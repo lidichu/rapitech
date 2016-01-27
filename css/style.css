@@ -1,0 +1,255 @@
+/*--基本設定--*/
+html{
+	height:100%;
+}
+body{
+	height:100%;
+    margin:0;
+	padding:0;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+
+}
+.clear-both { clear: both; }
+input,button,select,textarea{outline:none}
+a img {
+	border:0;vertical-align:middle;
+}
+a{
+  	outline: none; /* for Firefox Google Chrome  */
+  	behavior:expression(this.onFocus=this.blur()); /* for IE */
+}
+ul, li {
+	margin: 0;
+	padding: 0;
+	list-style: none;}
+.img {
+	border:0;
+	vertical-align:middle;
+	margin-right:7px;
+}	
+.img_left {
+	border:0;
+	vertical-align:middle; 
+	margin-left:7px;
+}	
+.left{ float:left;}	
+.right{ float:right;}
+#content{width:100%;}	
+#frame{width:1200px; margin:0 auto;}	
+#memu_left{width:220px; float:left;}
+#banner_right{width:980px; float:right;}
+ul.menu{padding:0; margin:0 18px 0 0; list-style:none; cursor:pointer; }/*but*/
+ul.menu li{ float:right; margin:0 10px;}/*but*/
+ul.left_menu{padding:0; margin:0; list-style:none; cursor:pointer;}/*left_but*/
+ul.left_menu li{ float:right; }/*left_but*/
+
+ul.room_menu{padding:0; margin:0 auto; list-style:none; cursor:pointer; width:195px;}/*but*/
+ul.room_menu li{ margin:0px 0px; font-size:16px;font-family:Microsoft JhengHei, Arial; border-bottom:1px solid #DADADA; background:url(../ch/images/rooms/menu_bk.png) no-repeat left top; padding:5px; line-height:200%;}/*but*/
+ul.room_menu li:hover{background:url(../ch/images/rooms/menu_bk_1.png) no-repeat left top; padding:5px; line-height:200%; text-decoration:underline;}/*but*/
+.room_menu li.current{background:url(../ch/images/rooms/menu_bk_1.png) no-repeat left top; padding:5px; line-height:200%; text-decoration:underline;}
+ul.page {margin:0 10px; padding:0; list-style:none;}
+ul.page li {padding:5px 0px; float:left; margin:0 2px; font-size:12px; color:#999; cursor:pointer; border:1px solid #CCC; text-align:center; width:25px;}
+ul.page li:hover {text-decoration:underline; border:1px solid #BC4B70;}
+ul.page li.current {color:#333333; font-weight:bold}
+
+/*--banner輪播--*/
+#banner {
+	width: 978px;
+	height: 555px;
+	position: relative;
+	overflow: hidden;
+}
+#banner ul.list {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+	position: absolute;
+	width: 9999px;
+	height: 100%;
+}
+#banner ul.list li {
+	float: left;
+	width: 978px;
+	height: 100%;
+}
+#banner .list img{
+	width: 100%;
+	height: 100%;
+	border: 0;
+}
+#banner ul.playerControl {
+	margin-left: 430px;
+	padding: 0;
+	list-style: none;
+	position: absolute;
+	bottom: 5px;
+	right: 5px;
+	height: 14px;
+}
+#banner ul.playerControl li {
+	float: left;
+	width: 10px;
+	height: 10px;
+	cursor: pointer;
+	margin: 0px 2px;
+	background: url(../images/cir_ctrl.png) no-repeat -10px 0;
+}
+#banner ul.playerControl li.current { 
+	background-position: 0 0;
+}
+
+
+/*--房間介紹背景預設樣式--*/
+.divbox{
+  height:410px;
+  width:240px;
+  background:url(../images/index/room1.png) no-repeat left top;
+  float:left;
+  margin:0 2px;
+  cursor:pointer;
+ }
+ 
+/*  滑入時變換底色樣式 */  
+.divOver{
+	background:url(../images/index/room1_1.png) no-repeat left top;
+	} 	
+
+
+#hmenu {/*--圖片翻轉--*/
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+#hmenu li {
+	width:980px; margin:25px auto;
+}
+#hmenu li a {
+	display: block;
+	height: 16px; /* 圖片的高/2 */
+	line-height: 16px;	/* ie suck */
+	text-indent: -9999px;
+}
+#hmenu a.v1 {
+	width:980px; /* 圖片的寬 */
+	background:url(../images/index/v1.png) no-repeat 0 0;	
+}
+
+/*--首頁--*/
+.room_pc{padding:4px;}
+
+/*--footer--*/
+#footer_line{border-top:1px solid #AAAAAA; height:178px; width:100%; margin-top:45px;}
+#footer_share{width:1200px; margin:0 auto; height:34px;}
+#footer_contact{background-color:#3F4955; height:134px;}
+
+/*--聯絡我們--*/
+#contact_left{width:270px; float:left;}
+#contact_right{width:655px; float:right; margin-top:42px;}
+.contact_margin{margin-top:40px;}
+
+/*--房屋介紹--*/
+#room_left{width:200px; float:left;}
+#room_right{width:732px; float:right; margin-top:42px;}
+#room_right1{width:732px; float:right; margin-top:42px;margin-bottom:45px;}
+#room_border_bk{ background:url(../ch/images/rooms/border_bk.png) left top; width:704px; height:362px;}
+.datetable {
+    border: 2px solid #4A1C2B; border-collapse: collapse;
+}
+.datetable tr td {
+    border: 1px solid #A38B92;
+}
+/*--房屋設備--*/
+#facilities_bk{ background:url(../ch/images/facilities/facilities_bk.png) no-repeat left top; width:728px; height:809px;}
+/*--衛浴設備--*/
+#bathroom_bk{ background:url(../ch/images/bathroom/bathroom_bk.png) no-repeat left top; width:530px; height:490px;}
+/*--安全設備--*/
+#sale_bk{ background: url(../ch/images/sale/sale_bk.png) no-repeat left top; width:732px; height:600px;}
+
+/*--週邊景點--*/
+.pro_area{width:33%;float:left;margin-bottom:25px;position:relative;}
+.pro_title{background-color:#8A3451; padding:7px; width:222px;}
+.pro_sp {
+    width:230px; 
+	height:230px;	 
+	text-align:center;
+	display:table-cell;  
+	vertical-align:middle;
+	border:solid 1px #8A3451;
+	padding:2px;
+	margin-bottom:15px;
+}
+.pro_sp span{
+	height:100%; 
+	display:inline-block;
+	}
+.pro_sp *{ vertical-align:middle;}
+
+/*--文字基本設定--*/
+.style1 {/*首頁日期*/
+	font-family:Microsoft JhengHei, Arial;
+	font-size:20px;
+	color:#202020;
+	line-height:160%;
+	padding:10px;
+	font-weight:bold; 
+}
+.style2{
+	font-family:Microsoft JhengHei, Arial;
+	font-size:15px;
+	color:#fff;
+	line-height:160%;
+	padding-top:65px;
+}
+.style3{
+	font-family:Microsoft JhengHei, Arial;
+	font-size:13px;
+	color:#ccc;
+	line-height:160%;
+}
+.style4{
+	font-family:Arial;
+	font-size:12px;
+	color:#666;
+	line-height:200%;
+}
+.style5{
+	font-family:Arial;
+	font-size:18px;
+	color:#000;
+	line-height:150%;
+}
+.style6{
+	font-family:Arial;
+	font-size:22px;
+	color:#000;
+	line-height:160%;
+}
+.style7{
+	font-family:Arial;
+	font-size:22px;
+	color:#333;
+	line-height:130%;
+}
+.style8{
+	font-family:Microsoft JhengHei, Arial;
+	font-size:22px;
+	color:#fff;
+	line-height:130%;
+}
+.style9{
+	font-family:Microsoft JhengHei, Arial;
+	font-size:22px;
+	color:#4B1D2C;
+	line-height:130%;
+}
+.style10{
+	font-family:Microsoft JhengHei, Arial;
+	font-size:13px;
+	color:#fff;
+	line-height:130%;
+}
+
+a:link {text-decoration: none}
+a:visited {text-decoration: none;}
+a:hover{text-decoration: none;}
+a:active {text-decoration: none;}

@@ -1,0 +1,78 @@
+body {
+    font-size: 9pt;
+    font-family: Tahoma,新細明體;
+}
+
+body.menu {
+    padding: 0px;
+    margin: 0px;
+    background-color: #FFFBEE;
+}
+
+body.main {
+/*
+    scrollbar-base-color: #CEE0B4;
+    scrollbar-arrow-color: #336600;
+*/
+    background-color: #FFFFFF;
+}
+
+table,td {
+    font-size: 9pt;
+    font-family: Tahoma,新細明體;
+}
+input {
+    background-color: #CCCCCC;
+    font-size: 9pt;
+    font-family: Tahoma,新細明體;
+}
+table.tbody {
+    background-color: #000000;
+    width: 90%;
+    border: 0px;
+}
+td.thead {
+    background-color: #CCE483;
+    padding: 2px;
+}
+td.middle {
+    background-color: #FFFBEE;
+}
+
+A {
+    color: #000000;
+    text-decoration: none;
+}
+A:hover {
+    color: #3F8805;
+    text-decoration: none;
+}
+A.clicked {
+    cursor: default;
+    color: red;
+    text-decoration: none;
+}
+A.clicked:hover {
+    cursor: default;
+    color: red;
+    text-decoration: none;
+}
+A.c1 {
+    color: green;
+    text-decoration: none;
+}
+A.c1:hover {
+    color: red;
+    text-decoration: none;
+}
+
+td.vback {
+    background-image: url(v_back.gif);
+	background-repeat:repeat-x;
+	
+}
+td.hback {
+    background-image: url(h_back.gif);
+	background-repeat:repeat-y;
+}
+#dypopLayer{display:none;}

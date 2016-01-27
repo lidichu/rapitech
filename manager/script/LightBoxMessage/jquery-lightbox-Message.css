@@ -1,0 +1,26 @@
+﻿/* CSS Document */
+#lightbox-message-background{
+	position:absolute;
+	z-index:9000;
+	top:0px;
+	left:0px;
+	display:none;
+}
+#lightbox-message-canvas{
+	position:absolute;
+	z-index:9100;
+	top:0px;
+	left:0px;
+	width:949px;
+	height:637px;
+	background-color:#FFF;
+	background-image:url(images/lightbox-message-ico-loading.gif);
+	background-repeat:no-repeat;
+	background-position:center center;
+	padding:0px;
+	margin:0px;
+	display:none;
+}
+#lightbox-message-DataTemp{
+	display:none;
+}

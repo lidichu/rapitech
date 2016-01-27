@@ -1,0 +1,10 @@
+<?php session_start(); ?>
+<?php $Root = ""; ?>
+<?php $SdbRoot="../../"; ?>
+<?php
+	include_once("Mod_Data.php"); 	//載入參數檔
+?>
+<?php $Check_FileName=$Menu_File;	//有2功能,1:檢查權限用,2:使下面的程式超聯結本網頁?>
+<?php
+	$Title01 = $ModName;
+?>

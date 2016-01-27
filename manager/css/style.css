@@ -1,0 +1,33 @@
+@charset "utf-8";
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, p, blockquote, th, td, span, font,a{
+	font-family : Arial,Verdana, Helvetica, sans-serif;   
+}
+.Title{
+	font-family: Arial,Verdana, Helvetica, sans-serif;
+	font-size: 11pt;
+}
+.Title:link {
+	text-decoration:none;
+	color: #000;
+}
+.Title:visited {
+	text-decoration:none;
+	color: #000;
+}
+.Title:hover {
+	text-decoration:underline;
+	color: #000;
+}
+.Title:active {
+	text-decoration:none;
+	color: #000;
+}
+
+.Linka:link{color:#333;text-decoration:none;}
+.Linka:visited{color:#333;text-decoration:none;}
+.Linka:hover{color:#F90;text-decoration:none;}
+.Linka:active{color:#333;text-decoration:none;}
+.modifylink:link{color:#00F;text-decoration:none;}
+.modifylink:visited{color:#00F;text-decoration:none;}
+.modifylink:hover{color:#00F;text-decoration:underline;}
+.modifylink:active{color:#00F;text-decoration:none;}
