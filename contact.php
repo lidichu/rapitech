@@ -15,13 +15,49 @@
     <link href="css/font-awesome.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/multipage.css">
     <link rel="stylesheet" type="text/css" href="css/animate.css">
-        <link rel="stylesheet" type="text/css" href="css/mycontact.css">
+    <link rel="stylesheet" type="text/css" href="css/mycontact.css">
+    <link href="css/goTop.css" type="text/css" rel="stylesheet" />
+
+    <script src="js/jquery-1.4.1.min.js" type="text/javascript"></script>
     <link href='https://fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,500italic,500,700,700italic' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700,800,900' rel='stylesheet' type='text/css'>
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    
+    <script type="text/javascript">
+            $(function(){
+                    $("#btnSubmit").click(function(){		
+                    $("#form1").submit();
+                            return false;
+                    });
+                    $("#btnReset").click(function(){
+                            if(confirm('確定要清除重新填寫？')){
+                                    $("#form1").get(0).reset();
+                                    $("#form1").find('input,textarea').blur();
+                            }
+                            return false;
+                    });
+                    $("#form1").submit(function(){
+                            var sError = new MyErrorCh();
+
+                            sError.checkNull("姓名",$("#Name").val());
+                            sError.checkNull("電話",$("#Tel").val());
+                            sError.checkNull("詢問主題",$("#Subject").val());
+                            //sError.checkEMail("E-Mail",$("#EMail").val(),true);
+                            sError.checkNull("內容",$("#Note").val());
+                            sError.checkNull("驗證碼",$("#VCode").val());
+                            $("#form1").find('input,textarea').blur();
+                            return sError.pass();
+
+                    });
+                    $("#imgVCode").click(function(){
+                            $(this).find("img").attr("src","../Scripts/SafeCode.php?r=" + Math.random());
+                            return false;
+                    });
+            });
+    </script>
 </head>
 
 <body>
@@ -67,7 +103,7 @@
                     <li><a href="webDesign.php">網頁設計</a></li>
                     <li><a href="system.php">系統開發</a></li>
                     <li><a href="howwork.php">製作流程</a></li>
-                    <li><a href="contact.aspx">聯絡我們</a></li>
+                    <li><a href="contact.php">聯絡我們</a></li>
                 </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
@@ -87,103 +123,102 @@
 
     <div class="clearfix"></div>
     <!-- contact us section -->
+    <form id="form1">
     <section class="contact" id="contact">
         <header class="defaultHeaderContact">
             <h1 class="wow fadeIn" data-wow-duration="5s">線上報價</h1>
             <h6 class="wow fadeIn" data-wow-duration="5s">WE ARE HAPPY TO HELP YOU ANY TIME 24/7</h6>
         </header>
-
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 padding0">
-                    <form>
-                        <div class="form-group">
-                            <label class="col-lg-3 col-xs-12"><h4>公司名稱:</h4></label>
-                            <input type="text" class="form-control myform-control1 wow fadeIn" placeholder="keyin your company name..." data-wow-duration="1s">
-                        </div>
-                        <div class="form-group">
-                            <label class="col-lg-3 col-xs-12"><h4>聯絡人姓名:</h4></label>
-                            <input type="text" class="form-control wow fadeIn" placeholder="keyin your name..." data-wow-duration="1s">
-                        </div>
-                        <div class="form-group">
-                            <label class="col-lg-3 col-xs-12"><h4>您的電話</h4></label>
-                            <input type="text" class="form-control wow fadeIn" placeholder="keyin your tel number..." data-wow-duration="1s">
-                        </div>
-                        <div class="form-group">
-                            <label class="col-lg-3 col-xs-12"><h4>您的手機</h4></label>
-                            <input type="text" class="form-control wow fadeIn" placeholder="keyin your moblie number..." data-wow-duration="1s">
-                        </div>
-                        <div class="form-group">
-                            <label class="col-lg-3 col-xs-12"><h4>您的傳真</h4></label>
-                            <input type="text" class="form-control wow fadeIn" placeholder="keyin your fax number.." data-wow-duration="1s">
-                        </div>
-                        <div class="form-group">
-                            <label class="col-lg-3 col-xs-12"><h4>您的信箱</h4></label>
-                            <input type="email" class="form-control wow fadeIn" placeholder="keyin your E-mail address..." data-wow-duration="1s">
-                        </div>
-                        <div class="form-group">
-                            <label class="col-lg-3 col-xs-12"><h4>您的地址</h4></label>
-                            <input type="text" class="form-control wow fadeIn" placeholder="keyin your address ..." data-wow-duration="1s">
-                        </div>
-                        <div class="form-group">
-                            <label class="col-lg-3 col-xs-12"><h4>您的網站</h4></label>
-                            <input type="text" class="form-control wow fadeIn" placeholder="keyin your website docmain name..." data-wow-duration="1s">
-                        </div>
-
-
-                  <!--   </form> -->
-
-
-                </div>
-                <div class="form-group">
-                    <label class="col-lg-3 col-xs-12"><h4>詢問項目</h4></label>
-                    <select class="form-control myform-control" id="sel1">
-                        <option></option>
-                        <option>網站製作詢價</option>
-                        <option>程式規劃需求</option>
-                        <option>合作配合事項</option>
-                    </select>
-                </div>
-
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 padding0">
-                    <div class="form-group">
-                        <label class="col-lg-3 col-xs-12"><h4>詢問內容:</h4></label>
-                        <textarea class="form-control wow fadeIn" rows="10" placeholder="contact us..." data-wow-duration="1s"></textarea>
-                    </div>
-
-                    <!-- this is mine -->
+        
+            <div class="container">
+                <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 padding0">
-                        <label class="col-lg-12 col-xs-12"><h4>您搜尋的關鍵字:</h4></label>
-                        <select class="form-control wow fadeIn" id="sel1">
-                            <option>台北網頁</option>
-                            <option>台北網頁設計</option>
-                            <option>桃園網頁</option>
-                            <option>桃園網頁設計</option>
-                            <option>台南網頁</option>
-                            <option>台南網頁設計</option>
-                            <option>高雄網頁</option>
-                            <option>高雄網頁設計</option>
-                            <option>網頁設計</option>
-                            <option>網頁製作</option>
+
+                            <div class="form-group">
+                                <label class="col-lg-3 col-xs-12"><h4>公司名稱:</h4></label>
+                                <input id="Company" name="Company" type="text" class="form-control myform-control1 wow fadeIn" placeholder="(必填)請輸入您的公司名稱" data-wow-duration="1s">
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-3 col-xs-12"><h4>聯絡人姓名:</h4></label>
+                                <input id="Name" name="Name" type="text" class="form-control wow fadeIn" placeholder="(必填)請輸入您的姓名" data-wow-duration="1s">
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-3 col-xs-12"><h4>您的電話</h4></label>
+                                <input id="Tel" name="Tel" type="text" class="form-control wow fadeIn" placeholder="(必填)請輸入您的聯絡電話" data-wow-duration="1s">
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-3 col-xs-12"><h4>您的手機</h4></label>
+                                <input type="text" class="form-control wow fadeIn" placeholder="請輸入您的手機" data-wow-duration="1s">
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-3 col-xs-12"><h4>您的傳真</h4></label>
+                                <input type="text" class="form-control wow fadeIn" placeholder="請輸入您的傳真" data-wow-duration="1s">
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-3 col-xs-12"><h4>您的信箱</h4></label>
+                                <input id="Email" name="Email" type="email" class="form-control wow fadeIn" placeholder="(必填)請輸入您的電子信箱" data-wow-duration="1s">
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-3 col-xs-12"><h4>您的地址</h4></label>
+                                <input type="text" class="form-control wow fadeIn" placeholder="請輸入您的地址" data-wow-duration="1s">
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-3 col-xs-12"><h4>您的網站</h4></label>
+                                <input type="text" class="form-control wow fadeIn" placeholder="請輸入您的網站" data-wow-duration="1s">
+                            </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 col-xs-12"><h4>詢問項目</h4></label>
+                        <select class="form-control myform-control" id="sel1">                        
+                            <option>網站製作詢價</option>
+                            <option>程式規劃需求</option>
+                            <option>合作配合事項</option>
                         </select>
                     </div>
-                    <div class="col-lg-12 col-xs-12 padding0">
-                        <label class="col-lg-12 col-xs-12"><h4>驗證碼:</h4></label>
-                        <input type="text" class="mytxt form-control wow fadeIn" placeholder="請輸入驗證碼" data-wow-duration="1s">
-                    </div>
-                    <div class="divCenter col-lg-12 col-xs-12">
-                        <button class="send wow fadeIn" data-wow-duration="1s">送出表單</button>
-                        <button class="send wow fadeIn" data-wow-duration="1s">清除</button>
-                    </div>
 
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 padding0">
+                        <div class="form-group">
+                            <label class="col-lg-3 col-xs-12"><h4>詢問內容:</h4></label>
+                            <textarea class="form-control wow fadeIn" rows="10" placeholder="請輸入詢問內容" data-wow-duration="1s"></textarea>
+                        </div>
 
-                    </form>
+                        <!-- this is mine -->
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 padding0">
+                            <label class="col-lg-12 col-xs-12"><h4>您搜尋的關鍵字:</h4></label>
+                            <select class="form-control wow fadeIn" id="sel1">
+                                    <option>網頁設計</option>
+                                    <option>網頁製作</option>
+                                    <option>程式設計</option>
+                                    <option>系統開發</option>
+                                    <option>台北網頁</option>
+                                    <option>台北網頁設計</option>
+                                    <option>新北網頁</option>
+                                    <option>新北網頁設計</option>
+                                    <option>桃園網頁</option>
+                                    <option>桃園網頁設計</option>
+                                    <option>台中網頁</option>
+                                    <option>台南網頁</option>
+                                    <option>台南網頁設計</option>
+                                    <option>高雄網頁</option>
+                                    <option>高雄網頁設計</option>
+                                    <option>其他</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-12 col-xs-12 padding0">
+                            <label class="col-lg-12 col-xs-12"><h4>驗證碼:</h4></label>
+                            <img name="code" src="../Scripts/SafeCode.php">
+                            <input type="text" class="mytxt form-control wow fadeIn" placeholder="請輸入驗證碼" data-wow-duration="1s">
+                        </div>
+                        <div class="divCenter col-lg-12 col-xs-12">
+                            <button id="btnSubmit" class="send wow fadeIn" data-wow-duration="1s">送出表單</button>
+                            <button id="btnReset" class="send wow fadeIn" data-wow-duration="1s">清除</button>
+                        </div>
+                    </div>
                 </div>
-
             </div>
-        </div>
+        
     </section>
-
+</form>
     <!--Google maps-->
     <!--   <div id="map"> -->
 

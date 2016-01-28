@@ -51,7 +51,7 @@
                     <li><a href="webDesign.php">網頁設計</a></li>
                     <li><a href="system.php">系統開發</a></li>
                     <li><a href="howwork.php">製作流程</a></li>
-                    <li><a href="contact.aspx">聯絡我們</a></li>
+                    <li><a href="contact.php">聯絡我們</a></li>
                 </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
