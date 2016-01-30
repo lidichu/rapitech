@@ -9,7 +9,7 @@
     <meta name="keywords" content="<?php echo $keywords; ?>">
     <meta name="author" content="<?php echo $author; ?>">
     <meta name="copyright" content="<?php echo $copyright; ?>">
-    <meta name="description" content="<?php echo $description; ?>">    <link rel="shortcut icon" href="image/heryi.ico" type="image/heryi.ico" />
+    <meta name="description" content="<?php echo $description; ?>">    <link rel="shortcut icon" href="images/heryi.ico" type="images/heryi.ico" />
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/font-awesome.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/multipage.css">

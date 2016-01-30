@@ -20,7 +20,7 @@ function MyErrorEn(){
 				this.add("．" + FieldName + " is required.");
 			}
 		}else{
-			var EMailFilter = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+			var EMailFilter = /^([a-zA-Z0-9_.-])+@(([a-zA-Z0-9-])+.)+([a-zA-Z0-9]{2,4})+$/;	
 			if(!EMailFilter.test(FieldValue)){
 				this.add("．" + FieldName + " must contain an e-mail address");
 			}
@@ -56,7 +56,7 @@ function MyErrorCh(){
 				this.add("．『" + FieldName + "』 不能為空白");
 			}
 		}else{
-			var EMailFilter = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+			var EMailFilter = /^([a-zA-Z0-9_.-])+@(([a-zA-Z0-9-])+.)+([a-zA-Z0-9]{2,4})+$/;	
 			if(!EMailFilter.test(FieldValue)){
 				this.add("．『" + FieldName + "』 格式不正確");
 			}
@@ -180,8 +180,6 @@ function MyErrorCh(){
 		}
 	}
 }
-
-
 
 function MyErrorCn(){
 	this.Msg = "";

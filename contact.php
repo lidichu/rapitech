@@ -10,7 +10,7 @@
     <meta name="author" content="<?php echo $author; ?>">
     <meta name="copyright" content="<?php echo $copyright; ?>">
     <meta name="description" content="<?php echo $description; ?>">
-    <link rel="shortcut icon" href="image/heryi.ico" type="image/heryi.ico" />  
+    <link rel="shortcut icon" href="images/heryi.ico" type="images/heryi.ico" />  
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/font-awesome.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/multipage.css">
@@ -25,7 +25,7 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-    
+    <?php include_once($VisualRoot.'Common/Script.php'); ?>
     <script type="text/javascript">
             $(function(){
                     $("#btnSubmit").click(function(){		
@@ -41,19 +41,17 @@
                     });
                     $("#form1").submit(function(){
                             var sError = new MyErrorCh();
-
+                            sError.checkNull("公司名稱",$("#Company").val());
                             sError.checkNull("姓名",$("#Name").val());
                             sError.checkNull("電話",$("#Tel").val());
-                            sError.checkNull("詢問主題",$("#Subject").val());
-                            //sError.checkEMail("E-Mail",$("#EMail").val(),true);
-                            sError.checkNull("內容",$("#Note").val());
-                            sError.checkNull("驗證碼",$("#VCode").val());
+                            sError.checkNull("詢問內容",$("#Note").val());
+                            sError.checkEMail("E-Mail",$("#iptEmail").val(),true);                            
+                            sError.checkNull("驗證碼",$("#VCode").val());                            
                             $("#form1").find('input,textarea').blur();
                             return sError.pass();
-
                     });
                     $("#imgVCode").click(function(){
-                            $(this).find("img").attr("src","../Scripts/SafeCode.php?r=" + Math.random());
+                            $(this).find("img").attr("src","Scripts/SafeCode.php?r=" + Math.random());
                             return false;
                     });
             });
@@ -123,7 +121,7 @@
 
     <div class="clearfix"></div>
     <!-- contact us section -->
-    <form id="form1">
+    <form id="form1" action="ch/contact_handle.php?opp=yes" target="MyIframe" method="post" name="form1">
     <section class="contact" id="contact">
         <header class="defaultHeaderContact">
             <h1 class="wow fadeIn" data-wow-duration="5s">線上報價</h1>
@@ -148,28 +146,28 @@
                             </div>
                             <div class="form-group">
                                 <label class="col-lg-3 col-xs-12"><h4>您的手機</h4></label>
-                                <input type="text" class="form-control wow fadeIn" placeholder="請輸入您的手機" data-wow-duration="1s">
+                                <input type="text" name="Phone" class="form-control wow fadeIn" placeholder="請輸入您的手機" data-wow-duration="1s">
                             </div>
                             <div class="form-group">
                                 <label class="col-lg-3 col-xs-12"><h4>您的傳真</h4></label>
-                                <input type="text" class="form-control wow fadeIn" placeholder="請輸入您的傳真" data-wow-duration="1s">
+                                <input type="text" name="Fax" class="form-control wow fadeIn" placeholder="請輸入您的傳真" data-wow-duration="1s">
                             </div>
                             <div class="form-group">
                                 <label class="col-lg-3 col-xs-12"><h4>您的信箱</h4></label>
-                                <input id="Email" name="Email" type="email" class="form-control wow fadeIn" placeholder="(必填)請輸入您的電子信箱" data-wow-duration="1s">
+                                <input id="iptEmail" name="Email" type="email" class="form-control wow fadeIn" placeholder="(必填)請輸入您的電子信箱" data-wow-duration="1s">
                             </div>
                             <div class="form-group">
                                 <label class="col-lg-3 col-xs-12"><h4>您的地址</h4></label>
-                                <input type="text" class="form-control wow fadeIn" placeholder="請輸入您的地址" data-wow-duration="1s">
+                                <input type="text" name="Address" class="form-control wow fadeIn" placeholder="請輸入您的地址" data-wow-duration="1s">
                             </div>
                             <div class="form-group">
                                 <label class="col-lg-3 col-xs-12"><h4>您的網站</h4></label>
-                                <input type="text" class="form-control wow fadeIn" placeholder="請輸入您的網站" data-wow-duration="1s">
+                                <input type="text" name="WebSite" class="form-control wow fadeIn" placeholder="請輸入您的網站" data-wow-duration="1s">
                             </div>
                     </div>
                     <div class="form-group">
                         <label class="col-lg-3 col-xs-12"><h4>詢問項目</h4></label>
-                        <select class="form-control myform-control" id="sel1">                        
+                        <select name="AskItem" class="form-control myform-control" id="sel1">                        
                             <option>網站製作詢價</option>
                             <option>程式規劃需求</option>
                             <option>合作配合事項</option>
@@ -179,13 +177,13 @@
                     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 padding0">
                         <div class="form-group">
                             <label class="col-lg-3 col-xs-12"><h4>詢問內容:</h4></label>
-                            <textarea class="form-control wow fadeIn" rows="10" placeholder="請輸入詢問內容" data-wow-duration="1s"></textarea>
+                            <textarea id="Note" name="Note" class="form-control wow fadeIn" rows="10" placeholder="請輸入詢問內容" data-wow-duration="1s"></textarea>
                         </div>
 
                         <!-- this is mine -->
                         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 padding0">
                             <label class="col-lg-12 col-xs-12"><h4>您搜尋的關鍵字:</h4></label>
-                            <select class="form-control wow fadeIn" id="sel1">
+                            <select name="KeyWordItem" class="form-control wow fadeIn" id="sel1">
                                     <option>網頁設計</option>
                                     <option>網頁製作</option>
                                     <option>程式設計</option>
@@ -205,10 +203,13 @@
                             </select>
                         </div>
                         <div class="col-lg-12 col-xs-12 padding0">
-                            <label class="col-lg-12 col-xs-12"><h4>驗證碼:</h4></label>
-                            <img name="code" src="../Scripts/SafeCode.php">
-                            <input type="text" class="mytxt form-control wow fadeIn" placeholder="請輸入驗證碼" data-wow-duration="1s">
+                            <label ><h4>驗證碼:</h4></label>
+                            <a href="javascript:" id="imgVCode"><img name="code" src="Scripts/SafeCode.php" alt="code"></a>                            
                         </div>
+                        <div class="col-lg-12 col-xs-12 padding0">
+                             <input id="VCode" name="VCode" type="text" class="mytxt form-control wow fadeIn" placeholder="請輸入驗證碼" data-wow-duration="1s">
+                        </div>
+                       
                         <div class="divCenter col-lg-12 col-xs-12">
                             <button id="btnSubmit" class="send wow fadeIn" data-wow-duration="1s">送出表單</button>
                             <button id="btnReset" class="send wow fadeIn" data-wow-duration="1s">清除</button>

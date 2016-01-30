@@ -23,26 +23,6 @@ $( document ).ready(function(){
 	});	
 });
 </script>
-<script>
-$( document ).ready(function(){
-	
-	r_SCookie = SCookie("<?php echo $WebTitle ?>","<?php echo $_website ?>","<?php echo $_user ?>", null , null );	
-	$( ".box2 span ").html(r_SCookie);
-	
-	$( '.set' ).on('click',function(){
-		//console.log(	$(this)		);		
-		r_SCookie = SCookie("<?php echo $WebTitle ?>","<?php echo $_website ?>","<?php echo $_user ?>", null , null );	
-		$( ".box2 span ").html(r_SCookie);
-		if(r_SCookie==0)
-		{
-			jAlert('購物清單中，無任何商品！','提示訊息'  );
-			
-			return false;
-		}
-		
-	});
-});
-</script>
 <style>
 	#popup_title{ background: #ECFFC9;  }
 </style>	 

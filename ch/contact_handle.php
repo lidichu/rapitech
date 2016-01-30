@@ -10,22 +10,27 @@
 		//接收會員資料
 		$Ip=$_SERVER["REMOTE_ADDR"];
 		
-		$DataArray["Name"] = CheckData($_POST["Name"]);
-		$DataArray["Sex"] = CheckData($_POST["Sex"]);
+                $DataArray["Company"] = CheckData($_POST["Company"]);
+		$DataArray["Name"] = CheckData($_POST["Name"]);                
+		//$DataArray["Sex"] = CheckData($_POST["Sex"]);
 		$DataArray["Tel"] = CheckData($_POST["Tel"]);
+                $DataArray["Phone"] = CheckData($_POST["Phone"]);
 		$DataArray["Fax"] = CheckData($_POST["Fax"]);
 		$DataArray["Address"] = CheckData($_POST["Address"]);
 		$DataArray["EMail"] = CheckData($_POST["EMail"]);
-		$DataArray["Subject"] = CheckData($_POST["Subject"]);
+                $DataArray["WebSite"] = CheckData($_POST["WebSite"]);                
+                $DataArray["AskItem"] = CheckData($_POST["AskItem"]);
+                $DataArray["KeyWordItem"] = CheckData($_POST["KeyWordItem"]);
+		//$DataArray["Subject"] = CheckData($_POST["Subject"]);
 		$DataArray["Note"]= CheckData($_POST["Note"]);
 		
 		
-		$DataArray["Sex"] = $DataArray["Sex"]=='先生'||$DataArray["Sex"]=='小姐'?$DataArray["Sex"]:'';
-		$DataArray["Fax"] = $DataArray["Fax"]==''?'未填寫':$DataArray["Fax"];
-		$DataArray["Address"] = $DataArray["Address"]==''?'未填寫':$DataArray["Address"];
+		//$DataArray["Sex"] = $DataArray["Sex"]=='先生'||$DataArray["Sex"]=='小姐'?$DataArray["Sex"]:'';
+		//$DataArray["Fax"] = $DataArray["Fax"]==''?'未填寫':$DataArray["Fax"];
+		//$DataArray["Address"] = $DataArray["Address"]==''?'未填寫':$DataArray["Address"];
 		
 		$DataArray["PostDate"]=date("Y-m-d H:i:s");
-		$DataArray["Status"] = "未處理";
+		$DataArray["Status"] = "未處理";		
 
 		$Checked = false;
 		$VCode = strtolower($_POST["VCode"]);
@@ -34,16 +39,16 @@
 			notify("驗證碼錯誤！");
 		}else{				
 			unset($_SESSION["SafeCode"]);
-			$CheckField = explode(",","Name,Tel,EMail,Note,Subject,PostDate,Status");
-			$CheckResult = true;
-			foreach($CheckField as $Key => $Value){
+			//$CheckField = explode(",","Name,Tel,EMail,Note,Subject,PostDate,Status");
+			//$CheckResult = true;
+			/*foreach($CheckField as $Key => $Value){
 				if($DataArray[$Value] == ""){
 					$CheckResult = false;
 				}
 			}
 			if(!$CheckResult){
 				notify("部份欄位未填寫");
-			}
+			}*/
 					
 
 			$InsertFields="";
@@ -112,7 +117,7 @@
 			$ToEmail = array();
 			$ToEmail[] = $Web["ManagerEmail"];
 			SendMail($Web["WebTitle"],$Web["ManagerEmail"],$Web["WebTitle"],$ToEmail,$Web["WebTitle"]."-新信件通知",$Contact,"",$Web["EMailServer"],"");
-			notify("送出留言成功","index.php");
+			notify("送出留言成功","../index.php");
 			
 		}
 	}
