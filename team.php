@@ -8,7 +8,7 @@
     <title><?php echo $title; ?></title>
     <meta name="keywords" content="<?php echo $keywords; ?>">
     <meta name="author" content="<?php echo $author; ?>">
-    <meta name="copyright" content="<?php echo $copyright; ?>">
+    
     <meta name="description" content="<?php echo $description; ?>">
     <link rel="shortcut icon" href="images/heryi.ico" type="images/heryi.ico" />
     <link href="css/bootstrap.css" rel="stylesheet">
@@ -44,7 +44,7 @@
                     <li><a href="index.php">首頁</a></li>
                     <li><a href="about.php">關於我們</a></li>
                     <li><a href="services.php">服務項目</a></li>
-                    <!--<li><a href="team.html">專案介紹</a></li>-->
+                    <li><a href="team.php">專案介紹</a></li>
                     <li><a href="webDesign.php">網頁設計</a></li>
                     <li><a href="system.php">系統開發</a></li>
                     <li><a href="howwork.php">製作流程</a></li>
@@ -71,80 +71,24 @@
         </header>
         <div class="container">
             <div class="row">
+                <?php 
+                    $sql = "SELECT * FROM attractions WHERE STATUS='上架' ORDER BY sort,SerialNo DESC";                                        
+                    $Rs = $Conn->prepare ( $sql );
+                    $Rs->execute ();
+                    $rowCount = $Rs->rowCount ();
+                    $row = $Rs->fetchAll ();          
+                    
+                    if (! empty ( $row )) {
+                        foreach ( $row as $key => $value ) {                                         
+                ?>
                 <div class="col-lg-3 col-md-6 col-sm-6  col-xs-12 itemTeam wow flipInX" data-wow-duration="1s">
-                    <div class="bgImage"></div>
-                    <h3>XXXXX</h3>
-                    <h4>XXXXXXX</h4>
+                    <div class="bgImage" style="background-image: url('<?php echo(VisualRoot); ?>files/Attractions/L/<?php echo $value['PICHidden']?>'); "></div>
+                    <h3><a href="<?php echo $value['LinkUrl'] ?>" target="<?php echo $value['TargetWindow'] ?>"><?php echo $value['Title'] ?></a></h3>
+                    <h4><a href="<?php echo $value['LinkUrl'] ?>" target="<?php echo $value['TargetWindow'] ?>"><?php echo $value['LinkUrl'] ?></a></h4>
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 itemTeam wow flipInY" data-wow-duration="1s">
-                    <div class="bgImage1"></div>
-                    <h3>XXXXXX</h3>
-                    <h4>XXXXXX</h4>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 itemTeam wow flipInX" data-wow-duration="1s">
-                    <div class="bgImage2"></div>
-                    <h3>XXXXX</h3>
-                    <h4>XXXXXX</h4>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 itemTeam wow flipInY" data-wow-duration="1s">
-                    <div class="bgImage3"></div>
-                    <h3>XXXX</h3>
-                    <h4>XXXXXX</h4>
-                </div>
+                <?php }   } ?>
             </div>
         </div>
-
-
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3 col-md-6 col-sm-6  col-xs-12 itemTeam wow flipInX" data-wow-duration="1s">
-                    <div class="bgImage"></div>
-                    <h3>XXXXX</h3>
-                    <h4>XXXXXXX</h4>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 itemTeam wow flipInY" data-wow-duration="1s">
-                    <div class="bgImage1"></div>
-                    <h3>XXXXXX</h3>
-                    <h4>XXXXXX</h4>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 itemTeam wow flipInX" data-wow-duration="1s">
-                    <div class="bgImage2"></div>
-                    <h3>XXXXX</h3>
-                    <h4>XXXXXX</h4>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 itemTeam wow flipInY" data-wow-duration="1s">
-                    <div class="bgImage3"></div>
-                    <h3>XXXX</h3>
-                    <h4>XXXXXX</h4>
-                </div>
-            </div>
-        </div>
-
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3 col-md-6 col-sm-6  col-xs-12 itemTeam wow flipInX" data-wow-duration="1s">
-                    <div class="bgImage"></div>
-                    <h3>XXXXX</h3>
-                    <h4>XXXXXXX</h4>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 itemTeam wow flipInY" data-wow-duration="1s">
-                    <div class="bgImage1"></div>
-                    <h3>XXXXXX</h3>
-                    <h4>XXXXXX</h4>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 itemTeam wow flipInX" data-wow-duration="1s">
-                    <div class="bgImage2"></div>
-                    <h3>XXXXX</h3>
-                    <h4>XXXXXX</h4>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 itemTeam wow flipInY" data-wow-duration="1s">
-                    <div class="bgImage3"></div>
-                    <h3>XXXX</h3>
-                    <h4>XXXXXX</h4>
-                </div>
-            </div>
-        </div>
-
     </section>
     <!--      <div class="clearfix"></div>
         <div class="clearfix"></div> -->

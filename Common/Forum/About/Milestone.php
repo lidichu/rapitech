@@ -17,7 +17,7 @@
 					<td align="left" valign="top" bgcolor="#383838" class="h2" style="padding-left:6px;"><?php echo $TitleArray["$lang"]["Top"]?></td>
 				</tr>
 				<?php
-					$Sql="select * from milestonecategory where Status='上架' order by Sort,SerialNo Desc";
+					$Sql="select * from milestonecategory where Status='上架' order by Sort,SerialNo Desc";                                        
 					$Rs=mysql_query($Sql,$Conn);
 					if($Rs && mysql_num_rows($Rs)>0){
 						$Row=mysql_fetch_array($Rs);

@@ -3,22 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/spdgAdmin/webDesign.php</file>
+            <file>file:/C:/xampp/htdocs/spdgAdmin/Common/Forum/About/Milestone.php</file>
             <file>file:/C:/xampp/htdocs/spdgAdmin/index.php</file>
-            <file>file:/C:/xampp/htdocs/spdgAdmin/manager/down.php</file>
-            <file>file:/C:/xampp/htdocs/spdgAdmin/system.php</file>
-            <file>file:/C:/xampp/htdocs/spdgAdmin/Common/banner.php</file>
-            <file>file:/C:/xampp/htdocs/spdgAdmin/Common/footer.php</file>
-            <file>file:/C:/xampp/htdocs/spdgAdmin/about.php</file>
-            <file>file:/C:/xampp/htdocs/spdgAdmin/contact.php</file>
-            <file>file:/C:/xampp/htdocs/spdgAdmin/.project</file>
-            <file>file:/C:/xampp/htdocs/spdgAdmin/ch/contact.php</file>
+            <file>file:/C:/xampp/htdocs/spdgAdmin/Common/Forum/Product/LeftMenu.php</file>
+            <file>file:/C:/xampp/htdocs/spdgAdmin/manager/form/Attractions/AttractionsParame.php</file>
             <file>file:/C:/xampp/htdocs/spdgAdmin/team.php</file>
             <file>file:/C:/xampp/htdocs/spdgAdmin/howwork.php</file>
-            <file>file:/C:/xampp/htdocs/spdgAdmin/services.php</file>
-            <file>file:/C:/xampp/htdocs/spdgAdmin/PageHead.php</file>
-            <file>file:/C:/xampp/htdocs/spdgAdmin/ch/contact_handle.php</file>
-            <file>file:/C:/xampp/htdocs/spdgAdmin/PageEnd.php</file>
+            <file>file:/C:/xampp/htdocs/spdgAdmin/Common/banner.php</file>
+            <file>file:/C:/xampp/htdocs/spdgAdmin/manager/inc/Connection.php</file>
+            <file>file:/C:/xampp/htdocs/spdgAdmin/Common/Forum/News/Detail.php</file>
         </group>
     </open-files>
 </project-private>

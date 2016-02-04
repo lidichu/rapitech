@@ -13,7 +13,7 @@ $json = new Services_JSON ( SERVICES_JSON_LOOSE_TYPE );
 $Web = array ();
 $SQL = "Select * From web where true";
 $Web = $Conn->query ( $SQL )->fetch ( PDO::FETCH_ASSOC );
-include_once ($VisualRoot . "star/display.php");
+//include_once ($VisualRoot . "star/display.php");
 
 $title = $Web ["WebTitle" . $lang];
 $keywords = $Web ["Keywords" . $lang];

@@ -894,26 +894,15 @@ background-color: rgba(0,0,0,0);
   -webkit-transition:all 0.5s ease;
   -moz-transition:all 0.5s ease;
   -o-transition:all 0.5s ease;
+  margin-right: 15px;
 }
 
-.itemTeam:nth-child(2)
-{
-  margin-left: 29px;
-}
-.itemTeam:nth-child(3)
-{
-  margin-left: 29px;
-}
-.itemTeam:nth-child(4)
-{
-  margin-left: 28px;
-}
 
 .bgImage
 {
   height: 317px;
   width: 100%;
-  background-image: url('../image/team/1.jpg');
+  
   background-position: center center;
   background-size: cover;
 }
@@ -921,7 +910,7 @@ background-color: rgba(0,0,0,0);
 {
   height: 317px;
   width: 100%;
-  background-image: url('../image/team/2.jpg');
+  background-image: url('../images/team/2.jpg');
   background-position: center center;
   background-size: cover;
 }
@@ -929,7 +918,7 @@ background-color: rgba(0,0,0,0);
 {
   height: 317px;
   width: 100%;
-  background-image: url('../image/team/3.jpg');
+  background-image: url('../images/team/3.jpg');
   background-position: center center;
   background-size: cover;
 }
@@ -937,7 +926,7 @@ background-color: rgba(0,0,0,0);
 {
   height: 317px;
   width: 100%;
-  background-image: url('../image/team/4.jpg');
+  background-image: url('../images/team/4.jpg');
   background-position: center center;
   background-size: cover;
 }
@@ -2002,21 +1991,10 @@ textarea.form-control {
   /*team section*/
 
   .itemTeam
-  { 
-    width: 50%;
-  }
-  .itemTeam:nth-child(2)
   {
-    margin-left: 0px;
+    width: 48%;
   }
-  .itemTeam:nth-child(3)
-  {
-    margin-left: 0px;
-  }
-  .itemTeam:nth-child(4)
-  {
-    margin-left: 0px;
-  }
+
 
   /*progress bar*/
   .progress
@@ -2370,18 +2348,7 @@ textarea.form-control {
     float: none;
     margin: 0 auto;
   }
-  .itemTeam:nth-child(2)
-  {
-    margin-left: 0px;
-  }
-  .itemTeam:nth-child(3)
-  {
-    margin-left: 0px;
-  }
-  .itemTeam:nth-child(4)
-  {
-    margin-left: 0px;
-  }
+
   .defaultHeaderTeam {
     width: 100%;
   }

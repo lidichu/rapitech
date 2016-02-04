@@ -13,8 +13,8 @@ $Title02_1 = $ModName . " - " . $ModName2_1;
 $Title02_2 = $ModName . " - " . $ModName2_2;
 
 $UploadPic ["PIC"] ["Path"] = "../../../files/Attractions/L/";
-$UploadPic ["PIC"] ["Width"] = "230";
-$UploadPic ["PIC"] ["Height"] = "229";
+$UploadPic ["PIC"] ["Width"] = "480";
+$UploadPic ["PIC"] ["Height"] = "320";
 $UploadPic ["PIC"] ["BoxMode"] = true;
 ?>
 
