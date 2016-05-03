@@ -221,7 +221,7 @@ function cmdCancel_onclick(){
 					<tr>
 						<td bgcolor="#E0EFF8" align="center" height="30"
 							style="font-size: 12pt; color: #000000"><img
-							src="../../images/computer.gif" BORDER="0" align="absmiddle">&nbsp;<?php echo $TopTitle; ?>&nbsp;&nbsp;&nbsp;
+							src="../../images/project.gif" BORDER="0" align="absmiddle">&nbsp;<?php echo $TopTitle; ?>&nbsp;&nbsp;&nbsp;
 					</td>
 					</tr>
 				</table>

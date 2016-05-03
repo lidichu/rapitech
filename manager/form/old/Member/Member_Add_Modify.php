@@ -320,7 +320,7 @@ function cmdCancel_onclick(){
 			<table width="560" cellpadding="0" cellspacing="0" bordercolorlight="#FFFFFF" style="border:solid #A3BFE2 1px;margin-bottom:25px" border="0" bgcolor="#FFFFE1">
 				<tr>
 					<td bgcolor="#E0EFF8" align="center" height="30" style="font-size:12pt;color:#000000">
-						<img src="../../images/computer.gif" BORDER="0" align="absmiddle">&nbsp;<?php echo $TopTitle; ?>&nbsp;&nbsp;&nbsp;
+						<img src="../../images/manger.gif" BORDER="0" align="absmiddle">&nbsp;<?php echo $TopTitle; ?>&nbsp;&nbsp;&nbsp;
 					</td>
 				</tr>
 			</table>
@@ -384,7 +384,7 @@ function cmdCancel_onclick(){
 			<table width="560" cellpadding="0" cellspacing="0" bordercolorlight="#FFFFFF" style="border:solid #A3BFE2 1px" border="0" bgcolor="#FFFFE1">
 				<tr>
 					<td bgcolor="#E0EFF8" align="center" height="30" style="font-size:12pt;color:#000000">
-						<img src="../../images/computer.gif" BORDER="0" align="absmiddle">&nbsp;匯入-<?php echo($TableTitle); ?>&nbsp;&nbsp;&nbsp;
+						<img src="../../images/manger.gif" BORDER="0" align="absmiddle">&nbsp;匯入-<?php echo($TableTitle); ?>&nbsp;&nbsp;&nbsp;
 					</td>
 				</tr>
 			</table>		

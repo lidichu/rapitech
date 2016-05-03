@@ -113,7 +113,7 @@ $(function(){
 					<tr>
 						<td bgcolor="#E0EFF8" align="center" height="30"
 							style="font-size: 12pt; color: #000000"><img
-							src="../../images/computer.gif" border="0">&nbsp;<?php echo $TableTitle ; ?>&nbsp;&nbsp;&nbsp;</td>
+                                                        src="../../images/comp.gif" border="0">&nbsp;<?php echo $TableTitle ; ?>&nbsp;&nbsp;&nbsp;</td>
 					</tr>
 				</table>
 			</td>

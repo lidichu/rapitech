@@ -265,7 +265,7 @@ $(function(){
 					<tr>
 						<td bgcolor="#E0EFF8" align="center" height="30"
 							style="font-size: 12pt; color: #000000"><img
-							src="../../images/computer.gif" border="0" align="absmiddle">&nbsp;<?php echo $TableTitle; ?>&nbsp;&nbsp;&nbsp;</td>
+                                                        src="../../images/project.gif" border="0" align="absmiddle">&nbsp;<?php echo $TableTitle; ?>&nbsp;&nbsp;&nbsp;</td>
 					</tr>
 				</table>
 			</td>

@@ -128,8 +128,8 @@ $(function(){
 					bgcolor="#FFFFE1">
 					<tr>
 						<td bgcolor="#E0EFF8" align="center" height="30"
-							style="font-size: 12pt; color: #000000"><img
-							src="../../images/computer.gif" border="0">&nbsp;<?php echo $TableTitle ; ?>&nbsp;&nbsp;&nbsp;</td>
+                                                    style="font-size: 12pt; color: #000000"><img style="height: 40px;vertical-align: middle;"
+                                                        src="../../images/web.gif" border="0">&nbsp;<?php echo $TableTitle ; ?>&nbsp;&nbsp;&nbsp;</td>
 					</tr>
 				</table>
 			</td>
