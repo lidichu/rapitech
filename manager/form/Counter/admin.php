@@ -12,8 +12,7 @@ include_once("../../inc/CheckHead.php"); 	//權限檢查
 include_once("lib/base.php");
 if ($_POST['send'] == "doit") {
 	$SQL = "Update web Set datedb = '',recentdb = '',startdb = ''";
-	$Rs = $Conn->prepare($SQL);
-	$Rs->execute();
+	mysql_query($SQL,$Conn);
 }
 ob_start("ob_gzhandler");
 $showPopText = true;

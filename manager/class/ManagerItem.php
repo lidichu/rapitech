@@ -7,7 +7,7 @@
 		function AddScript();
 		function ModifyScript();
 		function ShowScript();
-		function AddHandle(&$Param);
-		function ModifyHandle(&$Param);
+		function AddHandle();
+		function ModifyHandle();
 	}
 ?>

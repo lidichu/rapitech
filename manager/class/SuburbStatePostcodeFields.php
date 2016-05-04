@@ -57,45 +57,17 @@
 		function AddScript(){}
 		function ModifyScript(){}
 		function ShowScript(){}
-		function AddHandle(&$Param){
+		function AddHandle(){
 			global $AddFieldsSQL,$AddValuesSQL;
-			if($AddFieldsSQL!=""){ $AddFieldsSQL.=","; $AddValuesSQL.=","; }
-			$Param[":".$this->SuburbFieldName] = htmlspecialchars($_POST[$this->SuburbFieldName]);
-			$Param[":".$this->StateFieldName] = htmlspecialchars($_POST[$this->StateFieldName]);
-			$Param[":".$this->PostcodeFieldName] = htmlspecialchars($_POST[$this->PostcodeFieldName]);
-			$AddFieldsSQL.="`".$this->SuburbFieldName."`";
-			$AddFieldsSQL.=",`".$this->StateFieldName."`";
-			$AddFieldsSQL.=",`".$this->PostcodeFieldName."`";
-			$AddValuesSQL.=":".$this->SuburbFieldName;
-			$AddValuesSQL.=",:".$this->StateFieldName;
-			$AddValuesSQL.=",:".$this->PostcodeFieldName;
+			if($AddFieldsSQL!=""){$AddFieldsSQL.=",";}
+			$AddFieldsSQL.="`".$this->SuburbFieldName."`,`".$this->StateFieldName."`,`".$this->PostcodeFieldName."`";
+			if($AddValuesSQL!=""){$AddValuesSQL.=",";}
+			$AddValuesSQL.="'".htmlspecialchars($_POST[$this->SuburbFieldName])."','".htmlspecialchars($_POST[$this->StateFieldName])."','".htmlspecialchars($_POST[$this->PostcodeFieldName])."'";
 		}
-		function ModifyHandle(&$Param){
+		function ModifyHandle(){
 			global $ModifySQL;
-			if($ModifySQL!=""){ $ModifySQL.=","; }
-			$Param[":".$this->SuburbFieldName] = htmlspecialchars($_POST[$this->SuburbFieldName]);
-			$Param[":".$this->StateFieldName] = htmlspecialchars($_POST[$this->StateFieldName]);
-			$Param[":".$this->PostcodeFieldName] = htmlspecialchars($_POST[$this->PostcodeFieldName]);
-			$ModifySQL.="`".$this->SuburbFieldName."`= :".$this->SuburbFieldName;
-			$ModifySQL.="`".$this->StateFieldName."`= :".$this->StateFieldName;
-			$ModifySQL.="`".$this->PostcodeFieldName."`= :".$this->PostcodeFieldName;
-		}
-		function GetDataHandle(&$data){
-			$DateValue = htmlspecialchars($_POST[$this->SuburbFieldName]);
-			if($DateValue==""){
-				$DateValue = "";
-			}
-			$data[$this->SuburbFieldName] = $DateValue;
-			$DateValue = htmlspecialchars($_POST[$this->StateFieldName]);
-			if($DateValue==""){
-				$DateValue = "";
-			}
-			$data[$this->StateFieldName] = $DateValue;
-			$DateValue = htmlspecialchars($_POST[$this->PostcodeFieldName]);
-			if($DateValue==""){
-				$DateValue = "";
-			}
-			$data[$this->PostcodeFieldName] = $DateValue;
+			if($ModifySQL!=""){$ModifySQL.=",";}
+			$ModifySQL.="`".$this->SuburbFieldName."`='".htmlspecialchars($_POST[$this->SuburbFieldName])."',`".$this->StateFieldName."`='".htmlspecialchars($_POST[$this->StateFieldName])."',`".$this->PostcodeFieldName."`='".htmlspecialchars($_POST[$this->PostcodeFieldName])."'";
 		}
 	}
 ?>

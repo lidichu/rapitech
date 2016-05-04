@@ -90,35 +90,18 @@
 		function AddScript(){}
 		function ModifyScript(){}
 		function ShowScript(){}
-		function AddHandle(&$Param){
+		function AddHandle(){
 			global $AddFieldsSQL,$AddValuesSQL;
 			$DateValue1 = $_POST[$this->FieldName1];
 			$DateValue2 = $_POST[$this->FieldName2];
-			if($AddFieldsSQL!=""){
-				$AddFieldsSQL.=",";
-				$AddValuesSQL.=",";
-			}
-			$Param[":".$this->FieldName1] = $DateValue1;
-			$Param[":".$this->FieldName2] = $DateValue2;
-			$AddFieldsSQL.="`".$this->FieldName1."`,`".$this->FieldName2."`";
-			$AddValuesSQL.=":".$this->FieldName1.", :".$this->FieldName2;
+			if($AddFieldsSQL!=""){$AddFieldsSQL.=",`".$this->FieldName1."`,`".$this->FieldName2."`";}else{$AddFieldsSQL.="`".$this->FieldName1."`,`".$this->FieldName2."`";}
+			if($AddValuesSQL!=""){$AddValuesSQL.=",'".$DateValue1."','".$DateValue2."'";}else{$AddValuesSQL.="'".$DateValue1."','".$DateValue2."'";}
 		}
-		function ModifyHandle(&$Param){
+		function ModifyHandle(){
 			global $ModifySQL;
 			$DateValue1 = $_POST[$this->FieldName1];
 			$DateValue2 = $_POST[$this->FieldName2];
-			if($ModifySQL!=""){
-				$ModifySQL.=",";
-			}
-			$Param[":".$this->FieldName1] = $DateValue1;
-			$Param[":".$this->FieldName2] = $DateValue2;
-			$ModifySQL.="`".$this->FieldName1."`= :".$this->FieldName1.",`".$this->FieldName2."` = :".$this->FieldName2;
-		}
-		function GetDataHandle(&$data){
-			$DateValue1 = $_POST[$this->FieldName1];
-			$DateValue2 = $_POST[$this->FieldName2];
-			$data[$this->FieldName1] = $DateValue1;
-			$data[$this->FieldName2] = $DateValue2;
+			if($ModifySQL!=""){$ModifySQL.=",`".$this->FieldName1."`='".$DateValue1."',`".$this->FieldName2."`='".$DateValue2."'";}else{$ModifySQL.="`".$this->FieldName."`='".$DateValue."',`".$this->FieldName."`='".$DateValue."'";}
 		}
 	}
 ?>

@@ -7,12 +7,11 @@
 		var $ShowName;
 		var $NullFlag;
 		var $DefaultValue;
-		public function AddressFields($FieldCountyNameIn,$FieldAreaNameIn,$FieldZipCodeNameIn,$FieldOtherNameIn,$ShowNameIn,$NullFlagIn=false,$DefaultValueIn="",$AddressNameIn=""){
+		public function AddressFields($FieldCountyNameIn,$FieldAreaNameIn,$FieldZipCodeNameIn,$FieldOtherNameIn,$ShowNameIn,$NullFlagIn=false,$DefaultValueIn=""){
 			$this->FieldCountyName = $FieldCountyNameIn;
 			$this->FieldAreaName = $FieldAreaNameIn;
 			$this->FieldZipCodeName = $FieldZipCodeNameIn;
 			$this->FieldOtherName = $FieldOtherNameIn;
-			$this->AddressName = $AddressNameIn;
 			$this->ShowName = $ShowNameIn;
 			$this->NullFlag = $NullFlagIn;
 			$this->DefaultValue = $DefaultValueIn;
@@ -76,11 +75,12 @@
 			}
 		}
 		function AddScript(){
+		
 			echo "<script language=\"javascript\" type=\"text/javascript\">\n";
 			echo "$(function(){\n";
 			echo "$(\"body\").TwZipCode({\"CountryFieldName\":\"".$this->FieldCountyName."\",\"AreaFieldName\":\"".$this->FieldAreaName."\",\"ZipCodeFieldName\":\"".$this->FieldZipCodeName."\"});\n";
 			echo "});\n";
-			echo "</script>\n";
+			echo "</script>\n";		
 		}
 		function ModifyScript(){
 			global $Row;
@@ -91,58 +91,22 @@
 			echo "</script>\n";			
 		}
 		function ShowScript(){}
-		function AddHandle(&$Param){
+		function AddHandle(){
 			global $AddFieldsSQL,$AddValuesSQL;
 			$CountyName = htmlspecialchars($_POST[$this->FieldCountyName]);
 			$AreaName = htmlspecialchars($_POST[$this->FieldAreaName]);
 			$ZipCodeName = htmlspecialchars($_POST[$this->FieldZipCodeName]);
 			$OtherName = htmlspecialchars($_POST[$this->FieldOtherName]);
-			$AddressName=$ZipCodeName.$CountyName.$AreaName.$OtherName;
-			if($AddFieldsSQL!=""){
-				$AddFieldsSQL.=",";
-				$AddValuesSQL.=",";
-			}
-			$Param[":".$this->FieldCountyName] = $CountyName;
-			$Param[":".$this->FieldAreaName] = $AreaName;
-			$Param[":".$this->FieldZipCodeName] = $ZipCodeName;
-			$Param[":".$this->FieldOtherName] = $OtherName;
-			$AddFieldsSQL.="`".$this->FieldCountyName."`,`".$this->FieldAreaName.
-						   "`,`".$this->FieldZipCodeName."`,`".$this->FieldOtherName."`";
-			$AddValuesSQL.=":".$this->FieldCountyName.", :".$this->FieldAreaName.", :".$this->FieldZipCodeName.", :".$this->FieldOtherName;
-			if($this->AddressName!=""){
-				$Param[":".$this->AddressName] = $AddressName;
-				$AddFieldsSQL.=",`".$this->AddressName."`";
-				$AddValuesSQL.=",:".$this->AddressName;
-			}
+			if($AddFieldsSQL!=""){$AddFieldsSQL.=",`".$this->FieldCountyName."`,`".$this->FieldAreaName."`,`".$this->FieldZipCodeName."`,`".$this->FieldOtherName."`";}else{$AddFieldsSQL.="`".$this->FieldCountyName."`,`".$this->FieldAreaName."`,`".$this->FieldZipCodeName."`,`".$this->FieldOtherName."`";}
+			if($AddValuesSQL!=""){$AddValuesSQL.=",'".$CountyName."','".$AreaName."','".$ZipCodeName."','".$OtherName."'";}else{$AddValuesSQL.="'".$CountyName."','".$AreaName."','".$ZipCodeName."','".$OtherName."'";}
 		}
-		function ModifyHandle(&$Param){
+		function ModifyHandle(){
 			global $ModifySQL;
 			$CountyName = htmlspecialchars($_POST[$this->FieldCountyName]);
 			$AreaName = htmlspecialchars($_POST[$this->FieldAreaName]);
 			$ZipCodeName = htmlspecialchars($_POST[$this->FieldZipCodeName]);
 			$OtherName = htmlspecialchars($_POST[$this->FieldOtherName]);
-			$AddressName=$ZipCodeName.$CountyName.$AreaName.$OtherName;
-			if($ModifySQL!=""){
-				$ModifySQL.=",";
-			}
-			$Param[":".$this->FieldCountyName] = $CountyName;
-			$Param[":".$this->FieldAreaName] = $AreaName;
-			$Param[":".$this->FieldZipCodeName] = $ZipCodeName;
-			$Param[":".$this->FieldOtherName] = $OtherName;
-			
-			$ModifySQL.="`".$this->FieldCountyName."`= :".$this->FieldCountyName.",`".$this->FieldAreaName."`= :".$this->FieldAreaName.
-						",`".$this->FieldZipCodeName."`= :".$this->FieldZipCodeName.",`".$this->FieldOtherName."`= :".$this->FieldOtherName;
-			if($this->AddressName!=""){	
-				$Param[":".$this->AddressName] = $AddressName;
-				$ModifySQL.=",`".$this->AddressName."`= :".$this->AddressName;
-			}			
-		}
-		function GetDataHandle(&$data){
-			$data[$this->FieldCountyName] = htmlspecialchars($_POST[$this->FieldCountyName]);
-			$data[$this->FieldAreaName] = htmlspecialchars($_POST[$this->FieldAreaName]);
-			$data[$this->FieldZipCodeName] = htmlspecialchars($_POST[$this->FieldZipCodeName]);
-			$data[$this->FieldOtherName] = htmlspecialchars($_POST[$this->FieldOtherName]);
-			$data[$this->FieldFullAddressName] = $data[$this->FieldZipCodeName].$data[$this->FieldCountyName].$data[$this->FieldAreaName].$data[$this->FieldOtherName];
+			if($ModifySQL!=""){$ModifySQL.=",`".$this->FieldCountyName."`='".$CountyName."',`".$this->FieldAreaName."`='".$AreaName."',`".$this->FieldZipCodeName."`='".$ZipCodeName."',`".$this->FieldOtherName."`='".$OtherName."'";}else{$ModifySQL.="`".$this->FieldCountyName."`='".$CountyName."',`".$this->FieldAreaName."`='".$AreaName."',`".$this->FieldZipCodeName."`='".$ZipCodeName."',`".$this->FieldOtherName."`='".$OtherName."'";}
 		}
 	}
 ?>

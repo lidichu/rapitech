@@ -6,9 +6,11 @@
 		public function YouTubeFields($FieldNameIn,$ShowNameIn,$NullFlagIn){
 			$this->FieldName = $FieldNameIn;
 			$this->ShowName = $ShowNameIn;
-			$this->NullFlag = $NullFlagIn;			
+			$this->NullFlag = $NullFlagIn;
+			
 		}
-		function AddShow(){			
+		function AddShow(){
+			
 			echo "	<tr>\n";
 			echo "		<td width=\"17%\" bgcolor=\"#EEEEEE\" nowrap align=\"right\"><font color=\"#FF8833\">".$this->ShowName."&nbsp;</font></td>\n";
 			echo "		<td width=\"83%\" bgcolor=\"#FFFFFF\" align=\"left\">&nbsp;&nbsp;\n";
@@ -52,25 +54,14 @@
 		function AddScript(){}
 		function ModifyScript(){}
 		function ShowScript(){}
-		function AddHandle(&$Param){
+		function AddHandle(){
 			global $AddFieldsSQL,$AddValuesSQL;
-			if($AddFieldsSQL!=""){ $AddFieldsSQL.=","; $AddValuesSQL.=","; }
-			$AddFieldsSQL.="`".$this->FieldName."`";
-			$AddValuesSQL.=":".$this->FieldName;
-			$Param[":".$this->FieldName] = htmlspecialchars($_POST[$this->FieldName]);
+			if($AddFieldsSQL!=""){$AddFieldsSQL.=",`".$this->FieldName."`";}else{$AddFieldsSQL.="`".$this->FieldName."`";}
+			if($AddValuesSQL!=""){$AddValuesSQL.=",'".htmlspecialchars($_POST[$this->FieldName])."'";}else{$AddValuesSQL.="'".htmlspecialchars($_POST[$this->FieldName])."'";}
 		}
-		function ModifyHandle(&$Param){
+		function ModifyHandle(){
 			global $ModifySQL;
-			if($ModifySQL!=""){ $ModifySQL.=","; }
-			$ModifySQL.="`".$this->FieldName."`= :".$this->FieldName;
-			$Param[":".$this->FieldName] = htmlspecialchars($_POST[$this->FieldName]);
-		}
-		function GetDataHandle(&$data){
-			$DateValue = htmlspecialchars($_POST[$this->FieldName]);
-			if($DateValue==""){
-				$DateValue = "";
-			}
-			$data[$this->FieldName] = $DateValue;
+			if($ModifySQL!=""){$ModifySQL.=",`".$this->FieldName."`='".htmlspecialchars($_POST[$this->FieldName])."'";}else{$ModifySQL.="`".$this->FieldName."`='".htmlspecialchars($_POST[$this->FieldName])."'";}
 		}
 	}
 ?>

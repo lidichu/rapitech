@@ -4,9 +4,10 @@ session_start();
 //接收帳號及密碼
 $id = $_POST['id'];
 $pw = $_POST['pw'];
+
 if(trim($id)!="" && trim($pw)!=""){
-	setcookie("id", $id, time()+60*60*24, "/", "",  0);
-	setcookie("pw", md5($pw), time()+60*60*24, "/", "",  0);
+	setcookie("id",$id,time()+60*60*24);	//cookie 存在一天
+	setcookie("pw",$pw,time()+60*60*24);
 }
 $_SESSION["check_fileName"]="login";
 ?>
@@ -21,7 +22,5 @@ $_SESSION["check_fileName"]="login";
 		<frame src="mng.php">
 		<frame name="rightFrame" src="right.php" noresize scrolling="NO">
 </frameset>
-<noframes><body bgcolor="#FFFFFF">本系統需要支援框架的瀏覽器
-</body></noframes>
+<noframes><body bgcolor="#FFFFFF">本系統需要支援框架的瀏覽器</body></noframes>
 </html>
-

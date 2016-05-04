@@ -34,27 +34,31 @@
 			$Rows = 0;
 			//查詢數量
 			$SQL="Select Count(*) As Counter From ".$this->RelTable.$this->RelQuery;
-			$Rs = $Conn->prepare($SQL);
-			$Rs->execute();
-			$DataAmount = $Rs->fetchColumn();
-			$Rows = NumHandle2(intval($DataAmount),$this->Cols) / $this->Cols;				
+			$Rs = mysql_query($SQL,$Conn);
+			if($Rs && (mysql_num_rows($Rs)>0)){
+				$Row2=mysql_fetch_array($Rs);
+				$Rows = NumHandle2(intval($Row2["Counter"]),$this->Cols) / $this->Cols;				
+			}
+			
 			//查詢選項
 			$SQL="Select ".$this->RelField.",".$this->RelShow." From ".$this->RelTable.$this->RelQuery.$this->RelOrder;
-			$Rs = $Conn->prepare($SQL);
-			$Rs->execute();
-			echo "<table cellpadding=\"0\" cellspacing=\"0\" border=\"0\" width=\"100%\">\n";
-			for($i=1;$i<=$Rows;$i++){
-				echo "	<tr>\n";
-				for($j=1;$j<=$this->Cols;$j++){
-					if($Row2 = $Rs->fetch(PDO::FETCH_ASSOC)){
-						echo "		<td><input class=\"".$this->FieldName."Class\" type=\"checkbox\" name=\"".$this->FieldName."[]\" value=\"".NumHandle($Row2[$this->RelField],6)."\" />".$Row2[$this->RelShow]."</td>\n";
-					}else{
-						echo "		<td>&nbsp;</td>\n";
+			$Rs = mysql_query($SQL,$Conn);
+			if($Rs && (mysql_num_rows($Rs)>0)){
+				echo "<table cellpadding=\"0\" cellspacing=\"0\" border=\"0\" width=\"100%\">\n";
+				for($i=1;$i<=$Rows;$i++){
+					echo "	<tr>\n";
+					for($j=1;$j<=$this->Cols;$j++){
+						if($Row2 = mysql_fetch_array($Rs)){
+							echo "		<td><input class=\"".$this->FieldName."Class\" type=\"checkbox\" name=\"".$this->FieldName."[]\" value=\"".NumHandle($Row2[$this->RelField],6)."\" />".$Row2[$this->RelShow]."</td>\n";
+						}else{
+							echo "		<td>&nbsp;</td>\n";
+						}
 					}
-				}
-				echo "	</tr>\n";
-			}			
-			echo "</table>\n";
+					echo "	</tr>\n";
+				}			
+				echo "</table>\n";
+			}
+
 			if($this->NullFlag){
 			echo "			<font size=\"-1\" color=\"DarkGray\">(必填)</font>\n";
 			}
@@ -71,30 +75,32 @@
 			$Rows = 0;
 			//查詢數量
 			$SQL="Select Count(*) As Counter From ".$this->RelTable.$this->RelQuery;
-			$Rs = $Conn->prepare($SQL);
-			$Rs->execute();
-			$DataAmount = $Rs->fetchColumn();
-			$Rows = NumHandle2(intval($DataAmount),$this->Cols) / $this->Cols;
+			$Rs = mysql_query($SQL,$Conn);
+			if($Rs && (mysql_num_rows($Rs)>0)){
+				$Row2=mysql_fetch_array($Rs);
+				$Rows = NumHandle2(intval($Row2["Counter"]),$this->Cols) / $this->Cols;				
+			}
 			//查詢選項
 			$SQL="Select ".$this->RelField.",".$this->RelShow." From ".$this->RelTable.$this->RelQuery.$this->RelOrder;
-			$Rs = $Conn->prepare($SQL);
-			$Rs->execute();
+			$Rs = mysql_query($SQL,$Conn);
 			$CheckFlag = "";
-			echo "<table cellpadding=\"0\" cellspacing=\"0\" border=\"0\" width=\"100%\">\n";
-			for($i=1;$i<=$Rows;$i++){
-				echo "	<tr>\n";
-				for($j=1;$j<=$this->Cols;$j++){
-					
-					if($Row2 = $Rs->fetch(PDO::FETCH_ASSOC)){
-						$CheckFlag = (in_array(NumHandle($Row2[$this->RelField],6),$RowItemArray))?"checked=\"checked\"":"";
-						echo "		<td><input class=\"".$this->FieldName."Class\" type=\"checkbox\" name=\"".$this->FieldName."[]\" value=\"".NumHandle($Row2[$this->RelField],6)."\"".$CheckFlag." />".$Row2[$this->RelShow]."</td>\n";
-					}else{
-						echo "		<td>&nbsp;</td>\n";
+			if($Rs && (mysql_num_rows($Rs)>0)){
+				echo "<table cellpadding=\"0\" cellspacing=\"0\" border=\"0\" width=\"100%\">\n";
+				for($i=1;$i<=$Rows;$i++){
+					echo "	<tr>\n";
+					for($j=1;$j<=$this->Cols;$j++){
+						
+						if($Row2 = mysql_fetch_array($Rs)){
+							$CheckFlag = (in_array(NumHandle($Row2[$this->RelField],6),$RowItemArray))?"checked=\"checked\"":"";
+							echo "		<td><input class=\"".$this->FieldName."Class\" type=\"checkbox\" name=\"".$this->FieldName."[]\" value=\"".NumHandle($Row2[$this->RelField],6)."\"".$CheckFlag." />".$Row2[$this->RelShow]."</td>\n";
+						}else{
+							echo "		<td>&nbsp;</td>\n";
+						}
 					}
-				}
-				echo "	</tr>\n";
+					echo "	</tr>\n";
+				}			
+				echo "</table>\n";
 			}			
-			echo "</table>\n";
 			if($this->NullFlag){
 			echo "			<font size=\"-1\" color=\"DarkGray\">(必填)</font>\n";
 			}
@@ -110,13 +116,14 @@
 			$RowItemArray = split(",", $RowItem);			
 			//查詢選項
 			$SQL="Select ".$this->RelField.",".$this->RelShow." From ".$this->RelTable.$this->RelQuery.$this->RelOrder;
-			$Rs = $Conn->prepare($SQL);
-			$Rs->execute();
+			$Rs = mysql_query($SQL,$Conn);
 			$Result = "";
-			while($Row2 = $Rs->fetch(PDO::FETCH_ASSOC)){
-				if(in_array(NumHandle($Row2[$this->RelField],6),$RowItemArray)){
-					$Result .= ($Result=="")?"":",";
-					$Result .= $Row2[$this->RelShow];
+			if($Rs && (mysql_num_rows($Rs)>0)){
+				while($Row2 = mysql_fetch_array($Rs)){
+					if(in_array(NumHandle($Row2[$this->RelField],6),$RowItemArray)){
+						$Result .= ($Result=="")?"":",";
+						$Result .= $Row2[$this->RelShow];
+					}
 				}
 			}
 			echo $Result;
@@ -135,7 +142,7 @@
 		function AddScript(){}
 		function ModifyScript(){}
 		function ShowScript(){}
-		function AddHandle(&$Param){
+		function AddHandle(){
 			global $AddFieldsSQL,$AddValuesSQL;
 			
 			//接收參數
@@ -144,15 +151,12 @@
 				$ResultString .= ($ResultString=="")?"":",";
 				$ResultString .= $val;
 			}
-			if($AddFieldsSQL!=""){
-				$AddFieldsSQL.=",";
-				$AddValuesSQL.=",";
-			}
-			$Param[":".$this->FieldName] = $ResultString;
-			$AddFieldsSQL.="`".$this->FieldName."`";
-			$AddValuesSQL.=":".$this->FieldName;
+			
+			
+			if($AddFieldsSQL!=""){$AddFieldsSQL.=",`".$this->FieldName."`";}else{$AddFieldsSQL.="`".$this->FieldName."`";}
+			if($AddValuesSQL!=""){$AddValuesSQL.=",'".$ResultString."'";}else{$AddValuesSQL.="'".$ResultString."'";}
 		}
-		function ModifyHandle(&$Param){
+		function ModifyHandle(){
 			global $ModifySQL;
 			//接收參數
 			$Result = $_POST[$this->FieldName];
@@ -160,21 +164,7 @@
 				$ResultString .= ($ResultString=="")?"":",";
 				$ResultString .= $val;
 			}
-			if($ModifySQL!=""){
-				$ModifySQL.=",";
-			}
-			$Param[":".$this->FieldName] = $ResultString;
-			$ModifySQL.="`".$this->FieldName."`= :".$this->FieldName;
-		}
-		function GetDataHandle(&$data){
-			//接收參數
-			$Result = $_POST[$this->FieldName];
-			$ResultString = "";
-			while (list ($key,$val) = @each ($Result)) { 
-				$ResultString .= ($ResultString=="")?"":",";
-				$ResultString .= $val;
-			}
-			$data[$this->FieldName] = $ResultString;
+			if($ModifySQL!=""){$ModifySQL.=",`".$this->FieldName."`='".$ResultString."'";}else{$ModifySQL.="`".$this->FieldName."`='".$ResultString."'";}
 		}
 	}
 ?>

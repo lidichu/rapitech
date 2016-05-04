@@ -98,42 +98,24 @@
 			echo "</script>\n";
 		}
 		function ShowScript(){}
-		function AddHandle(&$Param){
+		function AddHandle(){
 			global $AddFieldsSQL,$AddValuesSQL;
 			if($_POST[$this->FieldName."_Year"] != "" && $_POST[$this->FieldName."_Month"] != "" && $_POST[$this->FieldName."_Day"] != ""){
 				$DateValue = NumHandle($_POST[$this->FieldName."_Year"],4)."-".NumHandle($_POST[$this->FieldName."_Month"],2)."-".NumHandle($_POST[$this->FieldName."_Day"],2);
 			}else{
 				$DateValue = "0000-00-00";
 			}
-			if($AddFieldsSQL!=""){
-				$AddFieldsSQL.=",";
-				$AddValuesSQL.=",";
-			}
-			$Param[":".$this->FieldName] = $DateValue;
-			$AddFieldsSQL.="`".$this->FieldName."`";
-			$AddValuesSQL.=":".$this->FieldName;
+			if($AddFieldsSQL!=""){$AddFieldsSQL.=",`".$this->FieldName."`";}else{$AddFieldsSQL.="`".$this->FieldName."`";}
+			if($AddValuesSQL!=""){$AddValuesSQL.=",'".$DateValue."'";}else{$AddValuesSQL.="'".$DateValue."'";}
 		}
-		function ModifyHandle(&$Param){
+		function ModifyHandle(){
 			global $ModifySQL;
 			if($_POST[$this->FieldName."_Year"] != "" && $_POST[$this->FieldName."_Month"] != "" && $_POST[$this->FieldName."_Day"] != ""){
 				$DateValue = NumHandle($_POST[$this->FieldName."_Year"],4)."-".NumHandle($_POST[$this->FieldName."_Month"],2)."-".NumHandle($_POST[$this->FieldName."_Day"],2);
 			}else{
 				$DateValue = "0000-00-00";
 			}
-			if($ModifySQL!=""){
-				$ModifySQL.=",";
-			}
-			$Param[":".$this->FieldName] = $DateValue;
-			$ModifySQL.="`".$this->FieldName."`= :".$this->FieldName;
-		}
-		function GetDataHandle(&$data){
-			$DateValue = $_POST[$this->FieldName];
-			if($_POST[$this->FieldName."_Year"] != "" && $_POST[$this->FieldName."_Month"] != "" && $_POST[$this->FieldName."_Day"] != ""){
-				$DateValue = NumHandle($_POST[$this->FieldName."_Year"],4)."-".NumHandle($_POST[$this->FieldName."_Month"],2)."-".NumHandle($_POST[$this->FieldName."_Day"],2);
-			}else{
-				$DateValue = "0000-00-00";
-			}
-			$data[$this->FieldName] = $DateValue;
+			if($ModifySQL!=""){$ModifySQL.=",`".$this->FieldName."`='".$DateValue."'";}else{$ModifySQL.="`".$this->FieldName."`='".$DateValue."'";}
 		}
 	}
 ?>

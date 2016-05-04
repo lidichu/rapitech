@@ -53,7 +53,7 @@
 			echo  "	<td height=\"83%\" width=\"489\" valign=\"top\" bgcolor=\"#FFFFFF\" align=\"left\">\n";
 			echo  "	<input type=\"hidden\" id=\"OldFile_".$this->FieldNameHidden."\" name=\"OldFile_".$this->FieldNameHidden."\" value=\"".$Row[$this->FieldNameHidden]."\"/>\n";
 			echo  "	<input type=\"hidden\" id=\"OldFile_".$this->FieldName."\" name=\"OldFile_".$this->FieldName."\" value=\"".$Row[$this->FieldName]."\"/>\n";
-			if($Row[$this->FieldName]!="" && is_file($this->FilePath.$Row[$this->FieldNameHidden])){
+			if($Row[$this->FieldName]!=""){
 				$PICWidthString = "";
 				$PICHeightString = "";
 				if($this->Width != ""){$PICWidthString = " width=\"".$this->Width."\" ";}
@@ -101,7 +101,7 @@
 			echo "<tr>\n";
 			echo "	<td width=\"17%\" bgcolor=\"#EEEEEE\" nowrap align=\"right\"><font color=\"#FF8833\">".$this->ShowName."&nbsp;</font></td>\n";
 			echo "	<td height=\"83%\" width=\"489\" valign=\"top\" bgcolor=\"#FFFFFF\" align=\"left\">\n";
-			if($Row[$this->FieldName]!="" && is_file($this->FilePath.$Row[$this->FieldNameHidden])){
+			if($Row[$this->FieldName]!=""){
 				$PICWidthString = "";
 				$PICHeightString = "";
 				if($this->Width != ""){$PICWidthString = " width=\"".$this->Width."\" ";}
@@ -109,12 +109,12 @@
 			echo  "		圖片：\n";	
 				if($this->TitleField!=""){
 					if($Row[$this->TitleField]!=""){
-			echo  "			<a href=\"".GetSCRIPTNAME().$this->OtherVar."option=Download&SerialNo=".$Row["SerialNo"]."&FieldName=".$this->FieldName."\" target=\"_blank\" alt=\"".$Row[$this->TitleField]."\" title=\"".$Row[$this->TitleField]."\"><img src=\"".$this->FilePath.$Row[$this->FieldNameHidden]."\" alt=\"".$Row[$this->TitleField]."\"".$PICWidthString.$PICHeightString." border=\"0\"/></a><br/>\n";
+			echo  "			<a href=\"".GetSCRIPTNAME().$this->OtherVar."option=Download&SerialNo=".$Row["SerialNo"]."&FieldName=".$this->FieldName."\" target=\"_blank\" alt=\"".$Row[$this->TitleField]."\" title=\"".$Row[$this->TitleField]."\"><img src=\"".$this->FilePath.$Row[$this->FieldName]."\" alt=\"".$Row[$this->TitleField]."\"".$PICWidthString.$PICHeightString." border=\"0\"/></a><br/>\n";
 					}else{
-			echo  "			<a href=\"".GetSCRIPTNAME().$this->OtherVar."option=Download&SerialNo=".$Row["SerialNo"]."&FieldName=".$this->FieldName."\" target=\"_blank\" alt=\"".$Row[$this->FieldName]."\" title=\"".$Row[$this->FieldName]."\"><img src=\"".$this->FilePath.$Row[$this->FieldNameHidden]."\" alt=\"".$Row[$this->FieldName]."\"".$PICWidthString.$PICHeightString." border=\"0\"/></a><br/>\n";
+			echo  "			<a href=\"".GetSCRIPTNAME().$this->OtherVar."option=Download&SerialNo=".$Row["SerialNo"]."&FieldName=".$this->FieldName."\" target=\"_blank\" alt=\"".$Row[$this->FieldName]."\" title=\"".$Row[$this->FieldName]."\"><img src=\"".$this->FilePath.$Row[$this->FieldName]."\" alt=\"".$Row[$this->FieldName]."\"".$PICWidthString.$PICHeightString." border=\"0\"/></a><br/>\n";
 					}
 				}else{
-			echo  "			<a href=\"".GetSCRIPTNAME().$this->OtherVar."option=Download&SerialNo=".$Row["SerialNo"]."&FieldName=".$this->FieldName."\" target=\"_blank\" alt=\"".$Row[$this->FieldName]."\" title=\"".$Row[$this->FieldName]."\"><img src=\"".$this->FilePath.$Row[$this->FieldNameHidden]."\" alt=\"".$Row[$this->FieldName]."\"".$PICWidthString.$PICHeightString." border=\"0\"/></a><br/>\n";
+			echo  "			<a href=\"".GetSCRIPTNAME().$this->OtherVar."option=Download&SerialNo=".$Row["SerialNo"]."&FieldName=".$this->FieldName."\" target=\"_blank\" alt=\"".$Row[$this->FieldName]."\" title=\"".$Row[$this->FieldName]."\"><img src=\"".$this->FilePath.$Row[$this->FieldName]."\" alt=\"".$Row[$this->FieldName]."\"".$PICWidthString.$PICHeightString." border=\"0\"/></a><br/>\n";
 				}
 			}else{
 			echo  "		<font color=\"red\">沒有圖片</font><br/>\n";	
@@ -168,41 +168,23 @@
 			echo "</script>\n";
 		}
 		function ShowScript(){}
-		function AddHandle(&$Param){
+		function AddHandle(){
 			global $AddFieldsSQL,$AddValuesSQL;
 			$FileName = ($_POST["FileName_".$this->FieldName]=="")?$_FILES[$this->FieldName]['name']:$_POST["FileName_".$this->FieldName];
 			$FieldNameHiddenValue = FileHandle::Upload($_FILES[$this->FieldName],$this->FilePath,$_POST["FileName_".$this->FieldName]);
-			if($AddFieldsSQL!=""){
-				$AddFieldsSQL.=",";
-				$AddValuesSQL.=",";
-			}
-			$Param[":".$this->FieldName] = $FileName;
-			$Param[":".$this->FieldNameHidden] = $FieldNameHiddenValue;
-			$AddFieldsSQL.="`".$this->FieldName."`";
-			$AddFieldsSQL.=",`".$this->FieldNameHidden."`";
-			$AddValuesSQL.=":".$this->FieldName;
-			$AddValuesSQL.=",:".$this->FieldNameHidden;
+			if($AddFieldsSQL!=""){$AddFieldsSQL.=",`".$this->FieldName."`,`".$this->FieldNameHidden."`";}else{$AddFieldsSQL.="`".$this->FieldName."`,`".$this->FieldNameHidden."`";}
+			if($AddValuesSQL!=""){$AddValuesSQL.=",'".$FileName."','".$FieldNameHiddenValue."'";}else{$AddValuesSQL.="'".$FileName."','".$FieldNameHiddenValue."'";}
 			if($this->TitleField!=""){
 				if($_POST[$this->TitleField]!=""){
-					if($AddFieldsSQL!=""){
-						$AddFieldsSQL.=",";
-						$AddValuesSQL.=",";
-					}
-					$Param[":".$this->TitleField] = $_POST[$this->TitleField];
-					$AddFieldsSQL.="`".$this->TitleField."`";
-					$AddValuesSQL.=":".$this->TitleField;
+					if($AddFieldsSQL!=""){$AddFieldsSQL.=",`".$this->TitleField."`";}else{$AddFieldsSQL.="`".$this->TitleField."`";}
+					if($AddValuesSQL!=""){$AddValuesSQL.=",'".$_POST[$this->TitleField]."'";}else{$AddValuesSQL.="'".$_POST[$this->TitleField]."'";}
 				}else{
-					if($AddFieldsSQL!=""){
-						$AddFieldsSQL.=",";
-						$AddValuesSQL.=",";
-					}
-					$Param[":".$this->TitleField] = $FileName;
-					$AddFieldsSQL.="`".$this->TitleField."`";
-					$AddValuesSQL.=":".$this->TitleField;
+					if($AddFieldsSQL!=""){$AddFieldsSQL.=",`".$this->TitleField."`";}else{$AddFieldsSQL.="`".$this->TitleField."`";}
+					if($AddValuesSQL!=""){$AddValuesSQL.=",'".$FileName."'";}else{$AddValuesSQL.="'".$FileName."'";}
 				}
 			}
 		}
-		function ModifyHandle(&$Param){
+		function ModifyHandle(){
 			global $ModifySQL;
 			if($_POST["file".$this->Num."_modify"]=="new"){
 				$FileName = ($_POST["FileName_".$this->FieldName]=="")?$_FILES[$this->FieldName]['name']:$_POST["FileName_".$this->FieldName];
@@ -220,22 +202,13 @@
 					$FileName = $_POST["OldFile_".$this->FieldName];
 					$FieldNameHiddenValue = $_POST["OldFile_".$this->FieldNameHidden];
 				}
-				if($ModifySQL!=""){
-					$ModifySQL.=",";
-				}
-				$Param[":".$this->FieldName] = $FileName;
-				$Param[":".$this->FieldNameHidden] = $FieldNameHiddenValue;
-				$ModifySQL.="`".$this->FieldName."`= :".$this->FieldName;
-				$ModifySQL.=",`".$this->FieldNameHidden."`= :".$this->FieldNameHidden;
+
+				if($ModifySQL!=""){$ModifySQL.=",`".$this->FieldName."`='".$FileName."',`".$this->FieldNameHidden."`='".$FieldNameHiddenValue."'";}else{$ModifySQL.="`".$this->FieldName."`='".$FileName."',`".$this->FieldNameHidden."`='".$FieldNameHiddenValue."'";}
 				if($this->TitleField!=""){
-					if($ModifySQL!=""){
-						$ModifySQL.=",";
-					}
-					$ModifySQL.="`".$this->TitleField."`= :".$this->TitleField;
 					if($_POST[$this->TitleField]!=""){
-						$Param[":".$this->TitleField] = $_POST[$this->TitleField];
+						if($ModifySQL!=""){$ModifySQL.=",`".$this->TitleField."`='".$_POST[$this->TitleField]."'";}else{$ModifySQL.="`".$this->TitleField."`='".$_POST[$this->TitleField]."'";}
 					}else{
-						$Param[":".$this->TitleField] = $FileName;
+						if($ModifySQL!=""){$ModifySQL.=",`".$this->TitleField."`='".$FileName."'";}else{$ModifySQL.="`".$this->TitleField."`='".$FileName."'";}
 					}
 				}
 			}elseif($_POST["file".$this->Num."_modify"]=="del"){
@@ -247,45 +220,22 @@
 					//若刪除失敗，則刪除新上傳檔案，並回存原始檔案名稱
 					$FileName = $_POST["OldFile_".$this->FieldName];
 					$FieldNameHiddenValue = $DelFileName;
-					if($ModifySQL!=""){
-						$ModifySQL.=",";
-					}
-					$Param[":".$this->FieldName] = $FileName;
-					$Param[":".$this->FieldNameHidden] = $FieldNameHiddenValue;
-					$ModifySQL.="`".$this->FieldName."`= :".$this->FieldName;
-					$ModifySQL.=",`".$this->FieldNameHidden."`= :".$this->FieldNameHidden;
+					if($ModifySQL!=""){$ModifySQL.=",`".$this->FieldName."`='".$FileName."',`".$this->FieldNameHidden."`='".$FieldNameHiddenValue."'";}else{$ModifySQL.="`".$this->FieldName."`='".$FileName."',`".$this->FieldNameHidden."`='".$FieldNameHiddenValue."'";}
 				}else{
-					if($ModifySQL!=""){
-						$ModifySQL.=",";
-					}
-					$Param[":".$this->FieldName] = "";
-					$Param[":".$this->FieldNameHidden] = "";
-					$ModifySQL.="`".$this->FieldName."`= :".$this->FieldName;
-					$ModifySQL.=",`".$this->FieldNameHidden."`= :".$this->FieldNameHidden;
+					if($ModifySQL!=""){$ModifySQL.=",`".$this->FieldName."`='".$FileName."',`".$this->FieldNameHidden."`='".$FieldNameHiddenValue."'";}else{$ModifySQL.="`".$this->FieldName."`='".$FileName."',`".$this->FieldNameHidden."`='".$FieldNameHiddenValue."'";}
 					if($this->TitleField!=""){
-						if($ModifySQL!=""){
-							$ModifySQL.=",";
-						}
-						$Param[":".$this->TitleField] = "";
-						$ModifySQL.="`".$this->TitleField."`= :".$this->TitleField;
+						if($ModifySQL!=""){$ModifySQL.=",`".$this->TitleField."`=''";}else{$ModifySQL.="`".$this->TitleField."`=''";}
 					}
 				}
 			}elseif($_POST["file".$this->Num."_modify"]=="modify"){
 				if($this->TitleField!=""){
-					if($ModifySQL!=""){
-							$ModifySQL.=",";
-					}
-					$ModifySQL.="`".$this->TitleField."`= :".$this->TitleField;
 					if($_POST["Title_".$this->TitleField]!=""){
-						$Param[":".$this->TitleField] = $_POST["Title_".$this->TitleField];
+						if($ModifySQL!=""){$ModifySQL.=",`".$this->TitleField."`='".$_POST["Title_".$this->TitleField]."'";}else{$ModifySQL.="`".$this->TitleField."`='".$_POST["Title_".$this->TitleField]."'";}
 					}else{
-						$Param[":".$this->TitleField] = $Ros[$this->FieldName];
+						if($ModifySQL!=""){$ModifySQL.=",`".$this->TitleField."`=".$this->FieldName;}else{$ModifySQL.="`".$this->TitleField."`=".$this->FieldName;}
 					}
 				}
 			}
-		}
-		function GetDataHandle(&$data){
-			// 不做任何事
 		}
 	}
 ?>

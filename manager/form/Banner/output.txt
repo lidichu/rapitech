@@ -1,0 +1,4 @@
+Select SerialNo From dmpic Where IndexShow = 'true' And G0 = 5
+Select SerialNo From dmpic Where IndexShow = 'true' And G0 = 5
+Select SerialNo From dmpic Where IndexShow = 'true' And G0 = 5
+Select SerialNo From dmpic Where IndexShow = 'true' And G0 = 4

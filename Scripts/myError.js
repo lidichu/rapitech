@@ -20,7 +20,7 @@ function MyErrorEn(){
 				this.add("．" + FieldName + " is required.");
 			}
 		}else{
-			var EMailFilter = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+			var EMailFilter = /^([a-zA-Z0-9_.-])+@(([a-zA-Z0-9-])+.)+([a-zA-Z0-9]{2,4})+$/;	
 			if(!EMailFilter.test(FieldValue)){
 				this.add("．" + FieldName + " must contain an e-mail address");
 			}
@@ -56,7 +56,7 @@ function MyErrorCh(){
 				this.add("．『" + FieldName + "』 不能為空白");
 			}
 		}else{
-			var EMailFilter = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+			var EMailFilter = /^([a-zA-Z0-9_.-])+@(([a-zA-Z0-9-])+.)+([a-zA-Z0-9]{2,4})+$/;	
 			if(!EMailFilter.test(FieldValue)){
 				this.add("．『" + FieldName + "』 格式不正確");
 			}
@@ -81,13 +81,7 @@ function MyErrorCh(){
 			this.add("．『" + FieldName + "』 不能為空白");
 		}
 	};	
-	//檢查地址
-	this.checkAddress = function(FieldName,FieldCityValue,FieldAreaValue,FieldOtherValue){
-		if(FieldCityValue == "" || FieldAreaValue == "" || FieldOtherValue == ""){
-			this.add("．『" + FieldName + "』 不能為空白");
-		}
-		return true;
-	};
+	
 	
 	//檢查CheckBox必填
 	this.checkCheckbox = function (FieldName,CheckBoxName){
@@ -124,17 +118,6 @@ function MyErrorCh(){
 			this.add("．『" + FieldName + "』 請輸入5-50個英數字");
 		}		
 	};
-	this.confirmPWD = function(FieldName,FieldValueArray){
-		if(FieldValueArray[1]==""){
-			this.add("．『" + FieldName + "』 不能為空白");
-			return false;
-		}
-		if(FieldValueArray[0]!=FieldValueArray[1]){
-			this.add("．『" + FieldName + "』 與密碼不一致");
-			return false;
-		}
-		return true;		
-	}
 	//檢查密碼格式
 	this.checkPWD = function(FieldName,FieldValue){
 		re1 = /[A-Za-z0-9]+$/g;
@@ -180,8 +163,6 @@ function MyErrorCh(){
 		}
 	}
 }
-
-
 
 function MyErrorCn(){
 	this.Msg = "";

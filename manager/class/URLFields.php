@@ -24,15 +24,6 @@
 			echo  "		</td>\n";
 			echo  "	</tr>\n";			
 		}
-		function AddShowTiny(){
-			if($this->TitleField !=""){
-			echo  "		&nbsp;&nbsp;網址標題：<input type=\"text\" name=\"".$this->TitleField."\" id=\"".$this->TitleField."\" size=\"41\" maxlength=\"255\" value=\"\"><br/>\n";
-			}
-			echo  " <input type=\"text\" name=\"".$this->FieldName."\" id=\"".$this->FieldName."\" size=\"16\" maxlength=\"255\" value=\"http://\">\n";
-			if($this->NullFlag){
-			echo "			<font size=\"-1\" color=\"DarkGray\">(必填)</font>\n";
-			}
-		}		
 		function ModifyShow(){
 			global $Row;
 			echo  "	<tr>\n";
@@ -52,20 +43,6 @@
 			echo  "		</td>\n";
 			echo  "	</tr>\n";			
 		}
-		function ModifyShowTiny(){
-			global $Row;
-			if($this->TitleField !=""){
-			echo  "		&nbsp;&nbsp;網址標題：<input type=\"text\" name=\"".$this->TitleField."\" id=\"".$this->TitleField."\" size=\"41\" maxlength=\"255\" value=\"".$Row[$this->TitleField]."\"><br/>\n";
-			}
-			if($Row[$this->FieldName]!=""){
-			echo  " <input type=\"text\" name=\"".$this->FieldName."\" id=\"".$this->FieldName."\" size=\"16\" maxlength=\"255\" value=\"".$Row[$this->FieldName]."\"/>\n";
-			}else{
-			echo  " <input type=\"text\" name=\"".$this->FieldName."\" id=\"".$this->FieldName."\" size=\"16\" maxlength=\"255\" value=\"http://\"/>\n";				
-			}
-			if($this->NullFlag){
-			echo "			<font size=\"-1\" color=\"DarkGray\">(必填)</font>\n";
-			}
-		}		
 		function ReadShow(){
 			global $Row;
 			echo  "	<tr>\n";
@@ -101,44 +78,66 @@
 	
 		}
 		function ShowScript(){}
-		function AddHandle(&$Param){
+		function AddHandle(){
 			global $AddFieldsSQL,$AddValuesSQL;
-			if($AddFieldsSQL!=""){ $AddFieldsSQL.=","; $AddValuesSQL.=","; }
-			$AddFieldsSQL.="`".$this->FieldName."`";
-			$AddValuesSQL.=":".$this->FieldName;
-			$FieldValue = $_POST[$this->FieldName];
-			if(strtolower($FieldValue) == "http://" || strtolower($FieldValue) == "https://"){ $FieldValue = ""; }
-			$Param[":".$this->FieldName] = $FieldValue;
-			if($this->TitleField!=""){
-				$AddFieldsSQL.=",`".$this->TitleField."`";
-				$AddValuesSQL.=",:".$this->TitleField;
-				$TitleValue = $_POST[$this->TitleField];
-				if($TitleValue == ""){ $TitleValue = $FieldValue; }
-				$Param[":".$this->TitleField] = $TitleValue;
-			}
-		}
-		function ModifyHandle(&$Param){
-			global $ModifySQL;
-			if($ModifySQL!=""){ $ModifySQL.=","; }
-			$ModifySQL.="`".$this->FieldName."`= :".$this->FieldName;
-			$FieldValue = $_POST[$this->FieldName];
-			if(strtolower($FieldValue) == "http://" || strtolower($FieldValue) == "https://"){ $FieldValue = ""; }
-			$Param[":".$this->FieldName] = $FieldValue;
-			if($this->TitleField!=""){
-				$ModifySQL.=",`".$this->TitleField."`= :".$this->TitleField;
-				$TitleValue = $_POST[$this->TitleField];
-				if($TitleValue == ""){ $TitleValue = $FieldValue; }
-				$Param[":".$this->TitleField] = $TitleValue;
-			}
-		}
-		function GetDataHandle(&$data){
 			$TitleValue = $_POST[$this->TitleField];
 			$FieldValue = $_POST[$this->FieldName];
-			if(strtolower($FieldValue)=="http://"){
-				$FieldValue = "";
+
+			if($this->TitleField!=""){
+				if($FieldValue!=""){
+					if(strtolower($FieldValue)!="http://"){
+						if($AddFieldsSQL!=""){$AddFieldsSQL.=",`".$this->FieldName."`";}else{$AddFieldsSQL.="`".$this->FieldName."`";}
+						if($AddValuesSQL!=""){$AddValuesSQL.=",'".$FieldValue."'";}else{$AddValuesSQL.="'".$FieldValue."'";}
+						if($TitleValue!=""){
+							if($AddFieldsSQL!=""){$AddFieldsSQL.=",`".$this->TitleField."`";}else{$AddFieldsSQL.="`".$this->TitleField."`";}
+							if($AddValuesSQL!=""){$AddValuesSQL.=",'".$TitleValue."'";}else{$AddValuesSQL.="'".$TitleValue."'";}							
+						}else{
+							if($AddFieldsSQL!=""){$AddFieldsSQL.=",`".$this->TitleField."`";}else{$AddFieldsSQL.="`".$this->TitleField."`";}
+							if($AddValuesSQL!=""){$AddValuesSQL.=",'".$FieldValue."'";}else{$AddValuesSQL.="'".$FieldValue."'";}
+						}
+					}
+				}				
+			}else{
+				if($FieldValue!=""){
+					if(strtolower($FieldValue)!="http://"){
+						if($AddFieldsSQL!=""){$AddFieldsSQL.=",`".$this->FieldName."`";}else{$AddFieldsSQL.="`".$this->FieldName."`";}
+						if($AddValuesSQL!=""){$AddValuesSQL.=",'".$FieldValue."'";}else{$AddValuesSQL.="'".$FieldValue."'";}
+					}
+				}
 			}
-			$data[$this->TitleField] = $TitleValue;
-			$data[$this->FieldName] = $FieldValue;
+		}
+		function ModifyHandle(){
+			global $ModifySQL;
+			$TitleValue = $_POST[$this->TitleField];
+			$FieldValue = $_POST[$this->FieldName];
+			if($this->TitleField!=""){
+				if($FieldValue!=""){
+					if(strtolower($FieldValue)!="http://"){
+						if($ModifySQL!=""){$ModifySQL.=",`".$this->FieldName."`='".$FieldValue."'";}else{$ModifySQL.="`".$this->FieldName."`='".$FieldValue."'";}
+						if($TitleValue!=""){
+							if($ModifySQL!=""){$ModifySQL.=",`".$this->TitleField."`='".$TitleValue."'";}else{$ModifySQL.="`".$this->TitleField."`='".$TitleValue."'";}						
+						}else{
+							if($ModifySQL!=""){$ModifySQL.=",`".$this->TitleField."`='".$FieldValue."'";}else{$ModifySQL.="`".$this->TitleField."`='".$FieldValue."'";}						
+						}						
+					}else{
+						if($ModifySQL!=""){$ModifySQL.=",`".$this->FieldName."`=''";}else{$ModifySQL.="`".$this->FieldName."`=''";}
+						if($ModifySQL!=""){$ModifySQL.=",`".$this->TitleField."`=''";}else{$ModifySQL.="`".$this->TitleField."`=''";}						
+					}
+				}else{
+					if($ModifySQL!=""){$ModifySQL.=",`".$this->FieldName."`=''";}else{$ModifySQL.="`".$this->FieldName."`=''";}
+					if($ModifySQL!=""){$ModifySQL.=",`".$this->TitleField."`=''";}else{$ModifySQL.="`".$this->TitleField."`=''";}
+				}
+			}else{
+				if($FieldValue!=""){
+					if(strtolower($FieldValue)!="http://"){
+						if($ModifySQL!=""){$ModifySQL.=",`".$this->FieldName."`='".$FieldValue."'";}else{$ModifySQL.="`".$this->FieldName."`='".$FieldValue."'";}
+					}else{
+						if($ModifySQL!=""){$ModifySQL.=",`".$this->FieldName."`=''";}else{$ModifySQL.="`".$this->FieldName."`=''";}
+					}
+				}else{
+					if($ModifySQL!=""){$ModifySQL.=",`".$this->FieldName."`=''";}else{$ModifySQL.="`".$this->FieldName."`=''";}
+				}
+			}
 		}
 	}
 ?>

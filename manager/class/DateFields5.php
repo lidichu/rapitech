@@ -72,7 +72,7 @@
 		function AddScript(){}
 		function ModifyScript(){}
 		function ShowScript(){}
-		function AddHandle(&$Param){
+		function AddHandle(){
 			global $AddFieldsSQL,$AddValuesSQL;
 			$DateStartValue = $_POST[$this->StartField];
 			if($DateStartValue==""){
@@ -89,16 +89,10 @@
 				$DateStartValue = $DateEndValue;
 				$DateEndValue = $DateTempValue;
 			}
-			if($AddFieldsSQL!=""){
-				$AddFieldsSQL.=",";
-				$AddValuesSQL.=",";
-			}
-			$Param[":".$this->StartField] = $DateStartValue;
-			$Param[":".$this->EndField] = $DateEndValue;
-			$AddFieldsSQL.="`".$this->StartField."`,`".$this->EndField."`";
-			$AddValuesSQL.=":".$this->StartField.", :".$this->EndField;
+			if($AddFieldsSQL!=""){$AddFieldsSQL.=",`".$this->StartField."`,`".$this->EndField."`";}else{$AddFieldsSQL.="`".$this->StartField."`,`".$this->EndField."`";}
+			if($AddValuesSQL!=""){$AddValuesSQL.=",'".$DateStartValue."','".$DateEndValue."'";}else{$AddValuesSQL.="'".$DateStartValue."','".$DateEndValue."'";}
 		}
-		function ModifyHandle(&$Param){
+		function ModifyHandle(){
 			global $ModifySQL;
 			$DateStartValue = $_POST[$this->StartField];
 			if($DateStartValue==""){
@@ -114,30 +108,8 @@
 				$DateTempValue = $DateStartValue;
 				$DateStartValue = $DateEndValue;
 				$DateEndValue = $DateTempValue;
-			}
-			if($ModifySQL!=""){
-				$ModifySQL.=",";
-			}
-			$Param[":".$this->StartField] = $DateStartValue;
-			$Param[":".$this->EndField] = $DateEndValue;
-			$ModifySQL.="`".$this->StartField."`= :".$this->StartField.",`".$this->EndField."` = :".$this->EndField;
-		}
-		function GetDataHandle(&$data){
-			$DateStartValue = $_POST[$this->StartField];
-			if($DateStartValue==""){
-				$DateStartValue = "0000-00-00 00:00:00";
-			}
-			$DateEndValue = $_POST[$this->EndField];
-			if($DateEndValue==""){
-				$DateEndValue = "0000-00-00 00:00:00";
-			}
-			if(strtotime($DateStartValue) > strtotime($DateEndValue )){
-				$DateTemp = $DateStartValue;
-				$DateStartValue = $DateEndValue;
-				$DateEndValue = $DateTemp;
-			}
-			$data[$this->StartField] = $DateStartValue;
-			$data[$this->EndField] = $DateEndValue;
+			}	
+			if($ModifySQL!=""){$ModifySQL.=",`".$this->StartField."`='".$DateStartValue."',`".$this->EndField."`='".$DateEndValue."'";}else{$ModifySQL.="`".$this->StartField."`='".$DateStartValue."',`".$this->EndField."`='".$DateEndValue."'";}
 		}
 	}
 ?>

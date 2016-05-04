@@ -1,0 +1,14 @@
+後台參考網址：http://www.motherwang.com/manager/
+帳號:admin 密碼:0113
+
+前台參考網址：http://www.motherwang.com/
+
+資料庫設定:
+\manager\inc\Connection.php
+
+王家老木原前台頁面路徑:\ch
+
+撰寫語言:php 資料庫:mysql 
+
+建議架站工具:XAMPP(含MYSQL、Apache)
+[開發時是用80port要把iis關掉還有SQL Server Reporting Services]

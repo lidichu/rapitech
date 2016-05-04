@@ -14,7 +14,7 @@
 			echo "	<tr>\n";
 			echo "		<td width=\"17%\" bgcolor=\"#EEEEEE\" nowrap align=\"right\"><font color=\"#FF8833\">".$this->ShowName."&nbsp;</font></td>\n";
 			echo "		<td width=\"83%\" bgcolor=\"#FFFFFF\" align=\"left\">&nbsp;&nbsp;\n";
-			echo "			<input type=\"text\" name=\"".$this->FieldName."\" id=\"".$this->FieldName."\" size=\"18\" maxlength=\"255\" readonly onclick=\"WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'});\" value=\"".$this->DefaultValue."\"/>\n";
+			echo "			<input type=\"text\" name=\"".$this->FieldName."\" id=\"".$this->FieldName."\" size=\"12\" maxlength=\"255\" readonly onclick=\"WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'});\" value=\"".$this->DefaultValue."\"/>\n";
 			if($this->NullFlag){
 			echo "			<font size=\"-1\" color=\"DarkGray\">(必填)</font>\n";
 			}
@@ -32,7 +32,7 @@
 			echo "	<tr>\n";
 			echo "		<td width=\"17%\" bgcolor=\"#EEEEEE\" nowrap align=\"right\"><font color=\"#FF8833\">".$this->ShowName."&nbsp;</font></td>\n";
 			echo "		<td width=\"83%\" bgcolor=\"#FFFFFF\" align=\"left\">&nbsp;&nbsp;\n";
-			echo "			<input type=\"text\" name=\"".$this->FieldName."\" id=\"".$this->FieldName."\" size=\"18\" maxlength=\"255\" readonly onclick=\"WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'});\" value=\"".$DateValue."\"/>\n";
+			echo "			<input type=\"text\" name=\"".$this->FieldName."\" id=\"".$this->FieldName."\" size=\"12\" maxlength=\"255\" readonly onclick=\"WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'});\" value=\"".$DateValue."\"/>\n";
 			if($this->NullFlag){
 			echo "			<font size=\"-1\" color=\"DarkGray\">(必填)</font>\n";
 			}
@@ -41,15 +41,9 @@
 		}
 		function ReadShow(){
 			global $Row;
-			$DateValue = strtotime($Row[$this->FieldName]);
-			if(date("Y",$DateValue)=="0000"||$DateValue==""){
-				$DateValue = "";
-			}else{
-				$DateValue = date("Y-m-d H:i:s",$DateValue);
-			}
 			echo "	<tr>\n";
 			echo "		<td width=\"17%\" bgcolor=\"#EEEEEE\" nowrap align=\"right\"><font color=\"#FF8833\">".$this->ShowName."&nbsp;</font></td>\n";
-			echo "		<td width=\"83%\" bgcolor=\"#FFFFFF\" align=\"left\">&nbsp;&nbsp;".$DateValue."</td>\n";
+			echo "		<td width=\"83%\" bgcolor=\"#FFFFFF\" align=\"left\">&nbsp;&nbsp;".$Row[$this->FieldName]."</td>\n";
 			echo "	</tr>\n";			
 		}
 		function CheckScript(){
@@ -63,38 +57,22 @@
 		function AddScript(){}
 		function ModifyScript(){}
 		function ShowScript(){}
-		function AddHandle(&$Param){
+		function AddHandle(){
 			global $AddFieldsSQL,$AddValuesSQL;
 			$DateValue = $_POST[$this->FieldName];
 			if($DateValue==""){
 				$DateValue = "0000-00-00 00:00:00";
 			}
-			if($AddFieldsSQL!=""){
-				$AddFieldsSQL.=",";
-				$AddValuesSQL.=",";
-			}
-			$Param[":".$this->FieldName] = $DateValue;
-			$AddFieldsSQL.="`".$this->FieldName."`";
-			$AddValuesSQL.=":".$this->FieldName;
+			if($AddFieldsSQL!=""){$AddFieldsSQL.=",`".$this->FieldName."`";}else{$AddFieldsSQL.="`".$this->FieldName."`";}
+			if($AddValuesSQL!=""){$AddValuesSQL.=",'".$DateValue."'";}else{$AddValuesSQL.="'".$DateValue."'";}
 		}
-		function ModifyHandle(&$Param){
+		function ModifyHandle(){
 			global $ModifySQL;
 			$DateValue = $_POST[$this->FieldName];
 			if($DateValue==""){
 				$DateValue = "0000-00-00 00:00:00";
 			}
-			if($ModifySQL!=""){
-				$ModifySQL.=",";
-			}
-			$Param[":".$this->FieldName] = $DateValue;
-			$ModifySQL.="`".$this->FieldName."`= :".$this->FieldName;
-		}
-		function GetDataHandle(&$data){
-			$DateValue = $_POST[$this->FieldName];
-			if($DateValue==""){
-				$DateValue = "0000-00-00 00:00:00";
-			}
-			$data[$this->FieldName] = $DateValue;
+			if($ModifySQL!=""){$ModifySQL.=",`".$this->FieldName."`='".$DateValue."'";}else{$ModifySQL.="`".$this->FieldName."`='".$DateValue."'";}
 		}
 	}
 ?>

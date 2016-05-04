@@ -50,21 +50,14 @@
 		function AddScript(){}
 		function ModifyScript(){}
 		function ShowScript(){}
-		function AddHandle(&$Param){
+		function AddHandle(){
 			global $AddFieldsSQL,$AddValuesSQL;
-			if($AddFieldsSQL!=""){ $AddFieldsSQL.=","; $AddValuesSQL.=","; }
-			$AddFieldsSQL.="`".$this->FieldName."`";
-			$AddValuesSQL.=":".$this->FieldName;
-			$Param[":".$this->FieldName] = $_POST[$this->FieldName];
+			if($AddFieldsSQL!=""){$AddFieldsSQL.=",".$this->FieldName;}else{$AddFieldsSQL.=$this->FieldName;}
+			if($AddValuesSQL!=""){$AddValuesSQL.=",'".$_POST[$this->FieldName]."'";}else{$AddValuesSQL.="'".$_POST[$this->FieldName]."'";}
 		}
-		function ModifyHandle(&$Param){
+		function ModifyHandle(){
 			global $ModifySQL;
-			if($ModifySQL!=""){ $ModifySQL.=","; }
-			$ModifySQL.="`".$this->FieldName."`= :".$this->FieldName;
-			$Param[":".$this->FieldName] = $_POST[$this->FieldName];
-		}
-		function GetDataHandle(&$data){
-			$data[$this->FieldName] = $_POST[$this->FieldName];
+			if($ModifySQL!=""){$ModifySQL.=",".$this->FieldName."='".$_POST[$this->FieldName]."'";}else{$ModifySQL.=$this->FieldName."='".$_POST[$this->FieldName]."'";}
 		}
 	}
 ?>

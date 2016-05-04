@@ -3,50 +3,35 @@
 		$OtherQuery = "&" . $OtherQuery;
 	$temp=$Page;
 	$StartPage=1;
-	$LimitPage=9;
-	$EndPage=$LimitPage;
-	$CenterPage=round($LimitPage/2);
-	if($Page>$CenterPage){
-		$StartPage=$StartPage+($Page-$CenterPage);
-		$EndPage=$EndPage+($Page-$CenterPage);
-	}
-	if($PageAmount<=$LimitPage){		
-		$StartPage=1;
-		$EndPage=$LimitPage;
-	}
-	if ($EndPage > $PageAmount){ 
+	$EndPage=9;
+	while ($temp>9){
+		$StartPage=$StartPage+9;
+		$temp=$temp-9;
+		$EndPage=$EndPage+9;
+	}	
+	if ($EndPage > $PageAmount) 
 		$EndPage=$PageAmount;
-	}
-	/*if($opp=="kyw" && $kyw!=""){
-		$Pg="&opp=".$opp."&kyw=".$kyw;
-	}
-	if($QTime!=""){
-		$Pg="&QTime=".$QTime."&Qu=".$Qu;
-	}*/
-	if(G0!=""){
-		$Pg.="&G0=".$G0;
-	}
-	if(G1!=""){
-		$Pg.="&G1=".$G1;
-	}
 ?>
-
-<?php	if($PageAmount>0){?>
-<div id="pagebar">
-<div class="pagebox">
-				<?php if($Page>1){ ?>
-						
-				<?php }?>
-				<?php for ($i=$StartPage;$i<=$EndPage;$i++){?>
-					<?php if($i!=$Page){?>
-						<div class="page"><a href="<?php echo GetScriptName() . "?Page=" . $i . $OtherQuery.$Pg ?>" ><?php if($i==$EndPage){ echo $i; }else{ echo $i; } ?></a></div>			
-					<?php }else{?>
-						<div class="page" style="font-weight: bold;"><a href="#"><?php if($i==$EndPage){ echo $i; }else{ echo $i; } ?></a></div>	
-					<?php }?>	
-				<?php }?>
-				<?php if ($Page < $PageAmount ){?>
-							<div class="pagebox2"><a href="<?php echo GetScriptName()."?Page=".($Page + 1).$OtherQuery.$Pg ?>"><img src="images/00/icon_next.png" width="20" height="20" /></a></div>							
-				<?php	}?>
-</div><!-- pagebox end-->
-</div><!-- pagebar end-->
-<?php	}?>
+<tr>
+	<td height="40" align="center" valign="bottom">
+		<table cellpadding="0" cellspacing="0" border="0" align="center">
+			<tr>
+				<td>
+					<?php if($Page>1){ ?>
+					<div class="pagebar"><a href="<?php echo GetScriptName()."?Page=".($Page - 1).$OtherQuery ?>" title="上一頁,第<?php echo($Page - 1)?>頁" style="padding:2px 3px 0px 3px">上一頁</a></div>
+					<?php }?>
+					<?php for ($i=$StartPage;$i<=$EndPage;$i++){?>
+						<?php if($i!=$Page){?>
+							<div class="pagebar"><a href="<?php echo GetScriptName() . "?Page=" . $i . $OtherQuery ?>" title="第<?php echo $i?>頁"><?php echo $i?></a></div>
+						<?php }else{?>
+							<div  class="pagebar2"><a href="#" title="第 <?php echo $i?> 頁,目前所在頁"><?php echo $i?></a></div>
+						<?php }?>
+					<?php }?>
+					<?php if ($Page < $PageAmount ){?>
+					<div class="pagebar"><a href="<?php echo GetScriptName()."?Page=".($Page + 1).$OtherQuery ?>" title="下一頁,第<?php echo($Page + 1)?>頁" style="padding:2px 3px 0px 3px">下一頁</a></div>
+					<?php }?>
+				</td>
+			</tr>
+		</table>
+	</td>
+</tr>

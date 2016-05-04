@@ -2,8 +2,8 @@
 /**
  * CKFinder
  * ========
- * http://cksource.com/ckfinder
- * Copyright (C) 2007-2013, CKSource - Frederico Knabben. All rights reserved.
+ * http://ckfinder.com
+ * Copyright (C) 2007-2011, CKSource - Frederico Knabben. All rights reserved.
  *
  * The software, this file and its contents are subject to the CKFinder
  * License. Please read the license.txt file before using, installing, copying,
@@ -55,12 +55,17 @@ class CKFinder_Connector_CommandHandler_FileUpload extends CKFinder_Connector_Co
         }
 
         $sUnsafeFileName = CKFinder_Connector_Utils_FileSystem::convertToFilesystemEncoding(CKFinder_Connector_Utils_Misc::mbBasename($uploadedFile['name']));
-        $sFileName = CKFinder_Connector_Utils_FileSystem::secureFileName($sUnsafeFileName);
-        $sExtension = CKFinder_Connector_Utils_FileSystem::getExtension($sFileName);
-		$sFileName=date('YmdHis').'.'.$sExtension;  
-        if ($sFileName != $sUnsafeFileName) {
-          $iErrorNumber = CKFINDER_CONNECTOR_ERROR_UPLOADED_INVALID_NAME_RENAMED;
+        $sFileName = str_replace(array(":", "*", "?", "|", "/"), "_", $sUnsafeFileName);
+        if ($_config->forceAscii()) {
+            $sFileName = CKFinder_Connector_Utils_FileSystem::convertToAscii($sFileName);
         }
+        if ($sFileName != $sUnsafeFileName) {
+			$iErrorNumber = CKFINDER_CONNECTOR_ERROR_UPLOADED_INVALID_NAME_RENAMED;
+
+        }
+		//以日期時間命名，並轉為小寫
+		$sExtension=CKFinder_Connector_Utils_FileSystem::getExtension($sFileName);
+		$sFileName=strtolower(date("YmdHis") . "." . $sExtension);		
         $oRegistry->set("FileUpload_fileName", $sFileName);
 
         $this->checkConnector();
@@ -80,6 +85,7 @@ class CKFinder_Connector_CommandHandler_FileUpload extends CKFinder_Connector_Co
             $this->_errorHandler->throwError(CKFINDER_CONNECTOR_ERROR_INVALID_EXTENSION);
         }
 
+        $sFileNameOrginal = $sFileName;
         $oRegistry->set("FileUpload_fileName", $sFileName);
         $oRegistry->set("FileUpload_url", $this->_currentFolder->getUrl());
 
@@ -89,12 +95,15 @@ class CKFinder_Connector_CommandHandler_FileUpload extends CKFinder_Connector_Co
         }
 
         $htmlExtensions = $_config->getHtmlExtensions();
+        $sExtension = CKFinder_Connector_Utils_FileSystem::getExtension($sFileNameOrginal);
+
         if ($htmlExtensions
         && !CKFinder_Connector_Utils_Misc::inArrayCaseInsensitive($sExtension, $htmlExtensions)
         && ($detectHtml = CKFinder_Connector_Utils_FileSystem::detectHtml($uploadedFile['tmp_name'])) === true ) {
             $this->_errorHandler->throwError(CKFINDER_CONNECTOR_ERROR_UPLOADED_WRONG_HTML_FILE);
         }
 
+        $sExtension = CKFinder_Connector_Utils_FileSystem::getExtension($sFileNameOrginal);
         $secureImageUploads = $_config->getSecureImageUploads();
         if ($secureImageUploads
         && ($isImageValid = CKFinder_Connector_Utils_FileSystem::isImageValid($uploadedFile['tmp_name'], $sExtension)) === false ) {
@@ -129,13 +138,18 @@ class CKFinder_Connector_CommandHandler_FileUpload extends CKFinder_Connector_Co
         }
 
         $sServerDir = $this->_currentFolder->getServerPath();
+        $iCounter = 0;
 
         while (true)
         {
             $sFilePath = CKFinder_Connector_Utils_FileSystem::combinePaths($sServerDir, $sFileName);
 
             if (file_exists($sFilePath)) {
-                $sFileName = CKFinder_Connector_Utils_FileSystem::autoRename($sServerDir, $sFileName);
+                $iCounter++;
+                $sFileName =
+                CKFinder_Connector_Utils_FileSystem::getFileNameWithoutExtension($sFileNameOrginal) .
+                "(" . $iCounter . ")" . "." .
+                CKFinder_Connector_Utils_FileSystem::getExtension($sFileNameOrginal);
                 $oRegistry->set("FileUpload_fileName", $sFileName);
 
                 $iErrorNumber = CKFINDER_CONNECTOR_ERROR_UPLOADED_FILE_RENAMED;
@@ -186,6 +200,4 @@ class CKFinder_Connector_CommandHandler_FileUpload extends CKFinder_Connector_Co
             }
         }
 
-        CKFinder_Connector_Core_Hooks::run('AfterFileUpload', array(&$this->_currentFolder, &$uploadedFile, &$sFilePath));
-    }
-}
+        CKFinder_Connector_Core_Hooks::run('AfterFileUpload', array(&$this->_currentFolder, &$uploadedFile, &

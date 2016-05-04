@@ -64,26 +64,14 @@
 			echo "</script>\n";		
 		}
 		function ShowScript(){}
-		function AddHandle(&$Param){
+		function AddHandle(){
 			global $AddFieldsSQL,$AddValuesSQL;
-			if($AddFieldsSQL!=""){
-				$AddFieldsSQL.=",";
-				$AddValuesSQL.=",";
-			}
-			$Param[":".$this->FieldName] = htmlspecialchars($_POST[$this->FieldName]);
-			$AddFieldsSQL.="`".$this->FieldName."`";
-			$AddValuesSQL.=":".$this->FieldName;
+			if($AddFieldsSQL!=""){$AddFieldsSQL.=",`".$this->FieldName."`";}else{$AddFieldsSQL.="`".$this->FieldName."`";}
+			if($AddValuesSQL!=""){$AddValuesSQL.=",'".htmlspecialchars($_POST[$this->FieldName])."'";}else{$AddValuesSQL.="'".htmlspecialchars($_POST[$this->FieldName])."'";}
 		}
-		function ModifyHandle(&$Param){
+		function ModifyHandle(){
 			global $ModifySQL;
-			if($ModifySQL!=""){
-				$ModifySQL.=",";
-			}
-			$Param[":".$this->FieldName] = htmlspecialchars($_POST[$this->FieldName]);
-			$ModifySQL.="`".$this->FieldName."`= :".$this->FieldName;
-		}
-		function GetDataHandle(&$data){
-			$data[$this->FieldName] = htmlspecialchars($_POST[$this->FieldName]);
+			if($ModifySQL!=""){$ModifySQL.=",`".$this->FieldName."`='".htmlspecialchars($_POST[$this->FieldName])."'";}else{$ModifySQL.="`".$this->FieldName."`='".htmlspecialchars($_POST[$this->FieldName])."'";}
 		}
 	}
 ?>

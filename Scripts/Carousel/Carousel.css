@@ -1,0 +1,17 @@
+/* CSS Document */
+.AdItem{
+	float:left;
+	text-align:center;
+	background-color:#9b9b9b;
+	font-size:9pt;
+	color:#FFF;
+	margin:0px;
+	margin-left:3px;
+	margin-top:3px;
+	width:15px;
+	height:15px;
+	cursor:pointer;
+}
+.AdItemCur{
+	background-color:#000;
+}

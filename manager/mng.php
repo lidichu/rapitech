@@ -11,7 +11,5 @@
     <frame name="bottomFrame" scrolling="NO" noresize src="down.php">
   </frameset>
 </frameset>
-<noframes><body bgcolor="#FFFFFF">
-</body></noframes>
+<noframes><body bgcolor="#FFFFFF"></body></noframes>
 </html>
-

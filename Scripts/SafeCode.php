@@ -24,13 +24,13 @@
 	//建立一張圖片
 	$im=imagecreate($PICWidth,$PICHeight);
 	//填入背景色
-	$back=imagecolorallocate($im,0,0,0);
+	$back=imagecolorallocate($im,0x0F,0x0F,0x0F);
 	//雜點顏色
 	$pix=imagecolorallocate($im,0xF1,0xA9,0x98);
 	//文字顏色
-	$font=imagecolorallocate($im,255,255,255);
+	$font=imagecolorallocate($im,0xD9,0xD9,0xD9);
 	//邊框顏色
-	$border=imagecolorallocate($im,247,247,247);
+	$border=imagecolorallocate($im,0x0F,0x0F,0x0F);
 	//加入文字 resource $image , int $font , int $x , int $y , string $string , int $color )
 	imagestring($im, 5, 7, 2,$SafeCode, $font);
 	//加入雜點

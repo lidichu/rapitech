@@ -84,25 +84,14 @@
 		function AddScript(){}
 		function ModifyScript(){}
 		function ShowScript(){}
-		function AddHandle(&$Param){
+		function AddHandle(){
 			global $AddFieldsSQL,$AddValuesSQL;
-			if($AddFieldsSQL!=""){ $AddFieldsSQL.=","; $AddValuesSQL.=","; }
-			$Param[":".$this->FieldName] = $_POST[$this->FieldName];
-			$AddFieldsSQL.="`".$this->FieldName."`";
-			$AddValuesSQL.=":".$this->FieldName;
+			if($AddFieldsSQL!=""){$AddFieldsSQL.=",`".$this->FieldName."`";}else{$AddFieldsSQL.="`".$this->FieldName."`";}
+			if($AddValuesSQL!=""){$AddValuesSQL.=",'".$_POST[$this->FieldName]."'";}else{$AddValuesSQL.="'".$_POST[$this->FieldName]."'";}
 		}
-		function ModifyHandle(&$Param){
+		function ModifyHandle(){
 			global $ModifySQL;
-			if($ModifySQL!=""){ $ModifySQL.=","; }
-			$Param[":".$this->FieldName] = $_POST[$this->FieldName];
-			$ModifySQL.="`".$this->FieldName."`= :".$this->FieldName;
-		}
-		function GetDataHandle(&$data){
-			$DateValue = $_POST[$this->FieldName];
-			if($DateValue==""){
-				$DateValue = "";
-			}
-			$data[$this->FieldName] = $DateValue;
+			if($ModifySQL!=""){$ModifySQL.=",`".$this->FieldName."`='".$_POST[$this->FieldName]."'";}else{$ModifySQL.="`".$this->FieldName."`='".$_POST[$this->FieldName]."'";}
 		}
 	}
 ?>

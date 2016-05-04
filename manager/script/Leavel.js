@@ -24,7 +24,7 @@ function cmdDel_onclick(href){
 
 	if(confirm(msg)){
 
-		document.getElementById("form1").action=href+'?option=Del'+otherstring;
+		document.getElementById("form1").action=href+'?option=Del';
 
 		document.getElementById("form1").submit();
 
@@ -176,18 +176,15 @@ $(function(){
 
 	$(".modifylink").click(function(){
 		var temp = $(this).prop("href").split('/');
-		var file_add_modify_href = file_add_modify;
 		var G = "";
 		if(temp.length == 1){
 			G = temp[0];
 		}else{
 			G = temp[temp.length-1];
 		}
-		if(typeof($(this).attr("data-modify")) != "undefined"){
-			file_add_modify_href = $(this).attr("data-modify");
-		}
-		window.location.href = file_add_modify_href + "?option=Modify&"+ G + otherstring;
+		window.location.href = file_add_modify + "?option=Modify&"+ G + otherstring;
 		return false;
+
     });
 
    

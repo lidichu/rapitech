@@ -28,18 +28,18 @@
 		}
 		function ModifyShow(){
 			global $Row;
-			$DateArray = explode("-",$Row[$this->StartField]);
-			if($DateArray[0] == "0000" || $DateArray[0] == ""){
+			$DateStartValue = strtotime($Row[$this->StartField]);
+			if(date("Y",$DateStartValue)=="0000"){
 				$DateStartValue = "";
 			}else{
-				$DateStartValue = date("Y-m-d",strtotime($Row[$this->StartField]));
+				$DateStartValue = date("Y-m-d",$DateStartValue);
 			}
-			$DateArray = explode("-",$Row[$this->EndField]);
 			
-			if($DateArray[0] == "0000" || $DateArray[0] == ""){
+			$DateEndValue = strtotime($Row[$this->EndField]);
+			if(date("Y",$DateEndValue)=="0000"){
 				$DateEndValue = "";
 			}else{
-				$DateEndValue = date("Y-m-d",strtotime($Row[$this->EndField]));
+				$DateEndValue = date("Y-m-d",$DateEndValue);
 			}			
 			
 			echo "	<tr>\n";
@@ -76,7 +76,7 @@
 		function AddScript(){}
 		function ModifyScript(){}
 		function ShowScript(){}
-		function AddHandle(&$Param){
+		function AddHandle(){
 			global $AddFieldsSQL,$AddValuesSQL;
 			$DateStartValue = $_POST[$this->StartField];
 			if($DateStartValue==""){
@@ -92,16 +92,11 @@
 				$DateStartValue = $DateEndValue;
 				$DateEndValue = $DateTemp;
 			}
-			if($AddFieldsSQL!=""){
-				$AddFieldsSQL.=",";
-				$AddValuesSQL.=",";
-			}
-			$Param[":".$this->StartField] = $DateStartValue;
-			$Param[":".$this->EndField] = $DateEndValue;
-			$AddFieldsSQL.="`".$this->StartField."`,`".$this->EndField."`";
-			$AddValuesSQL.=":".$this->StartField.",:".$this->EndField;
+			
+			if($AddFieldsSQL!=""){$AddFieldsSQL.=",`".$this->StartField."`,`".$this->EndField."`";}else{$AddFieldsSQL.="`".$this->StartField."`,`".$this->EndField."`";}
+			if($AddValuesSQL!=""){$AddValuesSQL.=",'".$DateStartValue."','".$DateEndValue."'";}else{$AddValuesSQL.="'".$DateStartValue."','".$DateEndValue."'";}
 		}
-		function ModifyHandle(&$Param){
+		function ModifyHandle(){
 			global $ModifySQL;
 			$DateStartValue = $_POST[$this->StartField];
 			if($DateStartValue==""){
@@ -115,30 +110,8 @@
 				$DateTemp = $DateStartValue;
 				$DateStartValue = $DateEndValue;
 				$DateEndValue = $DateTemp;
-			}	
-			if($ModifySQL!=""){
-				$ModifySQL.=",";
-			}
-			$Param[":".$this->StartField] = $DateStartValue;
-			$Param[":".$this->EndField] = $DateEndValue;
-			$ModifySQL.="`".$this->StartField."`= :".$this->StartField.",`".$this->EndField."`= :".$this->EndField;
-		}
-		function GetDataHandle(&$data){
-			$DateStartValue = $_POST[$this->StartField];
-			if($DateStartValue==""){
-				$DateStartValue = "0000-00-00";
-			}
-			$DateEndValue = $_POST[$this->EndField];
-			if($DateEndValue==""){
-				$DateEndValue = "0000-00-00";
-			}
-			if(DateComparison($DateStartValue,$DateEndValue)==true){
-				$DateTemp = $DateStartValue;
-				$DateStartValue = $DateEndValue;
-				$DateEndValue = $DateTemp;
-			}
-			$data[$this->StartField] = $DateStartValue;
-			$data[$this->EndField] = $DateEndValue;
+			}			
+			if($ModifySQL!=""){$ModifySQL.=",`".$this->StartField."`='".$DateStartValue."',`".$this->EndField."`='".$DateEndValue."'";}else{$ModifySQL.="`".$this->StartField."`='".$DateStartValue."',`".$this->EndField."`='".$DateEndValue."'";}
 		}
 	}
 ?>

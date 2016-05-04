@@ -2,8 +2,8 @@
 /*
  * CKFinder
  * ========
- * http://cksource.com/ckfinder
- * Copyright (C) 2007-2013, CKSource - Frederico Knabben. All rights reserved.
+ * http://ckfinder.com
+ * Copyright (C) 2007-2011, CKSource - Frederico Knabben. All rights reserved.
  *
  * The software, this file and its contents are subject to the CKFinder
  * License. Please read the license.txt file before using, installing, copying,
@@ -45,14 +45,14 @@ class CKFinder_Connector_Core_Hooks
         foreach ($hooks[$event] as $i => $hook) {
 
             $object = NULL;
-            $Method = NULL;
+            $method = NULL;
             $function = NULL;
             $data = NULL;
             $passData = false;
 
             /* $hook can be: a function, an object, an array of $functiontion and $data,
-            * an array of just a function, an array of object and Method, or an
-            * array of object, Method, and data.
+            * an array of just a function, an array of object and method, or an
+            * array of object, method, and data.
             */
             //function
             if (is_string($hook)) {
@@ -61,7 +61,7 @@ class CKFinder_Connector_Core_Hooks
             //object
             else if (is_object($hook)) {
                 $object = $hooks[$event][$i];
-                $Method = "on" . $event;
+                $method = "on" . $event;
             }
             //array of...
             else if (is_array($hook)) {
@@ -71,12 +71,12 @@ class CKFinder_Connector_Core_Hooks
                     if (is_object($hook[0])) {
                         $object = $hooks[$event][$i][0];
                         if ($count < 2) {
-                            $Method = "on" . $event;
+                            $method = "on" . $event;
                         } else {
-                            //...object and Method
-                            $Method = $hook[1];
+                            //...object and method
+                            $method = $hook[1];
                             if (count($hook) > 2) {
-                                //...object, Method and data
+                                //...object, method and data
                                 $passData = true;
                                 $data = $hook[2];
                             }
@@ -100,7 +100,7 @@ class CKFinder_Connector_Core_Hooks
             }
 
             if (isset($object)) {
-                $callback = array($object, $Method);
+                $callback = array($object, $method);
             }
             else if (false !== ($pos = strpos($function, '::'))) {
                 $callback = array(substr($function, 0, $pos), substr($function, $pos + 2));

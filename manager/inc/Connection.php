@@ -1,35 +1,15 @@
 <?php
-session_start ();
-/* 資料庫連結設定 */
-$DbHost = "localhost";
-$DbName = "spdgadmin";
-$DbUser = "root";
-$DbPwd = "";
-date_default_timezone_set ( "Asia/Taipei" );
-$dsn = "mysql:host=" . $DbHost . ";dbname=" . $DbName;
-try {
-	$Conn = new PDO ( $dsn, $DbUser, $DbPwd );
-} catch ( PDOException $e ) {
-	echo 'Connection failed: ' . $e->getMessage ();
-}
-$Conn->exec ( "SET CHARACTER SET utf8" );
-$Conn->setAttribute ( PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING );
-// 防止網頁過期
-header ( "Cache-control: private" );
+session_start();
+/*資料庫連結設定*/
+date_default_timezone_set("Asia/Taipei");
+//$Conn = mysql_connect('localhost','root','2776');
+$Conn = mysql_connect('localhost','motherwang_admin','2604222');
+mysql_select_db("motherwang",$Conn);
+mysql_query("SET NAMES 'utf8'");
+header("Cache-control: private"); //防止網頁過期
 $VisualRoot = "";
-$i = 0;
-if (! defined ( 'VisualRoot' )) {
-	if (! isset ( $VisualRoot )) {
-		$VisualRoot = '';
-	}
-	// 抓取根目錄位置
-	while ( is_file ( $VisualRoot . "PageHead.php" ) == false ) {
-		if ($i >= 5) {
-			break;
-		}
-		$i ++;
-		$VisualRoot .= '../';
-	}
-	define ( 'VisualRoot', $VisualRoot );
+while(is_file($VisualRoot."PageHead.php")==false){
+	$VisualRoot .= '../';
 }
+define('VisualRoot', $VisualRoot);
 ?>

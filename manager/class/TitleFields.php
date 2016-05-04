@@ -39,15 +39,12 @@
 			echo "</script>\n";			
 		}
 		function ShowScript(){}
-		function AddHandle(&$Param){
+		function AddHandle(){
 			global $AddFieldsSQL,$AddValuesSQL;
 
 		}
-		function ModifyHandle(&$Param){
+		function ModifyHandle(){
 			global $ModifySQL;
-		}
-		function GetDataHandle(&$data){
-			// 不做任何事
 		}
 	}
 ?>

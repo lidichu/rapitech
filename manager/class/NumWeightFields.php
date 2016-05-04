@@ -93,44 +93,21 @@
 			echo "</script>\n";			
 		}
 		function ShowScript(){}
-		function AddHandle(&$Param){
+		function AddHandle(){
 			global $AddFieldsSQL,$AddValuesSQL;
 			$FieldValue = $_POST[$this->WeightFieldName];
 			if($FieldValue==""){$FieldValue=0;}
-			if($AddFieldsSQL!=""){
-				$AddFieldsSQL.=",";
-				$AddValuesSQL.=",";
-			}
-			$Param[":".$this->WeightFieldName] = $FieldValue;
-			$Param[":".$this->WeightUnitFieldName] = $_POST[$this->WeightUnitFieldName];
-			$AddFieldsSQL.="`".$this->WeightFieldName."`";
-			$AddFieldsSQL.=",`".$this->WeightUnitFieldName."`";
-			$AddValuesSQL.=":".$this->WeightFieldName;
-			$AddValuesSQL.=",:".$this->WeightUnitFieldName;
+			if($AddFieldsSQL!=""){$AddFieldsSQL.=",";}
+			$AddFieldsSQL.="`".$this->WeightFieldName."`,`".$this->WeightUnitFieldName."`";
+			if($AddValuesSQL!=""){$AddValuesSQL.=",";}
+			$AddValuesSQL.= $FieldValue.",'".$_POST[$this->WeightUnitFieldName]."'";
 		}
-		function ModifyHandle(&$Param){
+		function ModifyHandle(){
 			global $ModifySQL;
 			$FieldValue = $_POST[$this->WeightFieldName];
 			if($FieldValue==""){$FieldValue=0;}
-			if($ModifySQL!=""){
-				$ModifySQL.=",";
-			}
-			$Param[":".$this->WeightFieldName] = $FieldValue;
-			$Param[":".$this->WeightUnitFieldName] = $_POST[$this->WeightUnitFieldName];
-			$ModifySQL.="`".$this->WeightFieldName."`= :".$this->WeightFieldName;
-			$ModifySQL.=",`".$this->WeightUnitFieldName."`= :".$this->WeightUnitFieldName;
-		}
-		function GetDataHandle(&$data){
-			$DateValue = $_POST[$this->WeightFieldName];
-			if($DateValue==""){
-				$DateValue = 0;
-			}
-			$data[$this->WeightFieldName] = $DateValue;
-			$DateValue = $_POST[$this->WeightUnitFieldName];
-			if($DateValue==""){
-				$DateValue = "";
-			}
-			$data[$this->WeightUnitFieldName] = $DateValue;
+			if($ModifySQL!=""){$ModifySQL.=",";}
+			$ModifySQL.="`".$this->WeightFieldName."`=".$FieldValue.",`".$this->WeightUnitFieldName."`='".$_POST[$this->WeightUnitFieldName]."'";
 		}
 	}
 ?>

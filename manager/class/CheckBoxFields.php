@@ -50,18 +50,19 @@
 			echo "	<tr>\n";
 			echo "		<td width=\"17%\" bgcolor=\"#EEEEEE\" nowrap align=\"right\"><font color=\"#FF8833\">".$this->ShowName."&nbsp;</font></td>\n";
 			echo "		<td width=\"83%\" bgcolor=\"#FFFFFF\" align=\"left\">\n";
-			$ValueArray = explode($this->SaveChar,$Row[$this->FieldName]);
-			foreach($ValueArray as $Key => $Value){
-				$ValueArray[$Key] = trim($Value);
-			}
+			$ValueString = $Row[$this->FieldName];
 			$CheckBoxFieldsItemAmount = count($this->ItemValArray );
+			
+			
+			
+			
 			$Rows = NumHandle2($CheckBoxFieldsItemAmount,$this->Cols) / $this->Cols;
 			echo "			<table width=\"90%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"margin-left:5px;\">\n";
 			for($i=1;$i<=$Rows;$i++){
 			echo "				<tr>\n";
 				for($j=0;$j<$this->Cols;$j++){
 					if((($i-1) * $this->Cols + $j) < $CheckBoxFieldsItemAmount){
-						if(in_array($this->ItemValArray[($i-1) * $this->Cols + $j],$ValueArray) === false){
+						if(strpos($ValueString, $this->SaveChar.$this->ItemValArray[($i-1) * $this->Cols + $j].$this->SaveChar) === false ){
 			echo "					<td style=\"font-size:10pt;\"><input class=\"".$this->FieldName."Class\" type=\"checkbox\" name=\"".$this->FieldName."[]\" value=\"".$this->ItemValArray[($i-1) * $this->Cols + $j]."\" />".$this->ItemTextArray[($i-1) * $this->Cols + $j]."</td>\n";						
 						}else{
 			echo "					<td style=\"font-size:10pt;\"><input class=\"".$this->FieldName."Class\" type=\"checkbox\" name=\"".$this->FieldName."[]\" value=\"".$this->ItemValArray[($i-1) * $this->Cols + $j]."\" checked=\"checked\" />".$this->ItemTextArray[($i-1) * $this->Cols + $j]."</td>\n";
@@ -84,14 +85,6 @@
 			$ValueString = $Row[$this->FieldName];
 			$CheckBoxFieldsItemAmount = count($this->ItemValArray );
 			$ShowData = "";
-			$ValueArray = explode($this->SaveChar,$ValueString);
-			$ValueString = "";
-			foreach($ValueArray as $Value){
-				if($Value != ""){
-					$ValueString .= $this->SaveChar.$Value;
-				}
-			}
-			if($ValueString != ""){ $ValueString .= $this->SaveChar; }
 			for($i=0;$i<$CheckBoxFieldsItemAmount;$i++){
 				if(!(strpos($ValueString, $this->SaveChar.$this->ItemValArray[$i].$this->SaveChar)=== false)){
 					if($ShowData != ""){$ShowData .= $this->ReadOnlyChar;}
@@ -100,8 +93,7 @@
 			}
 			echo "	<tr>\n";
 			echo "		<td width=\"17%\" bgcolor=\"#EEEEEE\" nowrap align=\"right\"><font color=\"#FF8833\">".$this->ShowName."&nbsp;</font></td>\n";
-			echo "		<td width=\"83%\" bgcolor=\"#FFFFFF\" align=\"left\" style=\"padding-left:13px;\" id>".$ShowData;
-			echo "</td>\n";
+			echo "		<td width=\"83%\" bgcolor=\"#FFFFFF\" align=\"left\" style=\"padding-left:13px;\" id>".$ShowData."</td>\n";
 			echo "	</tr>\n";			
 		}
 		
@@ -120,7 +112,7 @@
 		function AddScript(){}
 		function ModifyScript(){}
 		function ShowScript(){}
-		function AddHandle(&$Param){
+		function AddHandle(){
 			global $AddFieldsSQL,$AddValuesSQL;
 			$ValuesArray = $_POST[$this->FieldName];
 			if($ValuesArray != ""){
@@ -128,15 +120,10 @@
 			}else{
 				$Values = "";
 			}
-			if($AddFieldsSQL!=""){
-				$AddFieldsSQL.=",";
-				$AddValuesSQL.=",";
-			}
-			$Param[":".$this->FieldName] = $Values;
-			$AddFieldsSQL.="`".$this->FieldName."`";
-			$AddValuesSQL.=":".$this->FieldName;
+			if($AddFieldsSQL!=""){$AddFieldsSQL.=",`".$this->FieldName."`";}else{$AddFieldsSQL.="`".$this->FieldName."`";}
+			if($AddValuesSQL!=""){$AddValuesSQL.=",'".$Values."'";}else{$AddValuesSQL.="'".$Values."'";}
 		}
-		function ModifyHandle(&$Param){
+		function ModifyHandle(){
 			global $ModifySQL;
 			$ValuesArray = $_POST[$this->FieldName];
 			if($ValuesArray != ""){
@@ -144,21 +131,7 @@
 			}else{
 				$Values = "";
 			}
-			if($ModifySQL!=""){
-				$ModifySQL.=",";
-			}
-			$Param[":".$this->FieldName] = $Values;
-			$ModifySQL.="`".$this->FieldName."`= :".$this->FieldName;
-		}
-		function GetDataHandle(&$data){
-			//接收參數
-			$ValuesArray = $_POST[$this->FieldName];
-			if($ValuesArray != ""){
-				$Values = $this->SaveChar . join($this->SaveChar,$ValuesArray).$this->SaveChar;
-			}else{
-				$Values = "";
-			}
-			$data[$this->FieldName] = $Values;
+			if($ModifySQL!=""){$ModifySQL.=",`".$this->FieldName."`='".$Values."'";}else{$ModifySQL.="`".$this->FieldName."`='".$Values."'";}
 		}
 	}
 ?>

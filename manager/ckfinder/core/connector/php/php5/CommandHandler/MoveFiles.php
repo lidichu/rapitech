@@ -2,8 +2,8 @@
 /*
  * CKFinder
  * ========
- * http://cksource.com/ckfinder
- * Copyright (C) 2007-2013, CKSource - Frederico Knabben. All rights reserved.
+ * http://ckfinder.com
+ * Copyright (C) 2007-2011, CKSource - Frederico Knabben. All rights reserved.
  *
  * The software, this file and its contents are subject to the CKFinder
  * License. Please read the license.txt file before using, installing, copying,
@@ -57,7 +57,6 @@ class CKFinder_Connector_CommandHandler_MoveFiles extends CKFinder_Connector_Com
         $currentResourceTypeConfig = $this->_currentFolder->getResourceTypeConfig();
         $_config =& CKFinder_Connector_Core_Factory::getInstance("Core_Config");
         $_aclConfig = $_config->getAccessControlConfig();
-        $_thumbnailsConfig = $_config->getThumbnailsConfig();
         $aclMasks = array();
         $_resourceTypeConfig = array();
 
@@ -173,9 +172,6 @@ class CKFinder_Connector_CommandHandler_MoveFiles extends CKFinder_Connector_Com
                     }
                 }
 
-                $_thumbsServerPath = CKFinder_Connector_Utils_FileSystem::combinePaths($_thumbnailsConfig->getDirectory(), $_config->getResourceTypeConfig($type)->getName());
-                $thumbPath = CKFinder_Connector_Utils_FileSystem::combinePaths($_thumbsServerPath, $path.$name);
-
                 //$overwrite
                 // finally, no errors so far, we may attempt to copy a file
                 // protection against copying files to itself
@@ -199,21 +195,32 @@ class CKFinder_Connector_CommandHandler_MoveFiles extends CKFinder_Connector_Com
                                 continue;
                             }
                             else {
-                                CKFinder_Connector_Utils_FileSystem::unlink($thumbPath);
                                 $moved++;
                             }
                         }
                     }
                     else if (strpos($options, "autorename") !== false) {
-                        $fileName = CKFinder_Connector_Utils_FileSystem::autoRename($sServerDir, $name);
-                        $destinationFilePath = $sServerDir.$fileName;
+                        $iCounter = 1;
+                        while (true)
+                        {
+                            $fileName = CKFinder_Connector_Utils_FileSystem::getFileNameWithoutExtension($name) .
+                                "(" . $iCounter . ")" . "." .
+                                CKFinder_Connector_Utils_FileSystem::getExtension($name);
+
+                            $destinationFilePath = $sServerDir.$fileName;
+                            if (!file_exists($destinationFilePath)) {
+                                break;
+                            }
+                            else {
+                                $iCounter++;
+                            }
+                        }
                         if (!@rename($sourceFilePath, $destinationFilePath)) {
                             $errorCode = CKFINDER_CONNECTOR_ERROR_ACCESS_DENIED;
                             $this->appendErrorNode($oErrorsNode, $errorCode, $name, $type, $path);
                             continue;
                         }
                         else {
-                            CKFinder_Connector_Utils_FileSystem::unlink($thumbPath);
                             $moved++;
                         }
                     }
@@ -230,7 +237,6 @@ class CKFinder_Connector_CommandHandler_MoveFiles extends CKFinder_Connector_Com
                         continue;
                     }
                     else {
-                        CKFinder_Connector_Utils_FileSystem::unlink($thumbPath);
                         $moved++;
                     }
                 }

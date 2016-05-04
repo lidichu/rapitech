@@ -15,10 +15,10 @@ define('LOC_UNKNOWN', '未知地區');
 $toShow = array();
 $today  = getdate();
 $SQL = "Select datedb,recentdb,startdb From web";
-$Rs = $Conn->prepare($SQL);
-$Rs->execute();
-$Counter = $Rs->fetch(PDO::FETCH_ASSOC);
-if($Counter){
+$Rs_Counter = mysql_query($SQL,$Conn);
+if($Rs_Counter && mysql_num_rows($Rs_Counter) > 0)
+{
+	$Counter = mysql_fetch_array($Rs_Counter);
 	if($Counter["startdb"] == ""){
 		$title = "Welcome";
 		include_once("templates/common-header.inc");
@@ -297,10 +297,9 @@ function getData($dbName)
 {
 	global $Conn;
 	$SQL = "Select ".$dbName." From web ";
-	$Rs = $Conn->prepare($SQL);
-	$Rs->execute();
-	$Row = $Rs->fetch(PDO::FETCH_ASSOC);
-	if($Row){
+	$Rs = mysql_query($SQL,$Conn);
+	if($Rs && mysql_num_rows($Rs) > 0){
+		$Row = mysql_fetch_array($Rs);
 		$toread = $Row[$dbName];
 		return unserialize($toread);
 	}else{

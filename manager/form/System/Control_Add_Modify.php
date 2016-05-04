@@ -14,6 +14,7 @@
 	$MainFileName = $MainFileName01;
 	//修改資料庫名稱
 	$DBTable = $DatabaseName01;
+	
 
 	//接收參數
 	$Option = $_REQUEST["option"];
@@ -29,51 +30,48 @@
 	//新增用SQL
 	$AddFieldsSQL = "";
 	$AddValuesSQL = "";
-
+	
 	//修改用SQL
 	$ModifySQL = "";
-
+	
 	//查詢用
 	$Row=null;
-
-	$SQL="Select * From ".$DBTable." Where SerialNo = :SerialNo";
-	$Rs = $Conn->prepare($SQL);
-	$Rs->bindParam(":SerialNo", $G[$Level]);
-	$Rs->execute();
-	$Row = $Rs->fetch(PDO::FETCH_ASSOC);
-	if($Row){
+	
+	$SQL="Select * From ".$DBTable." Where SerialNo=".$G[$Level];
+	$Rs = mysql_query($SQL,$Conn);
+	if($Rs && mysql_num_rows($Rs)>0){
+		$Row = mysql_fetch_array($Rs);
 		$ModifyAcc = $Row["Acc"];
 		$ModifyName = $Row["Name"];
 		$ModifySerialNo = $Row["SerialNo"];
 	}else{
 		ReturnToPage($MainFileName,"查無此筆資料","");
 	}
-	//清空先前的紀錄
+
+
 	if($YesNo=="true"){
-		$SQL = "delete from popedom where Member_ID = :Member_ID";
-		$Rs = $Conn->prepare($SQL);
-		$Rs->bindParam(":Member_ID", $G[$Level]);
-		$Rs->execute();
+		//清空先前的紀錄
+		$SQL = "delete from popedom where Member_ID=".$G[$Level];
+		mysql_query($SQL,$Conn);
+		
 		$Tree_ID = $_POST["Tree_ID"];
-		while (list ($key,$val) = @each ($Tree_ID)) {
-			$SQL = "Insert Into popedom(Member_ID,Tree_ID) values(:Member_ID,:Tree_ID)";
-			$Rs = $Conn->prepare($SQL);
-			$Rs->bindParam(":Member_ID", $G[$Level]);
-			$Rs->bindParam(":Tree_ID", $val);
-			$Rs->execute();
-		}
+		while (list ($key,$val) = @each ($Tree_ID)) { 
+			$SQL = "Insert Into popedom(Member_ID,Tree_ID) values(".$G[$Level].",'".$val."')";
+			mysql_query($SQL,$Conn);
+		} 
 		ReturnToPage($MainFileName,"修改完成","");
 	}
-
+	
 	//查詢此帳號權限資料
 	$Popedom = array();
-	$SQL = "Select Tree_ID From popedom Where Member_ID = :Member_ID";
-	$Rs = $Conn->prepare($SQL);
-	$Rs->bindParam(":Member_ID", $G[$Level]);
-	$Rs->execute();
-	while($Row = $Rs->fetch(PDO::FETCH_ASSOC)){
-		array_push($Popedom,$Row["Tree_ID"]);
+	$SQL = "Select Tree_ID From popedom Where Member_ID=".$G[$Level];
+	$Rs = mysql_query($SQL,$Conn);
+	if($Rs && mysql_num_rows($Rs) > 0){
+		while($Row = mysql_fetch_array($Rs)){
+			array_push($Popedom,$Row["Tree_ID"]);
+		}
 	}
+	//查詢節點
 	//查詢節點
 	if(strtolower($id)!="admin"){
 		//非管理者帳號
@@ -83,22 +81,27 @@
 		$SQL = "Select * From treelist Order by Sort";
 	}
 	$TreeList = array();
-	$Rs = $Conn->prepare($SQL);
-	$Rs->execute();
-	while($Row = $Rs->fetch(PDO::FETCH_ASSOC)){
-		if(strlen($Row["Tree_ID"]) == 2){
-			$tmp = array("Tree_Name" => $Row["Tree_Name"],"Nodes" => array());
-			$TreeList[$Row["Tree_ID"]] = $tmp;
-		}else if(strlen($Row["Tree_ID"]) == 3){
-			$tmp = array("Tree_Name" => $Row["Tree_Name"],"Nodes" => array());
-			$TreeList[$Row["Tree_ID"]] = $tmp;
-		}else if(strlen($Row["Tree_ID"]) == 4){
-			$Main_Tree_ID = substr ($Row["Tree_ID"], 0,2);
-			if(array_key_exists ( $Main_Tree_ID , $TreeList )){
-				$TreeList[$Main_Tree_ID]["Nodes"][$Row["Tree_ID"]] = $Row["Tree_Name"];
+	$Rs = mysql_query($SQL,$Conn);
+	if($Rs && mysql_num_rows($Rs) > 0){
+		while($Row = mysql_fetch_array($Rs)){
+			if(strlen($Row["Tree_ID"]) == 2){
+				$tmp = array("Tree_Name" => $Row["Tree_Name"],"Nodes" => array());
+				$TreeList[$Row["Tree_ID"]] = $tmp;
+			}else if(strlen($Row["Tree_ID"]) == 3){
+				$tmp = array("Tree_Name" => $Row["Tree_Name"],"Nodes" => array());
+				$TreeList[$Row["Tree_ID"]] = $tmp;				
+			}else if(strlen($Row["Tree_ID"]) == 4){
+				$Main_Tree_ID = substr ($Row["Tree_ID"], 0,2);
+				if(array_key_exists ( $Main_Tree_ID , $TreeList )){
+					$TreeList[$Main_Tree_ID]["Nodes"][$Row["Tree_ID"]] = $Row["Tree_Name"];
+				}
 			}
 		}
 	}
+	/*
+	$TreeList[MainID][Tree_Name] = Tree_Name
+	$TreeList[MainID][Nodes][SubID] = Tree_Name
+	*/
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -130,7 +133,6 @@ function cmdCancel_onclick(){
 	?>
 }
 $(function(){
-	var CheckAllflag = true;
 	$(".SubItem").click(function(){
 		$TB = $(this).parent().parent().parent();
 		if($TB.find(".SubItem:checked").length > 0){
@@ -143,17 +145,6 @@ $(function(){
 		$TB = $(this).parent().parent().parent();
 		$TB.find(".SubItem").prop("checked",$(this).prop("checked"));
 	});
-	function CheckAll(obj){
-
-	}
-	$("#AllCheck").click(function(){
-		if(CheckAllflag){
-			$("input:checkbox").prop("checked",true);
-		}else{
-			$("input:checkbox").prop("checked",false);
-		}
-		CheckAllflag = !CheckAllflag;
-	});
 });
 </script>
 </head>
@@ -161,13 +152,13 @@ $(function(){
 <table cellpadding="0" cellspacing="0" border="0" width="100%">
 	<tr>
 		<td align="center">
-			<table width="560" cellpadding="0" cellspacing="0" bordercolorlight="#FFFFFF" style="border:solid #A3BFE2 1px;margin-bottom:25px;" border="0" bgcolor="#FFFFE1">
+			<table width="560" cellpadding="0" cellspacing="0" bordercolorlight="#FFFFFF" style="border:solid #A3BFE2 1px" border="0" bgcolor="#FFFFE1">
 				<tr>
 					<td bgcolor="#E0EFF8" align="center" height="30" style="font-size:12pt;color:#000000">
-                                            <img src="../../images/comp.gif" BORDER="0" align="absmiddle">&nbsp;修改-<?php echo $TableTitle; ?>&nbsp;&nbsp;&nbsp;
+						<img src="../../images/computer.gif" BORDER="0" align="absmiddle">&nbsp;修改-<?php echo $TableTitle; ?>&nbsp;&nbsp;&nbsp;
 					</td>
 				</tr>
-			</table>
+			</table>		
 		</td>
 	</tr>
 	<tr>
@@ -180,19 +171,14 @@ $(function(){
 				echo "<input type=\"hidden\" name=\"SK".$i."\" id=\"SK".$i."\" value=\"".$SK[$i]."\"/>\n";
 				echo "<input type=\"hidden\" name=\"TS".$i."\" id=\"TS".$i."\" value=\"".$TS[$i]."\"/>\n";
 				echo "<input type=\"hidden\" name=\"P".$i."\" id=\"P".$i."\" value=\"".$P[$i]."\"/>\n";
-			}
+			}	
 			?>
 			<table width="300" border="1" cellspacing="0" bordercolorlight="#666666" bordercolordark="#FFFFFF">
-				<tr>
+				<tr> 
 					<td>
 						<table border="0" bgcolor="#A3BFE2" cellspacing="1" cellpadding="5" width="100%" style="font-size:10pt">
                         	<tr>
-                            	<td style="background-color:#FFFFE1;">
-									<span style="color:#F00;">§ 帳號：</span><?php echo $ModifyAcc;?> &nbsp;&nbsp;<span style="color:#F00;">§姓名：</span><?php echo $ModifyName;?>
-									<?php if($id=="admin"){ ?>
-										<input type="button" value="全選" id="AllCheck"/>
-									<?php } ?>
-								</td>
+                            	<td style="background-color:#FFFFE1;"><span style="color:#F00;">§ 帳號：</span><?php echo $ModifyAcc;?> &nbsp;&nbsp;<span style="color:#F00;">§姓名：</span><?php echo $ModifyName;?></td>
                             </tr>
                             <tr>
                             	<td style="background-color:#005783;color:#FFF;" align="center">請 勾 選 要 賦 予 使 用 者 權 限 的 功 能</td>
@@ -234,9 +220,9 @@ $(function(){
 			</table>
 			<input type="button" value="確定" id="cmdEnter" name="cmdEnter" onclick="cmdUpdate_onclick();">&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="button" value="取消" id="cmdCancel" name="cmdCancel" onClick="cmdCancel_onclick();">
-			</form>
+			</form>		
 		</td>
-	</tr>
+	</tr>	
 </table>
 </body>
 </html>

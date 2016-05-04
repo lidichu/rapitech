@@ -4,26 +4,18 @@
 		var $ShowName;
 		var $NullFlag;
 		var $Maxlength;
-		public function NoteFields2($FieldNameIn,$ShowNameIn,$NullFlagIn=false,$Maxlength=0){
+		public function NoteFields2($FieldNameIn,$ShowNameIn,$NullFlagIn=false,$Maxlength=1000){
 			$this->FieldName = $FieldNameIn ;
 			$this->ShowName = $ShowNameIn ;
 			$this->NullFlag = $NullFlagIn ;
 			$this->Maxlength = $Maxlength ;
 		}
 		function AddShow(){
-			$TextArea = "<textarea";
-			$TextArea .= " name=\"".$this->FieldName."\"";
-			$TextArea .= " id=\"".$this->FieldName."\"";
-			$TextArea .= " cols=\"45\"";
-			$TextArea .= " rows=\"8\"";
-			if($this->Maxlength > 0){ $TextArea .= " maxlength=\"".$this->Maxlength."\""; }
-			$TextArea .= ">";
-			$TextArea .= "</textarea>\n";
-		
+
 			echo "	<tr>\n";
 			echo "		<td width=\"17%\" bgcolor=\"#EEEEEE\" nowrap align=\"right\"><font color=\"#FF8833\">".$this->ShowName."&nbsp;</font></td>\n";
 			echo "		<td width=\"83%\" bgcolor=\"#FFFFFF\" align=\"left\">&nbsp;&nbsp;\n";
-			echo "			".$TextArea;
+			echo "			<textarea name=\"".$this->FieldName."\" id=\"".$this->FieldName."\" maxlength=\"".$this->Maxlength."\" cols=\"45\" rows=\"8\"></textarea>\n";
 			if($this->NullFlag){
 			echo "				<br/><font size=\"-1\" color=\"DarkGray\">(必填)</font>\n";
 			}
@@ -32,26 +24,15 @@
 		}
 		function ModifyShow(){
 			global $Row;
-			$Value = $Row[$this->FieldName];
-			$Value = htmlspecialchars_decode($Value);
-			$Value = str_replace("<br />","\n",$Value);
-			$Value = str_replace("<br/>","\n",$Value);
-			$Value = str_replace("<br>","\n",$Value);
-			$Value = stripslashes($Value);
-			
-			$TextArea = "<textarea";
-			$TextArea .= " name=\"".$this->FieldName."\"";
-			$TextArea .= " id=\"".$this->FieldName."\"";
-			$TextArea .= " cols=\"45\"";
-			$TextArea .= " rows=\"8\"";
-			if($this->Maxlength > 0){ $TextArea .= " maxlength=\"".$this->Maxlength."\""; }
-			$TextArea .= ">";
-			$TextArea .= $Value;
-			$TextArea .= "</textarea>\n";
 			echo "	<tr>\n";
 			echo "		<td width=\"17%\" bgcolor=\"#EEEEEE\" nowrap align=\"right\"><font color=\"#FF8833\">".$this->ShowName."&nbsp;</font></td>\n";
 			echo "		<td width=\"83%\" bgcolor=\"#FFFFFF\" align=\"left\">&nbsp;&nbsp;\n";
-			echo "			".$TextArea;
+			$Value = $Row[$this->FieldName];
+			$Value = str_replace("<br />","\n",$Value);
+			$Value = str_replace("<br/>","\n",$Value);
+			$Value = str_replace("<br>","\n",$Value);
+			$Value = htmlspecialchars_decode($Value);
+			echo "			<textarea name=\"".$this->FieldName."\" id=\"".$this->FieldName."\" maxlength=\"".$this->Maxlength."\" cols=\"45\" rows=\"8\">".$Value."</textarea>\n";
 			if($this->NullFlag){
 			echo "			<br/><font size=\"-1\" color=\"DarkGray\">(必填)</font>\n";
 			}
@@ -76,51 +57,25 @@
 		function AddScript(){}
 		function ModifyScript(){}
 		function ShowScript(){}
-		function AddHandle(&$Param){
+		function AddHandle(){
 			global $AddFieldsSQL,$AddValuesSQL;
+			if($AddFieldsSQL!=""){$AddFieldsSQL.=",`".$this->FieldName."`";}else{$AddFieldsSQL.="`".$this->FieldName."`";}
 			$PostNote = $_POST[$this->FieldName] ;
 			$PostNote = htmlspecialchars($PostNote);
 			$order = array("\r\n", "\n", "\r"); 
 			$replace = "<br />"; 
 			$PostNote = str_replace($order, $replace, $PostNote);
-			if(!get_magic_quotes_gpc()){
-				$order = array("'"); 
-				$replace = "\'"; 
-				$PostNote = str_replace($order, $replace, $PostNote);
-			}
-			if($AddFieldsSQL!=""){
-				$AddFieldsSQL.=",";
-				$AddValuesSQL.=",";
-			}
-			$Param[":".$this->FieldName] = $PostNote;
-			$AddFieldsSQL.="`".$this->FieldName."`";
-			$AddValuesSQL.=":".$this->FieldName;
+			
+			if($AddValuesSQL!=""){$AddValuesSQL.=",'".$PostNote."'";}else{$AddValuesSQL.="'".$PostNote."'";}
 		}
-		function ModifyHandle(&$Param){
+		function ModifyHandle(){
 			global $ModifySQL;
 			$PostNote = $_POST[$this->FieldName] ;
 			$PostNote = htmlspecialchars($PostNote);
 			$order = array("\r\n", "\n", "\r"); 
 			$replace = "<br />"; 
 			$PostNote = str_replace($order, $replace, $PostNote);
-			if(!get_magic_quotes_gpc()){
-				$order = array("'"); 
-				$replace = "\'"; 
-				$PostNote = str_replace($order, $replace, $PostNote);
-			}
-			if($ModifySQL!=""){
-				$ModifySQL.=",";
-			}
-			$Param[":".$this->FieldName] = $PostNote;
-			$ModifySQL.="`".$this->FieldName."`= :".$this->FieldName;
-		}
-		function GetDataHandle(&$data){
-			$PostNote = $_POST[$this->FieldName] ;
-			$PostNote = htmlspecialchars($PostNote);
-			$order = array("\r\n", "\n", "\r"); 
-			$replace = "<br />"; 
-			$PostNote = str_replace($order, $replace, $PostNote);
-			$data[$this->FieldName] = $PostNote;
+			if($ModifySQL!=""){$ModifySQL.=",`".$this->FieldName."`='".$PostNote."'";}else{$ModifySQL.="`".$this->FieldName."`='".$PostNote."'";}
 		}
 	}
 ?>

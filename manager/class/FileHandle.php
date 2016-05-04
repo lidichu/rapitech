@@ -2,21 +2,8 @@
 	class FileHandle{
 		public static function Upload($FileObj,$FileRoot,$FileName){
 			// 存入暫存區的檔名
-			$FileRoot = FileHandle::GetPath($FileRoot);
-			// $FileObj['tmp_name']
-			
-			
-			
-			CreatDir($FileRoot);
 			$File_tmp = $FileObj['tmp_name'];
 			//判斷欄位是否指定上傳檔案…
-			// if(is_uploaded_file($File_tmp)){
-				// echo($FileObj['tmp_name']."AAA");
-			// }else{
-				// echo("AAAA".$FileObj['tmp_name']."AAAB");
-			// }
-			
-			// exit();
 			if(is_uploaded_file($File_tmp)){
 				//如果沒有輸入檔名，則用物件原來的檔名
 				if($FileName==""){$FileName=$FileObj['name'];}
@@ -24,7 +11,6 @@
 				$FileName = str_replace(' ', '_', $FileName);
 				//一律改為以日期時間命名
 				$ExtendName = strtolower(FileHandle::GetExtendName($FileName));
-				
 				if(strrpos($ExtendName,'php') === false){
 					if(FileHandle::GetExtendName($FileName)!=""){
 						$FileName = date("Ymdhis",time()+8*60*60).".".FileHandle::GetExtendName($FileName);	
@@ -48,44 +34,8 @@
 				return "";
 			}
 		}
-		public static function GetPath($FileRoot){
-			$PathTemp = "";
-			$PathArray = explode("/",$FileRoot);
-			for($i=0;$i<(count($PathArray) - 1);$i++){
-				switch($PathArray[$i]){
-					case "files0":
-						$PathTemp = files0."/";
-						break;
-					case "files1":
-						$PathTemp = files1."/";
-						break;
-					case "files2":
-						$PathTemp = files2."/";
-						break;
-					case "":
-						break;
-					default:
-						$PathTemp .= $PathArray[$i]."/";
-						break;
-				}
-			}
-			$LastDir = $PathArray[(count($PathArray) - 1)];
-			if($LastDir != ""){
-				$PathTemp .= $LastDir;
-			}
-			return $PathTemp;
-		}
-		public static function CheckFileExists($FileRoot){
-			$FileRoot = FileHandle::GetPath($FileRoot);
-			if(is_file($FileRoot)){
-				return true;
-			}else{
-				return false;
-			}
-		}
 		
 		public static function Delete($FileRoot,$FileName){
-			$FileRoot = FileHandle::GetPath($FileRoot);
 			if($FileName!=""){
 				if(@fopen(iconv("utf-8", "big5",$FileRoot.$FileName),"rb")){
 					if(!(@unlink(iconv("utf-8", "big5",$FileRoot.$FileName)))){
@@ -98,25 +48,17 @@
 			}
 		}
 		
-		public static function Move($SourceFolder,$SourceFileName,$TargetFolder,$CheckFileName=false){
-			$SourceFolder = FileHandle::GetPath($SourceFolder);
-			$SourceFileName = FileHandle::GetPath($SourceFileName);
-		
-			CreatDir($TargetFolder);
-			$NewFileName = "";
-			if($CheckFileName){
-				//一律改為以日期時間命名
-				if(FileHandle::GetExtendName($SourceFileName)!=""){
-					$FileName = date("Ymdhis",time()+8*60*60).".".FileHandle::GetExtendName($SourceFileName);
-				}else{
-					$FileName = date("Ymdhis",time()+8*60*60);
-				}
-				//查看此檔名是否已存在，若存在，則產生新檔案名稱	
-				$NewFileName = FileHandle::MakeFile($TargetFolder,$FileName);
+		public static function Move($SourceFolder,$SourceFileName,$TargetFolder){
+			//一律改為以日期時間命名
+			if(FileHandle::GetExtendName($SourceFileName)!=""){
+				$FileName = date("Ymdhis",time()+8*60*60).".".FileHandle::GetExtendName($SourceFileName);	
+			}else{
+				$FileName = date("Ymdhis",time()+8*60*60);
 			}
+			//查看此檔名是否已存在，若存在，則產生新檔案名稱	
+			$NewFileName = FileHandle::MakeFile($TargetFolder,$FileName);			
 			copy($SourceFolder.$SourceFileName,$TargetFolder.$NewFileName);
 			FileHandle::Delete($SourceFolder,$SourceFileName);
-			$NewFileName = ($NewFileName == "")?$SourceFileName:$NewFileName;
 			return $NewFileName;
 		}
 		
@@ -144,16 +86,14 @@
 		}		
 		
 		public static function MakeFile($TargetFilePath,$TargetFileName){
-			$TargetFilePath = FileHandle::GetPath($TargetFilePath);
 			$MakeFileSuccess = false;
 			$MakeFileFlag = 0 ;
 			$FileExtendName = FileHandle::GetExtendName($TargetFileName);
 			$FileSourceName = FileHandle::GetFileName($TargetFileName);
-			$FileSourceNameO = floatval($FileSourceName);
+		
 			while(!$MakeFileSuccess){
 				if($MakeFileFlag > 0){
-					$FileSourceName = $FileSourceNameO + $MakeFileFlag;
-					$TestResult = file_exists(iconv("utf-8", "big5",$TargetFilePath.$FileSourceName.".".$FileExtendName));
+					$TestResult = file_exists(iconv("utf-8", "big5",$TargetFilePath.$FileSourceName."(".$MakeFileFlag.").".$FileExtendName));
 				}else{
 					$TestResult = file_exists(iconv("utf-8", "big5",$TargetFilePath.$FileSourceName.".".$FileExtendName));
 				}
@@ -172,7 +112,6 @@
 		
 		//檔案下載
 		public static function Downloadfile($file,$filename){
-			$file = FileHandle::GetPath($file);
 			// Must be fresh start
 			$filename = mb_convert_encoding($filename, 'BIG-5','UTF-8');
 			if( headers_sent()){die('Headers Sent');}
@@ -224,23 +163,8 @@
 				die('File Not Found');
 			}
 		}
-		// 判斷是否可以上傳
-		public static function isImage($filename){
-			$filename = FileHandle::GetPath($filename);
-			// 定義可以上傳圖片類型
-			$types = '.jpg|.gif|.jpeg|.png|.bmp';
-			if(file_exists($filename)){
-				$info = getimagesize($filename);
-				$ext = strtolower(image_type_to_extension($info['2']));
-				return stripos($types,$ext);
-			}else{
-				return false;
-			}
-		}
-		
 		//刪除資料夾
 		public static function Deltree($dir){
-			$dir = FileHandle::GetPath($dir);
 			if(is_dir($dir)){
 				$TrackDir = opendir($dir);
 				while ($file = readdir($TrackDir)){

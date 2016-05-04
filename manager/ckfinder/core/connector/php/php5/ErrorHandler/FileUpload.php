@@ -3,8 +3,8 @@
 /*
  * CKFinder
  * ========
- * http://cksource.com/ckfinder
- * Copyright (C) 2007-2013, CKSource - Frederico Knabben. All rights reserved.
+ * http://ckfinder.com
+ * Copyright (C) 2007-2011, CKSource - Frederico Knabben. All rights reserved.
  *
  * The software, this file and its contents are subject to the CKFinder
  * License. Please read the license.txt file before using, installing, copying,
@@ -47,35 +47,35 @@ class CKFinder_Connector_ErrorHandler_FileUpload extends CKFinder_Connector_Erro
         $oRegistry = & CKFinder_Connector_Core_Factory :: getInstance("Core_Registry");
         $sFileName = $oRegistry->get("FileUpload_fileName");
         $sFileUrl = $oRegistry->get("FileUpload_url");
-        $sEncodedFileName = CKFinder_Connector_Utils_FileSystem::convertToConnectorEncoding($sFileName);
 
         header('Content-Type: text/html; charset=utf-8');
 
-        $errorMessage = CKFinder_Connector_Utils_Misc::getErrorMessage($number, $sEncodedFileName);
+        $errorMessage = CKFinder_Connector_Utils_Misc :: getErrorMessage($number, $sFileName);
         if (!$uploaded) {
             $sFileName = "";
-            $sEncodedFileName = "";
         }
         if (!empty($_GET['response_type']) && $_GET['response_type'] == 'txt') {
-            echo $sFileName."|".$errorMessage;
+          echo $sFileName."|".$errorMessage;
+          exit;
+        }
+        echo "<script type=\"text/javascript\">";
+
+        if (!empty($_GET['CKFinderFuncNum'])) {
+            $errorMessage = CKFinder_Connector_Utils_Misc::getErrorMessage($number, $sFileName);
+
+            if (!$uploaded) {
+                $sFileUrl = "";
+                $sFileName = "";
+            }
+
+            $funcNum = preg_replace("/[^0-9]/", "", $_GET['CKFinderFuncNum']);
+            echo "window.parent.CKFinder.tools.callFunction($funcNum, '" . str_replace("'", "\\'", $sFileUrl . $sFileName) . "', '" .str_replace("'", "\\'", $errorMessage). "');";
         }
         else {
-            echo "<script type=\"text/javascript\">";
-            if (!empty($_GET['CKFinderFuncNum'])) {
-
-                if (!$uploaded) {
-                    $sFileUrl = "";
-                    $sFileName = "";
-                }
-
-                $funcNum = preg_replace("/[^0-9]/", "", $_GET['CKFinderFuncNum']);
-                echo "window.parent.CKFinder.tools.callFunction($funcNum, '" . str_replace("'", "\\'", $sFileUrl . $sFileName) . "', '" .str_replace("'", "\\'", $errorMessage). "');";
-            }
-            else {
-                echo "window.parent.OnUploadCompleted('" . str_replace("'", "\\'", $sEncodedFileName) . "', '" . str_replace("'", "\\'", $errorMessage) . "') ;";
-            }
-            echo "</script>";
+            echo "window.parent.OnUploadCompleted('" . str_replace("'", "\\'", $sFileName) . "', '" . str_replace("'", "\\'", $errorMessage) . "') ;";
         }
+
+        echo "</script>";
 
         if ($exit) {
             exit;

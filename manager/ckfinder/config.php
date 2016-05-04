@@ -20,23 +20,17 @@
  */
 function CheckAuthentication()
 {
-	include_once('../../../../inc/Connection.php');
-	if($DbHost != '' && $DbName != '' && $DbUser != '' && $DbPwd != ''){
-		$LoginID = $_COOKIE["id"];
-		$LoginPWD = $_COOKIE["pw"];
-		if($LoginID != ""){
-			$SQL = "Select * From m_member where acc=:Acc";			
-			$Rs=$Conn->prepare($SQL);
-			$Rs->bindParam(":Acc",$LoginID);
-			$Rs->execute();
-			if($Row =$Rs->fetch(PDO::FETCH_ASSOC)){							
-				if(trim($Row["Pwd"]) == trim($LoginPWD)){
-					return true;
-				}
-			}
-		}
-	}
-	return false;
+	// WARNING : DO NOT simply return "true". By doing so, you are allowing
+	// "anyone" to upload and list the files in your server. You must implement
+	// some kind of session validation here. Even something very simple as...
+
+	// return isset($_SESSION['IsAuthorized']) && $_SESSION['IsAuthorized'];
+
+	// ... where $_SESSION['IsAuthorized'] is set to "true" as soon as the
+	// user logs in your system. To be able to use session variables don't
+	// forget to add session_start() at the top of this file.
+
+	return true;
 }
 
 // LicenseKey : Paste your license key here. If left blank, CKFinder will be
@@ -82,6 +76,7 @@ for($i=0;$i<$baseUrli;$i++){
 }
 $baseUrl = $baseUrl.'/files/Upload/';
 
+//echo $baseUrl."<br/>";
 /*
 $baseDir : the path to the local directory (in the server) which points to the
 above $baseUrl URL. This is the path used by CKFinder to handle the files in
@@ -119,11 +114,12 @@ for($i=0;$i<$baseDiri;$i++){
 	$baseDir = $baseDir.$script_filenameArray[$i];
 }
 $OS = "";
-if (strtoupper(substr(PHP_OS,0,3)==='WIN')) {
+if (strtoupper(substr(PHP_OS,0,3)==='WIN')) { 
 	$baseDir = $baseDir."/files/Upload/";
 }else{
 	$baseDir = "/".$baseDir."/files/Upload/";
-}
+} 
+//$baseDir = resolveUrl($baseUrl);
 
 /*
  * ### Advanced Settings
@@ -141,7 +137,7 @@ $config['Thumbnails'] = Array(
 		'maxWidth' => 100,
 		'maxHeight' => 100,
 		'bmpSupported' => false,
-		'quality' => 100);
+		'quality' => 80);
 
 /*
 Set the maximum size of uploaded images. If an uploaded image is larger, it
@@ -150,7 +146,7 @@ gets scaled down proportionally. Set to 0 to disable this feature.
 $config['Images'] = Array(
 		'maxWidth' => 1600,
 		'maxHeight' => 1200,
-		'quality' => 100);
+		'quality' => 80);
 
 /*
 RoleSessionVar : the session variable name that CKFinder must use to retrieve
@@ -227,12 +223,6 @@ maxSize is defined in bytes, but shorthand notation may be also used.
 Available options are: G, M, K (case insensitive).
 1M equals 1048576 bytes (one Megabyte), 1K equals 1024 bytes (one Kilobyte), 1G equals one Gigabyte.
 Example: 'maxSize' => "8M",
-
-==============================================================================
-ATTENTION: Flash files with `swf' extension, just like HTML files, can be used
-to execute JavaScript code and to e.g. perform an XSS attack. Grant permission
-to upload `.swf` files only if you understand and can accept this risk.
-==============================================================================
 */
 $config['DefaultResourceTypes'] = '';
 
@@ -283,13 +273,6 @@ denied, because "php" is on the denied extensions list.
 $config['CheckDoubleExtension'] = true;
 
 /*
-Increases the security on an IIS web server.
-If enabled, CKFinder will disallow creating folders and uploading files whose names contain characters
-that are not safe under an IIS web server.
-*/
-$config['DisallowUnsafeCharacters'] = false;
-
-/*
 If you have iconv enabled (visit http://php.net/iconv for more information),
 you can use this directive to specify the encoding of file names in your
 system. Acceptable values can be found at:
@@ -299,8 +282,8 @@ Examples:
 	$config['FilesystemEncoding'] = 'CP1250';
 	$config['FilesystemEncoding'] = 'ISO-8859-2';
 */
-$config['FilesystemEncoding'] = 'UTF-8';
-
+//$config['FilesystemEncoding'] = 'UTF-8';
+$config['FilesystemEncoding'] = 'BIG5';
 /*
 Perform additional checks for image files
 if set to true, validate image size
@@ -323,9 +306,8 @@ $config['HtmlExtensions'] = array('html', 'htm', 'xml', 'js');
 Folders to not display in CKFinder, no matter their location.
 No paths are accepted, only the folder name.
 The * and ? wildcards are accepted.
-".*" disallows the creation of folders starting with a dot character.
 */
-$config['HideFolders'] = Array(".*", "CVS");
+$config['HideFolders'] = Array(".svn", "CVS");
 
 /*
 Files to not display in CKFinder, no matter their location.
@@ -347,32 +329,18 @@ $config['ChmodFiles'] = 0777 ;
 See comments above.
 Used when creating folders that does not exist.
 */
-$config['ChmodFolders'] = 0777 ;
+$config['ChmodFolders'] = 0755 ;
 
 /*
 Force ASCII names for files and folders.
-If enabled, characters with diactric marks, like å, ä, ö, ć, č, đ, š
+If enabled, characters with diactric marks, like å, ä, ö, ?, ?, ?, š
 will be automatically converted to ASCII letters.
 */
 $config['ForceAscii'] = false;
 
-/*
-Send files using X-Sendfile module
-Mod X-Sendfile (or similar) is avalible on Apache2, Nginx, Cherokee, Lighttpd
-
-Enabling X-Sendfile option can potentially cause security issue.
- - server path to the file may be send to the browser with X-Sendfile header
- - if server is not configured properly files will be send with 0 length
-
-For more complex configuration options visit our Developer's Guide
-  http://docs.cksource.com/CKFinder_2.x/Developers_Guide/PHP
-*/
-$config['XSendfile'] = false;
-
 
 include_once "plugins/imageresize/plugin.php";
 include_once "plugins/fileeditor/plugin.php";
-include_once "plugins/zip/plugin.php";
 
 $config['plugin_imageresize']['smallThumb'] = '90x90';
 $config['plugin_imageresize']['mediumThumb'] = '120x120';

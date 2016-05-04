@@ -4,11 +4,8 @@ function UpdateStatus(){
 	global $DBTable,$Conn,$RowCount;
 	for($i=1;$i<=$RowCount;$i++){
 		if($_POST["status".$i] != $_POST["statusId".$i]){
-			$SQL = "update ".$DBTable." set Status= :Status Where SerialNo = :SerialNo";
-			$Rs = $Conn->prepare($SQL);
-			$Rs->bindParam(":Status", $_POST["status".$i]);
-			$Rs->bindParam(":SerialNo", $_POST["SERIALNO".$i]);
-			$Rs->execute();
+			$SQL = "update ".$DBTable." set Status='".$_POST["status".$i]."' Where SerialNo=".$_POST["SERIALNO".$i];
+			mysql_query($SQL,$Conn);
 		}
 	}	
 }
@@ -18,11 +15,8 @@ function UpdateOrderStatus(){
 	global $DBTable,$Conn,$RowCount;
 	for($i=1;$i<=$RowCount;$i++){
 		if($_POST["OrderStatus".$i] != $_POST["statusId".$i]){
-			$SQL = "update ".$DBTable." set OrderStatus = :OrderStatus Where SerialNo = :SerialNo";
-			$Rs = $Conn->prepare($SQL);
-			$Rs->bindParam(":OrderStatus", $_POST["OrderStatus".$i]);
-			$Rs->bindParam(":SerialNo", $_POST["SERIALNO".$i]);
-			$Rs->execute();
+			$SQL = "update ".$DBTable." set OrderStatus='".$_POST["OrderStatus".$i]."' Where SerialNo=".$_POST["SERIALNO".$i];
+			mysql_query($SQL,$Conn);
 		}
 	}	
 }
@@ -32,11 +26,8 @@ function UpdateSort(){
 	global $DBTable,$Conn,$RowCount;
 	for($i=1;$i<=$RowCount;$i++){
 		if($_POST["sort".$i] != $_POST["sortId".$i]){
-			$SQL = "update ".$DBTable." set Sort = :Sort Where SerialNo = :SerialNo";
-			$Rs = $Conn->prepare($SQL);
-			$Rs->bindParam(":Sort", $_POST["sort".$i]);
-			$Rs->bindParam(":SerialNo", $_POST["SERIALNO".$i]);
-			$Rs->execute();
+			$SQL = "update ".$DBTable." set Sort=".$_POST["sort".$i]." Where SerialNo=".$_POST["SERIALNO".$i];
+			mysql_query($SQL,$Conn);
 		}
 	}	
 }
@@ -46,51 +37,20 @@ function UpdateIndexSort(){
 	global $DBTable,$Conn,$RowCount;
 	for($i=1;$i<=$RowCount;$i++){
 		if($_POST["indexsort".$i] != $_POST["indexsortId".$i]){
-			$SQL = "update ".$DBTable." set IndexSort = :IndexSort Where SerialNo = :SerialNo";
-			$Rs = $Conn->prepare($SQL);
-			$Rs->bindParam(":IndexSort", $_POST["indexsort".$i]);
-			$Rs->bindParam(":SerialNo", $_POST["SERIALNO".$i]);
-			$Rs->execute();
+			$SQL = "update ".$DBTable." set IndexSort=".$_POST["indexsort".$i]." Where SerialNo=".$_POST["SERIALNO".$i];
+			mysql_query($SQL,$Conn);
 		}
 	}	
 }
-//更新推薦首頁排序
-function UpdateIndexSort2(){
-	global $DBTable,$Conn,$RowCount;
-	for($i=1;$i<=$RowCount;$i++){
-		if($_POST["indexsort".$i] != $_POST["indexsortId".$i]){
-			$SQL = "update ".$DBTable." set RecommendSort = :RecommendSort Where SerialNo = :SerialNo";
-			$Rs = $Conn->prepare($SQL);
-			$Rs->bindParam(":RecommendSort", $_POST["indexsort".$i]);
-			$Rs->bindParam(":SerialNo", $_POST["SERIALNO".$i]);
-			$Rs->execute();
-		}
-	}	
-}
-//更新推薦首頁排序
-function UpdateIndexSort3(){
-	global $DBTable,$Conn,$RowCount;
-	for($i=1;$i<=$RowCount;$i++){
-		if($_POST["indexsort".$i] != $_POST["indexsortId".$i]){
-			$SQL = "update ".$DBTable." set NewSort = :NewSort Where SerialNo = :SerialNo";
-			$Rs = $Conn->prepare($SQL);
-			$Rs->bindParam(":NewSort", $_POST["indexsort".$i]);
-			$Rs->bindParam(":SerialNo", $_POST["SERIALNO".$i]);
-			$Rs->execute();
-		}
-	}	
-}
+
 
 //更新開啟方式
 function UpdateTargetWindow(){
 	global $DBTable,$Conn,$RowCount;
 	for($i=1;$i<=$RowCount;$i++){
 		if($_POST["TargetWindow".$i] != $_POST["TargetWindowId".$i]){
-			$SQL = "update ".$DBTable." set TargetWindow = :TargetWindow Where SerialNo = :SerialNo";
-			$Rs = $Conn->prepare($SQL);
-			$Rs->bindParam(":TargetWindow", $_POST["TargetWindow".$i]);
-			$Rs->bindParam(":SerialNo", $_POST["SERIALNO".$i]);
-			$Rs->execute();
+			$SQL = "update ".$DBTable." set TargetWindow='".$_POST["TargetWindow".$i]."' Where SerialNo=".$_POST["SERIALNO".$i];
+			mysql_query($SQL,$Conn);
 		}
 	}	
 }
@@ -220,6 +180,7 @@ function ReturnToBack($MSG){
 	echo "</script>\n";	
 	echo "</body>\n";
 	echo "</html>\n";
+	
 	exit();	
 }
 ?>

@@ -1,4 +1,4 @@
-<?php
+<?php 
 $Root = "";
 $SdbRoot = "../";
 include_once("../inc/CheckHead.php");
@@ -14,222 +14,66 @@ include_once("../inc/CheckHead.php");
 $(function(){
 <?php
 	//讀取外部結點
-	if($id=="admin"){
-		$SQL = "Select * From treelist Where LENGTH(Tree_ID) = 3 order by Sort";
-		$Rs = $Conn->prepare($SQL);
-	}else{
-		$SQL = "Select * From treelist where Tree_ID in(Select Tree_ID From popedom Where Member_ID = :Member_ID ) and LENGTH(Tree_ID) = 3 order by Sort";
-		$Rs = $Conn->prepare($SQL);
-		$Rs->bindParam(':Member_ID', $LOGIN_SERIALNO);
-	}
-	$Rs->execute();
-	while($Row = $Rs->fetch(PDO::FETCH_ASSOC)){
-		echo "AddFolderItem(\"" . "T" . $Row->{"SerialNo"} . "\",\"".$Row->{"Tree_Name"}."\",\"".$Row->{"Href_File"}."\");\n";
+	$Query = "select * from treelist where Tree_ID in(select Tree_ID From popedom Where Member_ID = " . $LOGIN_SERIALNO . " and LENGTH(Tree_ID) = 3 order by Sort";
+	
+	$Rs_check0 = mysql_query($Query,$Conn);
+	if($Rs_check0 && mysql_num_rows($Rs_check0)>0){
+		for ($i = 0; $i < mysql_num_rows($Rs_check0) ; $i++) {
+			$Row=mysql_fetch_array($Rs_check0);			//取得一筆查詢結果資料
+			echo "AddFolderItem(\"" . "T" . $Row["SerialNo"] . "\",\"".$Row["Tree_Name"]."\",\"".$Row["Href_File"]."\");\n";
+		}
 	}
 	//讀取資料夾節點
-	if($id=="admin"){
-		$SQL = "Select * From treelist where LENGTH(Tree_ID) = 2  order by Sort";
-		$Rs = $Conn->prepare($SQL);
-	}else{
-		$SQL = "Select * From treelist where Tree_ID in(Select Tree_ID From popedom Where Member_ID = :Member_ID and LENGTH(Tree_ID) = 2 ) order by Sort";
-		$Rs = $Conn->prepare($SQL);
-		$Rs->bindParam(':Member_ID', $LOGIN_SERIALNO);
-	}
-	$AmountD = array();
-	$Rs->execute();
-	while($Row = $Rs->fetch(PDO::FETCH_ASSOC)){
-		switch($Row["Tree_ID"]){
-			
-			/*
-			case "32":
-			// 訂單管理
-				$Amount=0;
-				$AmountD["3210"] = 0; 				
-				
-				// 檢查有沒有新留言
-				$SQL = "select Count(*) As Num from qa_ch where Status = '上架' and G0 in ( select SerialNo from qacategory_ch where Status = '上架') AND SerialNo NOT in ( select G1 from qareply_ch )";
-				$Rs2 = $Conn->prepare($SQL);
-				$Rs2->execute();
-				$Row2 = $Rs2->fetch(PDO::FETCH_ASSOC);
-				$AmountD["3210"] = intval($Row2["Num"]);
-				$Amount += intval($Row2["Num"]);
-				
-				$SQL = "select Count(*) As Num from qa_en where Status = '上架' and G0 in ( select SerialNo from qacategory_en where Status = '上架') AND SerialNo NOT in ( select G1 from qareply_en )";
-				$Rs2 = $Conn->prepare($SQL);
-				$Rs2->execute();
-				$Row2 = $Rs2->fetch(PDO::FETCH_ASSOC);
-				$AmountD["3220"] = intval($Row2["Num"]);
-				$Amount += intval($Row2["Num"]);
-				
-				echo "AddFolder(\"" . "T" . $Row["SerialNo"] . "\",\"".$Row["Tree_Name"]."<span style='color:#F00' id='Menu_OA'>(".$Amount.")</span>\");\n";
-				break;
-				
-			case "11":
-				// 會員管理
-				$Amount=0;
-				$AmountD["1120"] = 0; // VIP會員
-				$SQL = "Select Count(*) As Num From (SELECT M.SerialNo,M.MemberID,M.MemberName,M.EMail,CASE (M.IsVIP) WHEN 'false' THEN '否' WHEN 'true' THEN '是' END as IsVIP,M.VIPID,SUM(OL.TotalPrice) as TotalPrice FROM `order_list` as OL, `orderrecord` as OD, `member` as M Where OL.SerialNo = OD.G0 And OD.IsNew = '是' And PayHandle <> '取消' And ManagerHandle = '交易完成' And M.MemberID = OL.MemberID And M.IsVIP = 'false' Group By M.MemberID) as V Where true and TotalPrice > 10000";
-				$Rs2 = $Conn->prepare($SQL);
-				$Rs2->execute();
-				$Row2 = $Rs2->fetch(PDO::FETCH_ASSOC);
-				$Amount += intval($Row2["Num"]);
-				$AmountD["1120"] = intval($Row2["Num"]);
-				echo "AddFolder(\"" . "T" . $Row["SerialNo"] . "\",\"".$Row["Tree_Name"]."<span style='color:#F00' id='Menu_MemberManager'>(".$Amount.")</span>\");\n";
-				break;
-			
-			case "40":
-				// 訂單管理
-				$Amount=0;
-				$AmountD["4010"] = 0; 
-				$AmountD["4020"] = 0; 
-				$AmountD["4030"] = 0; 
-				
-				// 核帳訂單
-				$SQL = "Select Count(*) As Num From order_list as OL, orderrecord as OD Where true and OD.IsNew='是' and OD.ManagerHandle ='未處理' and OD.PayHandle not in('訂單取消','退貨申請') and OL.SerialNo = OD.G0";
-				$Rs2 = $Conn->prepare($SQL);
-				$Rs2->execute();
-				$Row2 = $Rs2->fetch(PDO::FETCH_ASSOC);
-				$AmountD["4010"] = intval($Row2["Num"]);
-				$Amount += intval($Row2["Num"]);
-				
-				// 待出貨
-				$SQL = "Select Count(*) As Num From order_list as OL, orderrecord as OD Where true and OD.IsNew='是' and OD.ManagerHandle ='訂單確認' and OL.SerialNo = OD.G0";
-				$Rs2 = $Conn->prepare($SQL);
-				$Rs2->execute();
-				$Row2 = $Rs2->fetch(PDO::FETCH_ASSOC);
-				$AmountD["4020"] = intval($Row2["Num"]);
-				$Amount += intval($Row2["Num"]);
-				
-				// 已出貨
-				$SQL = "Select Count(*) As Num From order_list as OL, orderrecord as OD Where true and OD.IsNew='是' and OD.ManagerHandle ='已出貨' and OL.SerialNo = OD.G0";
-				$Rs2 = $Conn->prepare($SQL);
-				$Rs2->execute();
-				$Row2 = $Rs2->fetch(PDO::FETCH_ASSOC);
-				$AmountD["4030"] = intval($Row2["Num"]);
-				$Amount += intval($Row2["Num"]);
-				
-				echo "AddFolder(\"" . "T" . $Row["SerialNo"] . "\",\"".$Row["Tree_Name"]."<span style='color:#F00' id='Menu_OrderManager'>(".$Amount.")</span>\");\n";
-				break;
-			case "41":
-				// 退換貨管理
-				$Amount=0;
-				$AmountD["4110"] = 0; // 未處理訂單
-				$SQL = "Select Count(*) As Num From order_list as OL, orderrecord as OD Where true and OD.IsNew='是' and OD.ManagerHandle ='未處理' and OD.PayHandle ='退貨申請' and OL.SerialNo = OD.G0";
-				$Rs2 = $Conn->prepare($SQL);
-				$Rs2->execute();
-				$Row2 = $Rs2->fetch(PDO::FETCH_ASSOC);
-				$Amount += intval($Row2["Num"]);
-				$AmountD["4110"] = intval($Row2["Num"]);
-				echo "AddFolder(\"" . "T" . $Row["SerialNo"] . "\",\"".$Row["Tree_Name"]."<span style='color:#F00' id='Menu_ReturnManager'>(".$Amount.")</span>\");\n";
-				break;
-			case "42":
-				// 訂單問題管理
-				$Amount=0;
-				$AmountD["4210"] = 0; // 未處理問題
-				$SQL = "Select Count(*) As Num From orderquestion Where true and Status = '未處理'";
-				$Rs2 = $Conn->prepare($SQL);
-				$Rs2->execute();
-				$Row2 = $Rs2->fetch(PDO::FETCH_ASSOC);
-				$Amount += intval($Row2["Num"]);
-				$AmountD["4210"] = intval($Row2["Num"]);
-				echo "AddFolder(\"" . "T" . $Row["SerialNo"] . "\",\"".$Row["Tree_Name"]."<span style='color:#F00' id='Menu_OrderQuestionManager'>(".$Amount.")</span>\");\n";
-				break;
-			
-				case "60":
-				// 問與答管理
-				$Amount=0;
-				$AmountD["6010"] = 0; // 未處理問題
-				$SQL = "Select Count(*) As Num From productquestion Where true and Status = '未處理'";
-				$Rs2 = $Conn->prepare($SQL);
-				$Rs2->execute();
-				$Row2 = $Rs2->fetch(PDO::FETCH_ASSOC);
-				$Amount += intval($Row2["Num"]);
-				$AmountD["6010"] = intval($Row2["Num"]);
-				echo "AddFolder(\"" . "T" . $Row["SerialNo"] . "\",\"".$Row["Tree_Name"]."<span style='color:#F00' id='Menu_QAManager'>(".$Amount.")</span>\");\n";
-				break;
-			*/	
-			/*case "70":
-				// 聯絡我們
-				$Amount=0;
-				$AmountD["7010"] = 0; // 未處理問題
-				$SQL = "Select Count(*) As Num From contact Where true and Status = '未處理'";
-				$Rs2 = $Conn->prepare($SQL);
-				$Rs2->execute();
-				$Row2 = $Rs2->fetch(PDO::FETCH_ASSOC);
-				$Amount += intval($Row2["Num"]);
-				$AmountD["7010"] = intval($Row2["Num"]);
-				echo "AddFolder(\"" . "T" . $Row["SerialNo"] . "\",\"".$Row["Tree_Name"]."<span style='color:#F00' id='Menu_ContactManager'>(".$Amount.")</span>\");\n";
-				break;*/
-			default:
+	$Query = "select * from treelist where Tree_ID in(select Tree_ID From popedom Where Member_ID = " . $LOGIN_SERIALNO . " and LENGTH(Tree_ID) = 2 ) order by Sort";
+	$Rs_check = mysql_query($Query,$Conn);
+	
+	if($Rs_check && mysql_num_rows($Rs_check)>0){
+		for ($i = 0; $i < mysql_num_rows($Rs_check) ; $i++) {
+			$Row=mysql_fetch_array($Rs_check);			//取得一筆查詢結果資料
+			if($Row["Tree_ID"] == "30"){	
+				$SQL="Select Count(*) as Counter From  ordermain Where Status='未處理'";
+				$Rs3 = mysql_query($SQL,$Conn);
+				$Row3 = mysql_fetch_array($Rs3);
+				echo "AddFolder(\"" . "T" . $Row["SerialNo"] . "\",\"".$Row["Tree_Name"]."<span style='color:#F00' id='order'>(".$Row3["Counter"].")</span>\");\n";
+			}elseif($Row["Tree_ID"] == "45"){	
+				$SQL="Select Count(*) as Counter From  contact Where Status='未處理'";
+				$Rs3 = mysql_query($SQL,$Conn);
+				$Row3 = mysql_fetch_array($Rs3);
+				echo "AddFolder(\"" . "T" . $Row["SerialNo"] . "\",\"".$Row["Tree_Name"]."<span style='color:#F00' id='contact'>(".$Row3["Counter"].")</span>\");\n";
+			}
+			else{
 				echo "AddFolder(\"" . "T" . $Row["SerialNo"] . "\",\"".$Row["Tree_Name"]."\");\n";
-				break;
-				
-		}
-		//讀取
-		if($id=="admin"){
-			$SQL = "select * from treelist where  LENGTH(Tree_ID) = 4 and Tree_ID like Concat(:Tree_ID,'%') order by Sort";
-			$Rs2 = $Conn->prepare($SQL);
-			$Rs2->bindParam(':Tree_ID', $Row["Tree_ID"]);
-			
-		}else{
-			$SQL = "select * from treelist where Tree_ID in(select Tree_ID From popedom Where Member_ID = :Member_ID and LENGTH(Tree_ID) = 4 and Tree_ID like Concat(:Tree_ID,'%')) order by Sort";
-			$Rs2 = $Conn->prepare($SQL);
-			$Rs2->bindParam(':Member_ID', $LOGIN_SERIALNO);
-			$Rs2->bindParam(':Tree_ID', $Row["Tree_ID"]);
-			
-		}
-		$Rs2->execute();
-		while($Row2 = $Rs2->fetch(PDO::FETCH_ASSOC)){
-			switch($Row2["Tree_ID"]){
-				/*
-				case "3210":
-					echo "AddItem(\""."T".$Row["SerialNo"]."\",\"".$Row["Tree_Name"]."\",\"".$Row2["Tree_Name"]."<span style='color:#F00' id='Tree_OA_ch'>(".$AmountD[$Row2["Tree_ID"]].")</span>\",\"".$Row2["Href_File"]."\");\n";
-					break;
-				case "3220":
-					echo "AddItem(\""."T".$Row["SerialNo"]."\",\"".$Row["Tree_Name"]."\",\"".$Row2["Tree_Name"]."<span style='color:#F00' id='Tree_OA_en'>(".$AmountD[$Row2["Tree_ID"]].")</span>\",\"".$Row2["Href_File"]."\");\n";
-					break;
-				case "1120":
-					echo "AddItem(\""."T".$Row["SerialNo"]."\",\"".$Row["Tree_Name"]."\",\"".$Row2["Tree_Name"]."<span style='color:#F00' id='Tree_OUpDateVIP'>(".$AmountD[$Row2["Tree_ID"]].")</span>\",\"".$Row2["Href_File"]."\");\n";
-					break;
-					
-				case "4010":
-					echo "AddItem(\""."T".$Row["SerialNo"]."\",\"".$Row["Tree_Name"]."\",\"".$Row2["Tree_Name"]."<span style='color:#F00' id='Tree_OAOrder'>(".$AmountD[$Row2["Tree_ID"]].")</span>\",\"".$Row2["Href_File"]."\");\n";
-					break;
-				case "4020":
-					echo "AddItem(\""."T".$Row["SerialNo"]."\",\"".$Row["Tree_Name"]."\",\"".$Row2["Tree_Name"]."<span style='color:#F00' id='Tree_OShipment'>(".$AmountD[$Row2["Tree_ID"]].")</span>\",\"".$Row2["Href_File"]."\");\n";
-					break;
-				case "4030":
-					echo "AddItem(\""."T".$Row["SerialNo"]."\",\"".$Row["Tree_Name"]."\",\"".$Row2["Tree_Name"]."<span style='color:#F00' id='Tree_OFinished'>(".$AmountD[$Row2["Tree_ID"]].")</span>\",\"".$Row2["Href_File"]."\");\n";
-					break;
-				case "4110":
-					echo "AddItem(\""."T".$Row["SerialNo"]."\",\"".$Row["Tree_Name"]."\",\"".$Row2["Tree_Name"]."<span style='color:#F00' id='Tree_RUnhandle'>(".$AmountD[$Row2["Tree_ID"]].")</span>\",\"".$Row2["Href_File"]."\");\n";
-					break;
-				
-				case "4210":
-					echo "AddItem(\""."T".$Row["SerialNo"]."\",\"".$Row["Tree_Name"]."\",\"".$Row2["Tree_Name"]."<span style='color:#F00' id='Tree_OQA'>(".$AmountD[$Row2["Tree_ID"]].")</span>\",\"".$Row2["Href_File"]."\");\n";
-					break;
-				case "6010":
-					echo "AddItem(\""."T".$Row["SerialNo"]."\",\"".$Row["Tree_Name"]."\",\"".$Row2["Tree_Name"]."<span style='color:#F00' id='Tree_QAM'>(".$AmountD[$Row2["Tree_ID"]].")</span>\",\"".$Row2["Href_File"]."\");\n";
-					break;
-				*/	
-				/*
-				case "7010":
-					echo "AddItem(\""."T".$Row["SerialNo"]."\",\"".$Row["Tree_Name"]."\",\"".$Row2["Tree_Name"]."<span style='color:#F00' id='Tree_OContact'>(".$AmountD[$Row2["Tree_ID"]].")</span>\",\"".$Row2["Href_File"]."\");\n";
-					break;
-					*/
-				default:
-					echo "AddItem(\"" . "T" . $Row["SerialNo"] . "\",\"".$Row["Tree_Name"]."\",\"".$Row2["Tree_Name"]."\",\"".$Row2["Href_File"]."\");\n";
-					break;
-					
+			}
+			//讀取
+			$Query = "select * from treelist where Tree_ID in(select Tree_ID From popedom Where Member_ID = " . $LOGIN_SERIALNO . " and LENGTH(Tree_ID) = 4 and Tree_ID like '" . $Row["Tree_ID"] . "%') order by Sort";	
+			$Rs_check2 = mysql_query($Query,$Conn);
+			if($Rs_check && mysql_num_rows($Rs_check2)>0){
+				for ($j = 0; $j < mysql_num_rows($Rs_check2) ; $j++) {
+					$Row2=mysql_fetch_array($Rs_check2);			//取得一筆查詢結果資料
+					if($Row2["Tree_ID"] == "3020"){
+						$SQL="Select Count(*) as Counter From ordermain Where Status='未處理'";
+						$Rs3 = mysql_query($SQL,$Conn);
+						$Row3 = mysql_fetch_array($Rs3);
+						echo "AddItem(\""."T".$Row["SerialNo"]."\",\"".$Row["Tree_Name"]."\",\"".$Row2["Tree_Name"]."<span style='color:#F00' id='order2'>(".$Row3["Counter"].")</span>\",\"".$Row2["Href_File"]."\");\n";					
+					}elseif($Row2["Tree_ID"] == "4510"){
+						$SQL="Select Count(*) as Counter From contact Where Status='未處理'";
+						$Rs3 = mysql_query($SQL,$Conn);
+						$Row3 = mysql_fetch_array($Rs3);
+						echo "AddItem(\""."T".$Row["SerialNo"]."\",\"".$Row["Tree_Name"]."\",\"".$Row2["Tree_Name"]."<span style='color:#F00' id='contact2'>(".$Row3["Counter"].")</span>\",\"".$Row2["Href_File"]."\");\n";					
+					}else{
+						echo "AddItem(\"" . "T" . $Row["SerialNo"] . "\",\"".$Row["Tree_Name"]."\",\"".$Row2["Tree_Name"]."\",\"".$Row2["Href_File"]."\");\n";
+					}
+				}
 			}
 		}
 	}
-?>
+																															   
+?>		   
 });
 </script>
 <script language="javascript" type="text/javascript">
 $(function(){
-	$(".Folder").on("click",function(event){
+	$(".Folder").live("click",function(event){
 		//if($(event.target).prop("className")=="Folder"){
 			if($(this).parent().find(".Item").length > 0){
 				if($(this).parent().find(".Item").eq(0).css("display")=="none"){
@@ -245,21 +89,21 @@ $(function(){
 						$(this).parent().find(".openStatus1").eq(0).prop("src","ftv2plastnode.gif");
 					}else{
 						$(this).parent().find(".openStatus1").eq(0).prop("src","ftv2pnode.gif");
-					}
+					}			
 					$(this).parent().find(".openStatus2").eq(0).prop("src","ftv2folderclosed.gif");
 					$(this).parent().find(".Item").hide();
 				}
 			}
 		//}
-	}).on("mouseenter",function(){
-		$(this).css({"cursor":"pointer"})
-	});
+	}).live("mouseenter",function(){
+		$(this).css({"cursor":"pointer"})	
+	});	   
 	$("#logoutlink").mouseover(function(){
 		$(this).find("img").prop("src","../images/iconKey2.gif");
 	}).mouseout(function(){
 		$(this).find("img").prop("src","../images/iconKey1.gif");
 	});
-
+	
 	$(".FolderAll").eq($(".FolderAll").length-1).find(".openStatus1").eq(0).prop("src","ftv2plastnode.gif");
 	$(".FolderAll").each(function(){
 		$(this).find(".Item").eq($(this).find(".Item").length-1).find(".ItemPic2").eq(0).prop("src","ftv2lastnode.gif");
@@ -269,7 +113,9 @@ $(function(){
 			$(this).prop("src","ftv2blank.gif");
 		});
 	});
-
+	
+	
+	
 });
 function AddFolder(TreeSerialNo,FolderName){
 	$("#TreeMenu").append('<div align="left" id="' + TreeSerialNo + '" class="FolderAll"><div class="Folder"><table border="0" cellspacing="0" cellpadding="0"><tr><td><img src="ftv2pnode.gif" border="0" class="openStatus1" /></td><td><img src="ftv2folderclosed.gif" border="0" class="openStatus2" /></td><td style="font-size:10pt;">'+FolderName+'</td></tr></table></div></div>');
@@ -295,5 +141,10 @@ function AddFolderItem(TreeSerialNo,ItemName,Href){
 </td>
 </tr>
 </table>
+
+
+
+
 </body>
 </html>
+

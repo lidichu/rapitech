@@ -10,7 +10,11 @@
 		<td align="center">
 			<table border="10" cellspacing="5" cellpadding="10" width="570" height="140" bgcolor="#F6F5FA" style="border-style:solid">
 				<tr>
-					<td align="center" background="images/a_bg.jpg"><font style="font-size:18pt;"><b><span style="letter-spacing:10px;"></span><p><img src="images/key1.gif" valign="absbottom"> 後端管理系統</font></td>
+					<td align="center" background="images/a_bg.jpg">
+						<font style="font-size:18pt;"><b><span style="letter-spacing:10px;"></span><p>
+						<img src="images/key1.gif" valign="absbottom"> 後端管理系統
+						</font>
+					</td>
 				</tr>
 			</table>
 		</td>
@@ -18,4 +22,3 @@
 </table>
 </body>
 </html>
-

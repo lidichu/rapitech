@@ -32,14 +32,15 @@
 			echo "				<option value=\"\">請選擇</option>\n";
 			//查詢資料庫
 			$SQL = "Select ".$this->RelField.",".$this->RelShow." from ".$this->RelTable.$this->RelQuery.$this->RelOrder;
-			$Rs = $Conn->prepare($SQL);
-			$Rs->execute();
-			while($Row = $Rs->fetch(PDO::FETCH_ASSOC)){
-				if(strval($this->SelectItemDefault)==strval($Row[$this->RelField])){
+			$Rs = mysql_query($SQL,$Conn);
+			if($Rs && (mysql_num_rows($Rs)>0)){
+				while($Row = mysql_fetch_array($Rs)){
+					if(strval($this->SelectItemDefault)==strval($Row[$this->RelField])){
 			echo "				<option value=\"".$Row[$this->RelField]."\" selected=\"selected\">".$Row[$this->RelShow]."</option>\n";
-				}else{
+					}else{
 			echo "				<option value=\"".$Row[$this->RelField]."\">".$Row[$this->RelShow]."</option>\n";
-				}					
+					}					
+				}
 			}
 			echo "			</select>\n";
 			if($this->NullFlag){
@@ -57,19 +58,21 @@
 			echo "				<option value=\"\">請選擇</option>\n";
 			//查詢資料庫
 			$SQL = "Select ".$this->RelField.",".$this->RelShow." from ".$this->RelTable.$this->RelQuery.$this->RelOrder;
-			$Rs = $Conn->prepare($SQL);
-			$Rs->execute();
-			while($Row = $Rs->fetch(PDO::FETCH_ASSOC)){
-				if($Row[$this->FieldName]!=""){
-					if(strval($Row[$this->FieldName])==strval($Row2[$this->RelField])){
+			$Rs = mysql_query($SQL,$Conn);
+			if($Rs && (mysql_num_rows($Rs)>0)){
+				while($Row2 = mysql_fetch_array($Rs)){
+					if($Row[$this->FieldName]!=""){
+						if(strval($Row[$this->FieldName])==strval($Row2[$this->RelField])){
 				echo "				<option value=\"".$Row2[$this->RelField]."\" selected=\"selected\">".$Row2[$this->RelShow]."</option>\n";
-					}else{
+						}else{
 				echo "				<option value=\"".$Row2[$this->RelField]."\">".$Row2[$this->RelShow]."</option>\n";					
-					}	
-				}else{
+						}	
+					}else{
 				echo "				<option value=\"".$Row2[$this->RelField]."\">".$Row2[$this->RelShow]."</option>\n";
+					}
 				}
-			}
+			}			
+
 			echo "			</select>\n";
 			if($this->NullFlag){
 			echo "			<font size=\"-1\" color=\"DarkGray\">(必填)</font>\n";
@@ -78,29 +81,22 @@
 			echo "	</tr>\n";			
 		}
 		function ReadShow(){
-			global $Conn, $Row;
+			global $Row;
 			echo "	<tr>\n";
 			echo "		<td width=\"17%\" bgcolor=\"#EEEEEE\" nowrap align=\"right\"><font color=\"#FF8833\">".$this->ShowName."&nbsp;</font></td>\n";
 			echo "		<td width=\"83%\" bgcolor=\"#FFFFFF\" align=\"left\">&nbsp;&nbsp;";
 			//查詢資料庫
-			if($this->RelQuery != ""){ 
-				$this->RelQuery = $this->RelQuery." And ".$this->RelField."= :".$this->FieldName;
-			}else{
-				$this->RelQuery = " Where ".$this->RelField."= :".$this->FieldName;
-			}
-			// echo($this->RelQuery);
-			// echo($Row[$this->FieldName]);
-		
 			$SQL = "Select ".$this->RelField.",".$this->RelShow." from ".$this->RelTable.$this->RelQuery.$this->RelOrder;
-			// echo($SQL);
-			// exit();
-			$Rs = $Conn->prepare($SQL);
-			$Rs->bindValue(":".$this->FieldName, $Row[$this->FieldName]);
-			$Rs->execute();
-			$RowTemp = $Rs->fetch(PDO::FETCH_ASSOC);
-			if($RowTemp){
-				echo($RowTemp[$this->RelShow]);
-			}
+			$Rs = mysql_query($SQL,$Conn);
+			if($Rs && (mysql_num_rows($Rs)>0)){
+				while($Row = mysql_fetch_array($Rs)){
+					if($Row[$this->FieldName]!=""){
+						if($Row[$this->FieldName]==$Row[$this->RelField]){
+				echo $Row[$this->RelShow];
+						}
+					}
+				}
+			}				
 			echo "		</td>\n";
 			echo "	</tr>\n";			
 		}
@@ -115,25 +111,14 @@
 		function AddScript(){}
 		function ModifyScript(){}
 		function ShowScript(){}
-		function AddHandle(&$Param){
+		function AddHandle(){
 			global $AddFieldsSQL,$AddValuesSQL;
-			if($AddFieldsSQL!=""){ $AddFieldsSQL.=","; $AddValuesSQL.=","; }
-			$Param[":".$this->FieldName] = $_POST[$this->FieldName];
-			$AddFieldsSQL.="`".$this->FieldName."`";
-			$AddValuesSQL.=":".$this->FieldName;
+			if($AddFieldsSQL!=""){$AddFieldsSQL.=",`".$this->FieldName."`";}else{$AddFieldsSQL.="`".$this->FieldName."`";}
+			if($AddValuesSQL!=""){$AddValuesSQL.=",'".$_POST[$this->FieldName]."'";}else{$AddValuesSQL.="'".$_POST[$this->FieldName]."'";}
 		}
-		function ModifyHandle(&$Param){
+		function ModifyHandle(){
 			global $ModifySQL;
-			if($ModifySQL!=""){ $ModifySQL.=","; }
-			$Param[":".$this->FieldName] = $_POST[$this->FieldName];
-			$ModifySQL.="`".$this->FieldName."`= :".$this->FieldName;
-		}
-		function GetDataHandle(&$data){
-			$DateValue = $_POST[$this->FieldName];
-			if($DateValue==""){
-				$DateValue = "";
-			}
-			$data[$this->FieldName] = $DateValue;
+			if($ModifySQL!=""){$ModifySQL.=",`".$this->FieldName."`='".$_POST[$this->FieldName]."'";}else{$ModifySQL.="`".$this->FieldName."`='".$_POST[$this->FieldName]."'";}
 		}
 	}
 ?>

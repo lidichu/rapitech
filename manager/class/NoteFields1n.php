@@ -77,41 +77,20 @@
 		function AddScript(){}
 		function ModifyScript(){}
 		function ShowScript(){}
-		function AddHandle(&$Param){
+		function AddHandle(){
 			global $AddFieldsSQL,$AddValuesSQL;
+			if($AddFieldsSQL!=""){$AddFieldsSQL.=",`".$this->FieldName."`";}else{$AddFieldsSQL.="`".$this->FieldName."`";}
 			$PostNote = $_POST[$this->FieldName] ;
 			$PostNote = str_replace($this->baseUrl,"{VisualRoot}",$PostNote);
-			$PostNote = str_replace($this->baseUrl0,"{VisualRoot0}",$PostNote);
-			$PostNote = str_replace($this->baseUrl1,"{VisualRoot1}",$PostNote);
-			$PostNote = str_replace($this->baseUrl2,"{VisualRoot2}",$PostNote);
 			$PostNote = htmlspecialchars($PostNote);
-			if($AddFieldsSQL!=""){
-				$AddFieldsSQL.=",";
-				$AddValuesSQL.=",";
-			}
-			$Param[":".$this->FieldName] = $PostNote;
-			$AddFieldsSQL.="`".$this->FieldName."`";
-			$AddValuesSQL.=":".$this->FieldName;
+			if($AddValuesSQL!=""){$AddValuesSQL.=",'".$PostNote."'";}else{$AddValuesSQL.="'".$PostNote."'";}
 		}
-		function ModifyHandle(&$Param){
+		function ModifyHandle(){
 			global $ModifySQL;
 			$PostNote = $_POST[$this->FieldName] ;
 			$PostNote = str_replace($this->baseUrl,"{VisualRoot}",$PostNote);
-			$PostNote = str_replace($this->baseUrl0,"{VisualRoot0}",$PostNote);
-			$PostNote = str_replace($this->baseUrl1,"{VisualRoot1}",$PostNote);
-			$PostNote = str_replace($this->baseUrl2,"{VisualRoot2}",$PostNote);
 			$PostNote = htmlspecialchars($PostNote);
-			if($ModifySQL!=""){
-				$ModifySQL.=",";
-			}
-			$Param[":".$this->FieldName] = $PostNote;
-			$ModifySQL.="`".$this->FieldName."`= :".$this->FieldName;
-		}
-		function GetDataHandle(&$data){
-			$PostNote = $_POST[$this->FieldName] ;
-			$PostNote = str_replace($this->baseUrl,"{VisualRoot}",$PostNote);
-			$PostNote = htmlspecialchars($PostNote);
-			$data[$this->FieldName] = $PostNote;
+			if($ModifySQL!=""){$ModifySQL.=",`".$this->FieldName."`='".$PostNote."'";}else{$ModifySQL.="`".$this->FieldName."`='".$PostNote."'";}
 		}
 	}
 ?>

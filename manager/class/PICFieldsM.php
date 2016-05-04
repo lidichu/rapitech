@@ -66,7 +66,7 @@
 			echo  "	<td height=\"83%\" width=\"489\" valign=\"top\" bgcolor=\"#FFFFFF\" align=\"left\">\n";
 			echo  "	<input type=\"hidden\" id=\"OldFile_".$this->FieldNameHidden."\" name=\"OldFile_".$this->FieldNameHidden."\" value=\"".$Row[$this->FieldNameHidden]."\"/>\n";
 			echo  "	<input type=\"hidden\" id=\"OldFile_".$this->FieldName."\" name=\"OldFile_".$this->FieldName."\" value=\"".$Row[$this->FieldName]."\"/>\n";
-			if($Row[$this->FieldName]!="" && is_file($this->FilePathArray[0].$Row[$this->FieldNameHidden])){
+			if($Row[$this->FieldName]!=""){
 				$PICWidthString = "";
 				$PICHeightString = "";
 				if($this->ShowWidth != ""){$PICWidthString = " width=\"".$this->ShowWidth."\" ";}
@@ -129,7 +129,7 @@
 			echo  "	<td height=\"83%\" width=\"489\" valign=\"top\" bgcolor=\"#FFFFFF\" align=\"left\">\n";
 			echo  "	<input type=\"hidden\" id=\"OldFile_".$this->FieldNameHidden."\" name=\"OldFile_".$this->FieldNameHidden."\" value=\"".$Row[$this->FieldNameHidden]."\"/>\n";
 			echo  "	<input type=\"hidden\" id=\"OldFile_".$this->FieldName."\" name=\"OldFile_".$this->FieldName."\" value=\"".$Row[$this->FieldName]."\"/>\n";
-			if($Row[$this->FieldName]!="" && is_file($this->FilePathArray[0].$Row[$this->FieldNameHidden])){
+			if($Row[$this->FieldName]!=""){
 				$PICWidthString = "";
 				$PICHeightString = "";
 				if($this->ShowWidth != ""){$PICWidthString = " width=\"".$this->ShowWidth."\" ";}
@@ -207,7 +207,7 @@
 			echo "</script>\n";
 		}
 		function ShowScript(){}
-		function AddHandle(&$Param){
+		function AddHandle(){
 			global $AddFieldsSQL,$AddValuesSQL;
 			//判斷是否有上傳檔案
 			if($_FILES["Filedata"]["size"] > 0){
@@ -221,31 +221,19 @@
 				$FileName = "";
 				$FieldNameHiddenValue = "";
 			}
-			if($AddFieldsSQL!=""){
-				$AddFieldsSQL.=",";
-				$AddValuesSQL.=",";
-			}
-			$Param[":".$this->FieldName] = $FileName;
-			$Param[":".$this->FieldNameHidden] = $FieldNameHiddenValue;
-			$AddFieldsSQL.="`".$this->FieldName."`";
-			$AddFieldsSQL.=",`".$this->FieldNameHidden."`";
-			$AddValuesSQL.=":".$this->FieldName;
-			$AddValuesSQL.=",:".$this->FieldNameHidden;
+			if($AddFieldsSQL!=""){$AddFieldsSQL.=",`".$this->FieldName."`,`".$this->FieldNameHidden."`";}else{$AddFieldsSQL.="`".$this->FieldName."`,`".$this->FieldNameHidden."`";}
+			if($AddValuesSQL!=""){$AddValuesSQL.=",'".$FileName."','".$FieldNameHiddenValue."'";}else{$AddValuesSQL.="'".$FileName."','".$FieldNameHiddenValue."'";}
 			if($this->TitleField!=""){
-				if($AddFieldsSQL!=""){
-					$AddFieldsSQL.=",";
-					$AddValuesSQL.=",";
-				}
-				$AddFieldsSQL.="`".$this->TitleField."`";
-				$AddValuesSQL.=":".$this->TitleField;
 				if($_POST[$this->TitleField]!=""){
-					$Param[":".$this->TitleField] = $_POST[$this->TitleField];
+					if($AddFieldsSQL!=""){$AddFieldsSQL.=",`".$this->TitleField."`";}else{$AddFieldsSQL.="`".$this->TitleField."`";}
+					if($AddValuesSQL!=""){$AddValuesSQL.=",'".$_POST[$this->TitleField]."'";}else{$AddValuesSQL.="'".$_POST[$this->TitleField]."'";}
 				}else{
-					$Param[":".$this->TitleField] = $FileName;
+					if($AddFieldsSQL!=""){$AddFieldsSQL.=",`".$this->TitleField."`";}else{$AddFieldsSQL.="`".$this->TitleField."`";}
+					if($AddValuesSQL!=""){$AddValuesSQL.=",'".$FileName."'";}else{$AddValuesSQL.="'".$FileName."'";}
 				}
 			}
 		}
-		function ModifyHandle(&$Param){
+		function ModifyHandle(){
 			global $ModifySQL;
 			global $Row;
 			if($_POST["file".$this->Num."_modify"]=="new"){
@@ -271,19 +259,15 @@
 					$FileName = $Row[$this->FieldName];
 					$FieldNameHiddenValue = $Row[$this->FieldNameHidden];			
 				}
-				if($ModifySQL!=""){
-					$ModifySQL.=",";
-				}
-				$Param[":".$this->FieldName] = $FileName;
-				$Param[":".$this->FieldNameHidden] = $FieldNameHiddenValue;
-				$ModifySQL.="`".$this->FieldName."`= :".$this->FieldName;
-				$ModifySQL.=",`".$this->FieldNameHidden."`= :".$this->FieldNameHidden;
+				if($ModifySQL!=""){$ModifySQL.=",";}
+				$ModifySQL.="`".$this->FieldName."`='".$FileName."',`".$this->FieldNameHidden."`='".$FieldNameHiddenValue."'";
 				if($this->TitleField!=""){
-					$ModifySQL.="`".$this->TitleField."`= :".$this->TitleField;
 					if($_POST[$this->TitleField]!=""){
-						$Param[":".$this->TitleField] = $_POST[$this->TitleField];
+						if($ModifySQL!=""){$ModifySQL.=",";}
+						$ModifySQL.="`".$this->TitleField."`='".$_POST[$this->TitleField]."'";
 					}else{
-						$Param[":".$this->TitleField] = $FileName;
+						if($ModifySQL!=""){$ModifySQL.=",";}
+						$ModifySQL.=",`".$this->TitleField."`='".$FileName."'";
 					}
 				}
 			}elseif($_POST["file".$this->Num."_modify"]=="del"){
@@ -293,36 +277,23 @@
 				}				
 				$FileName = "";
 				$FieldNameHiddenValue = "";
-				if($ModifySQL!=""){
-					$ModifySQL.=",";
-				}
-				$Param[":".$this->FieldName] = $FileName;
-				$Param[":".$this->FieldNameHidden] = $FieldNameHiddenValue;
-				$ModifySQL.="`".$this->FieldName."`= :".$this->FieldName;
-				$ModifySQL.=",`".$this->FieldNameHidden."`= :".$this->FieldNameHidden;
+				if($ModifySQL!=""){$ModifySQL.=",";}
+				$ModifySQL.="`".$this->FieldName."`='".$FileName."',`".$this->FieldNameHidden."`='".$FieldNameHiddenValue."'";
 				if($this->TitleField!=""){
-					if($ModifySQL!=""){
-						$ModifySQL.=",";
-					}
-					$Param[":".$this->TitleField] = "";
-					$ModifySQL.="`".$this->TitleField."`= :".$this->TitleField;
+					if($ModifySQL!=""){$ModifySQL.=",";}
+					$ModifySQL.="`".$this->TitleField."`=''";
 				}
 			}elseif($_POST["file".$this->Num."_modify"]=="modify"){
 				if($this->TitleField!=""){
-					if($ModifySQL!=""){
-						$ModifySQL.=",";
-					}
-					$ModifySQL.="`".$this->TitleField."`= :".$this->TitleField;
 					if($_POST["Title_".$this->TitleField]!=""){
-						$Param[":".$this->TitleField] = $_POST["Title_".$this->TitleField];
+						if($ModifySQL!=""){$ModifySQL.=",";}
+						$ModifySQL.="`".$this->TitleField."`='".$_POST["Title_".$this->TitleField]."'";
 					}else{
-						$Param[":".$this->TitleField] = $Row[$this->FieldName];
+						if($ModifySQL!=""){$ModifySQL.=",";}
+						$ModifySQL.="`".$this->TitleField."`=".$this->FieldName;
 					}
 				}
 			}
-		}
-		function GetDataHandle(&$data){
-			// 不做任何事
 		}
 	}
 ?>

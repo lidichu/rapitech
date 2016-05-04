@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>後端管理系統</title>
 </head>
-<body bgcolor="#FFFFFF" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0"><img src="images/mngtop.gif" height="30" width="100%" border="0"/>
+<body bgcolor="#FFFFFF" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<img src="images/mngtop.gif" height="30" width="100%" border="0"/>
 </body>
 </html>
-
