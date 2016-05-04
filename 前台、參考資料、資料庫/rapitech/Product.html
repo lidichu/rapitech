@@ -362,39 +362,39 @@
                             <div class="row mb24 mb-xs-48">
                                 <div class="col-md-5 col-sm-6">
                                     <div class="image-slider slider-thumb-controls controls-inside">
-                                        <span class="label">Sale</span>
+                                       
                                         <ul class="slides">
                                             <li>
-                                                <!-- <img alt="Image" src="img/shop-product-4.jpg" /> -->
+                                                
                                                 <img src="https://placem.at/things?w=600&h=600&random=1" alt="" class="img-responsive">
                                             </li>
                                             <li>
-                                                <!-- <img alt="Image" src="img/shop-product-4_1.jpg" /> -->
-                                                <img src="https://placem.at/things?w=600&h=600&random=1" alt="" class="img-responsive">
+                                                
+                                                <img src="https://placem.at/things?w=600&h=600&random=2" alt="" class="img-responsive">
                                             </li>
                                             <li>
-                                                <!-- <img alt="Image" src="img/shop-product-4_2.jpg" /> -->
-                                                <img src="https://placem.at/things?w=600&h=600&random=1" alt="" class="img-responsive">
+                                                
+                                                <img src="https://placem.at/things?w=600&h=600&random=3" alt="" class="img-responsive">
                                             </li>
                                             <li>
-                                                <!-- <img alt="Image" src="img/shop-product-4_2.jpg" /> -->
-                                                <img src="https://placem.at/things?w=600&h=600&random=1" alt="" class="img-responsive">
+                                                
+                                                <img src="https://placem.at/things?w=600&h=600&random=4" alt="" class="img-responsive">
                                             </li>
                                             <li>
-                                                <!-- <img alt="Image" src="img/shop-product-4.jpg" /> -->
-                                                <img src="https://placem.at/things?w=600&h=600&random=1" alt="" class="img-responsive">
+                                                
+                                                <img src="https://placem.at/things?w=600&h=600&random=5" alt="" class="img-responsive">
                                             </li>
                                             <li>
-                                                <!-- <img alt="Image" src="img/shop-product-4_1.jpg" /> -->
-                                                <img src="https://placem.at/things?w=600&h=600&random=1" alt="" class="img-responsive">
+                                                
+                                                <img src="https://placem.at/things?w=600&h=600&random=6" alt="" class="img-responsive">
                                             </li>
                                             <li>
-                                                <!-- <img alt="Image" src="img/shop-product-4_2.jpg" /> -->
-                                                <img src="https://placem.at/things?w=600&h=600&random=1" alt="" class="img-responsive">
+                                                
+                                                <img src="https://placem.at/things?w=600&h=600&random=7" alt="" class="img-responsive">
                                             </li>
                                             <li>
-                                                <!-- <img alt="Image" src="img/shop-product-4_2.jpg" /> -->
-                                                <img src="https://placem.at/things?w=600&h=600&random=1" alt="" class="img-responsive">
+                                               
+                                                <img src="https://placem.at/things?w=600&h=600&random=8" alt="" class="img-responsive">
                                             </li>
                                         </ul>
                                     </div>
@@ -404,8 +404,7 @@
                                     <div class="description">
                                         <h4 class="uppercase">put the measuring product name</h4>
                                         <div class="mb32 mb-xs-24">
-                                            <!--  <span class="number price old-price">$149.95</span>
-                                             <span class="number price">$119.95</span> -->
+                                            
                                         </div>
                                         <p>
                                             put some description here natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis.
@@ -480,7 +479,7 @@
                                     LambsWool
                                 </h5>
                                    <br>
-                                                   <a class="btn btn-sm btn-rounded" href="Product.html">Add To List</a>
+                                    <a class="btn btn-sm btn-rounded" href="Product.html">Add To List</a>
                             </div>
                         </div>
                     </div>
@@ -685,5 +684,41 @@
         wow.init();
 
     </script>
+
+     <!-- add to cart -->
+  <script>
+
+$(function(){
+    $('#btn').click(function(){
+
+        var myImg = $('.list img').prop('src');
+        var myTitle = $('#btn').parent().children()[1].innerText;//$('.list .product-title').text();
+        var newProduct = "";
+        var select = $('.cart-overview').children();
+        for(i = 0;i<select.length;i++)
+        {
+            if(!select[i])
+                break;
+            var title = select[i].children[0].children[1].innerText;
+           if(title== myTitle) 
+                break;
+        }
+        if(title!= myTitle && title !="")
+        {
+            newProduct += "<li>";
+            newProduct += "<a href=\"#\">";
+            newProduct += "<img src=\"" + myImg + "\" class=\"img-responsive product-thumb  col-sm-6\">";
+            newProduct += "<div class=\"description\">";
+            newProduct += "<span class=\"product-title\">" + myTitle + "</span>";
+            newProduct += "</div>";
+            newProduct += "</a>";
+            newProduct += "</li>";
+            $('.a').append(newProduct);
+        }
+    });
+});
+
+</script>
+  <!--end add to cart add --
 </body>
 </html>
