@@ -253,7 +253,7 @@
                                     <div class="image-tile outer-title text-center">
 
                                         <a href="Product.html" class="list">
-                                              <img src="https://placem.at/things?w=600&amp;h=600&amp;random=1" alt="" class="img-responsive product-thumb ">
+                                              <img src="https://placem.at/things?w=600&amp;h=600&amp;random=2" alt="" class="img-responsive product-thumb ">
                                         </a>
                                         <div class="description">
                                              <span class="product-title">Adrian LambsWool Cap2</span>
@@ -263,17 +263,17 @@
                                     </div>
                                 </div>
                                 <!--end three col-->
-                                <div class="col-md-4 col-sm-4 masonry-item col-xs-6">
+                              <div class="col-md-4 col-sm-4 masonry-item col-xs-6">
                                     <div class="image-tile outer-title text-center">
-                                        <a href="product.html">
 
-                                            <img src="https://placem.at/things?w=600&h=600&random=1" alt="" class="img-responsive product-thumb">
+                                        <a href="Product.html" class="list">
+                                              <img src="https://placem.at/things?w=600&amp;h=600&amp;random=3" alt="" class="img-responsive product-thumb ">
                                         </a>
-                                        <div class="title">
-                                            <h5 class="mb0">Adrian LambsWool Cap3</h5>
-                                                 <br>
-                                            <a class="btn btn-sm btn-rounded" href="#">add to List</a>
-                                        </div>
+                                        <div class="description">
+                                             <span class="product-title">Adrian LambsWool Cap3</span>
+                                         </div>
+                                        <br/>
+                                         <a id="btn" class="btn btn-sm btn-rounded" href="#">add to List</a>
                                     </div>
                                 </div>
                                 <!--end three col-->
@@ -281,7 +281,7 @@
                                     <div class="image-tile outer-title text-center">
 
                                         <a href="Product.html" class="list">
-                                              <img src="https://placem.at/things?w=600&amp;h=600&amp;random=1" alt="" class="img-responsive product-thumb ">
+                                              <img src="https://placem.at/things?w=600&amp;h=600&amp;random=4" alt="" class="img-responsive product-thumb ">
                                         </a>
                                         <div class="description">
                                              <span class="product-title">Adrian LambsWool Cap4</span>
@@ -297,7 +297,7 @@
                                     <div class="image-tile outer-title text-center">
 
                                         <a href="Product.html" class="list">
-                                              <img src="https://placem.at/things?w=600&amp;h=600&amp;random=1" alt="" class="img-responsive product-thumb ">
+                                              <img src="https://placem.at/things?w=600&amp;h=600&amp;random=5" alt="" class="img-responsive product-thumb ">
                                         </a>
                                         <div class="description">
                                              <span class="product-title">Adrian LambsWool Cap5</span>
@@ -669,17 +669,17 @@
   <script>
 
 $(function(){
-    $('#btn').click(function(){
+    $('.btn-rounded').click(function(){
 
         var myImg = $('.list img').prop('src');
-        var myTitle = $('#btn').parent().children()[1].innerText;//$('.list .product-title').text();
+        var myTitle = $(this).parent().children()[1].innerText;//$('.list .product-title').text();
         var newProduct = "";
         var select = $('.cart-overview').children();
         for(i = 0;i<select.length;i++)
         {
             if(!select[i])
                 break;
-            var title = select[i].children[0].children[1].innerText;
+            var title = select[i].children[0].textContent;//select[i].children[0].children[1].innerText;
            if(title== myTitle) 
                 break;
         }
@@ -694,6 +694,7 @@ $(function(){
             newProduct += "</a>";
             newProduct += "</li>";
             $('.a').append(newProduct);
+            alert("已加入清單。");
         }
     });
 });
