@@ -149,7 +149,7 @@ function ShowOnePageMe($Rs,$Page,$NoShowFields,$Href,$HrefField,$align,$PicField
 								$FirstFieldFlag = false;
 							}
 							echo "</td>\n";
-						}						
+						}
 					}else{
 						//一般文字欄位
 						echo "<td align=\"".$align."\">";
@@ -164,6 +164,16 @@ function ShowOnePageMe($Rs,$Page,$NoShowFields,$Href,$HrefField,$align,$PicField
 							$FirstFieldFlag = false;
 						}
 						echo "</td>\n";
+						# by chonly
+						if($_SESSION['cid'] == 1)
+						{
+							echo "<td align=\"center\">\n
+<a href=\"{$MainFileName01}?cid={$Row['SerialNo']}\">
+<img src=\"../../images/add.gif\" alt=\"\">
+</a>
+</td>";
+						}
+						# end			
 					}
 				}else{
 					//非修改欄位
@@ -387,7 +397,7 @@ function ShowOnePageMe($Rs,$Page,$NoShowFields,$Href,$HrefField,$align,$PicField
 				}
 			}
 			//下層連結按鈕
-			if($DBTableName[0]!=""){
+			if($DBTableName[0]!="" && $_SESSION['cid'] != 1){
 				for($i=0;$i<count($DBTableName);$i++){
 					echo "<td align=\"center\">\n";
 					if( $DBTableName[$i] == "TravelList.php"){
@@ -395,7 +405,8 @@ function ShowOnePageMe($Rs,$Page,$NoShowFields,$Href,$HrefField,$align,$PicField
 						$Rs2 = mysql_query($SQL,$Conn);
 						$Row2 = mysql_fetch_array($Rs2);
 						echo "<a class=\"otherlink\" href=\"".$DBTableName[$i]."?".$GName."=".$Row["SerialNo"]."\">".$Row2[0]."</a>\n";
-					}else{
+					}
+                                        else{
 						echo "<a class=\"otherlink\" href=\"".$DBTableName[$i]."?".$GName."=".$Row["SerialNo"]."\"><img src=\"../../images/add.gif\" border=\"0\"/></a>\n";
 					}					
 					//echo "<a class=\"otherlink\" href=\"".$DBTableName[$i]."?".$GName."=".$Row["SerialNo"]."\"><img src=\"../../images/add.gif\" border=\"0\"/></a>\n";

@@ -57,8 +57,9 @@
 	$M->AddNum("Sort","排序",true,4,"","9999");
 	$M->AddSelect2("Status","狀態",true,$StatusItem,$StatusItem,"上架");
 	$M->AddText("PrdName","產品名稱",true);
-	$M->AddNum("PrdPrice","價格",true,5,"","");
+	//$M->AddNum("PrdPrice","價格",true,5,"","");
 	$M->AddNote2("PrdNote","說明",false,99999);
+        $M->AddNote2("Notes","商品規格",false,99999);
 	$M->AddPIC3("PIC","產品圖片",false,$PICRootArray,$PICWidthArray,$PICHeightArray,"圖片建議寬度為 800 x 603 像素","","","","PICHidden",$PICBoxArray,140,"",$UploadPic["List"]["Root"]);
 	//新增用SQL
 	$AddFieldsSQL = "";
