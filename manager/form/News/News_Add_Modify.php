@@ -39,7 +39,7 @@
 	$M->AddSelect2("Status","狀態",true,$StatusItem,$StatusItem,"上架");
 	$M->AddDate("PostDate","日期",true,date("Y-m-d"));	
 	$M->AddText("Title","標題(繁體)",true);
-	$M->AddNote1("Note","內容(繁體)",false);
+	$M->AddNote1n("Note","內容(繁體)",false);
 	$M->AddPIC3("PIC","圖片",false,$PICRootArray,$PICWidthArray,$PICHeightArray,"圖片建議寬高為 689 x 517 像素","","","","PICHidden",$PICBoxArray,120,"",$UploadPic["Small"]["Root"]);
 	
 	//新增用SQL
