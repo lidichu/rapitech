@@ -128,7 +128,16 @@
 			else
 				$Query =  " where ";
 			$Query .= $SpecialString	;
-		}	
+		}
+		if(isset($_GET['cid']) && is_numeric($_GET['cid']))
+			$cid = $_GET['cid'];
+		else
+			$cid = 1;
+		$_SESSION['cid'] = $cid;
+		if(!empty($Query))
+			$Query .= " AND parentSerialNo='{$cid}'";
+		else
+			$Query = " WHERE parentSerialNo='{$cid}'";
 		//PageCount處理
 		$PageCount = 0;
 		$SQL = "Select Count(SerialNo) As Num From ".$DBTable_S.$Query;
@@ -232,15 +241,16 @@
                         <table cellspacing="1" cellpadding="2" width="100%" border="0">
 	                        <tr style="font-size:13;color:#E0EFF8" bgcolor="#005783" align="center">
 		                        <td nowrap width="40" style="font-size:12px;"><font color="#FFFFFF"><input type="button" value="全選" cvalue="true" onclick="CheckAll(this);" name="B1"></font></td>
-		                        <td nowrap style="font-size:12px;"><a class="Title sortlink" href="<?php echo GetSCRIPTNAME(); ?>?SF<?php echo $Level; ?>=Category"><font color="#FFFFFF" style="font-size:13px;">分類名稱</font></a></td>
+		                        <td nowrap style="font-size:12px;"><a class="Title sortlink" href="<?php echo GetSCRIPTNAME(); ?>?SF<?php echo $Level; ?>=Category"><font color="#FFFFFF" style="font-size:13px;">分類名稱</font></a></td>								
 								<td nowrap width="80"><input type="button" name="SortUpdate" value="更新排序" onClick="cmdSortUpdate_onclick('<?php echo GetSCRIPTNAME(); ?>');"></td>
 								<td nowrap width="80"><input type="button" name="StatusUpdate" value="更新狀態" onClick="cmdStatusUpdate_onclick('<?php echo GetSCRIPTNAME(); ?>');"></td>
 		                        <td nowrap width="80" style="font-size:13px;"><font color="#FFFFFF">產品</font></td>
+                                        <?PHP if($_SESSION['cid'] == 1) { ?><td nowrap width="80" style="font-size:13px;"><font color="#FFFFFF">次分類</font></td><?PHP } ?>
 	                       	</tr>	
                         <?php
                                 $SQL = "select ".$SQLFields." from ".$DBTable_S.$Query." order by ".$SQLOrderBy." limit ".($Page-1) * $RowCount.",".$RowCount;
 								$Rs = mysql_query($SQL,$Conn);
-                                ShowOnePageMe($Rs,$page,$NoShowFields,$File_Add_Modify,$UpdateField,$UpdateFieldAlign,$PicField,$PicWidth,$PicRoot,$DBTableName,"G".$Level);
+                                ShowOnePageMe($Rs,$page,$NoShowFields,$File_Add_Modify,$UpdateField,$UpdateFieldAlign,$PicField,$PicWidth,$PicRoot,$DBTableName,"G".$Level,true);
                         ?>
                         </table>
                     </td>
