@@ -16,6 +16,7 @@
 	//接收參數
 	$Option = $_REQUEST["option"];
 	$YesNo = $_REQUEST["YesNo"];
+
 	for($i=0;$i<=$Level;$i++){
 		$G[$i] = $_REQUEST["G".$i];
 		$SF[$i] = $_REQUEST["SF".$i];
@@ -30,7 +31,6 @@
 	$M->AddNum("Sort","排序",true,4,"","9999");	
 	$M->AddSelect2("Status","狀態",true,$StatusItem,$StatusItem,"上架");
 	$M->AddText("Category","分類名稱",true);
-	
 	//新增用SQL
 	$AddFieldsSQL = "";
 	$AddValuesSQL = "";
@@ -59,6 +59,8 @@ function Add(){
 		$M->AddHandle();
 		$SQL = "Insert Into ".$DBTable."(".$AddFieldsSQL.") values(".$AddValuesSQL.")";
 		mysql_query($SQL,$Conn);
+		$id = mysql_insert_id();
+		mysql_query("UPDATE {$DBTable} SET parentSerialNo='{$_SESSION['cid']}' WHERE `serialNo`='{$id}'");
 		ReturnToPage($MainFileName,"新增完成","");		
 	}
 ?>
@@ -118,7 +120,8 @@ function cmdCancel_onclick(){
 				echo "<input type=\"hidden\" name=\"SK".$i."\" id=\"SK".$i."\" value=\"".$SK[$i]."\"/>\n";
 				echo "<input type=\"hidden\" name=\"TS".$i."\" id=\"TS".$i."\" value=\"".$TS[$i]."\"/>\n";
 				echo "<input type=\"hidden\" name=\"P".$i."\" id=\"P".$i."\" value=\"".$P[$i]."\"/>\n";
-			}	
+			}
+			echo "<input type='hidden' name='parentSerialNo' value='" . $_SESSION['cid'] . "' />\n";	
 			?>
 			<table width="600" border="1" cellspacing="0" bordercolorlight="#666666" bordercolordark="#FFFFFF">
 				<tr> 
@@ -144,6 +147,7 @@ function cmdCancel_onclick(){
 function Modify(){
 	global	$Level,$TableTitle,$MainFileName,$DBTable,$M,$G,$SF,$SK,$TS,$P,$YesNo,$ModifySQL,$Conn,$Row;
 	$SQL="Select * From ".$DBTable." Where SerialNo=".$G[$Level];
+
 	$Rs = mysql_query($SQL,$Conn);
 	if($Rs && (mysql_num_rows($Rs)>0)){
 		$Row = mysql_fetch_array($Rs);

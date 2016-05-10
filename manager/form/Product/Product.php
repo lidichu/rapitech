@@ -19,7 +19,7 @@
 			$P[$i] = $_REQUEST["P".$i];
 		}
 		//層級
-		$Level = 1;
+		$Level = 2;
 		$TableTitle = $Title02;
 		$Title=$Title01;
 		//要查詢的欄位

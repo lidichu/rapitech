@@ -1,215 +1,608 @@
-<?php ob_start(); ?>
-<?php include_once('../PageHead.php');?>
-<?php
-	$Contact_View=true;
-?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/main.dwt" codeOutsideHTMLIsLocked="false" -->
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name= "keywords" content="<?php echo $Web["Keywords"];?>" />
-<meta name= "description" content="<?php echo $Web["Description"];?>" />
-<!-- InstanceBeginEditable name="doctitle" -->
-<title><?php echo($Web["WebTitle".$Lang]);?></title>
-<!-- InstanceEndEditable -->
-<script type="text/javascript">
-function MM_swapImgRestore() { //v3.0
-var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
-}
-function MM_preloadImages() { //v3.0
-var d=document; if(d.images){ if(!d.MM_p) d.MM_p=new Array();
-var i,j=d.MM_p.length,a=MM_preloadImages.arguments; for(i=0; i<a.length; i++)
-if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
-}
-function MM_findObj(n, d) { //v4.01
-var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
-d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
-if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
-for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document);
-if(!x && d.getElementById) x=d.getElementById(n); return x;
-}
-function MM_swapImage() { //v3.0
-var i,j=0,x,a=MM_swapImage.arguments; document.MM_sr=new Array; for(i=0;i<(a.length-2);i+=3)
-if ((x=MM_findObj(a[i]))!=null){document.MM_sr[j++]=x; if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];}
-}
-</script>
-<?php include_once(VisualRoot.'Common/Script.php'); ?>
-<script type="text/javascript"><?php include_once $VisualRoot."star/statjs.php"; ?></script>
-<link href="../css/style.css" rel="stylesheet" type="text/css" />
-<?php include_once(VisualRoot.'Common/Forum/Banner/BannerScript.php'); ?>
-<link href="../Scripts/Carousel/Carousel.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="../Scripts/Carousel/Carousel.js"></script>
-<link href="../css/style.css" rel="stylesheet" type="text/css" />
-<!-- InstanceBeginEditable name="head" -->
-<script type="text/javascript" src="../Scripts/myError.js"></script>
-<script type="text/javascript" src="../Scripts/twzipcode2.js"></script>
-<script type="text/javascript">
-$(function(){
-	$("body").TwZipCode({CountryFieldName : 'AddressCity',AreaFieldName:'AddressArea',ZipCodeFieldName:'AddressZipCode',CountryDefaultValue : '縣/市',AreaDefaultValue: '鄉/鎮/市/區'});
-	$("#btnSubmit").click(function(){
-		$("#form1").submit();
-		return false;
-	});
-	$("#btnReset").click(function(){
-		$("#form1").get(0).reset();
-		return false;
-	});	
-	$("#form1").submit(function(){
-		var sError = new MyErrorCh();
-		var AddressValue = new Array();
-		AddressValue.push($("#AddressCity").val());
-		AddressValue.push($("#AddressArea").val());
-		AddressValue.push($("#AddressZipCode").val());
-		AddressValue.push($("#AddressOther").val());
-		sError.checkNull("姓名",$("#Name").val());
-		sError.checkNull("連絡電話",$("#Tel").val());
+﻿<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title> Rapitech index</title>
+        <meta name="viewport" content="width=device-width, initial-scale=0.9">
+        <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+        <link href="css/themify-icons.css" rel="stylesheet" type="text/css" media="all" />
+        <link href="css/flexslider.css" rel="stylesheet" type="text/css" media="all" />
+        <link href="css/lightbox.min.css" rel="stylesheet" type="text/css" media="all" />
+        <link href="css/ytplayer.css" rel="stylesheet" type="text/css" media="all" />
+        <link href="css/theme.css" rel="stylesheet" type="text/css" media="all" />
+        <link href="css/custom.css" rel="stylesheet" type="text/css" media="all" />
+        <link href='http://fonts.googleapis.com/css?family=Lato:300,400%7CRaleway:100,400,300,500,600,700%7COpen+Sans:400,500,600' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+        <link rel="stylesheet" href="css/animate.css">
 
-		sError.checkNull("主旨",$("#Subject").val());
-		sError.checkNull("內容",$("#Note").val());
-		sError.checkNull("驗證碼",$("#VCode").val());
-		return sError.pass();
-	});
-	$("#imgVCode").click(function(){
-		$(this).find("img").prop("src","../Scripts/SafeCode.php?r=" + Math.random());
-		return false;
-	});
-});
-</script> 
-<!-- InstanceEndEditable -->
-</head>
-<body onload="MM_preloadImages('../images/but_a_o.jpg','../images/but_b_o.jpg','../images/but_c_o.jpg','../images/but_d_o.jpg','../images/but_e_o.jpg','../images/but_f_o.jpg','images/06_contact/but_refill_o.jpg','images/06_contact/but_sent_o.jpg')">
-<table width="1003" border="0" align="center" cellpadding="0" cellspacing="0">
-	<?php include_once("../Common/top.php");?>
-	<tr>
-		<td valign="top">
-			<!-- InstanceBeginEditable name="EditRegion1" -->
-			<table width="100%" border="0" cellspacing="0" cellpadding="0">
-				<tr>
-					<?php include_once("../Common/left.php");?>
-					<td width="85%" valign="top" style="padding-right:20px">
-						<table width="100%" border="0" cellspacing="0" cellpadding="0">
-							<tr>
-								<td height="56" valign="bottom">&nbsp;</td>
-								<td align="right" valign="bottom">
-									<table border="0" cellspacing="0" cellpadding="0">
-										<tr>
-											<td><img src="images/00/img_01.jpg" width="22" height="22" /></td>
-											<td class="page"><a href="index.php">首頁</a> &gt; 聯絡我們</td>
-										</tr>
-									</table>
-								</td>
-							</tr>
-							<tr>
-								<td width="10" valign="bottom"><img src="images/00/line_top.jpg" width="4" height="4" /></td>
-								<td width="734">&nbsp;</td>
-							</tr>
-							<tr>
-								<td height="401" style="background-image:url(images/00/line_bg.jpg); width:4px; background-repeat:repeat-y;">&nbsp;</td>
-								<td align="left" valign="top" style="padding-left:30px; background-image:url(images/06_contact/img_03.jpg); width:684px; height:404px; background-repeat:no-repeat; background-position:right bottom">
-									<form id="form1" action="contact_handle.php" target="MyIframe" method="post" name="form1" style="padding:0px;margin:0px;">     
-									<table width="100%" border="0" cellspacing="0" cellpadding="0">
-										<tr>
-											<td height="63" align="right">&nbsp;</td>
-											<td height="63" style="padding-left:8px">&nbsp;</td>
-										</tr>
-										<tr>
-											<td width="22%" height="34" align="right"><img src="images/06_contact/img_02.jpg" width="13" height="14" /><span class="text02">姓　名／</span></td>
-											<td width="78%" height="34" style="padding-left:8px"><input name="Name" type="text" class="key" id="Name"  style="width:380px" /></td>
-										</tr>
-										<tr>
-											<td height="34" align="right" class="text02">性　別／</td>
-											<td height="34" style="padding-left:8px">
-												<table width="20%" border="0" cellspacing="0" cellpadding="0">
-													<tr>
-														<td width="16%"><input type="radio" name="Sex" value="Male" /></td>
-														<td width="33%" align="left">男</td>
-														<td width="17%"><input type="radio" name="Sex" value="Female" /></td>
-														<td width="34%" align="left">女</td>
-													</tr>
-												</table>
-											</td>
-										</tr>
 
-										<tr>
-											<td height="34" align="right" ><img src="images/06_contact/img_02.jpg" width="13" height="14" /><span class="text02">連絡電話／</span></td>
-											<td height="34" style="padding-left:8px">
-												<input name="Tel" type="text" class="key" id="Tel"  style="width:180px" />													
-											</td>
-										</tr>
-										<tr>
-											<td height="34" align="right"><span class="text02">信　箱／</span></td>
-											<td height="34" style="padding-left:8px"><input name="EMail" type="text" class="key" id="EMail"  style="width:380px" /></td>
-										</tr>
-										<tr>
-											<td height="34" align="right" valign="top"><span class="text02">地　址／</span></td>
-											<td height="34" valign="top" style="padding-left:8px">
-												<table width="100%" border="0" cellspacing="0" cellpadding="0">
-													<tr>
-														<td height="26">  
-															<select name="AddressCity" id="AddressCity" class="key">
-																<option>縣/市</option>
-															</select>-
-															<select name="AddressArea" id="AddressArea" class="key">
-																<option>鄉/鎮/市/區</option>
-															</select>-<input name="AddressZipCode" type="text" class="key" id="AddressZipCode"  style="width:40px" readonly="readonly" />
-														</td>
-													</tr>
-													<tr>
-														<td height="26"><input name="AddressOther" type="text" class="key" id="AddressOther"  style="width:380px" /></td>
-													</tr>
-												</table>
-											</td>
-										</tr>
-										<tr>
-											<td height="34" align="right"><img src="images/06_contact/img_02.jpg" width="13" height="14" /><span class="text02">主　旨／</span></td>
-											<td height="34" style="padding-left:8px"><input name="Subject" type="text" class="key" id="Subject"  style="width:380px" /></td>
-										</tr>
-										<tr>
-											<td height="34" align="right" valign="top" style="padding-top:4px"><img src="images/06_contact/img_02.jpg" width="13" height="14" /><span class="text02">內　容／</span></td>
-											<td height="34" style="padding-left:8px;padding-top:4px"><textarea name="Note" class="key" id="Note" style="width:380px;height:120px;"></textarea></td>
-										</tr>
-										 <tr>
-											<td height="34" align="right"><img src="images/06_contact/img_02.jpg" width="13" height="14" /><span class="text02">驗證碼／</span></td>
-											<td height="34" align="left">
-												<table cellpadding="0" cellspacing="0" border="0">
-													<tr>
-														<td width="60"><a id="imgVCode" href="#" class="number" onfocus="blur()"><img src="../Scripts/SafeCode.php" border="0" /></a></td>
-														<td><input  name="VCode" class="key" type="text" id="VCode" size="30" style="width:120px" maxlength="4" /></td>
-													</tr>
-												</table>     
-											</td>
-										</tr>
-										<tr>
-											<td height="45" colspan="2" align="center" valign="bottom" style="padding-top:4px">
-												<table width="30%" border="0" cellspacing="0" cellpadding="0">
-													<tr>
-														<td><a href="#" id="btnReset" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image25','','images/06_contact/but_refill_o.jpg',1)"><img src="images/06_contact/but_refill.jpg" name="Image25" width="93" height="25" border="0" id="Image25" /></a></td>
-														<td><a href="#" id="btnSubmit" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image26','','images/06_contact/but_sent_o.jpg',1)"><img src="images/06_contact/but_sent.jpg" name="Image26" width="93" height="25" border="0" id="Image26" /></a></td>
-													</tr>
-												</table>
-											</td>
-										</tr>
-									</table>
-									</form>
-								</td>
-							</tr>
-							<tr>
-								<td valign="top"><img src="images/00/line_bottom.jpg" width="4" height="4" /></td>
-								<td>&nbsp;</td>
-							</tr>
-						</table>
-						<iframe id="MyIframe" name="MyIframe" style="width:0px; height:0px; background-color:blue;border-width:0px;"frameborder="0"></iframe>
-					</td>
-				</tr>
-				<tr>
-					<td colspan="2">&nbsp;</td>
-				</tr>
-			</table>
-			<!-- InstanceEndEditable -->
-		</td>
-	</tr>
-	<?php include_once("../Common/footer.php");?>
-</table>
-</body>
-<!-- InstanceEnd --></html>
-<?php ob_flush(); ?>
+
+    </head>
+    <body>
+        <div class="nav-container wow bounceIn" data-wow-delay="1.5s">
+        <div class="nav-utility wordColor "  >
+               
+                    <div class="module right">
+                         <a href="contact.html">
+                            <i class="ti-location-arrow">&nbsp;</i>
+                            <span class="sub"> 12F-5,No.2,Fuxing 4th Rd.,Qianzhen Dist Kaohsiung City</span>
+                        </a>
+                    </div>
+
+                    <div class="module right">
+                        <a href="contact.html">
+                            <i class="ti-email">&nbsp;</i>
+                            <span class="sub">hello@email.com</span>
+                        </a>
+                    </div>
+                    <div class="module left">
+                      
+                    </div>
+                </div>
+            <nav>
+                <div class="nav-bar">
+                    <div class="module left">
+                        <a href="index.html">
+                            <img class="logo logo-light" alt="heryi" src="img/logo-light.png" />
+                            <img class="logo logo-dark" alt="heryi" src="img/logo-dark.png" />
+                        </a>
+                    </div>
+                    <div class="module widget-handle mobile-toggle right visible-sm visible-xs">
+                        <i class="ti-menu"></i>
+                    </div>
+                    <div class="module-group right">
+                        <div class="module left">
+                            <ul class="menu">
+                                <li>
+                                  
+                                     <a href="About.html"><span class="label label-success">About Us</span></a>
+                                    
+                                </li>
+                                <!--  -->
+                                <li class="has-dropdown">
+                                    <a href="#">
+                                                <span class="label label-success">Products</span>
+                                    </a>
+                                         <ul class="mega-menu">
+                                        <li>
+                                            <ul>
+                                                <li>
+                                                     <a href="productCategories.html">
+                                                        Measuring
+                                                     </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        Garden Accessories
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        Outdoor & Indoor Clocks
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        Soil Test Kits
+                                                    </a>
+                                                   
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        Thermometers
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        Gardening Ties
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        Plant Labels
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        Plant Supports
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        </ul> 
+                                <!--  -->
+                                <li>
+                                    <a href="news.html">
+                                                <span class="label label-success">News </span>
+                                    </a>
+                                </li>          
+                                <li>
+                                    <a href="contact.html">
+                                                 <span class="label label-success">Contact Us </span>
+                                    </a>
+                                </li> 
+
+
+                            </ul>
+                        </div>
+                        <!--end of menu module-->
+                        <div class="module widget-handle search-widget-handle left">
+                            <div class="search wordColor">
+                                <i class="ti-search"></i>
+                                <span class="title">Search the product</span>
+                            </div>
+                            <div class="function ">
+                                <form class="search-form ">
+                                    <input type="text" placeholder="Search the product" />
+                                </form>
+                            </div>
+                        </div>
+                        <div class="module widget-handle cart-widget-handle left">
+                            <div class="cart wordColor">
+                                <i class="ti-bag"></i>
+                                <span class="label number">2</span>
+                                <span class="title">Shopping Cart</span>
+                            </div>
+                            <div class="function">
+                                <div class="widget">
+                                    <h6 class="title">Shopping Cart</h6>
+                                    <hr>
+                                    <ul class="cart-overview">
+                                        <li>
+                                            <a href="#">
+                                                <img alt="Product" src="img/shop-widget-1.png" />
+                                                <div class="description">
+                                                    <span class="product-title">Canvas Backpack</span>
+                                                    <!-- <span class="price number">$39.90</span> -->
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <img alt="Product" src="img/shop-widget-2.png" />
+                                                <div class="description">
+                                                    <span class="product-title">Vintage Camera</span>
+                                                   <!--  <span class="price number">$249.50</span> -->
+                                                </div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <hr>
+                                    <div class="cart-controls">
+                                        <a class="btn btn-sm btn-filled" href="cart.html">Inquiry List</a>
+                                        <div class="list-inline pull-right">
+                                           <!--  <span class="cart-total">Total: </span>
+                                            <span class="number">$289.40</span> -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--end of widget-->
+                            </div>
+                        </div>
+                       
+                    </div>
+                    <!--end of module group-->
+                </div>
+            </nav>
+        </div>
+<!--end nav  -->
+        <div class="main-container">
+            <br>
+                <h1 class="text-center wordColor wow bounceIn" data-wow-delay="3s">Contact us</h1>
+                <hr>
+            <section class="p0">
+                <div class="map-holder pt160 pb160 wow fadeIn">
+                  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3683.3136650838424!2d120.29796401538883!3d22.60475923748517!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346e037776556f41%3A0xc45467858397992e!2sNo.+12%2C+Fuxing+4th+Rd%2C+Qianzhen+District%2C+Kaohsiung+City%2C+806!5e0!3m2!1sen!2stw!4v1461552570851" frameborder="0" style="border:0" allowfullscreen></iframe>
+
+                </div>
+            </section>
+            <section>
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-sm-6 col-md-5">
+                            <h4 class="uppercase">Get In Touch</h4>
+                            <p>
+                                At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident,
+                            </p>
+                            <hr>
+                            <p> 12F-5 No.2, Fuxing 4th Rd Qianzhen Dist
+                                <br /> Kaohsiung City 806
+                                <br /> Taiwan (R.O.C.)
+                            </p>
+                            <hr>
+                            <p>
+                                <strong>E:</strong> hello@email.com
+                                <br />
+                                <strong>P:</strong> (886) 7 535 7099
+                                <br />
+                            </p>
+                        </div>
+                        <div class="col-sm-6 col-md-5 col-md-offset-1">
+                            <form class="form-email" data-success="Thanks for your submission, we will be in touch shortly." data-error="Please fill all fields correctly.">
+                                <input type="text" class="validate-required" name="name" placeholder="Your Name" />
+                                <input type="text" class="validate-required validate-email" name="email" placeholder="Email Address" />
+                                <!-- contry -->
+                                                            <div class="form-group  ">
+                            
+                              <select class="my-form-control my-from-group cbg" id="sel1">
+                                <!-- <option value="AF" >select country*</option> -->
+                                    <option value="AL">Albania </option>
+                                    <option value="DZ">Algeria</option>
+                                    <option value="AS">American Samoa</option>
+                                    <option value="AD">Andorra</option>
+                                    <option value="AO">Angola</option>
+                                    <option value="AI">Anguilla</option>
+                                    <option value="AQ">Antarctica</option>
+                                    <option value="AG">Antigua and Barbuda</option>
+                                    <option value="AR">Argentina</option>
+                                    <option value="AM">Armenia</option>
+                                    <option value="AW">Aruba</option>
+                                    <option value="AU">Australia</option>
+                                    <option value="AT">Austria</option>
+                                    <option value="AZ">Azerbaijan</option>
+                                    <option value="BS">Bahamas</option>
+                                    <option value="BH">Bahrain</option>
+                                    <option value="BD">Bangladesh</option>
+                                    <option value="BB">Barbados</option>
+                                    <option value="BY">Belarus</option>
+                                    <option value="BE">Belgium</option>
+                                    <option value="BZ">Belize</option>
+                                    <option value="BJ">Benin</option>
+                                    <option value="BM">Bermuda</option>
+                                    <option value="BT">Bhutan</option>
+                                    <option value="BO">Bolivia</option>
+                                    <option value="BA">Bosnia and Herzegovina</option>
+                                    <option value="BW">Botswana</option>
+                                    <option value="BV">Bouvet Island</option>
+                                    <option value="BR">Brazil</option>
+                                    <option value="IO">British Indian Ocean Territory</option>
+                                    <option value="VG">British Virgin Islands</option>
+                                    <option value="BN">Brunei</option>
+                                    <option value="BG">Bulgaria</option>
+                                    <option value="BF">Burkina Faso</option>
+                                    <option value="BI">Burundi</option>
+                                    <option value="KH">Cambodia</option>
+                                    <option value="CM">Cameroon</option>
+                                    <option value="CA">Canada</option>
+                                    <option value="CV">Cape Verde</option>
+                                    <option value="KY">Cayman Islands</option>
+                                    <option value="CF">Central African Republic</option>
+                                    <option value="TD">Chad</option>
+                                    <option value="CL">Chile</option>
+                                    <option value="CN">China</option>
+                                    <option value="CX">Christmas Island</option>
+                                    <option value="CC">Cocos (Keeling) Islands</option>
+                                    <option value="CO">Colombia</option>
+                                    <option value="KM">Comoros</option>
+                                    <option value="CG">Congo</option>
+                                    <option value="CD">Congo - Democratic Republic of</option>
+                                    <option value="CK">Cook Islands</option>
+                                    <option value="CR">Costa Rica</option>
+                                    <option value="CI">Cote d'Ivoire</option>
+                                    <option value="HR">Croatia</option>
+                                    <option value="CU">Cuba</option>
+                                    <option value="CY">Cyprus</option>
+                                    <option value="CZ">Czech Republic</option>
+                                    <option value="DK">Denmark</option>
+                                    <option value="DJ">Djibouti</option>
+                                    <option value="DM">Dominica</option>
+                                    <option value="DO">Dominican Republic</option>
+                                    <option value="TP">East Timor</option>
+                                    <option value="EC">Ecuador</option>
+                                    <option value="EG">Egypt</option>
+                                    <option value="SV">El Salvador</option>
+                                    <option value="GQ">Equitorial Guinea</option>
+                                    <option value="ER">Eritrea</option>
+                                    <option value="EE">Estonia</option>
+                                    <option value="ET">Ethiopia</option>
+                                    <option value="FK">Falkland Islands (Islas Malvinas)</option>
+                                    <option value="FO">Faroe Islands</option>
+                                    <option value="FJ">Fiji</option>
+                                    <option value="FI">Finland</option>
+                                    <option value="FR">France</option>
+                                    <option value="GF">French Guyana</option>
+                                    <option value="PF">French Polynesia</option>
+                                    <option value="TF">French Southern and Antarctic Lands</option>
+                                    <option value="GA">Gabon</option>
+                                    <option value="GM">Gambia</option>
+                                    <option value="GZ">Gaza Strip</option>
+                                    <option value="GE">Georgia</option>
+                                    <option value="DE">Germany</option>
+                                    <option value="GH">Ghana</option>
+                                    <option value="GI">Gibraltar</option>
+                                    <option value="GR">Greece</option>
+                                    <option value="GL">Greenland</option>
+                                    <option value="GD">Grenada</option>
+                                    <option value="GP">Guadeloupe</option>
+                                    <option value="GU">Guam</option>
+                                    <option value="GT">Guatemala</option>
+                                    <option value="GG">Guernsey</option>
+                                    <option value="GN">Guinea</option>
+                                    <option value="GW">Guinea-Bissau</option>
+                                    <option value="GY">Guyana</option>
+                                    <option value="HT">Haiti</option>
+                                    <option value="HM">Heard Island and McDonald Islands</option>
+                                    <option value="VA">Holy See (Vatican City)</option>
+                                    <option value="HN">Honduras</option>
+                                    <option value="HK">Hong Kong</option>
+                                    <option value="HU">Hungary</option>
+                                    <option value="IS">Iceland</option>
+                                    <option value="IN">India</option>
+                                    <option value="ID">Indonesia</option>
+                                    <option value="IR">Iran</option>
+                                    <option value="IQ">Iraq</option>
+                                    <option value="IE">Ireland</option>
+                                    <option value="IM">Isle of Man</option>
+                                    <option value="IL">Israel</option>
+                                    <option value="IT">Italy</option>
+                                    <option value="JM">Jamaica</option>
+                                    <option value="JP">Japan</option>
+                                    <option value="JE">Jersey</option>
+                                    <option value="JO">Jordan</option>
+                                    <option value="KZ">Kazakhstan</option>
+                                    <option value="KE">Kenya</option>
+                                    <option value="KI">Kiribati</option>
+                                    <option value="KW">Kuwait</option>
+                                    <option value="KG">Kyrgyzstan</option>
+                                    <option value="LA">Laos</option>
+                                    <option value="LV">Latvia</option>
+                                    <option value="LB">Lebanon</option>
+                                    <option value="LS">Lesotho</option>
+                                    <option value="LR">Liberia</option>
+                                    <option value="LY">Libya</option>
+                                    <option value="LI">Liechtenstein</option>
+                                    <option value="LT">Lithuania</option>
+                                    <option value="LU">Luxembourg</option>
+                                    <option value="MO">Macau</option>
+                                    <option value="MK">Macedonia - The Former Yugoslav Republic of</option>
+                                    <option value="MG">Madagascar</option>
+                                    <option value="MW">Malawi</option>
+                                    <option value="MY">Malaysia</option>
+                                    <option value="MV">Maldives</option>
+                                    <option value="ML">Mali</option>
+                                    <option value="MT">Malta</option>
+                                    <option value="MH">Marshall Islands</option>
+                                    <option value="MQ">Martinique</option>
+                                    <option value="MR">Mauritania</option>
+                                    <option value="MU">Mauritius</option>
+                                    <option value="YT">Mayotte</option>
+                                    <option value="MX">Mexico</option>
+                                    <option value="FM">Micronesia - Federated States of</option>
+                                    <option value="MD">Moldova</option>
+                                    <option value="MC">Monaco</option>
+                                    <option value="MN">Mongolia</option>
+                                    <option value="MS">Montserrat</option>
+                                    <option value="MA">Morocco</option>
+                                    <option value="MZ">Mozambique</option>
+                                    <option value="MM">Myanmar</option>
+                                    <option value="NA">Namibia</option>
+                                    <option value="NR">Nauru</option>
+                                    <option value="NP">Nepal</option>
+                                    <option value="NL">Netherlands</option>
+                                    <option value="AN">Netherlands Antilles</option>
+                                    <option value="NC">New Caledonia</option>
+                                    <option value="NZ">New Zealand</option>
+                                    <option value="NI">Nicaragua</option>
+                                    <option value="NE">Niger</option>
+                                    <option value="NG">Nigeria</option>
+                                    <option value="NU">Niue</option>
+                                    <option value="NF">Norfolk Island</option>
+                                    <option value="MP">Northern Mariana Islands</option>
+                                    <option value="KP">North Korea</option>
+                                    <option value="NO">Norway</option>
+                                    <option value="OM">Oman</option>
+                                    <option value="PK">Pakistan</option>
+                                    <option value="PW">Palau</option>
+                                    <option value="PA">Panama</option>
+                                    <option value="PG">Papua New Guinea</option>
+                                    <option value="PY">Paraguay</option>
+                                    <option value="PE">Peru</option>
+                                    <option value="PH">Philippines</option>
+                                    <option value="PN">Pitcairn Islands</option>
+                                    <option value="PL">Poland</option>
+                                    <option value="PT">Portugal</option>
+                                    <option value="PR">Puerto Rico</option>
+                                    <option value="QA">Qatar</option>
+                                    <option value="RE">Reunion</option>
+                                    <option value="RO">Romania</option>
+                                    <option value="RU">Russia</option>
+                                    <option value="RW">Rwanda</option>
+                                    <option value="KN">Saint Kitts and Nevis</option>
+                                    <option value="LC">Saint Lucia</option>
+                                    <option value="VC">Saint Vincent and the Grenadines</option>
+                                    <option value="WS">Samoa</option>
+                                    <option value="SM">San Marino</option>
+                                    <option value="ST">Sao Tome and Principe</option>
+                                    <option value="SA">Saudi Arabia</option>
+                                    <option value="SN">Senegal</option>
+                                    <option value="CS">Serbia and Montenegro</option>
+                                    <option value="SC">Seychelles</option>
+                                    <option value="SL">Sierra Leone</option>
+                                    <option value="SG">Singapore</option>
+                                    <option value="SK">Slovakia</option>
+                                    <option value="SI">Slovenia</option>
+                                    <option value="SB">Solomon Islands</option>
+                                    <option value="SO">Somalia</option>
+                                    <option value="ZA">South Africa</option>
+                                    <option value="GS">South Georgia and the South Sandwich Islands</option>
+                                    <option value="KR">South Korea</option>
+                                    <option value="ES">Spain</option>
+                                    <option value="LK">Sri Lanka</option>
+                                    <option value="SH">St. Helena</option>
+                                    <option value="PM">St. Pierre and Miquelon</option>
+                                    <option value="SD">Sudan</option>
+                                    <option value="SR">Suriname</option>
+                                    <option value="SJ">Svalbard</option>
+                                    <option value="SZ">Swaziland</option>
+                                    <option value="SE">Sweden</option>
+                                    <option value="CH">Switzerland</option>
+                                    <option value="SY">Syria</option>
+                                    <option value="TW" selected="" >Taiwan</option>
+                                    <option value="TJ">Tajikistan</option>
+                                    <option value="TZ">Tanzania</option>
+                                    <option value="TH">Thailand</option>
+                                    <option value="TL">Timor-Leste</option>
+                                    <option value="TG">Togo</option>
+                                    <option value="TK">Tokelau</option>
+                                    <option value="TO">Tonga</option>
+                                    <option value="TT">Trinidad and Tobago</option>
+                                    <option value="TN">Tunisia</option>
+                                    <option value="TR">Turkey</option>
+                                    <option value="TM">Turkmenistan</option>
+                                    <option value="TC">Turks and Caicos Islands</option>
+                                    <option value="TV">Tuvalu</option>
+                                    <option value="UG">Uganda</option>
+                                    <option value="UA">Ukraine</option>
+                                    <option value="AE">United Arab Emirates</option>
+                                    <option value="GB">United Kingdom</option>
+                                    <option value="US">United States</option>
+                                    <option value="UM">United States Minor Outlying Islands</option>
+                                    <option value="VI">United States Virgin Islands</option>
+                                    <option value="UY">Uruguay</option>
+                                    <option value="UZ">Uzbekistan</option>
+                                    <option value="VU">Vanuatu</option>
+                                    <option value="VE">Venezuela</option>
+                                    <option value="VN">Vietnam</option>
+                                    <option value="WF">Wallis and Futuna</option>
+                                    <option value="PS">West Bank</option>
+                                    <option value="EH">Western Sahara</option>
+                                    <option value="YE">Yemen</option>
+                                    <option value="ZM">Zambia</option>
+                                    <option value="ZW">Zimbabwe</option>
+                              </select>
+
+                            </div>
+                           
+                                <!--  -->
+                                <textarea class="validate-required" name="message" rows="3" placeholder="Message"></textarea>
+                                <button type="submit">Send Message</button>
+                            </form>
+                        </div>
+                    </div>
+                    <!--end of row-->
+                </div>
+                <!--end of container-->
+            </section>
+        <!-- footer --> 
+            <footer class="footer-1 bg-dark bgcolor" >
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4 col-sm-6">
+                            <img alt="Logo" class="logo" src="img/logo-light.png" />
+                        </div>
+
+                         <div class="col-md-4 col-sm-6">
+                            <div class="widget">
+                                <h6 class="title">contact us</h6>
+                                <hr>
+                              
+                                 <ul class="link-list recent-posts">
+                                    <li>
+                                        <span class="date">
+                                            <i class="fa fa-home" aria-hidden="true"></i> 
+                                            ADD:12F-5,No.2,Fuxing 4th Rd.,Qianzhen Dist
+                                        </span>
+                                    </li>
+                                    <li>
+                                        <span class="date">
+                                            <i class="fa fa-phone" aria-hidden="true"></i>
+                                            Phone:(886) 7 535 7099
+                                        </span>
+                                    </li>
+                                    <li>
+                                        <span class="date">
+                                            <i class="fa fa-envelope" aria-hidden="true"></i>
+                                            E-Mail:2123356586
+                                        </span>   
+                                    </li>
+                                    <li>
+                                        <span class="date">
+                                        <i class="fa fa-tty" aria-hidden="true"></i> 
+                                           Fax: 123456789
+                                        </span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!--end of widget-->
+                        </div>
+
+                        
+                       
+                        <div class="col-md-4 col-sm-6">
+                            <div class="widget">
+                                <h6 class="title">Social Media</h6>
+                                <hr>
+                              <div class="row">
+                              <div class="col-xs-3 ">
+                                <a href="">
+                                    <img src="img/fb.png" alt="" class="wow flipInX " data-wow-delay=".5s">
+                                </a>  
+                                </div>
+                                
+                                <div class="col-xs-3 ">
+                                    <a href="">
+                                        <img src="img/alibaba.png" alt="" class="wow flipInX "  data-wow-delay=".5s">
+                                    </a>
+                                </div>
+                                <div class="col-xs-3 ">
+                                    <a href="">
+                                        <img src="img/youtube.png" alt="" class="wow flipInX "  data-wow-delay=".5s">
+                                    </a>
+                                </div>
+                                <div class="col-xs-3">
+                                    <a href="">
+                                        <img src="img/google.png" alt="" class="wow flipInX " data-wow-delay=".5s">
+                                    </a>
+                                </div>                           
+                                  
+                              </div>      
+
+                                </div>
+                            </div>
+                            <!--end of widget-->
+
+                        </div>
+                    </div>
+                    <!--end of row-->
+                    <div class="row">
+                        <div class="col-sm-12 text-center">
+                            <span class="sub">&copy; Copyright 2016 - Rapiteh Desgin by Heryi</span>
+                        </div>
+                    </div>
+              
+                
+            </footer>
+
+        </div>
+        <script src="js/jquery.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+       <script src="js/flickr.js"></script>
+        <script src="js/flexslider.min.js"></script>
+        <script src="js/lightbox.min.js"></script> 
+        <script src="js/masonry.min.js"></script>
+        <script src="js/twitterfetcher.min.js"></script>
+        <script src="js/spectragram.min.js"></script>
+        <script src="js/ytplayer.min.js"></script>
+        <script src="js/countdown.min.js"></script>
+         <script src="js/smooth-scroll.min.js"></script> 
+        <script src="js/parallax.js"></script> 
+        <script src="js/scripts.js"></script>
+        <!--  -->
+        <script src="js/wow.js"></script>
+  <script>
+    wow = new WOW(
+      {
+        animateClass: 'animated',
+        offset:       100,
+        callback:     function(box) {
+          console.log("WOW: animating <" + box.tagName.toLowerCase() + ">")
+        }
+      }
+    );
+    wow.init();
+
+  </script>
+    </body>
+</html>

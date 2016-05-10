@@ -1,5 +1,5 @@
 <?php
-function ShowOnePageMe($Rs,$Page,$NoShowFields,$Href,$HrefField,$align,$PicField,$PicWidth,$PicHref,$DBTableName,$GName){
+function ShowOnePageMe($Rs,$Page,$NoShowFields,$Href,$HrefField,$align,$PicField,$PicWidth,$PicHref,$DBTableName,$GName,$isSub = false){
 	global $Conn,$StatusItem,$CheckBoxShow;
 	global $CheckBoxFields;
 	global $TextFields;
@@ -149,7 +149,7 @@ function ShowOnePageMe($Rs,$Page,$NoShowFields,$Href,$HrefField,$align,$PicField
 								$FirstFieldFlag = false;
 							}
 							echo "</td>\n";
-						}						
+						}
 					}else{
 						//一般文字欄位
 						echo "<td align=\"".$align."\">";
@@ -164,6 +164,7 @@ function ShowOnePageMe($Rs,$Page,$NoShowFields,$Href,$HrefField,$align,$PicField
 							$FirstFieldFlag = false;
 						}
 						echo "</td>\n";
+		
 					}
 				}else{
 					//非修改欄位
@@ -406,6 +407,16 @@ function ShowOnePageMe($Rs,$Page,$NoShowFields,$Href,$HrefField,$align,$PicField
 					echo "</td>\n";				
 				}
 			}
+                        						# by chonly
+                        if($isSub && $_SESSION['cid'] == 1)
+                        {
+                            echo "<td align=\"center\">\n
+                            <a href=\"{$MainFileName01}?cid={$Row['SerialNo']}\">
+                            <img src=\"../../images/add.gif\" alt=\"\">
+                            </a>
+                            </td>";
+                        }
+						# end	
 			$iPage++;
 			echo "</tr>\n";
 		}  
