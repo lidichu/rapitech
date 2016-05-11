@@ -1,8 +1,8 @@
 <?php include_once("Connection.php"); ?>
 <?php
 $SdbRoot="../../"; 
-$id = $_COOKIE["id"];
-$pw = $_COOKIE["pw"];
+$id = mysql_real_escape_string($_COOKIE["id"]);
+$pw = mysql_real_escape_string($_COOKIE["pw"]);
 if ($id=="")
 	$id=$_REQUEST["id"];
 if ($pw=="")
