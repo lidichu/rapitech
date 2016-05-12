@@ -1,4 +1,5 @@
 ﻿<!doctype html>
+<?php include_once('../PageHead.php');?>
 <html lang="en">
     <head>
         <meta charset="utf-8">
@@ -25,14 +26,14 @@
                     <div class="module right">
                          <a href="contact.php">
                             <i class="ti-location-arrow">&nbsp;</i>
-                            <span class="sub"> 12F-5,No.2,Fuxing 4th Rd.,Qianzhen Dist Kaohsiung City</span>
+                            <span class="sub"> <?php echo $Web["WebAddress"]?></span>
                         </a>
                     </div>
 
                     <div class="module right">
                         <a href="contact.php">
                             <i class="ti-email">&nbsp;</i>
-                            <span class="sub">hello@email.com</span>
+                            <span class="sub"><?php echo $Web["ManagerEmail"]?></span>
                         </a>
                     </div>
                     <div class="module left">
@@ -415,25 +416,25 @@
                                     <li>
                                         <span class="date">
                                             <i class="fa fa-home" aria-hidden="true"></i>
-                                            ADD:12F-5,No.2,Fuxing 4th Rd.,Qianzhen Dist
+                                            ADD: <?php echo $Web["WebAddress"]?>
                                         </span>
                                     </li>
                                     <li>
                                         <span class="date">
                                             <i class="fa fa-phone" aria-hidden="true"></i>
-                                            Phone:(886) 7 535 7099
+                                            Phone: <?php echo $Web["WebTel"]?>
                                         </span>
                                     </li>
                                     <li>
                                         <span class="date">
                                             <i class="fa fa-envelope" aria-hidden="true"></i>
-                                            E-Mail:2123356586
+                                            E-Mail: <?php echo $Web["ManagerEmail"]?>
                                         </span>
                                     </li>
                                     <li>
                                         <span class="date">
                                             <i class="fa fa-tty" aria-hidden="true"></i>
-                                            Fax: 123456789
+                                            Fax: <?php echo $Web["WebFax"]?>
                                         </span>
                                     </li>
                                 </ul>

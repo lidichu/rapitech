@@ -29,6 +29,7 @@ $M->AddText("WebTitle","網站標題",false);
 $M->AddText("WebName","網站名稱",true);
 $M->AddText("WebAddress","地址",true);
 $M->AddText("WebTel","電話",false);
+$M->AddText("WebFax","傳真",false);
 $M->AddText("ManagerEmail","管理者EMail",false);
 $M->AddText("EMailServer","郵件伺服器位址",true);
 $AddFieldsSQL = "";
