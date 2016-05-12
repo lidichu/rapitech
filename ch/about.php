@@ -304,6 +304,7 @@
                     <div class="row">
                         <div class="col-sm-12 text-center">
                             <span class="sub">&copy; Copyright 2016 - Rapiteh Desgin by Heryi</span>
+                            <i class="fa fa-chevron-circle-up fa-5x goTop" aria-hidden="true" id="goTop" ></i>
                         </div>
                     </div>
               
@@ -336,6 +337,20 @@
       }
     );
     wow.init();
+
+
+        // go to top
+$(function(){
+    
+    $("#goTop").click(function(){
+
+        $("html,body").animate({scrollTop:0},900);
+
+        return false;
+
+    });
+
+});
 
   </script>
     </body>
