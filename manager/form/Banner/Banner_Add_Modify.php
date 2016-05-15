@@ -202,7 +202,7 @@ function cmdCancel_onclick(){
 							</div>
 							<div id="Message" style="display:none;text-align:left">
 								<span style='color:red'>以下檔案找不到可對應商品：</span>
-							<div>
+							</div>
 						</div>
 					</td>
 				</tr>

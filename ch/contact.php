@@ -23,14 +23,14 @@
         <div class="nav-utility wordColor "  >
                
                     <div class="module right">
-                         <a href="contact.html">
+                         <a href="contact.php">
                             <i class="ti-location-arrow">&nbsp;</i>
                             <span class="sub"> 12F-5,No.2,Fuxing 4th Rd.,Qianzhen Dist Kaohsiung City</span>
                         </a>
                     </div>
 
                     <div class="module right">
-                        <a href="contact.html">
+                        <a href="contact.php">
                             <i class="ti-email">&nbsp;</i>
                             <span class="sub">hello@email.com</span>
                         </a>
@@ -42,7 +42,7 @@
             <nav>
                 <div class="nav-bar">
                     <div class="module left">
-                        <a href="index.html">
+                        <a href="index.php">
                             <img class="logo logo-light" alt="heryi" src="img/logo-light.png" />
                             <img class="logo logo-dark" alt="heryi" src="img/logo-dark.png" />
                         </a>
@@ -55,7 +55,7 @@
                             <ul class="menu">
                                 <li>
                                   
-                                     <a href="About.html"><span class="label label-success">About Us</span></a>
+                                     <a href="About.php"><span class="label label-success">About Us</span></a>
                                     
                                 </li>
                                 <!--  -->
@@ -67,7 +67,7 @@
                                         <li>
                                             <ul>
                                                 <li>
-                                                     <a href="productCategories.html">
+                                                     <a href="productCategories.php">
                                                         Measuring
                                                      </a>
                                                 </li>
@@ -112,12 +112,12 @@
                                         </ul> 
                                 <!--  -->
                                 <li>
-                                    <a href="news.html">
+                                    <a href="news.php">
                                                 <span class="label label-success">News </span>
                                     </a>
                                 </li>          
                                 <li>
-                                    <a href="contact.html">
+                                    <a href="contact.php">
                                                  <span class="label label-success">Contact Us </span>
                                     </a>
                                 </li> 
@@ -169,7 +169,7 @@
                                     </ul>
                                     <hr>
                                     <div class="cart-controls">
-                                        <a class="btn btn-sm btn-filled" href="cart.html">Inquiry List</a>
+                                        <a class="btn btn-sm btn-filled" href="cart.php">Inquiry List</a>
                                         <div class="list-inline pull-right">
                                            <!--  <span class="cart-total">Total: </span>
                                             <span class="number">$289.40</span> -->
@@ -569,6 +569,7 @@
                     <div class="row">
                         <div class="col-sm-12 text-center">
                             <span class="sub">&copy; Copyright 2016 - Rapiteh Desgin by Heryi</span>
+                            <i class="fa fa-chevron-circle-up fa-5x goTop" aria-hidden="true" id="goTop" ></i>
                         </div>
                     </div>
               
@@ -602,6 +603,20 @@
       }
     );
     wow.init();
+
+
+        // go to top
+$(function(){
+    
+    $("#goTop").click(function(){
+
+        $("html,body").animate({scrollTop:0},900);
+
+        return false;
+
+    });
+
+});
 
   </script>
     </body>

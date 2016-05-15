@@ -148,38 +148,38 @@
                                 <div class="widget">
                                     <h6 class="title">Shopping Cart</h6>
                                     <hr>
-                                    <ul class="cart-overview">
-                                        <li>
-                                            <a href="#">
-                                                <!-- <img alt="Product" src="img/shop-widget-1.png" /> -->
-                                                 <img src="https://placem.at/things?w=600&h=600&random=1" alt="" class="img-responsive product-thumb  col-sm-6">
-                                                <div class="description col-sm-6">
-                                                    <span class="product-title">Adrian - Pure Labswool Cap</span>
-                                                  <!--   <span class="price number">$39.90</span> -->
-                                                </div>
-                                            </a>
+
+                                    <ul class="cart-overview cart" id="myCartList">
+
+                                       <li>
+                                            <img src="https://placem.at/things?w=600&amp;h=600&amp;random=1" alt="" class="col-sm-6">
+                                                <span class="cart-title description col-sm-6">Adrian - Pure Labswool Cap</span>
                                         </li>
-                                        <li>
-                                            <a href="#">
-                                              <!--   <img alt="Product" src="img/shop-widget-2.png" /> -->
-                                               <img src="https://placem.at/things?w=600&h=600&random=2" alt="" class="img-responsive product-thumb col-sm-6">
-                                                <div class="description col-sm-6">
-                                                    <span class="product-title">Stanley - Leather Wallet</span>
-                                                  <!--   <span class="price number">$249.50</span> -->
-                                                </div>
-                                            </a>
+                                        
+
+                                         <li>
+                                            <img src="https://placem.at/things?w=600&amp;h=600&amp;random=2" alt="" class="col-sm-6">
+                                            <span class="cart-title description col-sm-6">Stanley - Leather Wallet</span>  
                                         </li>
-                                        <li>
-                                            <a href="#">
-                                              <!--   <img alt="Product" src="img/shop-widget-2.png" /> -->
-                                               <img src="https://placem.at/things?w=600&h=600&random=3" alt="" class="img-responsive product-thumb col-sm-6">
-                                                <div class="description col-sm-6">
-                                                    <span class="product-title">Logan - Canvas Backpack</span>
-                                                  <!--   <span class="price number">$249.50</span> -->
-                                                </div>
-                                            </a>
+
+                                         <li>
+                                            <img src="https://placem.at/things?w=600&amp;h=600&amp;random=3" alt="" class="col-sm-6">
+                                            <span class="cart-title description col-sm-6">Logan - Canvas Backpack</span>  
                                         </li>
+
+                                        <li>
+                                            <img src="https://placem.at/things?w=600&amp;h=600&amp;random=4" alt="" class="col-sm-6">
+                                            <span class="cart-title description col-sm-6">this is the 4th product</span>  
+                                        </li>
+
+                                        <li>
+                                            <img src="https://placem.at/things?w=600&amp;h=600&amp;random=5" alt="" class="col-sm-6">
+                                            <span class="cart-title description col-sm-6">this is the 5th product</span> 
+                                        </li> 
+
+
                                     </ul>
+
                                     <hr>
                                     <div class="cart-controls">
                                         <a class="btn btn-sm btn-filled" href="cart.php">Inquiry List</a>
@@ -224,9 +224,9 @@
                                        <!--  <th>Price</th> -->
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody id="list">
                             <!-- item -->
-                                    <tr>
+                                  <!--   <tr>
                                         <th scope="row">
                                             <a href="#" class="remove-item" data-toggle="tooltip" data-placement="top" title="" data-original-title="Remove from list">
                                                 <i class="ti-close"></i>
@@ -241,40 +241,9 @@
                                             <span>Adrian - Pure Labswool Cap</span>
                                         </td>
                                      
-                                    </tr>
+                                    </tr> -->
                             <!-- item -->
-                                    <tr>
-                                        <th scope="row">
-                                            <a href="#" class="remove-item" data-toggle="tooltip" data-placement="top" title="" data-original-title="Remove from list">
-                                                <i class="ti-close"></i>
-                                            </a>
-                                        </th>
-                                        <td>
-                                            <a href="#">
-                                                <img src="https://placem.at/things?w=600&h=600&random=2" alt="" class="img-responsive product-thumb">
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <span>Stanley - Leather Wallet</span>
-                                        </td>
-                                      
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">
-                                            <a href="#" class="remove-item" data-toggle="tooltip" data-placement="top" title="" data-original-title="Remove from list">
-                                                <i class="ti-close"></i>
-                                            </a>
-                                        </th>
-                                        <td>
-                                            <a href="#">
-                                                <img src="https://placem.at/things?w=600&h=600&random=3" alt="" class="img-responsive product-thumb">
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <span>Logan - Canvas Backpack</span>
-                                        </td>
-                                      
-                                    </tr>
+                                    
                                 </tbody>
                             </table>
                             
@@ -639,6 +608,7 @@
                     <div class="row">
                         <div class="col-sm-12 text-center">
                             <span class="sub">&copy; Copyright 2016 - Rapiteh Desgin by Heryi</span>
+                            <i class="fa fa-chevron-circle-up fa-5x goTop" aria-hidden="true" id="goTop" ></i>
                         </div>
                     </div>
                
@@ -672,18 +642,70 @@
     );
     wow.init();
 
-    // remove
-    $(document).ready(function(){
-        $('.ti-close').click(
-            function() {
-                $(this).parents('tr').remove();
-                        });
-    });
-    // end remove
+// remove
+       $(function(){
 
-    // remove with cart
-    // end remove with cart
+        // 塞資料
+                var myImg = "";//$('.cart img').prop('src');\取img src
+                var spanText = "";
+                var myCartList = $('#myCartList').children();//$('.cart .cart-title').text(); 所有的li在cartlist
+                var newProduct = "";
+                $.each(myCartList,function(i,val){
+                    myImg = val.children[0].src;
+                    spanText =  val.children[1].textContent;
+                    newProduct += " <tr> ";
+                    // xx結構
+                    newProduct += "<th scope=\"row\"><a class=\"remove-item\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"\" data-original-title=\"Remove from list\"><i class=\"ti-close\"></i></a></th>";
+                    //img
+                    newProduct += "<td><img src=\""+ myImg +"\" alt=\"\" class=\"img-responsive product-thumb\"></td>";
+                    newProduct += "<td><span>" + spanText + "</span></td>";
+                    newProduct += "</tr>";                  
+                })
+                $('#list').append(newProduct);
+
+                // 抓出list 值
+                $('i').click(function(){
+                    //選取目前按鈕清單的SPAN
+                    var listElement = $(this).parents('tr').children('td:eq(1)').children('span');
+                    //選取目前按鈕清單的SPAN的值                   
+                    var listName = listElement.text();
+                    // alert(listName);
+
+                    // 選取購物車所有清單SPAN
+                    var cartList = $('#myCartList').children('li').children('span');
+                    // alert(list);
+                    
+                    $(cartList).each(function(){
+                     var s = $(this).text();
+                         if(listName == s)
+                         {
+                            $(this).parents('li').remove(); 
+                            $(listElement).parents('tr').remove();
+                            alert(listName+" "+"has been move out from  INQUIRY LIST");
+                            return false;                       
+                         }          
+                    });
+
+
+                });
+
+    });
+
+
+// go to top
+$(function(){
+    
+    $("#goTop").click(function(){
+
+        $("html,body").animate({scrollTop:0},900);
+
+        return false;
+
+    });
+
+});
     </script> 
+
 
 
 
