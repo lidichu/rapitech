@@ -424,36 +424,6 @@
     <!--  -->
     <script src="js/wow.js"></script>
     <script>
-        wow = new WOW(
-          {
-              animateClass: 'animated',
-              offset: 100,
-              callback: function (box) {
-                  console.log("WOW: animating <" + box.tagName.toLowerCase() + ">")
-              }
-          }
-        );
-        wow.init();
-
-    // go to top
-    $(function(){
-    
-    $("#goTop").click(function(){
-
-        $("html,body").animate({scrollTop:0},900);
-
-        // $("html,body").animate({scrollTop:0},900,"easeOutBounce");
-
-        return false;
-
-    });
-
-});
-
-
-
-
-
 //  add to cart
     $(function(){$('.btn-rounded').click(function(){
         // 抓到目前list img src
@@ -466,12 +436,8 @@
         // alert(listName);
         var newProduct = " <li><img src=\""+ImgSrc+"\" alt=\"\" class=\"img-responsive col-sm-6\"><span>"+ listName +"</span></li>";
          // alert(newProduct);
-
         //抓到所有的cart h3 取到物件 沒值
         var cartItem = $('#cartList').children('li').children('span');
-     
-         
-
         // alert(cartItem);
         // 宣告一個布林值 為false
         var b = false;
@@ -502,7 +468,6 @@
     });
 
   //end add to cart add 
-
 // product add
 $(function(){$('#btn').click(
     function(){
@@ -520,7 +485,6 @@ $(function(){$('#btn').click(
         // cart 裡的h3 跑迴圈
         $(cartItem).each(function(){
             // 取得cart h3值
-
             var cartItemName = $(this).text();
             // alert(cartItemName); 
             // 判斷 如果 cartItemName == ProductTittle
@@ -530,7 +494,6 @@ $(function(){$('#btn').click(
                 b = true;
                 // 跳出 
                 return false;
-
             }                       
         });
         // 如果不是true
@@ -540,11 +503,8 @@ $(function(){$('#btn').click(
             $('#cartList').append(newProductBig);  
              alert("add to inquiry List"); 
         }
-
     });
-
 });
-
 // product add
  </script>
  
