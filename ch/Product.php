@@ -318,7 +318,7 @@
                                     LambsWool
                                 </h5>
                                    <br>
-                                    <a class="btn btn-sm btn-rounded" href="Product.php">Add To List</a>
+                                    <a class="btn btn-sm btn-rounded">Add To List</a>
                             </div>
                         </div>
                     </div>
@@ -334,7 +334,7 @@
                                     Leather
                                 </h5>
                                  <br>
-                                                 <a class="btn btn-sm btn-rounded" href="Product.php">Add To List</a>
+                                                 <a class="btn btn-sm btn-rounded">Add To List</a>
                             </div>
                         </div>
                     </div>
@@ -350,7 +350,7 @@
                                     Stainless
                                 </h5>
                                  <br>
-                                                 <a class="btn btn-sm btn-rounded" href="Product.php">Add To List</a>
+                                                 <a class="btn btn-sm btn-rounded">Add To List</a>
                             </div>
                         </div>
                     </div>
@@ -366,7 +366,7 @@
                                     Vintage Camera
                                 </h5>
                                 <br>
-                                                <a class="btn btn-sm btn-rounded" href="Product.php">Add To List</a>
+                                                <a class="btn btn-sm btn-rounded">Add To List</a>
                             </div>
                         </div>
                     </div>
@@ -382,7 +382,7 @@
                                     Vintage Camera
                                 </h5>
                                   <br>
-                                                  <a class="btn btn-sm btn-rounded" href="Product.php">Add To List</a>
+                                                  <a class="btn btn-sm btn-rounded">Add To List</a>
                             </div>
                         </div>
                     </div>
@@ -398,7 +398,7 @@
                                     Vintage Camera
                                 </h5>
                                 <br>
-                                                <a class="btn btn-sm btn-rounded" href="Product.php">Add To List</a>
+                                                <a class="btn btn-sm btn-rounded">Add To List</a>
                             </div>
                         </div>
                     </div>
@@ -438,43 +438,7 @@
         );
         wow.init();
 
-    </script>
-
-     <!-- add to cart -->
-  <script>
-
-$(function(){
-    $('#btn').click(function(){
-
-        var myImg = $('.list img').prop('src');
-        var myTitle = $('#btn').parent().children()[1].innerText;//$('.list .product-title').text();
-        var newProduct = "";
-        var select = $('.cart-overview').children();
-        for(i = 0;i<select.length;i++)
-        {
-            if(!select[i])
-                break;
-            var title = select[i].children[0].children[1].innerText;
-           if(title== myTitle) 
-                break;
-        }
-        if(title!= myTitle && title !="")
-        {
-            newProduct += "<li>";
-            newProduct += "<a href=\"#\">";
-            newProduct += "<img src=\"" + myImg + "\" class=\"img-responsive product-thumb  col-sm-6\">";
-            newProduct += "<div class=\"description\">";
-            newProduct += "<span class=\"product-title\">" + myTitle + "</span>";
-            newProduct += "</div>";
-            newProduct += "</a>";
-            newProduct += "</li>";
-            $('.a').append(newProduct);
-        }
-    });
-});
-
-
-        // go to top
+// go to top
 $(function(){
     
     $("#goTop").click(function(){
@@ -486,6 +450,54 @@ $(function(){
     });
 
 });
+
+
+
+//  add to cart
+    $(function(){$('.btn-rounded').click(function(){
+        // 抓到目前list img src
+        var ImgSrc= $(this).parents('.image-tile').children('a').children('img').prop('src');
+         // alert(ImgSrc);
+        //抓到目前list span
+        var list = $(this).parents('.title').children('h5');
+        // span裡面的值
+        var listName = list.text();
+        // alert(listName);
+        var newProduct = " <li><img src=\""+ImgSrc+"\" alt=\"\" class=\"img-responsive\"><h3>"+ listName +"</h3></li>";
+         // alert(newProduct);
+
+        //抓到所有的cart h3 取到物件 沒值
+        var cartItem = $('#cartList').children('li').children('h3');
+     
+         
+
+        // alert(cartItem);
+        // 宣告一個布林值 為false
+        var b = false;
+        // cart 裡的h3 跑迴圈
+        $(cartItem).each(function(){
+            // 取得cart h3值
+
+            var cartItemName = $(this).text();
+            // alert(cartItemName); 
+            // 判斷 如果 cartItemName == listName
+            if(cartItemName == listName)
+            {   
+                // 布林值是true;
+                b = true;
+                // 跳出
+                return false;
+            }                       
+        });
+        // 如果不是true
+        if(!b)
+        {
+            // .cart加入newProduct結構
+            $('#cartList').append(newProduct);  
+            
+        }
+    });
+    });
 </script>
   <!--end add to cart add -->
 </body>

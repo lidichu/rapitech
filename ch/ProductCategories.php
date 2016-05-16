@@ -549,7 +549,7 @@ $(function(){
             newProduct += "</div>";
             newProduct += "</a>";
             newProduct += "</li>";
-            $('.a').append(newProduct);
+            $('#cartList').append(newProduct);
             alert("已加入清單。");
             carList.push(newProduct);
             var jsonStr = JSON.stringify(carList);
