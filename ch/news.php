@@ -37,127 +37,57 @@
                         </div>
                     </div>
                     <div class="row masonry masonryFlyIn mb40">
-
-                        <!-- 1 -->
+                    	<?php
+							$Sql="select * from news where Status='上架' order by Sort,PostDate DESC,SerialNo Desc";
+							$Rs=mysql_query($Sql,$Conn);
+							if($Rs && mysql_num_rows($Rs)>0){
+								while($Row=mysql_fetch_array($Rs)){
+									$Title=$Row["Title"];
+									$Note=$Row["Note"];
+									$PostDate=$Row["PostDate"];
+									
+									$Url=$Row["Url"];
+									$TargetWindow=$Row["TargetWindow"];
+									
+									$Pic="";
+									if($Row["PICHidden"]!="")
+										$Pic="../files/News/PIC/".$Row["PICHidden"];
+						?>
                         <div class="col-sm-4 post-snippet masonry-item col-xs-12">
-                            <a href="#">
-                                <!-- <img alt="Post Image" src="img/blog-single-3.jpg" /> -->
-                                <img src="https://placem.at/things?w=800&h=534&random=4" alt="">
-                            </a>
+	                        <?php
+		                        	if($Pic != "")
+		                        	{
+		                        		if($Url != "")
+		                        			echo "<a href=\"".$Url."\" target=\"".$TargetWindow."\">\n";
+	                        			
+							?>
+                            <img src="<?php echo $Pic?>" alt="" >
+                            <?php
+		                        		if($Url != "")
+		                        			echo "</a>\n";
+		                        	}
+							?>
                             <div class="inner">
-                                <a href="#">
-                                    <h5 class="mb0">A simple ima</h5>
-                                    <span class="inline-block mb16">September 23, 2015</span>
-                                </a>
+                            <?php
+		                        		if($Url != "")
+		                        			echo "<a href=\"".$Url."\" target=\"".$TargetWindow."\">\n";
+							?>
+                                    <h5 class="mb0"><?php echo $Title?></h5>
+                                    <span class="inline-block mb16"><?php echo $PostDate?></span>
+                            <?php
+		                        		if($Url != "")
+		                        			echo "</a>\n";
+							?>
                                 <hr>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis perferendis illum tempora, voluptatibus ipsam, asperiores quibusdam sapiente. Ad accusantium, libero recusandae et tempore velit debitis atque id, eum nisi modi!
-                                </p>
+                                <p><?php echo $Note?></p>
                                 <!-- <a class="btn btn-sm" href="#">Read More</a> -->
                             </div>
                         </div>
-                        <!--1-->
+                         <?php
+								}
+							}
+						?>
 
-                        <!-- 1 -->
-                        <div class="col-sm-4 post-snippet masonry-item col-xs-12 text-center">
-                            <a href="#">
-                                <img src="https://placem.at/things?w=534&h=800&random=2" alt="">
-                            </a>
-                            <div class="inner">
-                                <a href="#">
-                                    <h5 class="mb0">A simple ima</h5>
-                                    <span class="inline-block mb16">September 23, 2015</span>
-                                </a>
-                                <hr>
-                                <p> 
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut repellat, fuga iusto molestias perferendis, natus vel reprehenderit, amet maxime voluptates, quam dolor debitis! Debitis voluptates beatae doloribus autem, maxime ut.
-                                </p>
-                                 <!-- <a class="btn btn-sm" href="#">Read More</a> -->
-                            </div>
-                        </div>
-                        <!--1-->
-
-                        <!-- 1 -->
-                        <div class="col-sm-4 post-snippet masonry-item col-xs-12 text-center">
-                            <a href="#">
-                                <img src="https://placem.at/things?w=600&h=534&random=5" alt="">
-                            </a>
-                            <div class="inner">
-                                <a href="#">
-                                    <h5 class="mb0">A simple ima</h5>
-                                    <span class="inline-block mb16">September 23, 2015</span>
-                                </a>
-                                <hr>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum minima beatae autem aliquam id sit corporis iure itaque, eaque, qui ea alias dignissimos architecto. Assumenda blanditiis expedita molestias aperiam. Sequi!
-                                </p>
-                                 <!-- <a class="btn btn-sm" href="#">Read More</a> -->
-                               
-                            </div>
-                        </div>
-                        <!--1-->
-
-                         <!-- 1 -->
-                        <div class="col-sm-4 post-snippet masonry-item col-xs-12 text-center">
-                            <a href="#">
-                                <img src="https://placem.at/things?w=800&h=534&random=6" alt="">
-                            </a>
-                            <div class="inner">
-                                <a href="#">
-                                    <h5 class="mb0">A simple image post to start off</h5>
-                                    <span class="inline-block mb16">September 23, 2015</span>
-                                </a>
-                                <hr>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat eaque illo molestias expedita alias repellendus laborum et, architecto quo saepe provident dolore nobis corporis dolor culpa iste ad, aperiam eveniet.
-                                </p>
-                                <!-- <a class="btn btn-sm" href="#">Read More</a> -->
-                            </div>
-                        </div>
-                        <!--1-->
-
-                        <!-- 1 -->
-                        <div class="col-sm-4 post-snippet masonry-item col-xs-12 text-center">
-                            <a href="#">
-                                <img src="https://placem.at/things?w=400&h=224&random=8" alt="">
-                            </a>
-                            <div class="inner">
-                                <a href="#">
-                                    <h5 class="mb0">A simple ima</h5>
-                                    <span class="inline-block mb16">September 23, 2015</span>
-                                </a>
-                                <hr>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit, ea, voluptatibus! Omnis, officia iure quam, impedit perferendis laboriosam illum deleniti eaque, id vero nulla fuga velit qui, sapiente ipsum eius!
-                                </p>
-                                 <!-- <a class="btn btn-sm" href="#">Read More</a> -->
-                            </div>
-                        </div>
-                        <!--1-->
-
-                        <!-- 1 -->
-                        <div class="col-sm-4 post-snippet masonry-item col-xs-12 text-center">
-                            <a href="#">
-                                <img src="https://placem.at/things?w=400&h=400&random=7" alt="">
-                            </a>
-                            <div class="inner">
-                                <a href="#">
-                                    <h5 class="mb0">tittle ipsum dolor sit amet</h5>
-                                    <span class="inline-block mb16">September 23, 2015</span>
-                                </a>
-                                <hr>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias possimus labore, vel suscipit deserunt corrupti sunt aliquid, magni blanditiis incidunt, atque eveniet asperiores distinctio ex odio facilis fuga modi explicabo?   
-                                </p>
-                                <!-- <a class="btn btn-sm" href="#">Read More</a> -->
-                            </div>
-                        </div>
-                        <!--1-->
-
-
-
-                       
-                       
                       
                     </div>
                     <!--end of row-->

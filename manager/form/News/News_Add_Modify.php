@@ -26,6 +26,13 @@
 	//狀態設定
 	$StatusItem[0] = "上架";
 	$StatusItem[1] = "下架";
+	
+	//開啟方式狀態設定
+	$TargetWindowValue[0] = "_self";
+	$TargetWindowValue[1] = "_blank";
+	$TargetWindowItem[0] = "本頁開啟";
+	$TargetWindowItem[1] = "另開新視窗";	
+	
 	//宣告圖片上傳物件
 	foreach($UploadPic as $Key => $Value){
 		$PICRootArray[] = $Value["Root"];
@@ -39,6 +46,8 @@
 	$M->AddSelect2("Status","狀態",true,$StatusItem,$StatusItem,"上架");
 	$M->AddDate("PostDate","日期",true,date("Y-m-d"));	
 	$M->AddText("Title","標題(繁體)",true);
+	$M->AddURL("Url","連結",false,"","");
+	$M->AddSelect2("TargetWindow","開啟方式",true,$TargetWindowItem,$TargetWindowValue,"_blank");
 	$M->AddNote1n("Note","內容(繁體)",false);
 	$M->AddPIC3("PIC","圖片",false,$PICRootArray,$PICWidthArray,$PICHeightArray,"圖片建議寬高為 689 x 517 像素","","","","PICHidden",$PICBoxArray,120,"",$UploadPic["Small"]["Root"]);
 	
