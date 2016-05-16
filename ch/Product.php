@@ -240,7 +240,7 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="description">
-                                        <h4 class="uppercase">put the measuring product name</h4>
+                                        <h4 class="uppercase productTitle">put the measuring product name</h4>
                                         <div class="mb32 mb-xs-24">
                                             
                                         </div>
@@ -260,10 +260,7 @@
                                         </ul>
                                     </div>
                                     <hr class="mb48 mb-xs-24">
-                                    <form class="add-to-cart">
-                                      <!--   <input type="text" placeholder="QTY" /> -->
-                                        <input type="submit" value="Add To List" />
-                                    </form>
+                                   <a class="btn btn-lg add-to-cart" id="btn">Add To List</a>
                                 </div>
                             </div>
                             <!--end of row-->
@@ -326,7 +323,7 @@
                     <div class="col-md-2 col-sm-4">
                         <div class="image-tile outer-title text-center">
                             <a href="#">
-                                <img src="https://placem.at/things?w=600&h=600&random=1" alt="" class="img-responsive product-thumb">
+                                <img src="https://placem.at/things?w=600&h=600&random=2" alt="" class="img-responsive product-thumb">
                             </a>
                             <div class="title">
                                 <h5 class="mb0">
@@ -334,7 +331,7 @@
                                     Leather
                                 </h5>
                                  <br>
-                                                 <a class="btn btn-sm btn-rounded">Add To List</a>
+                                <a class="btn btn-sm btn-rounded">Add To List</a>
                             </div>
                         </div>
                     </div>
@@ -342,7 +339,7 @@
                     <div class="col-md-2 col-sm-4">
                         <div class="image-tile outer-title text-center">
                             <a href="#">
-                                <img src="https://placem.at/things?w=600&h=600&random=1" alt="" class="img-responsive product-thumb">
+                                <img src="https://placem.at/things?w=600&h=600&random=3" alt="" class="img-responsive product-thumb">
                             </a>
                             <div class="title">
                                 <h5 class="mb0">
@@ -350,7 +347,7 @@
                                     Stainless
                                 </h5>
                                  <br>
-                                                 <a class="btn btn-sm btn-rounded">Add To List</a>
+                                <a class="btn btn-sm btn-rounded">Add To List</a>
                             </div>
                         </div>
                     </div>
@@ -358,7 +355,7 @@
                     <div class="col-md-2 col-sm-4">
                         <div class="image-tile outer-title text-center">
                             <a href="#">
-                                <img src="https://placem.at/things?w=600&h=600&random=1" alt="" class="img-responsive product-thumb">
+                                <img src="https://placem.at/things?w=600&h=600&random=4" alt="" class="img-responsive product-thumb">
                             </a>
                             <div class="title">
                                 <h5 class="mb0">
@@ -366,7 +363,7 @@
                                     Vintage Camera
                                 </h5>
                                 <br>
-                                                <a class="btn btn-sm btn-rounded">Add To List</a>
+                                <a class="btn btn-sm btn-rounded">Add To List</a>
                             </div>
                         </div>
                     </div>
@@ -374,15 +371,15 @@
                     <div class="col-md-2 col-sm-4">
                         <div class="image-tile outer-title text-center">
                             <a href="#">
-                                <img src="https://placem.at/things?w=600&h=600&random=1" alt="" class="img-responsive product-thumb">
+                                <img src="https://placem.at/things?w=600&h=600&random=5" alt="" class="img-responsive product-thumb">
                             </a>
                             <div class="title">
                                 <h5 class="mb0">
                                     Luka
-                                    Vintage Camera
+                                    Vintage Camerb
                                 </h5>
                                   <br>
-                                                  <a class="btn btn-sm btn-rounded">Add To List</a>
+                                <a class="btn btn-sm btn-rounded">Add To List</a>
                             </div>
                         </div>
                     </div>
@@ -390,15 +387,15 @@
                     <div class="col-md-2 col-sm-4">
                         <div class="image-tile outer-title text-center">
                             <a href="#">
-                                <img src="https://placem.at/things?w=600&h=600&random=1" alt="" class="img-responsive product-thumb">
+                                <img src="https://placem.at/things?w=600&h=600&random=6" alt="" class="img-responsive product-thumb">
                             </a>
                             <div class="title">
                                 <h5 class="mb0">
                                     Luka
-                                    Vintage Camera
+                                    Vintage Camerc
                                 </h5>
                                 <br>
-                                                <a class="btn btn-sm btn-rounded">Add To List</a>
+                                <a class="btn btn-sm btn-rounded">Add To List</a>
                             </div>
                         </div>
                     </div>
@@ -438,18 +435,22 @@
         );
         wow.init();
 
-// go to top
-$(function(){
+    // go to top
+    $(function(){
     
     $("#goTop").click(function(){
 
         $("html,body").animate({scrollTop:0},900);
+
+        // $("html,body").animate({scrollTop:0},900,"easeOutBounce");
 
         return false;
 
     });
 
 });
+
+
 
 
 
@@ -463,11 +464,11 @@ $(function(){
         // span裡面的值
         var listName = list.text();
         // alert(listName);
-        var newProduct = " <li><img src=\""+ImgSrc+"\" alt=\"\" class=\"img-responsive\"><h3>"+ listName +"</h3></li>";
+        var newProduct = " <li><img src=\""+ImgSrc+"\" alt=\"\" class=\"img-responsive col-sm-6\"><span>"+ listName +"</span></li>";
          // alert(newProduct);
 
         //抓到所有的cart h3 取到物件 沒值
-        var cartItem = $('#cartList').children('li').children('h3');
+        var cartItem = $('#cartList').children('li').children('span');
      
          
 
@@ -485,8 +486,9 @@ $(function(){
             {   
                 // 布林值是true;
                 b = true;
-                // 跳出
+                // 跳出 
                 return false;
+
             }                       
         });
         // 如果不是true
@@ -494,11 +496,57 @@ $(function(){
         {
             // .cart加入newProduct結構
             $('#cartList').append(newProduct);  
-            
+             alert("add to inquiry List"); 
         }
     });
     });
-</script>
-  <!--end add to cart add -->
+
+  //end add to cart add 
+
+// product add
+$(function(){$('#btn').click(
+    function(){
+        var ProductImg = $('.slides').children('li:eq(0)').children('img').prop('src');
+        // alert(ProductImg);
+        var ProductTittle = $('.productTitle').text();
+        // alert(ProductTittle);
+        var newProductBig = " <li><img src=\""+ ProductImg+"\" alt=\"\" class=\"img-responsive col-sm-6\"><span>"+ ProductTittle +"</span></li>";
+        // alert(newProductBig);
+         var cartItem = $('#cartList').children('li').children('span');
+         // alert(cartItem);
+
+          // 宣告一個布林值 為false
+        var b = false;
+        // cart 裡的h3 跑迴圈
+        $(cartItem).each(function(){
+            // 取得cart h3值
+
+            var cartItemName = $(this).text();
+            // alert(cartItemName); 
+            // 判斷 如果 cartItemName == ProductTittle
+            if(cartItemName == ProductTittle)
+            {   
+                // 布林值是true;
+                b = true;
+                // 跳出 
+                return false;
+
+            }                       
+        });
+        // 如果不是true
+        if(!b)
+        {
+            // .cart加入newProduct結構
+            $('#cartList').append(newProductBig);  
+             alert("add to inquiry List"); 
+        }
+
+    });
+
+});
+
+// product add
+ </script>
+ 
 </body>
 </html>
