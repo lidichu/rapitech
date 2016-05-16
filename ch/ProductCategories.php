@@ -494,36 +494,19 @@
         <script src="js/scripts.js"></script>
         <script src="js/wow.js"></script>
        
-       
-  <script>
-    wow = new WOW(
-      {
-        animateClass: 'animated',
-        offset:       100,
-        callback:     function(box) {
-          console.log("WOW: animating <" + box.tagName.toLowerCase() + ">")
-        }
-      }
-    );
-    wow.init();
-
-  </script>
 
   <!-- add to cart -->
   <script>
 
 $(function(){
-    var carList = [];
-    $( document ).ready(function() {
-        carList = JSON.parse(window.localStorage.getItem("carList"));
-        if(carList){
-            $.each(carList,function(idx, value){
-              $('.a').append(value); 
-             })
-        }
-  
-          
-    });
+    var carList = [];   
+    carList = JSON.parse(window.localStorage.getItem("carList"));
+    if(carList){
+        $.each(carList,function(idx, value){
+        	$('#cartList').append(value); 
+        })
+    } 
+    
 
     $('.btn-rounded').click(function(){
 
@@ -549,22 +532,18 @@ $(function(){
             newProduct += "</div>";
             newProduct += "</a>";
             newProduct += "</li>";
-            $('.a').append(newProduct);
-            alert("已加入清單。");
+            $('#cartList').append(newProduct);            
+            if(!carList)
+            	carList = [];
             carList.push(newProduct);
             var jsonStr = JSON.stringify(carList);
             localStorage.setItem("carList",jsonStr);
+            alert("已加入清單。");
         }
     });
 });
 
-    // go to top
-$(function(){    
-    $("#goTop").click(function(){
-        $("html,body").animate({scrollTop:0},900);
-        return false;
-    });
-});
+
 
 
 </script>

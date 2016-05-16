@@ -126,25 +126,8 @@
                                 <div class="widget">
                                     <h6 class="title">Shopping Cart</h6>
                                     <hr>
-                                    <ul class="cart-overview">
-                                        <li>
-                                            <a href="#">
-                                                <img alt="Product" src="img/shop-widget-1.png" />
-                                                <div class="description">
-                                                    <span class="product-title">Canvas Backpack</span>
-                                                   <!--  <span class="price number">$39.90</span> -->
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <img alt="Product" src="img/shop-widget-2.png" />
-                                                <div class="description">
-                                                    <span class="product-title">Vintage Camera</span>
-                                                   <!--  <span class="price number">$249.50</span> -->
-                                                </div>
-                                            </a>
-                                        </li>
+                                    <ul class="cart-overview" id="cartList">
+  
                                     </ul>
                                     <hr>
                                     <div class="cart-controls">

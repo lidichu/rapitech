@@ -134,33 +134,7 @@
         <script src="js/parallax.js"></script> 
         <script src="js/scripts.js"></script>
         <script src="js/wow.js"></script>
-  <script>
-    wow = new WOW(
-      {
-        animateClass: 'animated',
-        offset:       100,
-        callback:     function(box) {
-          console.log("WOW: animating <" + box.tagName.toLowerCase() + ">")
-        }
-      }
-    );
-    wow.init();
 
-
-            // go to top
-$(function(){
-    
-    $("#goTop").click(function(){
-
-        $("html,body").animate({scrollTop:0},900);
-
-        return false;
-
-    });
-
-});
-
-  </script>
 
     </body>
 </html>
