@@ -20,173 +20,7 @@
 
     </head>
     <body>
-        <div class="nav-container wow bounceIn" data-wow-delay="1.5s">
-        <div class="nav-utility wordColor "  >
-
-                    <div class="module right">
-                         <a href="contact.php">
-                            <i class="ti-location-arrow">&nbsp;</i>
-                            <span class="sub"> <?php echo $Web["WebAddress"]?></span>
-                        </a>
-                    </div>
-
-                    <div class="module right">
-                        <a href="contact.php">
-                            <i class="ti-email">&nbsp;</i>
-                            <span class="sub"><?php echo $Web["ManagerEmail"]?></span>
-                        </a>
-                    </div>
-                    <div class="module left">
-                      
-                    </div>
-                </div>
-            <nav>
-                <div class="nav-bar">
-                    <div class="module left">
-                        <a href="index.php">
-                            <img class="logo logo-light" alt="heryi" src="img/logo-light.png" />
-                            <img class="logo logo-dark" alt="heryi" src="img/logo-dark.png" />
-                        </a>
-                    </div>
-                    <div class="module widget-handle mobile-toggle right visible-sm visible-xs">
-                        <i class="ti-menu"></i>
-                    </div>
-                    <div class="module-group right">
-                        <div class="module left">
-                            <ul class="menu">
-                                <li>
-                                  
-                                     <a href="about.php"><span class="label label-success">About Us</span></a>
-                                    
-                                </li>
-                                <!--  -->
-                                <li class="has-dropdown">
-                                    <a href="#">
-                                                <span class="label label-success">Products</span>
-                                    </a>
-                                         <ul class="mega-menu">
-                                        <li>
-                                            <ul>
-                                                <li>
-                                                     <a href="productCategories.php">
-                                                        Measuring
-                                                     </a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">
-                                                        Garden Accessories
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">
-                                                        Outdoor & Indoor Clocks
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">
-                                                        Soil Test Kits
-                                                    </a>
-                                                   
-                                                </li>
-                                                <li>
-                                                    <a href="#">
-                                                        Thermometers
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">
-                                                        Gardening Ties
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">
-                                                        Plant Labels
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">
-                                                        Plant Supports
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        </ul> 
-                                <!--  -->
-                                <li>
-                                    <a href="news.php">
-                                                <span class="label label-success">News </span>
-                                    </a>
-                                </li>          
-                                <li>
-                                    <a href="contact.php">
-                                                 <span class="label label-success">Contact Us </span>
-                                    </a>
-                                </li> 
-
-
-                            </ul>
-                        </div>
-                        <!--end of menu module-->
-                        <div class="module widget-handle search-widget-handle left">
-                            <div class="search wordColor">
-                                <i class="ti-search"></i>
-                                <span class="title">Search the product</span>
-                            </div>
-                            <div class="function ">
-                                <form class="search-form ">
-                                    <input type="text" placeholder="Search the product" />
-                                </form>
-                            </div>
-                        </div>
-                        <div class="module widget-handle cart-widget-handle left">
-                            <div class="cart wordColor">
-                                <i class="ti-bag"></i>
-                                <span class="label number">2</span>
-                                <span class="title">Shopping Cart</span>
-                            </div>
-                            <div class="function">
-                                <div class="widget">
-                                    <h6 class="title">Shopping Cart</h6>
-                                    <hr>
-                                    <ul class="cart-overview">
-                                        <li>
-                                            <a href="#">
-                                                <img alt="Product" src="img/shop-widget-1.png" />
-                                                <div class="description">
-                                                    <span class="product-title">Canvas Backpack</span>
-                                                   <!--  <span class="price number">$39.90</span> -->
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <img alt="Product" src="img/shop-widget-2.png" />
-                                                <div class="description">
-                                                    <span class="product-title">Vintage Camera</span>
-                                                   <!--  <span class="price number">$249.50</span> -->
-                                                </div>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                    <hr>
-                                    <div class="cart-controls">
-                                        <a class="btn btn-sm btn-filled" href="cart.php">Inquiry List</a>
-                                        <div class="list-inline pull-right">
-                                           <!--  <span class="cart-total">Total: </span>
-                                            <span class="number">$289.40</span> -->
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--end of widget-->
-                            </div>
-                        </div>
-                       
-                    </div>
-                    <!--end of module group-->
-                </div>
-            </nav>
-        </div>
-<!--end nav  -->
+		<?php include_once ('top.php');?>
         <div class="main-container">
             <section class="projects p0 bg-dark">
                 <ul class="filters floating cast-shadow mb0 col-md-12 col-md-push-0 col-sm-12"></ul>
@@ -316,30 +150,40 @@
                             <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1">
                                 <div class="text-slider slider-arrow-controls text-center relative">
                                     <ul class="slides">
-                                    	<?php
-											$Sql="select * from news where Status='上架' and IndexShow='true' order by IndexSort";
-											$Rs=mysql_query($Sql,$Conn);
-											if($Rs && mysql_num_rows($Rs)>0){
-												while($Row=mysql_fetch_array($Rs)){
-													$Title=$Row["Title"];
-													$Note=$Row["Note"];
-													$PostDate=$Row["PostDate"];
-										?>
                                         <li>
-                                            <h2 class="text-center wordColor"><?php echo $Title?></h2>
+                                            <h2 class="text-center wordColor">Can u have 4 buns in the same time</h2>
                                             <hr />
-                                            <p class="lead"><?php echo $Note?></p>
+                                            <p class="lead">looks like 17 years old  super young der Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque totam laborum, illum impedit, earum repellat error fuga iste obcaecati odit sapiente eius. Sequi velit a laborum doloribus, ex sit quaerat...</p>
                                             <div class="quote-author">
-                                                <span><?php echo $PostDate?></span>
+                                                <h6 class="uppercase mb0">Ying Xing</h6>
+                                                <span>2016,04,13</span>
                                             </div>
                                           <!--  something wrong with btn-modal -->
                                             <a class="btn btn-lg" href="news.php"> More Detail <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
                                            
                                         </li>
-                                        <?php
-												}
-											}
-										?>
+                                        <li>
+                                            <h2 class="text-center wordColor">Don't forgot put some chili sauce</h2>
+                                            <hr />
+                                            <p class="lead">get up at 10 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum officiis, atque, repellendus laudantium laboriosam sint in veritatis voluptates modi, quos sed quis repellat odit. Minus eum ducimus reiciendis veniam sint...</p>
+                                            <div class="quote-author">
+                                                <h6 class="uppercase mb0">Robert Hsieh</h6>
+                                                <span>2016,04,13</span>
+                                            </div>
+                                            <br />
+                                            <a class="btn btn-lg " href="news.php">More Detail <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
+                                        </li>
+                                        <li>
+                                            <h2 class="text-center wordColor">Always fallin sleeping in meditation</h2>
+                                            <hr />
+                                            <p class="lead">put a mask will be a ghost. fine example of atomic design brought to life. As a seasoned template user, I really appreciate the consistent styling for all common tags, it makes customising the sections that much easier. 5 stars as always for an amazing template...</p>
+                                            <div class="quote-author">
+                                                <h6 class="uppercase mb0">Robchi</h6>
+                                                <span>2016,04,13</span>
+                                            </div>
+                                              <!-- ??? -->
+                                            <a class="btn btn-lg " href="news.php">More Detail <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -389,93 +233,7 @@
                     </div>
                 </div>
             </div>
-
-            <!-- footer -->
-            <footer class="footer-1 bg-dark bgcolor">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-4 col-sm-6">
-                            <img alt="Logo" class="logo" src="img/logo-light.png" />
-                        </div>
-                        <div class="col-md-4 col-sm-6">
-                            <div class="widget">
-                                <h6 class="title">contact us</h6>
-                                <hr>
-
-                                <ul class="link-list recent-posts">
-                                    <li>
-                                        <span class="date">
-                                            <i class="fa fa-home" aria-hidden="true"></i>
-                                            ADD: <?php echo $Web["WebAddress"]?>
-                                        </span>
-                                    </li>
-                                    <li>
-                                        <span class="date">
-                                            <i class="fa fa-phone" aria-hidden="true"></i>
-                                            Phone: <?php echo $Web["WebTel"]?>
-                                        </span>
-                                    </li>
-                                    <li>
-                                        <span class="date">
-                                            <i class="fa fa-envelope" aria-hidden="true"></i>
-                                            E-Mail: <?php echo $Web["ManagerEmail"]?>
-                                        </span>
-                                    </li>
-                                    <li>
-                                        <span class="date">
-                                            <i class="fa fa-tty" aria-hidden="true"></i>
-                                            Fax: <?php echo $Web["WebFax"]?>
-                                        </span>
-                                    </li>
-                                </ul>
-                            </div>
-                            <!--end of widget-->
-                        </div>
-
-
-                        <div class="col-md-4 col-sm-6">
-                            <div class="widget">
-                                <h6 class="title">Social Media</h6>
-                                <hr>
-                                <div class="row">
-                                    <div class="col-xs-3 ">
-                                        <a href="">
-                                            <img src="img/fb.png" alt="" class="wow flipInX " data-wow-delay=".5s">
-                                        </a>
-                                    </div>
-
-                                    <div class="col-xs-3 ">
-                                        <a href="">
-                                            <img src="img/alibaba.png" alt="" class="wow flipInX " data-wow-delay=".5s">
-                                        </a>
-                                    </div>
-                                    <div class="col-xs-3 ">
-                                        <a href="">
-                                            <img src="img/youtube.png" alt="" class="wow flipInX " data-wow-delay=".5s">
-                                        </a>
-                                    </div>
-                                    <div class="col-xs-3">
-                                        <a href="">
-                                            <img src="img/google.png" alt="" class="wow flipInX " data-wow-delay=".5s">
-                                        </a>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <!--end of widget-->
-                    </div>
-                </div>
-                <!--end of row-->
-                <div class="row">
-                    <div class="col-sm-12 text-center">
-                        <span class="sub">&copy; Copyright 2016 - Rapiteh Desgin by Heryi</span>
-                        <i class="fa fa-chevron-circle-up fa-5x goTop" aria-hidden="true" id="goTop" ></i>
-                    </div>
-                </div>
-
-
-            </footer>
+			<?php include_once ('footer.php');?>
         </div> 
 
    
