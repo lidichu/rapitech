@@ -631,6 +631,7 @@
         <script src="js/scripts.js"></script>
         <script src="js/wow.js"></script>
   <script>
+
     wow = new WOW(
       {
         animateClass: 'animated',

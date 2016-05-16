@@ -678,6 +678,18 @@
   <script>
 
 $(function(){
+    var carList = [];
+    $( document ).ready(function() {
+        carList = JSON.parse(window.localStorage.getItem("carList"));
+        if(carList){
+            $.each(carList,function(idx, value){
+              $('.a').append(value); 
+             })
+        }
+  
+          
+    });
+
     $('.btn-rounded').click(function(){
 
         var myImg = $('.list img').prop('src');
@@ -704,24 +716,19 @@ $(function(){
             newProduct += "</li>";
             $('.a').append(newProduct);
             alert("已加入清單。");
-            
-
-
+            carList.push(newProduct);
+            var jsonStr = JSON.stringify(carList);
+            localStorage.setItem("carList",jsonStr);
         }
     });
 });
 
     // go to top
-$(function(){
-    
+$(function(){    
     $("#goTop").click(function(){
-
         $("html,body").animate({scrollTop:0},900);
-
         return false;
-
     });
-
 });
 
 
