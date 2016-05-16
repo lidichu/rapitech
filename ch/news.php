@@ -57,18 +57,27 @@
 	                        <?php
 		                        	if($Pic != "")
 		                        	{
+		                        		if($Url != "")
+		                        			echo "<a href=\"".$Url."\" target=\"".$TargetWindow."\">\n";
+	                        			
 							?>
-                            <a href="<?php echo $Url?>" target="<?php echo $TargetWindow?>">
-                                <img src="<?php echo $Pic?>" alt="" >
-                            </a>
-	                        <?php
-									}
+                            <img src="<?php echo $Pic?>" alt="" >
+                            <?php
+		                        		if($Url != "")
+		                        			echo "</a>\n";
+		                        	}
 							?>
                             <div class="inner">
-                                <a href="<?php echo $Url?>" target="<?php echo $TargetWindow?>">
+                            <?php
+		                        		if($Url != "")
+		                        			echo "<a href=\"".$Url."\" target=\"".$TargetWindow."\">\n";
+							?>
                                     <h5 class="mb0"><?php echo $Title?></h5>
                                     <span class="inline-block mb16"><?php echo $PostDate?></span>
-                                </a>
+                            <?php
+		                        		if($Url != "")
+		                        			echo "</a>\n";
+							?>
                                 <hr>
                                 <p><?php echo $Note?></p>
                                 <!-- <a class="btn btn-sm" href="#">Read More</a> -->
