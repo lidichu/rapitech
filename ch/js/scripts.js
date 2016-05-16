@@ -8,6 +8,26 @@ var mr_firstSectionHeight,
     mr_scrollTop = 0;
 
 $(document).ready(function() { 
+	
+    wow = new WOW(
+      {
+        animateClass: 'animated',
+        offset:       100,
+        callback:     function(box) {
+          console.log("WOW: animating <" + box.tagName.toLowerCase() + ">")
+        }
+      }
+    );
+   wow.init();
+	
+    // go to top
+	$(function(){    
+	    $("#goTop").click(function(){
+	        $("html,body").animate({scrollTop:0},900);
+	        return false;
+	    });
+	});
+	
     "use strict";
 
     // Smooth scroll to inner links
