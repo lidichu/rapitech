@@ -31,9 +31,7 @@
 		$NoShowFields[0] = "SerialNo";	//主鍵
 		//修改資料網頁名稱
 		$ModifyFileName = $ModifyFileName01;		
-		//按鈕式超連結,其變數值為要聯結的網頁名稱
-		$DBTableName[0]= $MainFileName02_1;
-		$DBTableName[1]= $MainFileName02_2;
+		
 		//修改資料庫名稱
 		$DBTable = $DatabaseName01;
 		//顯示資料庫名稱
@@ -346,8 +344,6 @@ $(function(){
 		                        <td nowrap style="font-size:12px;"><a class="Title sortlink" href="<?php echo GetSCRIPTNAME(); ?>?SF<?php echo $Level; ?>=Title"><font color="#FFFFFF" style="font-size:13px;">標題</font></a></td>
 								<td nowrap width="80"><input type="button" name="SortUpdate" value="更新排序" onClick="cmdSortUpdate_onclick('<?php echo GetSCRIPTNAME(); ?>');"></td>
 								<td nowrap width="80"><input type="button" name="StatusUpdate" value="更新狀態" onClick="cmdStatusUpdate_onclick('<?php echo GetSCRIPTNAME(); ?>');"></td>
-		                        <td nowrap width="80" style="font-size:13px;"><font color="#FFFFFF">相關連結</font></td>
-								<td nowrap width="80" style="font-size:13px;"><font color="#FFFFFF">檔案下載</font></td>
 	                       	</tr>	
                         <?php
                                 $SQL = "select ".$SQLFields." from ".$DBTable_S.$Query." order by ".$SQLOrderBy." limit ".($Page-1) * $RowCount.",".$RowCount;
