@@ -316,40 +316,30 @@
                             <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1">
                                 <div class="text-slider slider-arrow-controls text-center relative">
                                     <ul class="slides">
+                                    	<?php
+											$Sql="select * from news where Status='上架' and IndexShow='true' order by IndexSort";
+											$Rs=mysql_query($Sql,$Conn);
+											if($Rs && mysql_num_rows($Rs)>0){
+												while($Row=mysql_fetch_array($Rs)){
+													$Title=$Row["Title"];
+													$Note=$Row["Note"];
+													$PostDate=$Row["PostDate"];
+										?>
                                         <li>
-                                            <h2 class="text-center wordColor">Can u have 4 buns in the same time</h2>
+                                            <h2 class="text-center wordColor"><?php echo $Title?></h2>
                                             <hr />
-                                            <p class="lead">looks like 17 years old  super young der Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque totam laborum, illum impedit, earum repellat error fuga iste obcaecati odit sapiente eius. Sequi velit a laborum doloribus, ex sit quaerat...</p>
+                                            <p class="lead"><?php echo $Note?></p>
                                             <div class="quote-author">
-                                                <h6 class="uppercase mb0">Ying Xing</h6>
-                                                <span>2016,04,13</span>
+                                                <span><?php echo $PostDate?></span>
                                             </div>
                                           <!--  something wrong with btn-modal -->
                                             <a class="btn btn-lg" href="news.php"> More Detail <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
                                            
                                         </li>
-                                        <li>
-                                            <h2 class="text-center wordColor">Don't forgot put some chili sauce</h2>
-                                            <hr />
-                                            <p class="lead">get up at 10 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum officiis, atque, repellendus laudantium laboriosam sint in veritatis voluptates modi, quos sed quis repellat odit. Minus eum ducimus reiciendis veniam sint...</p>
-                                            <div class="quote-author">
-                                                <h6 class="uppercase mb0">Robert Hsieh</h6>
-                                                <span>2016,04,13</span>
-                                            </div>
-                                            <br />
-                                            <a class="btn btn-lg " href="news.php">More Detail <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
-                                        </li>
-                                        <li>
-                                            <h2 class="text-center wordColor">Always fallin sleeping in meditation</h2>
-                                            <hr />
-                                            <p class="lead">put a mask will be a ghost. fine example of atomic design brought to life. As a seasoned template user, I really appreciate the consistent styling for all common tags, it makes customising the sections that much easier. 5 stars as always for an amazing template...</p>
-                                            <div class="quote-author">
-                                                <h6 class="uppercase mb0">Robchi</h6>
-                                                <span>2016,04,13</span>
-                                            </div>
-                                              <!-- ??? -->
-                                            <a class="btn btn-lg " href="news.php">More Detail <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
-                                        </li>
+                                        <?php
+												}
+											}
+										?>
                                     </ul>
                                 </div>
                             </div>
