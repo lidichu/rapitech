@@ -501,11 +501,15 @@
 $(function(){
     var carList = [];   
     carList = JSON.parse(window.localStorage.getItem("carList"));
+    
     if(carList){
         $.each(carList,function(idx, value){
         	$('#cartList').append(value); 
         })
+        $("#cartListnum").text(carList.length);
     } 
+    else
+    	$("#cartListnum").text("0");
     
 
     $('.btn-rounded').click(function(){
@@ -538,6 +542,7 @@ $(function(){
             carList.push(newProduct);
             var jsonStr = JSON.stringify(carList);
             localStorage.setItem("carList",jsonStr);
+            $("#cartListnum").text(carList.length);
             alert("已加入清單。");
         }
     });

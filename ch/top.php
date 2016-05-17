@@ -119,7 +119,7 @@
                         <div class="module widget-handle cart-widget-handle left">
                             <div class="cart wordColor">
                                 <i class="ti-bag"></i>
-                                <span class="label number">2</span>
+                                <span id="cartListnum" class="label number">2</span>
                                 <span class="title">Shopping Cart</span>
                             </div>
                             <div class="function">
