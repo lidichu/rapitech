@@ -499,7 +499,13 @@
   <script>
 
 $(function(){
-
+    var carList = [];   
+    carList = JSON.parse(window.localStorage.getItem("carList"));
+    if(carList){
+        $.each(carList,function(idx, value){
+        	$('#cartList').append(value); 
+        })
+    } 
     
 
     $('.btn-rounded').click(function(){
