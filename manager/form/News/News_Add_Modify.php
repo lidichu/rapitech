@@ -49,7 +49,7 @@
 	$M->AddURL("Url","連結",false,"","");
 	$M->AddSelect2("TargetWindow","開啟方式",true,$TargetWindowItem,$TargetWindowValue,"_blank");
 	$M->AddNote1n("Note","內容(繁體)",false);
-	$M->AddPIC3("PIC","圖片",false,$PICRootArray,$PICWidthArray,$PICHeightArray,"圖片建議寬高為 689 x 517 像素","","","","PICHidden",$PICBoxArray,120,"",$UploadPic["Small"]["Root"]);
+	$M->AddPIC3("PIC","圖片",false,$PICRootArray,$PICWidthArray,$PICHeightArray,"圖片寬度360像素以上,高度不限","","","","PICHidden",$PICBoxArray,120,"",$UploadPic["Small"]["Root"]);
 	
 	//新增用SQL
 	$AddFieldsSQL = "";
