@@ -8,7 +8,13 @@ var mr_firstSectionHeight,
     mr_scrollTop = 0;
 
 $(document).ready(function() { 
-	
+    var carList = [];   
+    carList = JSON.parse(window.localStorage.getItem("carList"));
+    if(carList){
+        $.each(carList,function(idx, value){
+        	$('#cartList').append(value); 
+        })
+    } 
     wow = new WOW(
       {
         animateClass: 'animated',
