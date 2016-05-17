@@ -499,18 +499,24 @@
   <script>
 
 $(function(){
-    var carList = [];   
+
+  // 開始 local storage 塞入資料
+    // 宣告 carList是一個 arry
+    var carList = []; 
     carList = JSON.parse(window.localStorage.getItem("carList"));
-    
+      // alert(carList);  
     if(carList){
         $.each(carList,function(idx, value){
         	$('#cartList').append(value); 
         })
+        // #cartListnum塞入carList 各數
         $("#cartListnum").text(carList.length);
     } 
+        //#cartListnum else塞入0
     else
     	$("#cartListnum").text("0");
     
+  // 結束local storage 塞入資料
 
     $('.btn-rounded').click(function(){
 
@@ -536,14 +542,15 @@ $(function(){
             newProduct += "</div>";
             newProduct += "</a>";
             newProduct += "</li>";
-            $('#cartList').append(newProduct);            
+            $('#cartList').append(newProduct); 
+
             if(!carList)
-            	carList = [];
+            carList = [];
             carList.push(newProduct);
             var jsonStr = JSON.stringify(carList);
             localStorage.setItem("carList",jsonStr);
             $("#cartListnum").text(carList.length);
-            alert("已加入清單。");
+            // // alert("已加入清單。");
         }
     });
 });

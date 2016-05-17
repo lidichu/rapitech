@@ -366,14 +366,37 @@
 
        $(function(){
 
+    // 開始 local storage 塞入資料
+    // 宣告 carList是一個 arry
+    var carList = []; 
+    carList = JSON.parse(window.localStorage.getItem("carList"));
+      // alert(carList);  
+    if(carList){
+        $.each(carList,function(idx, value){
+            $('#cartList').append(value); 
+        })
+        // #cartListnum塞入carList 各數
+        $("#cartListnum").text(carList.length);
+        } 
+        //#cartListnum else塞入0
+        else
+        $("#cartListnum").text("0");
+    // 結束local storage 塞入資料
+
+
         // 塞資料
                 var myImg = "";//$('.cart img').prop('src');\取img src
                 var spanText = "";
-                var myCartList = $('#myCartList').children();//$('.cart .cart-title').text(); 所有的li在cartlist
+                var cartList = $('#cartList').children('li');//$('.cart .cart-title').text(); 所有的li在cartlist
+                // var myCartN = myCartList.text();
+                // alert(myCartN);
                 var newProduct = "";
-                $.each(myCartList,function(i,val){
-                    myImg = val.children[0].src;
-                    spanText =  val.children[1].textContent;
+            // new eah
+                $(cartList).each(function(){
+                    myImg = $(this).find('img').prop('src');
+                    // alert(myImg);
+                    spanText = $(this).find('span').text();
+                    // alert(spanText);
                     newProduct += " <tr> ";
                     // xx結構
                     newProduct += "<th scope=\"row\"><a class=\"remove-item\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"\" data-original-title=\"Remove from list\"><i class=\"ti-close\"></i></a></th>";
@@ -381,27 +404,41 @@
                     newProduct += "<td><img src=\""+ myImg +"\" alt=\"\" class=\"img-responsive product-thumb\"></td>";
                     newProduct += "<td><span>" + spanText + "</span></td>";
                     newProduct += "</tr>";                  
-                })
+                });
+
+            // end the new each
+
                 $('#list').append(newProduct);
 
                 // 抓出list 值
                 $('i').click(function(){
                     //選取目前按鈕清單的SPAN
-                    var listElement = $(this).parents('tr').children('td:eq(1)').children('span');
+                    var listElement = $(this).parents('tr').find('span');
                     //選取目前按鈕清單的SPAN的值                   
                     var listName = listElement.text();
                     // alert(listName);
 
                     // 選取購物車所有清單SPAN
-                    var cartList = $('#myCartList').children('li').children('span');
+                    var cartList = $('#cartList').find('span');
                     // alert(list);
-                    
                     $(cartList).each(function(){
                      var s = $(this).text();
                          if(listName == s)
                          {
                             $(this).parents('li').remove(); 
                             $(listElement).parents('tr').remove();
+
+
+
+                            // 
+                            $localStorage.removeItem(''); //刪除key值為test1這筆資料
+                            $localStorage.clear(); //刪除localStorage裡所有資料
+
+                            // $("#cartListnum").text(carList.length); 數字顯示
+
+
+
+
                             alert(listName+" "+"has been move out from  INQUIRY LIST");
                             return false;                       
                          }          
