@@ -436,6 +436,7 @@
                       arr.push(val.outerHTML);
                     });                    
                     localStorage.setItem("carList",JSON.stringify(arr));
+                    $("#cartListnum").text(arr.length);
                 });
 
     });
