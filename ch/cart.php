@@ -338,7 +338,7 @@
                         </div>
                         <div class="overflow-hidden">
                             <div class="col-sm-6 col-sm-offset-3">
-                                <button type="submit">Submit </button>
+                                <button id="btnSubmit" type="submit">Submit </button>
                             </div>
                         </div>
                     </form>
@@ -376,11 +376,11 @@
             $('#cartList').append(value); 
         })
         // #cartListnum塞入carList 各數
-        $("#cartListnum").text(carList.length);
+       		$("#cartListnum").text(carList.length);
         } 
         //#cartListnum else塞入0
         else
-        $("#cartListnum").text("0");
+        	$("#cartListnum").text("0");
     // 結束local storage 塞入資料
 
 
@@ -437,6 +437,11 @@
                     });                    
                     localStorage.setItem("carList",JSON.stringify(arr));
                     $("#cartListnum").text(arr.length);
+                });
+                
+                $('#btnSubmit').click(function() {
+                	localStorage.clear();    
+                	location.reload();
                 });
 
     });
