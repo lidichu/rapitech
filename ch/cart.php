@@ -427,24 +427,15 @@
                          {
                             $(this).parents('li').remove(); 
                             $(listElement).parents('tr').remove();
-
-
-
-                            // 
-                            $localStorage.removeItem(''); //刪除key值為test1這筆資料
-                            $localStorage.clear(); //刪除localStorage裡所有資料
-
-                            // $("#cartListnum").text(carList.length); 數字顯示
-
-
-
-
                             alert(listName+" "+"has been move out from  INQUIRY LIST");
                             return false;                       
                          }          
                     });
-
-
+                    var arr =[]; 
+                    $('#cartList li').each(function(index,val) {                      
+                      arr.push(val.outerHTML);
+                    });                    
+                    localStorage.setItem("carList",JSON.stringify(arr));
                 });
 
     });
