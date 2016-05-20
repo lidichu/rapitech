@@ -210,7 +210,7 @@
                     <div class="col-md-8 col-sm-8 col-md-pull-4 col-xs-12 ">
                         <h2 class="text-center footerColor">The Rapitech facilties</h2>
                         <p class="col-sm-10 col-sm-push-1 footerColor">
-                            Rapitech started as a manufactring company of gardening products, it now also  acts as a sourcing and a trading company for addtional products. The product range currentlyhandled is primarily for the garden,outdoor & indoors gardening clocks and electronic DIY markets in Europe and North America. Our company is constandly reviewing the productrang and offering new items to our customer based on the current markets needs.
+                            Our main office is based in Kaohsiung, Taiwan with the manufacturing facility in Zhangzhou, China and consolidation warehouse for sub-contracted goods. The factory and warehouse consist of 2,400 sq/m and employs about 75 workers. The factory manufactures test meters, garden accessories, plant labels, gardening ties, thermometers, etc. It is also equipped with general packing line, quality control and distribution. And the warehouse is available for multifunctional consolidation before shipment.
                             <br><br>
                             <a class="btn btn-lg  mybtn" href="about.php">More Detail <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
                         </p>
@@ -242,6 +242,28 @@
         <script src="js/scripts.js"></script>
         <!--  -->
         <script src="js/wow.js"></script>
+
+<script type="text/javascript">
+
+$(function(){
+
+  // 開始 local storage 塞入資料
+    // 宣告 carList是一個 arry
+    var carList = []; 
+    carList = JSON.parse(window.localStorage.getItem("carList"));
+      // alert(carList);  
+    if(carList){
+        $.each(carList,function(idx, value){
+            $('#cartList').append(value); 
+        })
+        // #cartListnum塞入carList 各數
+        $("#cartListnum").text(carList.length);
+    }
+    else
+        $("#cartListnum").text("0");
+    }); 
+
+</script>
 
     </body>
 </html>

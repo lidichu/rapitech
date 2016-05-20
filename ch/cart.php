@@ -431,6 +431,7 @@
                             return false;                       
                          }          
                     });
+                    
                     var arr =[]; 
                     $('#cartList li').each(function(index,val) {                      
                       arr.push(val.outerHTML);

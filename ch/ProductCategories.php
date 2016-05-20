@@ -399,8 +399,8 @@
         <script src="js/countdown.min.js"></script>
          <script src="js/smooth-scroll.min.js"></script> 
         <script src="js/parallax.js"></script> 
-        <script src="js/scripts.js"></script>
         <script src="js/wow.js"></script>
+        <script src="js/scripts.js"></script>
        
 
   <!-- add to cart -->
@@ -432,12 +432,13 @@ $(function(){
         var myTitle = $(this).parent().children()[1].innerText;//$('.list .product-title').text();
         var newProduct = "";
         var select = $('.cart-overview').children();
+
         for(i = 0;i<select.length;i++)
         {
-            if(!select[i])
-                break;
+          if(!select[i])
+            break;
             var title = select[i].children[0].textContent;//select[i].children[0].children[1].innerText;
-           if(title== myTitle) 
+          if(title == myTitle) 
                 break;
         }
         if(title!= myTitle && title !="")
@@ -453,14 +454,17 @@ $(function(){
             $('#cartList').append(newProduct); 
 
             if(!carList)
+
             carList = [];
             carList.push(newProduct);
             var jsonStr = JSON.stringify(carList);
             localStorage.setItem("carList",jsonStr);
             $("#cartListnum").text(carList.length);
+            
             // // alert("已加入清單。");
         }
     });
+
 });
 
 

@@ -133,8 +133,7 @@
                                     <div class="cart-controls">
                                         <a class="btn btn-sm btn-filled" href="cart.php">Inquiry List</a>
                                         <div class="list-inline pull-right">
-                                           <!--  <span class="cart-total">Total: </span>
-                                            <span class="number">$289.40</span> -->
+                                       
                                         </div>
                                     </div>
                                 </div>

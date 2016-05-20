@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title> Rapitech index</title>
+    <title> Rapitech product</title>
     <meta name="viewport" content="width=device-width, initial-scale=0.9">
     <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
     <link href="css/themify-icons.css" rel="stylesheet" type="text/css" media="all" />
@@ -310,10 +310,7 @@
                                 <img src="https://placem.at/things?w=600&h=600&random=1" alt="" class="img-responsive product-thumb">
                             </a>
                             <div class="title">
-                                <h5 class="mb0">
-                                    Adrian
-                                    LambsWool
-                                </h5>
+                                <h5 class="mb0">Adrian LambsWool</h5>
                                    <br>
                                     <a class="btn btn-sm btn-rounded">Add To List</a>
                             </div>
@@ -326,10 +323,7 @@
                                 <img src="https://placem.at/things?w=600&h=600&random=2" alt="" class="img-responsive product-thumb">
                             </a>
                             <div class="title">
-                                <h5 class="mb0">
-                                    Stanley
-                                    Leather
-                                </h5>
+                                <h5 class="mb0">Stanley Leather</h5>
                                  <br>
                                 <a class="btn btn-sm btn-rounded">Add To List</a>
                             </div>
@@ -342,10 +336,7 @@
                                 <img src="https://placem.at/things?w=600&h=600&random=3" alt="" class="img-responsive product-thumb">
                             </a>
                             <div class="title">
-                                <h5 class="mb0">
-                                    Vladimir
-                                    Stainless
-                                </h5>
+                                <h5 class="mb0">Vladimir Stainless</h5>
                                  <br>
                                 <a class="btn btn-sm btn-rounded">Add To List</a>
                             </div>
@@ -358,10 +349,7 @@
                                 <img src="https://placem.at/things?w=600&h=600&random=4" alt="" class="img-responsive product-thumb">
                             </a>
                             <div class="title">
-                                <h5 class="mb0">
-                                    Luka
-                                    Vintage Camera
-                                </h5>
+                                <h5 class="mb0">Luka Vintage Camera</h5>
                                 <br>
                                 <a class="btn btn-sm btn-rounded">Add To List</a>
                             </div>
@@ -374,10 +362,7 @@
                                 <img src="https://placem.at/things?w=600&h=600&random=5" alt="" class="img-responsive product-thumb">
                             </a>
                             <div class="title">
-                                <h5 class="mb0">
-                                    Luka
-                                    Vintage Camerb
-                                </h5>
+                                <h5 class="mb0">Luka Vintage Camerb</h5>
                                   <br>
                                 <a class="btn btn-sm btn-rounded">Add To List</a>
                             </div>
@@ -390,10 +375,7 @@
                                 <img src="https://placem.at/things?w=600&h=600&random=6" alt="" class="img-responsive product-thumb">
                             </a>
                             <div class="title">
-                                <h5 class="mb0">
-                                    Luka
-                                    Vintage Camerc
-                                </h5>
+                                <h5 class="mb0">Luka Vintage Camerc</h5>
                                 <br>
                                 <a class="btn btn-sm btn-rounded">Add To List</a>
                             </div>
@@ -425,7 +407,30 @@
     <script src="js/wow.js"></script>
     <script>
 //  add to cart
-    $(function(){$('.btn-rounded').click(function(){
+    $(function(){
+
+    // 開始 local storage 塞入資料
+    // 宣告 carList是一個 arry
+    var carList = []; 
+    carList = JSON.parse(window.localStorage.getItem("carList"));
+      // alert(carList);  
+    if(carList){
+        $.each(carList,function(idx, value){
+            $('#cartList').append(value); 
+        })
+        // #cartListnum塞入carList 各數
+        $("#cartListnum").text(carList.length);
+        } 
+        //#cartListnum else塞入0
+    else
+        $("#cartListnum").text("0");
+    
+  // 結束local storage 塞入資料
+
+
+
+        // 你可能會喜歡 按鈕事件
+        $('.btn-rounded').click(function(){
         // 抓到目前list img src
         var ImgSrc= $(this).parents('.image-tile').children('a').children('img').prop('src');
          // alert(ImgSrc);
@@ -434,8 +439,19 @@
         // span裡面的值
         var listName = list.text();
         // alert(listName);
-        var newProduct = " <li><img src=\""+ImgSrc+"\" alt=\"\" class=\"img-responsive col-sm-6\"><span>"+ listName +"</span></li>";
+     
+            var newProduct = "";
+            newProduct += "<li>";
+            newProduct += "<a href=\"#\">";
+            newProduct += "<img src=\"" + ImgSrc + "\" class=\"img-responsive product-thumb  col-sm-6\">";
+            newProduct += "<div class=\"description\">";
+            newProduct += "<span class=\"product-title\">" + listName + "</span>";
+            newProduct += "</div>";
+            newProduct += "</a>";
+            newProduct += "</li>";
+
          // alert(newProduct);
+
         //抓到所有的cart h3 取到物件 沒值
         var cartItem = $('#cartList').children('li').children('span');
         // alert(cartItem);
@@ -453,6 +469,7 @@
                 // 布林值是true;
                 b = true;
                 // 跳出 
+                alert('加過了');
                 return false;
 
             }                       
@@ -460,15 +477,30 @@
         // 如果不是true
         if(!b)
         {
+            
             // .cart加入newProduct結構
-            $('#cartList').append(newProduct);  
-             alert("add to inquiry List"); 
+            $('#cartList').append(newProduct);
+             alert(listName +"add to inquiry List");
+
+        // 宣告arr陣列
+        var arr =[]; 
+        // #cartList li 全部each 
+        $('#cartList li').each(function(index,val) {  
+        //塞入val 
+        arr.push(val.outerHTML);
+                });                    
+        localStorage.setItem("carList",JSON.stringify(arr));
+        $("#cartListnum").text(arr.length); 
+        // 
         }
     });
     });
 
   //end add to cart add 
+
+
 // product add
+
 $(function(){$('#btn').click(
     function(){
         var ProductImg = $('.slides').children('li:eq(0)').children('img').prop('src');
@@ -493,15 +525,31 @@ $(function(){$('#btn').click(
                 // 布林值是true;
                 b = true;
                 // 跳出 
+                alert('加過了');
                 return false;
             }                       
         });
         // 如果不是true
         if(!b)
         {
+
             // .cart加入newProduct結構
-            $('#cartList').append(newProductBig);  
-             alert("add to inquiry List"); 
+            $('#cartList').append(newProductBig); 
+
+             alert(ProductTittle + "add to inquiry List");
+
+            // 宣告arr陣列
+        var arr =[]; 
+        // #cartList li 全部each 
+        $('#cartList li').each(function(index,val) {  
+        //塞入val 
+        arr.push(val.outerHTML);
+                });                    
+        localStorage.setItem("carList",JSON.stringify(arr));
+        $("#cartListnum").text(arr.length); 
+        // 
+
+
         }
     });
 });
