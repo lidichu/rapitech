@@ -3,43 +3,43 @@
 <?php
 	$_POST = quotes($_POST);
 	//接收參數 
-	$SafeCodeTmp = strtolower($_SESSION["SafeCode"]);
-	$_SESSION["SafeCode"] = "";
-	$KeyPair["Name"] = CheckData($_POST["Name"]);
-	$KeyPair["Sex"] = CheckData($_POST["Sex"]);
+	//$SafeCodeTmp = strtolower($_SESSION["SafeCode"]);
+	//$_SESSION["SafeCode"] = "";
+	$KeyPair["Name"] = CheckData($_POST["name"]);
+	$KeyPair["Sex"] = "";//CheckData($_POST["Sex"]);
 	$KeyPair["Tel"] = CheckData($_POST["Tel"]);
 
 	$KeyPair["EMail"] = CheckData($_POST["EMail"]);
 	$AddressCity = CheckData($_POST["AddressCity"]);
-	$AddressArea = CheckData($_POST["AddressArea"]);
-	$AddressZipCode = CheckData($_POST["AddressZipCode"]);
-	$AddressOther = CheckData($_POST["AddressOther"]);
-	$Address = CheckData($_POST["Address"]);
+	$AddressArea = "";//CheckData($_POST["AddressArea"]);
+	$AddressZipCode = "";//CheckData($_POST["AddressZipCode"]);
+	$AddressOther = "";//CheckData($_POST["AddressOther"]);
+	$Address = "";//CheckData($_POST["Address"]);
 	$KeyPair["Address"] = $AddressZipCode.$AddressCity.$AddressArea.$AddressOther.$Address;
 	$KeyPair["Subject"] = CheckData($_POST["Subject"]);
 	$KeyPair["Note"] = CheckData($_POST["Note"]);
 	$KeyPair["PostDate"] = date("Y-m-d");
 	$KeyPair["Status"] = "未處理";
 	$KeyPair["Lang"] = $Lang;
-	$VCode = strtolower(CheckData($_POST["VCode"]));
+	$VCode = "";//strtolower(CheckData($_POST["VCode"]));
 	$order = array("\r\n", "\n", "\r"); 
 	$replace = "<br />"; 
 	$KeyPair["Note"] = str_replace($order, $replace, $KeyPair["Note"]);
 	$ResultCode = 0;
 	$CheckField = explode(",","Name,Tel,EMail,Address,Subject,Note");
 	$CheckResult = true;
-	foreach($CheckField as $Key => $Value){
-		if($Value!="Sex" && $Value!="Address"){
-			if($KeyPair[$Value] == ""){
-				notify("部份欄位未填寫");
-			}
-		}
-	}	
-	if($SafeCodeTmp != $VCode){
-		$_SESSION["SafeCode"] = $SafeCodeTmp;
-		notify("驗證碼錯誤");
+// 	foreach($CheckField as $Key => $Value){
+// 		if($Value!="Sex" && $Value!="Address"){
+// 			if($KeyPair[$Value] == ""){
+// 				notify("部份欄位未填寫");
+// 			}
+// 		}
+// 	}	
+// 	if($SafeCodeTmp != $VCode){
+// 		$_SESSION["SafeCode"] = $SafeCodeTmp;
+// 		notify("驗證碼錯誤");
 		
-	}
+// 	}
 	if($ResultCode==0){	
 		$SplitChar = "";
 		$InsertFields = "";

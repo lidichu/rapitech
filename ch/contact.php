@@ -54,13 +54,14 @@
                             </p>
                         </div>
                         <div class="col-sm-6 col-md-5 col-md-offset-1">
-                            <form class="form-email" data-success="Thanks for your submission, we will be in touch shortly." data-error="Please fill all fields correctly.">
+                            <form id="form1" action="contact_handle.php" method="post" data-success="Thanks for your submission, we will be in touch shortly." data-error="Please fill all fields correctly.">
                                 <input type="text" class="validate-required" name="name" placeholder="Your Name" />
-                                <input type="text" class="validate-required validate-email" name="email" placeholder="Email Address" />
+                                <input type="text" class="validate-required" name="Tel" placeholder="Your Tel" />
+                                <input type="text" class="validate-required validate-email" name="EMail" placeholder="Email Address" />
                                 <!-- contry -->
                                                             <div class="form-group  ">
                             
-                              <select class="my-form-control my-from-group cbg" id="sel1">
+                              <select name="AddressCity" class="my-form-control my-from-group cbg" id="sel1">
                                 <!-- <option value="AF" >select country*</option> -->
                                     <option value="AL">Albania </option>
                                     <option value="DZ">Algeria</option>
@@ -273,7 +274,7 @@
                                     <option value="SE">Sweden</option>
                                     <option value="CH">Switzerland</option>
                                     <option value="SY">Syria</option>
-                                    <option value="TW" selected="" >Taiwan</option>
+                                    <option value="TW" selected >Taiwan</option>
                                     <option value="TJ">Tajikistan</option>
                                     <option value="TZ">Tanzania</option>
                                     <option value="TH">Thailand</option>
@@ -308,9 +309,15 @@
                               </select>
 
                             </div>
-                           
-                                <!--  -->
-                                <textarea class="validate-required" name="message" rows="3" placeholder="Message"></textarea>
+                            	<input type="text" class="validate-required" name="Subject" placeholder="Your Subject" />
+                                <textarea class="validate-required" name="Note" rows="3" placeholder="Message"></textarea>
+                                <table cellpadding="0" cellspacing="0" border="0">
+									<tr>
+										<td>驗證碼：</td>
+										<td width="60"><a id="imgVCode" href="#" class="number" onfocus="blur()"><img src="../Scripts/SafeCode.php" border="0" /></a></td>
+										<td><input  name="VCode" class="key" type="text" id="VCode" size="30" style="width:120px" maxlength="4" /></td>
+									</tr>
+								</table>     
                                 <button type="submit">Send Message</button>
                             </form>
                         </div>
@@ -322,6 +329,7 @@
 <?php include_once ('footer.php');?>
 
         </div>
+        <?php include_once(VisualRoot.'Common/Script.php'); ?>
         <script src="js/jquery.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
        <script src="js/flickr.js"></script>
@@ -355,9 +363,38 @@ $(function(){
     }
     else
         $("#cartListnum").text("0");
-    }); 
+	$("body").TwZipCode({CountryFieldName : 'AddressCity',AreaFieldName:'AddressArea',ZipCodeFieldName:'AddressZipCode',CountryDefaultValue : '縣/市',AreaDefaultValue: '鄉/鎮/市/區'});
+	$("#btnSubmit").click(function(){
+		$("#form1").submit();
+		return false;
+	});
+	$("#btnReset").click(function(){
+		$("#form1").get(0).reset();
+		return false;
+	});	
+	$("#form1").submit(function(){
+		var sError = new MyErrorCh();
+		var AddressValue = new Array();
+		AddressValue.push($("#AddressCity").val());
+		AddressValue.push($("#AddressArea").val());
+		AddressValue.push($("#AddressZipCode").val());
+		AddressValue.push($("#AddressOther").val());
+		sError.checkNull("姓名",$("#Name").val());
+		sError.checkNull("連絡電話",$("#Tel").val());
+
+		sError.checkNull("主旨",$("#Subject").val());
+		sError.checkNull("內容",$("#Note").val());
+		sError.checkNull("驗證碼",$("#VCode").val());
+		return sError.pass();
+	});
+	$("#imgVCode").click(function(){
+		$(this).find("img").prop("src","../Scripts/SafeCode.php?r=" + Math.random());
+		return false;
+	});
+ }); 
 
 </script>
+
 
     </body>
 </html>
