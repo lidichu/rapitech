@@ -25,7 +25,7 @@
 
 
             <div class="container-fluid">
-                <img src="https://placem.at/things?w=1920&h=400&random=1" alt="" class="img-responsive">
+                <img src="https://placem.at/things?w=1920&h=400&random=0" alt="" class="img-responsive">
             </div>
             <div class="clearfix"></div>
                 <div class="container">
@@ -55,8 +55,8 @@
                                 <div class="col-md-4 col-sm-4 masonry-item col-xs-6">
                                     <div class="image-tile outer-title text-center">
 
-                                        <a href="Product.php" class="list">
-                                              <img src="https://placem.at/things?w=600&amp;h=600&amp;random=1" alt="" class="img-responsive product-thumb ">
+                                        <a href="product.php" class="list">
+                                              <img src="https://placem.at/things?w=600&amp;h=600&amp;random=0" alt="" class="img-responsive product-thumb ">
                                         </a>
                                         <div class="description">
                                              <span class="product-title">Adrian LambsWool Cap</span>
@@ -64,34 +64,31 @@
                                         <br/>
                                         <!--  btn -->
                                          <a id="btn" class="btn btn-sm btn-rounded" href="#" >add to List</a>
-
-                                       
                                         <!-- btn -->
                                     </div>
                                 </div>
-                                <!--end three col-->
 
+                                <!--end three col-->
 
                                 <div class="col-md-4 col-sm-4 masonry-item col-xs-6">
                                     <div class="image-tile outer-title text-center">
 
-                                        <a href="Product.php" class="list">
+                                        <a href="#" class="list">
                                               <img src="https://placem.at/things?w=600&amp;h=600&amp;random=1" alt="" class="img-responsive product-thumb ">
                                         </a>
                                         <div class="description">
                                              <span class="product-title">Adrian LambsWool Cap1</span>
                                          </div>
-
-
-                                        <br/>
+                                       <br/>
                                          <a id="btn" class="btn btn-sm btn-rounded" href="#">add to List</a>
                                     </div>
                                 </div>
+
                                 <!--end three col-->
                                <div class="col-md-4 col-sm-4 masonry-item col-xs-6">
                                     <div class="image-tile outer-title text-center">
 
-                                        <a href="Product.php" class="list">
+                                        <a href="#" class="list">
                                               <img src="https://placem.at/things?w=600&amp;h=600&amp;random=2" alt="" class="img-responsive product-thumb ">
                                         </a>
                                         <div class="description">
@@ -105,7 +102,7 @@
                               <div class="col-md-4 col-sm-4 masonry-item col-xs-6">
                                     <div class="image-tile outer-title text-center">
 
-                                        <a href="Product.php" class="list">
+                                        <a href="#" class="list">
                                               <img src="https://placem.at/things?w=600&amp;h=600&amp;random=3" alt="" class="img-responsive product-thumb ">
                                         </a>
                                         <div class="description">
@@ -119,7 +116,7 @@
                                 <div class="col-md-4 col-sm-4 masonry-item col-xs-6">
                                     <div class="image-tile outer-title text-center">
 
-                                        <a href="Product.php" class="list">
+                                        <a href="#" class="list">
                                               <img src="https://placem.at/things?w=600&amp;h=600&amp;random=4" alt="" class="img-responsive product-thumb ">
                                         </a>
                                         <div class="description">
@@ -135,7 +132,7 @@
                                 <div class="col-md-4 col-sm-4 masonry-item col-xs-6">
                                     <div class="image-tile outer-title text-center">
 
-                                        <a href="Product.php" class="list">
+                                        <a href="#" class="list">
                                               <img src="https://placem.at/things?w=600&amp;h=600&amp;random=5" alt="" class="img-responsive product-thumb ">
                                         </a>
                                         <div class="description">
@@ -185,7 +182,6 @@
                         <!-- accordion -->
                         <h4 class="title">Product Categories</h4>
                         <h4 class="text-center wordColor wow bounceIn" data-wow-delay="3s">Measuring-1</h4>
-                
                         <hr>
                         <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
   <div class="panel panel-default mypanel-default">
@@ -353,9 +349,8 @@
 
 
 
-</div>
-                        
-                        <!--end accordion  -->
+</div>                        
+<!--end accordion  -->
                        
                             <!--end of widget-->
                             <div class="widget">
@@ -387,9 +382,9 @@
 
 <?php include_once ('footer.php');?>
    
-         <script src="js/jquery.min.js"></script>
+        <script src="js/jquery.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
-       <script src="js/flickr.js"></script>
+        <script src="js/flickr.js"></script>
         <script src="js/flexslider.min.js"></script>
         <script src="js/lightbox.min.js"></script> 
         <script src="js/masonry.min.js"></script>
@@ -454,16 +449,59 @@ $(function(){
             $('#cartList').append(newProduct); 
 
             if(!carList)
-
             carList = [];
             carList.push(newProduct);
             var jsonStr = JSON.stringify(carList);
             localStorage.setItem("carList",jsonStr);
             $("#cartListnum").text(carList.length);
             
-            // // alert("已加入清單。");
+            // alert("已加入清單。");
         }
     });
+    //加入你可能會喜歡點過資料
+
+    $('.list img').click(
+      function(){
+         var likeImgSrc = $(this).prop('src');
+             // alert(likeImgSrc);
+         var likeImgTitle = $(this).parents('.image-tile').find('.product-title').text();;
+             // alert(likeImgTitle);
+         
+             // 產品頁面 你可能會喜歡li結構
+         var likeProduct = "";
+             likeProduct += "<div class=\"col-md-2 col-sm-4\">";
+             likeProduct += "<div class=\"image-tile outer-title text-center\">";
+             likeProduct += "<a href=\"#\">";
+             likeProduct += " <img src=\""+ likeImgSrc +"\" alt=\"\" class=\"img-responsive product-thumb\">";
+             likeProduct += "</a>";
+             likeProduct += "<div class=\"title\">";
+             likeProduct += "<h5 class=\"mb0\">" + likeImgTitle + "</h5>";
+             likeProduct += "<br>";
+             likeProduct += "<a class=\"btn btn-sm btn-rounded\">Add To List</a>";
+             likeProduct += "</div>";
+             likeProduct += "</div>";
+             likeProduct += "</div>";
+
+
+            // 宣告一個陣列
+            var likeList = [];
+            // 將likeproduct塞入likeList
+            likeList.push(likeProduct);
+            // 宣告jsonLikeStr反序列化likeList
+            var jsonLikeStr = JSON.stringify(likeList);
+            // 將likeList裡的jsonLikeStr 存到localStorage
+            localStorage.setItem( "likeList", jsonLikeStr );
+            // 取得likeList裡的jsonLikeStr 顯示
+            alert(localStorage.getItem( "likeList", jsonLikeStr ));
+             // $("#likeListnum").text(likeList.length);
+
+
+
+         });
+       
+
+ 
+
 
 });
 

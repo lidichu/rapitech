@@ -21,7 +21,7 @@
 <?php include_once ('top.php');?>
     <div class="main-container">
         <div class="container-fluid">
-            <img src="https://placem.at/things?w=1920&h=400&random=1" alt="" class="img-responsive">
+            <img src="https://placem.at/things?w=1920&h=400&random=0" alt="" class="img-responsive">
         </div>
         <div class="clearfix"></div>
    
@@ -47,11 +47,11 @@
                                     <div class="panel-body">
                                         <ul>
                                             <li>
-                                            <a href="productList.php">Measuring1<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
+                                            <a href="productCategories.php">Measuring1<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
                                            </li>
-                                            <li><a href="productList.php">Measuring2<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
-                                            <li><a href="productList.php">Measuring3<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
-                                            <li><a href="productList.php">Measuring4<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
+                                            <li><a href="productCategories.php">Measuring2<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
+                                            <li><a href="productCategories.php">Measuring3<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
+                                            <li><a href="productCategories.php">Measuring4<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -68,10 +68,10 @@
                                 <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
                                     <div class="panel-body">
                                         <ul>
-                                            <li><a href="productList.php">Garden Accessories1<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
-                                            <li><a href="productList.php">Garden Accessories2<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
-                                            <li><a href="productList.php">Garden Accessories3<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
-                                            <li><a href="productList.php">Garden Accessories4<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
+                                            <li><a href="productCategories.php">Garden Accessories1<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
+                                            <li><a href="productCategories.php">Garden Accessories2<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
+                                            <li><a href="productCategories.php">Garden Accessories3<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
+                                            <li><a href="productCategories.php">Garden Accessories4<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -87,10 +87,10 @@
                                 <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
                                     <div class="panel-body">
                                         <ul>
-                                            <li><a href="productList.php">Outdoor & Indoor Clocks1<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
-                                            <li><a href="productList.php">Outdoor & Indoor Clocks2<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
-                                            <li><a href="productList.php">Outdoor & Indoor Clocks3<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
-                                            <li><a href="productList.php">Outdoor & Indoor Clocks4<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
+                                            <li><a href="productCategories.php">Outdoor & Indoor Clocks1<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
+                                            <li><a href="productCategories.php">Outdoor & Indoor Clocks2<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
+                                            <li><a href="productCategories.php">Outdoor & Indoor Clocks3<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
+                                            <li><a href="productCategories.php">Outdoor & Indoor Clocks4<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -106,10 +106,10 @@
                                 <div id="collapsefour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingfour">
                                     <div class="panel-body">
                                         <ul>
-                                            <li><a href="productList.php">Soil Test Kits1<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
-                                            <li><a href="productList.php">Soil Test Kits2<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
-                                            <li><a href="productList.php">Soil Test Kits3<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
-                                            <li><a href="productList.php">Soil Test Kits4<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
+                                            <li><a href="productCategories.php">Soil Test Kits1<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
+                                            <li><a href="productCategories.php">Soil Test Kits2<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
+                                            <li><a href="productCategories.php">Soil Test Kits3<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
+                                            <li><a href="productCategories.php">Soil Test Kits4<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -125,10 +125,10 @@
                                 <div id="collapsefive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingfive">
                                     <div class="panel-body">
                                         <ul>
-                                            <li><a href="productList.php">Thermometers1<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
-                                            <li><a href="productList.php">Thermometers2<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
-                                            <li><a href="productList.php">Thermometers3<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
-                                            <li><a href="productList.php">Thermometers4<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
+                                            <li><a href="productCategories.php">Thermometers1<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
+                                            <li><a href="productCategories.php">Thermometers2<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
+                                            <li><a href="productCategories.php">Thermometers3<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
+                                            <li><a href="productCategories.php">Thermometers4<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -145,10 +145,10 @@
                                 <div id="collapseSix" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSix">
                                     <div class="panel-body">
                                         <ul>
-                                            <li><a href="productList.php">Plant Labels1<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
-                                            <li><a href="productList.php">Plant Labels2<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
-                                            <li><a href="productList.php">Plant Labels3<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
-                                            <li><a href="productList.php">Plant Labels4<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
+                                            <li><a href="productCategories.php">Plant Labels1<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
+                                            <li><a href="productCategories.php">Plant Labels2<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
+                                            <li><a href="productCategories.php">Plant Labels3<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
+                                            <li><a href="productCategories.php">Plant Labels4<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -164,10 +164,10 @@
                                 <div id="collapseSeven" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSeven">
                                     <div class="panel-body">
                                         <ul>
-                                            <li><a href="productList.php">Plant Supports1<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
-                                            <li><a href="productList.php">Plant Supports2<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
-                                            <li><a href="productList.php">Plant Supports3<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
-                                            <li><a href="productList.php">Plant Supports4<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
+                                            <li><a href="productCategories.php">Plant Supports1<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
+                                            <li><a href="productCategories.php">Plant Supports2<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
+                                            <li><a href="productCategories.php">Plant Supports3<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
+                                            <li><a href="productCategories.php">Plant Supports4<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -184,10 +184,10 @@
                                 <div id="collapseEight" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingEight">
                                     <div class="panel-body">
                                         <ul>
-                                            <li><a href="productList.php">Gardening Ties1<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
-                                            <li><a href="productList.php">Gardening Ties2<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
-                                            <li><a href="productList.php">Gardening Ties3<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
-                                            <li><a href="productList.php">Gardening Ties4<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
+                                            <li><a href="productCategories.php">Gardening Ties1<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
+                                            <li><a href="productCategories.php">Gardening Ties2<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
+                                            <li><a href="productCategories.php">Gardening Ties3<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
+                                            <li><a href="productCategories.php">Gardening Ties4<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -303,8 +303,8 @@
                     </div>
                 </div>
                 <!--end of row-->
-                <div class="row">
-                    <div class="col-md-2 col-sm-4">
+                <div class="row" id="likelist">
+                   <!--  <div class="col-md-2 col-sm-4">
                         <div class="image-tile outer-title text-center">
                             <a href="#">
                                 <img src="https://placem.at/things?w=600&h=600&random=1" alt="" class="img-responsive product-thumb">
@@ -315,9 +315,9 @@
                                     <a class="btn btn-sm btn-rounded">Add To List</a>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <!--end three col-->
-                    <div class="col-md-2 col-sm-4">
+                   <!--  <div class="col-md-2 col-sm-4">
                         <div class="image-tile outer-title text-center">
                             <a href="#">
                                 <img src="https://placem.at/things?w=600&h=600&random=2" alt="" class="img-responsive product-thumb">
@@ -328,9 +328,9 @@
                                 <a class="btn btn-sm btn-rounded">Add To List</a>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <!--end three col-->
-                    <div class="col-md-2 col-sm-4">
+                 <!--    <div class="col-md-2 col-sm-4">
                         <div class="image-tile outer-title text-center">
                             <a href="#">
                                 <img src="https://placem.at/things?w=600&h=600&random=3" alt="" class="img-responsive product-thumb">
@@ -341,9 +341,9 @@
                                 <a class="btn btn-sm btn-rounded">Add To List</a>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <!--end three col-->
-                    <div class="col-md-2 col-sm-4">
+                  <!--   <div class="col-md-2 col-sm-4">
                         <div class="image-tile outer-title text-center">
                             <a href="#">
                                 <img src="https://placem.at/things?w=600&h=600&random=4" alt="" class="img-responsive product-thumb">
@@ -354,9 +354,9 @@
                                 <a class="btn btn-sm btn-rounded">Add To List</a>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <!--end three col-->
-                    <div class="col-md-2 col-sm-4">
+                    <!-- <div class="col-md-2 col-sm-4">
                         <div class="image-tile outer-title text-center">
                             <a href="#">
                                 <img src="https://placem.at/things?w=600&h=600&random=5" alt="" class="img-responsive product-thumb">
@@ -367,9 +367,9 @@
                                 <a class="btn btn-sm btn-rounded">Add To List</a>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <!--end three col-->
-                    <div class="col-md-2 col-sm-4">
+                   <!--  <div class="col-md-2 col-sm-4">
                         <div class="image-tile outer-title text-center">
                             <a href="#">
                                 <img src="https://placem.at/things?w=600&h=600&random=6" alt="" class="img-responsive product-thumb">
@@ -380,7 +380,7 @@
                                 <a class="btn btn-sm btn-rounded">Add To List</a>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <!--end three col-->
                 </div>
                 <!--end of row-->
@@ -409,7 +409,7 @@
 //  add to cart
     $(function(){
 
-    // 開始 local storage 塞入資料
+    // 1.開始 local storage 塞入資料
     // 宣告 carList是一個 arry
     var carList = []; 
     carList = JSON.parse(window.localStorage.getItem("carList"));
@@ -424,12 +424,19 @@
         //#cartListnum else塞入0
     else
         $("#cartListnum").text("0");
-    
-  // 結束local storage 塞入資料
+    // 結束local storage 塞入資料
+
+//2.你可能會喜歡點過資料 
+    var likeList = [];
+    likeList = JSON.parse(window.localStorage.getItem("likeList"));
+    alert(likeList);
+    $('#likelist').append(likeList); 
 
 
 
-        // 你可能會喜歡 按鈕事件
+
+
+        // 3.你可能會喜歡 按鈕事件
         $('.btn-rounded').click(function(){
         // 抓到目前list img src
         var ImgSrc= $(this).parents('.image-tile').children('a').children('img').prop('src');
@@ -552,6 +559,10 @@ $(function(){$('#btn').click(
 
         }
     });
+
+
+
+
 });
 // product add
  </script>

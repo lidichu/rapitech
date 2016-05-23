@@ -39,7 +39,7 @@
                                 </li>
                                 <!--  -->
                                 <li class="has-dropdown">
-                                    <a href="#">
+                                    <a href="http://localhost/rapitech/ch/productCategories.php">
                                                 <span class="label label-success">Products</span>
                                     </a>
                                          <ul class="mega-menu">
