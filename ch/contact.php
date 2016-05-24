@@ -21,11 +21,8 @@
 			  vertical-align: text-top;
 			}
         </style>
-
-
-
-    </head>
-    <body>
+     </head>
+     <body>
 		<?php include_once ('top.php');?>
         <div class="main-container">
             <br>
