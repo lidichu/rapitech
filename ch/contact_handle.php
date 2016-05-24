@@ -3,10 +3,10 @@
 <?php
 	$_POST = quotes($_POST);
 	//接收參數 
-	//$SafeCodeTmp = strtolower($_SESSION["SafeCode"]);
-	//$_SESSION["SafeCode"] = "";
+	$SafeCodeTmp = strtolower($_SESSION["SafeCode"]);
+	$_SESSION["SafeCode"] = "";
 	$KeyPair["Name"] = CheckData($_POST["name"]);
-	$KeyPair["Sex"] = "";//CheckData($_POST["Sex"]);
+	$KeyPair["Sex"] = CheckData($_POST["Sex"]);
 	$KeyPair["Tel"] = CheckData($_POST["Tel"]);
 
 	$KeyPair["EMail"] = CheckData($_POST["EMail"]);
@@ -21,25 +21,24 @@
 	$KeyPair["PostDate"] = date("Y-m-d");
 	$KeyPair["Status"] = "未處理";
 	$KeyPair["Lang"] = $Lang;
-	$VCode = "";//strtolower(CheckData($_POST["VCode"]));
+	$VCode = strtolower(CheckData($_POST["VCode"]));
 	$order = array("\r\n", "\n", "\r"); 
 	$replace = "<br />"; 
 	$KeyPair["Note"] = str_replace($order, $replace, $KeyPair["Note"]);
 	$ResultCode = 0;
 	$CheckField = explode(",","Name,Tel,EMail,Address,Subject,Note");
 	$CheckResult = true;
-// 	foreach($CheckField as $Key => $Value){
-// 		if($Value!="Sex" && $Value!="Address"){
-// 			if($KeyPair[$Value] == ""){
-// 				notify("部份欄位未填寫");
-// 			}
-// 		}
-// 	}	
-// 	if($SafeCodeTmp != $VCode){
-// 		$_SESSION["SafeCode"] = $SafeCodeTmp;
-// 		notify("驗證碼錯誤");
-		
-// 	}
+	foreach($CheckField as $Key => $Value){
+		if($Value!="Sex" && $Value!="Address"){
+			if($KeyPair[$Value] == ""){				
+				notify("部份欄位未填寫","history.back()");
+			}
+		}
+	}	
+	if($SafeCodeTmp != $VCode){
+		$_SESSION["SafeCode"] = $SafeCodeTmp;
+		notify("驗證碼錯誤","","history.back()");
+	}
 	if($ResultCode==0){	
 		$SplitChar = "";
 		$InsertFields = "";
