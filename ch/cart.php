@@ -81,7 +81,7 @@
                             </h6>
                             <input type="text" name="name" class="col-md-6 validate-required" placeholder="Name*" />
                             <input type="text" name="email" class="col-md-6 validate-required validate-email" placeholder="Email Address*" />
-                            <input type="text" name="phone" class= "validate-required" placeholder="Contact number*" />
+                            <input type="text" name="phone" class= "validate-required" placeholder="Phone number*" />
                             <div class="form-group  ">
                             
                               <select class="my-form-control my-from-group" id="sel1">
@@ -333,7 +333,7 @@
 
                             </div>
                            
-                            <textarea name="message" placeholder="message comments" rows="4" class="validate-required"></textarea>
+                            <textarea name="message" placeholder="Message" rows="4" class="validate-required"></textarea>
                             <hr>
                         </div>
                         <div class="overflow-hidden">

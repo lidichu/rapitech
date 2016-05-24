@@ -7,7 +7,7 @@
                         </div>
                         <div class="col-md-4 col-sm-6">
                             <div class="widget">
-                                <h6 class="title">contact us</h6>
+                                <h6 class="title">contact  us</h6>
                                 <hr>
 
                                 <ul class="link-list recent-posts">

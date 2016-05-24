@@ -408,7 +408,7 @@ $(function(){
     var carList = []; 
     carList = JSON.parse(window.localStorage.getItem("carList"));
       // alert(carList);  
-    if(carList){
+    if(carList != null){
         $.each(carList,function(idx, value){
         	$('#cartList').append(value); 
         })
