@@ -15,6 +15,12 @@
         <link href='http://fonts.googleapis.com/css?family=Lato:300,400%7CRaleway:100,400,300,500,600,700%7COpen+Sans:400,500,600' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
         <link rel="stylesheet" href="css/animate.css">
+        <style type="text/css">
+        td {
+			  line-height: 24px !important;
+			  vertical-align: text-top;
+			}
+        </style>
 
 
 
@@ -54,13 +60,31 @@
                             </p>
                         </div>
                         <div class="col-sm-6 col-md-5 col-md-offset-1">
-                            <form id="form1" action="contact_handle.php" method="post" data-success="Thanks for your submission, we will be in touch shortly." data-error="Please fill all fields correctly.">
+                            <form id="form1" action="contact_handle.php" method="post" name="form1" data-success="Thanks for your submission, we will be in touch shortly." data-error="Please fill all fields correctly.">
                                 <input type="text" class="validate-required" name="name" placeholder="Your Name" />
+                                          			<div class="overflow-hidden">
+            				<h6 class="uppercase">
+            				Gender：
+            				</h6>
+            				<div class="col-sm-4">
+            					<span>Man</span>
+            					<div class="radio-option">
+									<div class="inner"></div>
+									<input type="radio" name="Sex" value="Male" />
+								</div>
+            				</div>
+            				<div class="col-sm-4">
+            					<span>Woman</span>
+            					<div class="radio-option">
+									<div class="inner"></div>
+									<input type="radio" name="Sex" value="Female" />
+								</div>
+            				</div>            				
+            			</div>
                                 <input type="text" class="validate-required" name="Tel" placeholder="Your Tel" />
                                 <input type="text" class="validate-required validate-email" name="EMail" placeholder="Email Address" />
                                 <!-- contry -->
-                                                            <div class="form-group  ">
-                            
+                        <div class="form-group  ">
                               <select name="AddressCity" class="my-form-control my-from-group cbg" id="sel1">
                                 <!-- <option value="AF" >select country*</option> -->
                                     <option value="AL">Albania </option>
@@ -312,13 +336,13 @@
                             	<input type="text" class="validate-required" name="Subject" placeholder="Your Subject" />
                                 <textarea class="validate-required" name="Note" rows="3" placeholder="Message"></textarea>
                                 <table cellpadding="0" cellspacing="0" border="0">
-									<tr>
-										<td>驗證碼：</td>
+									<tr >
+										<td><h6 class="uppercase">Verification Code：</h6></td>
 										<td width="60"><a id="imgVCode" href="#" class="number" onfocus="blur()"><img src="../Scripts/SafeCode.php" border="0" /></a></td>
-										<td><input  name="VCode" class="key" type="text" id="VCode" size="30" style="width:120px" maxlength="4" /></td>
+										<td><input name="VCode" class="key" type="text" id="VCode" size="30" style="width:120px" maxlength="4" /></td>
 									</tr>
 								</table>     
-                                <button type="submit">Send Message</button>
+                                <button id="btnSubmit" type="submit">Send Message</button>
                             </form>
                         </div>
                     </div>
@@ -345,6 +369,7 @@
         <script src="js/scripts.js"></script>
         <!--  -->
         <script src="js/wow.js"></script>
+        <script type="text/javascript" src="../Scripts/myError.js"></script>
 <script type="text/javascript">
 
 $(function(){
@@ -363,7 +388,7 @@ $(function(){
     }
     else
         $("#cartListnum").text("0");
-	$("body").TwZipCode({CountryFieldName : 'AddressCity',AreaFieldName:'AddressArea',ZipCodeFieldName:'AddressZipCode',CountryDefaultValue : '縣/市',AreaDefaultValue: '鄉/鎮/市/區'});
+	//$("body").TwZipCode({CountryFieldName : 'AddressCity',AreaFieldName:'AddressArea',ZipCodeFieldName:'AddressZipCode',CountryDefaultValue : '縣/市',AreaDefaultValue: '鄉/鎮/市/區'});
 	$("#btnSubmit").click(function(){
 		$("#form1").submit();
 		return false;
