@@ -14,7 +14,7 @@
 		//標題文字
 		$TableTitle = $Title01;
 		//要查詢的欄位
-		$SQLFields="SerialNo,Category,PrdName,PrdPrice,PICHidden,Status As StatusN,IndexSort";
+		$SQLFields="SerialNo,Category,PrdName,PIC1Hidden,Status As StatusN,IndexSort";
 		//預設排序方式
 		$DefaultSort = "IndexSort,SerialNo Desc";
 		//指定那個欄位為修改聯結欄
@@ -40,7 +40,7 @@
 		//可查詢欄位
 		$QueryField["PrdName"] = "產品名稱";
 		//圖片顯示欄位
-		$PicField = "PICHidden";
+		$PicField = "PIC1Hidden";
 		$PicWidth = $UploadPic["List"]["Width"];
 		$PicRoot = $UploadPic["List"]["Root"];
 	
@@ -223,7 +223,6 @@
 		                        <td nowrap width="40" style="font-size:12px;"><font color="#FFFFFF"><input type="button" value="全選" cvalue="true" onclick="CheckAll(this);" name="B1"></font></td>
 		                        <td nowrap width="100" style="font-size:12px;"><a class="Title sortlink" href="<?php echo GetSCRIPTNAME(); ?>?SF<?php echo $Level; ?>=Category"><font color="#FFFFFF" style="font-size:13px;">分類名稱</font></a></td>
 								<td nowrap style="font-size:12px;"><a class="Title sortlink" href="<?php echo GetSCRIPTNAME(); ?>?SF<?php echo $Level; ?>=PrdName"><font color="#FFFFFF" style="font-size:13px;">產品名稱</font></a></td>
-								<td nowrap style="font-size:12px;"><a class="Title sortlink" href="<?php echo GetSCRIPTNAME(); ?>?SF<?php echo $Level; ?>=PrdPrice"><font color="#FFFFFF" style="font-size:13px;">價格</font></a></td>
 								<td nowrap style="font-size:12px;" width="<?php echo($UploadPic["List"]["Width"] + 5); ?>"><font color="#FFFFFF" style="font-size:13px;">產品圖片</font></td>
 		                        <td nowrap width="80"style="font-size:12px;"><a class="Title sortlink" href="<?php echo GetSCRIPTNAME(); ?>?SF<?php echo $Level; ?>=Status"><font color="#FFFFFF" style="font-size:13px;">狀態</font></a></td>
 								<td nowrap width="100"><input type="button" name="SortUpdate2" value="更新首頁排序" onClick="cmdSortUpdate2_onclick('<?php echo GetSCRIPTNAME(); ?>');"></td>
