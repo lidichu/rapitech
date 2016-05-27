@@ -405,10 +405,10 @@
     <script src="js/scripts.js"></script>
     <!--  -->
     <script src="js/wow.js"></script>
-    <script>
+     <script>
 //  add to cart
     $(function(){
-
+    var likeList = [];
     // 1.開始 local storage 塞入資料
     // 宣告 carList是一個 arry
     var carList = []; 
@@ -427,68 +427,66 @@
     // 結束local storage 塞入資料
 
 //2.你可能會喜歡點過資料 
-    var likeList = [];
+    // var likeList = [];
     likeList = JSON.parse(window.localStorage.getItem("likeList"));
-    alert(likeList);
+    // alert(likeList);
     $('#likelist').append(likeList); 
 
+// 3.你可能會喜歡 按鈕事件
+    $('.btn-rounded').click(function(){
+    // 抓到目前list img src
+    var likeImgSrc= $(this).parents('.image-tile').children('a').children('img').prop('src');
+     // alert(likeImgSrc);
+    //抓到目前list span
+    var list = $(this).parents('.title').find('.likeImgTitle');
+    // span裡面的值
+    var likelistName = list.text();
+    // alert(likelistName);
+    var likeSerialNumber = $(this).parents('.title').find('.serialNumber').text();
+    // alert(likeSerialNumber);
+
+        var newLikeProduct = "";
+        newLikeProduct += "<li>";
+        newLikeProduct += "<a href=\"#\">";
+        newLikeProduct += "<img src=\"" + likeImgSrc + "\" class=\"img-responsive product-thumb  col-sm-6\">";
+        newLikeProduct += "<div class=\"description\">";
+        newLikeProduct += "<span class=\"product-title\">" + likelistName + "</span><br/>";
+        newLikeProduct += "<span class=\"serialNumber\">serialNumber" +likeSerialNumber + "</span>";
+        newLikeProduct += "</div>";
+        newLikeProduct += "</a>";
+        newLikeProduct += "</li>";
 
 
+     // alert(newProduct);
 
+    //抓到所有的cart h3 取到物件 沒值
+    var cartItem = $('#cartList').children('li').find('.product-title');
+    // alert(cartItem);
+    // 宣告一個布林值 為false
+    var b = false;
+    // cart 裡的.product-title 跑迴圈
+    $(cartItem).each(function(){
+        // 取得cart h3值
 
-        // 3.你可能會喜歡 按鈕事件
-        $('.btn-rounded').click(function(){
-        // 抓到目前list img src
-        var ImgSrc= $(this).parents('.image-tile').children('a').children('img').prop('src');
-         // alert(ImgSrc);
-        //抓到目前list span
-        var list = $(this).parents('.title').children('h5');
-        // span裡面的值
-        var listName = list.text();
-        // alert(listName);
-     
-            var newProduct = "";
-            newProduct += "<li>";
-            newProduct += "<a href=\"#\">";
-            newProduct += "<img src=\"" + ImgSrc + "\" class=\"img-responsive product-thumb  col-sm-6\">";
-            newProduct += "<div class=\"description\">";
-            newProduct += "<span class=\"product-title\">" + listName + "</span>";
-            newProduct += "</div>";
-            newProduct += "</a>";
-            newProduct += "</li>";
-
-         // alert(newProduct);
-
-        //抓到所有的cart h3 取到物件 沒值
-        var cartItem = $('#cartList').children('li').children('span');
-        // alert(cartItem);
-        // 宣告一個布林值 為false
-        var b = false;
-        // cart 裡的h3 跑迴圈
-        $(cartItem).each(function(){
-            // 取得cart h3值
-
-            var cartItemName = $(this).text();
-            // alert(cartItemName); 
-            // 判斷 如果 cartItemName == listName
-            if(cartItemName == listName)
-            {   
-                // 布林值是true;
-                b = true;
-                // 跳出 
-                alert('加過了');
-                return false;
-
-            }                       
-        });
+        var cartItemName = $(this).text();
+        // alert(cartItemName); 
+        // 判斷 如果 cartItemName == likelistName
+        if(cartItemName == likelistName)
+        {   
+            // 布林值是true;
+            b = true;
+            // 跳出 
+            alert('加過了');
+            return false;
+        }                       
+    });
         // 如果不是true
         if(!b)
         {
             
             // .cart加入newProduct結構
-            $('#cartList').append(newProduct);
-             alert(listName +"add to inquiry List");
-
+            $('#cartList').append(newLikeProduct);
+             alert(likelistName +"add to inquiry List");
         // 宣告arr陣列
         var arr =[]; 
         // #cartList li 全部each 
@@ -514,12 +512,27 @@ $(function(){$('#btn').click(
         // alert(ProductImg);
         var ProductTittle = $('.productTitle').text();
         // alert(ProductTittle);
-        var newProductBig = " <li><img src=\""+ ProductImg+"\" alt=\"\" class=\"img-responsive col-sm-6\"><span>"+ ProductTittle +"</span></li>";
+        var ProductNumber = $('.SerialNumber').text();
+        // alert(ProductNumber);
+        // var newProductBig = " <li><img src=\""+ ProductImg+"\" alt=\"\" class=\"img-responsive col-sm-6\"><span>"+ ProductTittle +"</span></li>";
         // alert(newProductBig);
-         var cartItem = $('#cartList').children('li').children('span');
-         // alert(cartItem);
 
-          // 宣告一個布林值 為false
+        var newProductBig = ""
+        newProductBig += "<li>";
+        newProductBig += "<a href=\"#\">";
+        newProductBig += "<img src=\"" + ProductImg + "\" class=\"img-responsive product-thumb  col-sm-6\">";
+        newProductBig += "<div class=\"description\">";
+        newProductBig += "<span class=\"product-title\">" + ProductTittle + "</span><br/>";
+        newProductBig += "<span class=\"serialNumber\">serialNumber" + ProductNumber + "</span>";
+        newProductBig += "</div>";
+        newProductBig += "</a>";
+        newProductBig += "</li>";
+
+        // alert(newProductBig);
+        // 宣告cartItem #cartList 的li .product-title的span
+         var cartItem = $('#cartList').children('li').find('.product-title');
+        // alert(cartItem);
+        // 宣告一個布林值 為false
         var b = false;
         // cart 裡的h3 跑迴圈
         $(cartItem).each(function(){
@@ -539,13 +552,10 @@ $(function(){$('#btn').click(
         // 如果不是true
         if(!b)
         {
-
-            // .cart加入newProduct結構
-            $('#cartList').append(newProductBig); 
-
-             alert(ProductTittle + "add to inquiry List");
-
-            // 宣告arr陣列
+        // .cart加入newProduct結構
+        $('#cartList').append(newProductBig); 
+        alert(ProductTittle + "add to inquiry List");
+        // 宣告arr陣列
         var arr =[]; 
         // #cartList li 全部each 
         $('#cartList li').each(function(index,val) {  
@@ -555,8 +565,6 @@ $(function(){$('#btn').click(
         localStorage.setItem("carList",JSON.stringify(arr));
         $("#cartListnum").text(arr.length); 
         // 
-
-
         }
     });
 
