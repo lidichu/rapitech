@@ -55,44 +55,56 @@
                                 <div class="col-md-4 col-sm-4 masonry-item col-xs-6">
                                     <div class="image-tile outer-title text-center">
 
-                                        <a href="product.php" class="list">
-                                              <img src="https://placem.at/things?w=600&amp;h=600&amp;random=0" alt="" class="img-responsive product-thumb ">
+                                        <a href="Product.php" class="list">
+                                              <img src="https://placem.at/things?w=600&amp;h=600&amp;random=1" alt="" class="img-responsive product-thumb ">
                                         </a>
                                         <div class="description">
                                              <span class="product-title">Adrian LambsWool Cap</span>
+                                             <br>
+                                             <strong>Serial Number:</strong>
+                                             <span class="serialNumber">8660</span>
                                          </div>
                                         <br/>
                                         <!--  btn -->
                                          <a id="btn" class="btn btn-sm btn-rounded" href="#" >add to List</a>
+
+                                       
                                         <!-- btn -->
                                     </div>
                                 </div>
-
                                 <!--end three col-->
+
 
                                 <div class="col-md-4 col-sm-4 masonry-item col-xs-6">
                                     <div class="image-tile outer-title text-center">
 
-                                        <a href="#" class="list">
+                                        <a href="Product.php" class="list">
                                               <img src="https://placem.at/things?w=600&amp;h=600&amp;random=1" alt="" class="img-responsive product-thumb ">
                                         </a>
                                         <div class="description">
                                              <span class="product-title">Adrian LambsWool Cap1</span>
+                                              <br>
+                                             <strong >Serial Number:</strong>
+                                             <span class="serialNumber">8661</span>
                                          </div>
-                                       <br/>
+
+
+                                        <br/>
                                          <a id="btn" class="btn btn-sm btn-rounded" href="#">add to List</a>
                                     </div>
                                 </div>
-
                                 <!--end three col-->
                                <div class="col-md-4 col-sm-4 masonry-item col-xs-6">
                                     <div class="image-tile outer-title text-center">
 
-                                        <a href="#" class="list">
+                                        <a href="Product.php" class="list">
                                               <img src="https://placem.at/things?w=600&amp;h=600&amp;random=2" alt="" class="img-responsive product-thumb ">
                                         </a>
                                         <div class="description">
                                              <span class="product-title">Adrian LambsWool Cap2</span>
+                                              <br>
+                                             <strong >Serial Number:</strong>
+                                             <span class="serialNumber">8662</span>
                                          </div>
                                         <br/>
                                          <a id="btn" class="btn btn-sm btn-rounded" href="#">add to List</a>
@@ -102,11 +114,14 @@
                               <div class="col-md-4 col-sm-4 masonry-item col-xs-6">
                                     <div class="image-tile outer-title text-center">
 
-                                        <a href="#" class="list">
+                                        <a href="Product.php" class="list">
                                               <img src="https://placem.at/things?w=600&amp;h=600&amp;random=3" alt="" class="img-responsive product-thumb ">
                                         </a>
                                         <div class="description">
                                              <span class="product-title">Adrian LambsWool Cap3</span>
+                                              <br>
+                                             <strong >Serial Number:</strong>
+                                             <span class="serialNumber">8663</span>
                                          </div>
                                         <br/>
                                          <a id="btn" class="btn btn-sm btn-rounded" href="#">add to List</a>
@@ -116,11 +131,14 @@
                                 <div class="col-md-4 col-sm-4 masonry-item col-xs-6">
                                     <div class="image-tile outer-title text-center">
 
-                                        <a href="#" class="list">
+                                        <a href="Product.php" class="list">
                                               <img src="https://placem.at/things?w=600&amp;h=600&amp;random=4" alt="" class="img-responsive product-thumb ">
                                         </a>
                                         <div class="description">
                                              <span class="product-title">Adrian LambsWool Cap4</span>
+                                              <br>
+                                             <strong >Serial Number:</strong>
+                                             <span class="serialNumber">8664</span>
                                          </div>
 
 
@@ -132,11 +150,14 @@
                                 <div class="col-md-4 col-sm-4 masonry-item col-xs-6">
                                     <div class="image-tile outer-title text-center">
 
-                                        <a href="#" class="list">
+                                        <a href="Product.php" class="list">
                                               <img src="https://placem.at/things?w=600&amp;h=600&amp;random=5" alt="" class="img-responsive product-thumb ">
                                         </a>
                                         <div class="description">
                                              <span class="product-title">Adrian LambsWool Cap5</span>
+                                              <br>
+                                             <strong >Serial Number:</strong>
+                                             <span class="serialNumber">8665</span>
                                          </div>
 
                                         <br/>
