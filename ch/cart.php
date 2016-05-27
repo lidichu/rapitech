@@ -42,8 +42,8 @@
                                         <th>&nbsp;</th>
                                         <th>Product</th>
                                         <th>Description</th>
-                                        <!-- <th>Description</th> -->
-                                       <!--  <th>Price</th> -->
+                                        <th>Serial Number</th>
+                                        <th>Product QTY</th>
                                     </tr>
                                 </thead>
                                 <tbody id="list">
