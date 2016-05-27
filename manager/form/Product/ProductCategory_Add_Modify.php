@@ -28,6 +28,8 @@
 	$StatusItem[0] = "上架";
 	$StatusItem[1] = "下架";
 	$M = new Manager();
+	if($_SESSION['cid'] != 1)
+		$M->AddNum("parentSerialNo", "父類別", true, 4,"",$_SESSION['cid'],false);
 	$M->AddNum("Sort","排序",true,4,"","9999");	
 	$M->AddSelect2("Status","狀態",true,$StatusItem,$StatusItem,"上架");
 	$M->AddText("Category","分類名稱",true);
@@ -59,8 +61,8 @@ function Add(){
 		$M->AddHandle();
 		$SQL = "Insert Into ".$DBTable."(".$AddFieldsSQL.") values(".$AddValuesSQL.")";
 		mysql_query($SQL,$Conn);
-		$id = mysql_insert_id();
-		mysql_query("UPDATE {$DBTable} SET parentSerialNo='{$_SESSION['cid']}' WHERE `serialNo`='{$id}'");
+		//$id = mysql_insert_id();
+		//mysql_query("UPDATE {$DBTable} SET parentSerialNo='{$_SESSION['cid']}' WHERE `serialNo`='{$id}'");
 		ReturnToPage($MainFileName,"新增完成","");		
 	}
 ?>
