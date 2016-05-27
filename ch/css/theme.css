@@ -1746,7 +1746,7 @@ input.transparent,
 button.transparent {
   background: none;
   border: 1px solid rgba(255, 255, 255, 0.5);
-  color: #fff !important	;
+  color: #fff !important  ;
 }
 input[type="text"]:focus,
 input[type="password"]:focus {
@@ -2575,7 +2575,7 @@ button[type="submit"] .form-loading {
   .page-title-4 .breadcrumb,
   .page-title-2 .breadcrumb {
     float: left;
-    margin-top: 8	px;
+    margin-top: 8 px;
   }
 }
 /*!---------- 17. PAGINATION ----------*/
@@ -3019,7 +3019,7 @@ button[type="submit"] .form-loading {
 .widget .cart-overview .description {
   display: inline-block;
   width: auto;
-  line-height: 24px;
+  line-height: 8px;
 }
 .widget .cart-overview span {
   display: block;
@@ -5860,7 +5860,6 @@ footer.bg-dark a {
 
                     .cbg{
                       background: #f5f5f5;
-                      padding-left:12px;
                     }
 
 
@@ -5882,3 +5881,5 @@ input::-webkit-input-placeholder,
 textarea::-webkit-input-placeholder {
     color:#B52209;
 }
+/*產品數量input*/
+.col-sm-6 .aaa{width: 49%;}
