@@ -6,18 +6,19 @@
 		var $NumLen;
 		var $Numtype;
 		var $DefaultValue;
-		public function NumFields($FieldNameIn,$ShowNameIn,$NullFlagIn=false,$NumLenIn,$NumtypeIn="",$DefaultValueIn=0){
+		public function NumFields($FieldNameIn,$ShowNameIn,$NullFlagIn=false,$NumLenIn,$NumtypeIn="",$DefaultValueIn=0,$Visible = true){
 			$this->FieldName = $FieldNameIn;
 			$this->ShowName = $ShowNameIn;
 			$this->NullFlag = $NullFlagIn;
 			$this->NumLen = $NumLenIn;
 			$this->Numtype = $NumtypeIn;
 			$this->DefaultValue = $DefaultValueIn;
+			$this->Visible = $Visible;
 		}
 		function AddShow(){
 			$Size = $this->NumLen + 2;
 			if($Size>50){$Size = 50;}
-			echo "	<tr>\n";
+			echo "	<tr ".($this->Visible ? '' : 'style="display:none"').">\n";
 			echo "		<td width=\"17%\" bgcolor=\"#EEEEEE\" nowrap align=\"right\"><font color=\"#FF8833\">".$this->ShowName."&nbsp;</font></td>\n";
 			echo "		<td width=\"83%\" bgcolor=\"#FFFFFF\" align=\"left\">&nbsp;&nbsp;\n";
 			echo "			<input type=\"text\" name=\"".$this->FieldName."\" id=\"".$this->FieldName."\" size=\"".$Size."\" maxlength=\"".$this->NumLen."\" value=\"".$this->DefaultValue."\"/>\n";
@@ -31,7 +32,7 @@
 			global $Row;
 			$Size = $this->NumLen + 2;
 			if($Size>50){$Size = 50;}			
-			echo "	<tr>\n";
+			echo "	<tr ".($this->Visible ? '' : 'style="display:none"').">\n";
 			echo "		<td width=\"17%\" bgcolor=\"#EEEEEE\" nowrap align=\"right\"><font color=\"#FF8833\">".$this->ShowName."&nbsp;</font></td>\n";
 			echo "		<td width=\"83%\" bgcolor=\"#FFFFFF\" align=\"left\">&nbsp;&nbsp;\n";
 			echo "			<input type=\"text\" name=\"".$this->FieldName."\" id=\"".$this->FieldName."\" size=\"".$Size."\" maxlength=\"".$this->NumLen."\" value=\"".$Row[$this->FieldName]."\"/>\n";

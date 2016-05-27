@@ -39,10 +39,10 @@
 	$StatusItem[1] = "下架";
 
 	//開啟方式狀態設定
-	$TargetWindowValue[0] = "_self";
-	$TargetWindowValue[1] = "_blank";
-	$TargetWindowItem[0] = "本頁開啟";
-	$TargetWindowItem[1] = "另開新視窗";	
+// 	$TargetWindowValue[0] = "_self";
+// 	$TargetWindowValue[1] = "_blank";
+// 	$TargetWindowItem[0] = "本頁開啟";
+// 	$TargetWindowItem[1] = "另開新視窗";	
 	
 	
 	//宣告圖片上傳物件
@@ -57,10 +57,19 @@
 	$M->AddNum("Sort","排序",true,4,"","9999");
 	$M->AddSelect2("Status","狀態",true,$StatusItem,$StatusItem,"上架");
 	$M->AddText("PrdName","產品名稱",true);
-	//$M->AddNum("PrdPrice","價格",true,5,"","");
+// 	$M->AddNum("PrdPrice","價格",true,5,"","");
 	$M->AddNote2("PrdNote","說明",false,99999);
-        $M->AddNote2("Notes","商品規格",false,99999);
-	$M->AddPIC3("PIC","產品圖片",false,$PICRootArray,$PICWidthArray,$PICHeightArray,"圖片建議寬度為 800 x 603 像素","","","","PICHidden",$PICBoxArray,140,"",$UploadPic["List"]["Root"]);
+    $M->AddNote2("Notes","商品規格",false,99999);
+	
+	$M->AddPIC3("PIC1","產品圖片一",false,$PICRootArray,$PICWidthArray,$PICHeightArray,"圖片建議寬度為 800 x 603 像素","","","","",$PICBoxArray,140,"",$UploadPic["List"]["Root"]);
+	$M->AddPIC3("PIC2","產品圖片二",false,$PICRootArray,$PICWidthArray,$PICHeightArray,"圖片建議寬度為 800 x 603 像素","","","","",$PICBoxArray,140,"",$UploadPic["List"]["Root"]);
+	$M->AddPIC3("PIC3","產品圖片三",false,$PICRootArray,$PICWidthArray,$PICHeightArray,"圖片建議寬度為 800 x 603 像素","","","","",$PICBoxArray,140,"",$UploadPic["List"]["Root"]);
+	$M->AddPIC3("PIC4","產品圖片四",false,$PICRootArray,$PICWidthArray,$PICHeightArray,"圖片建議寬度為 800 x 603 像素","","","","",$PICBoxArray,140,"",$UploadPic["List"]["Root"]);
+	$M->AddPIC3("PIC5","產品圖片五",false,$PICRootArray,$PICWidthArray,$PICHeightArray,"圖片建議寬度為 800 x 603 像素","","","","",$PICBoxArray,140,"",$UploadPic["List"]["Root"]);
+	$M->AddPIC3("PIC6","產品圖片六",false,$PICRootArray,$PICWidthArray,$PICHeightArray,"圖片建議寬度為 800 x 603 像素","","","","",$PICBoxArray,140,"",$UploadPic["List"]["Root"]);
+	$M->AddPIC3("PIC7","產品圖片七",false,$PICRootArray,$PICWidthArray,$PICHeightArray,"圖片建議寬度為 800 x 603 像素","","","","",$PICBoxArray,140,"",$UploadPic["List"]["Root"]);
+	$M->AddPIC3("PIC8","產品圖片八",false,$PICRootArray,$PICWidthArray,$PICHeightArray,"圖片建議寬度為 800 x 603 像素","","","","",$PICBoxArray,140,"",$UploadPic["List"]["Root"]);
+	
 	//新增用SQL
 	$AddFieldsSQL = "";
 	$AddValuesSQL = "";

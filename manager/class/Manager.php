@@ -157,9 +157,9 @@
 		}
 
 		//數字欄位
-		public function AddNum($FieldNameIn,$ShowNameIn,$NullFlagIn=false,$NumLenIn,$NumtypeIn,$DefaultValueIn){
+		public function AddNum($FieldNameIn,$ShowNameIn,$NullFlagIn=false,$NumLenIn,$NumtypeIn,$DefaultValueIn,$Visible=true){
 			if(array_key_exists($FieldNameIn,$this->Fields)==true){exit("AddNum Error ：`".$FieldNameIn."` is existed In Fields");}
-			$this->Fields[$FieldNameIn] = New NumFields($FieldNameIn,$ShowNameIn,$NullFlagIn,$NumLenIn,$NumtypeIn,$DefaultValueIn);
+			$this->Fields[$FieldNameIn] = New NumFields($FieldNameIn,$ShowNameIn,$NullFlagIn,$NumLenIn,$NumtypeIn,$DefaultValueIn,$Visible);
 			$this->FieldsStatus[$FieldNameIn] = false;
 		}
 

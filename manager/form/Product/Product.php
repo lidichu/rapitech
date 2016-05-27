@@ -9,6 +9,10 @@
 	include_once("../../inc/LevelOne.php"); 	//更新狀態與排序
 
 	//參數設定
+	
+	//層級
+	$Level = 1;
+	
 		//接收參數
 		$Option = $_REQUEST["option"];
 		for($i=0;$i<=$Level;$i++){
@@ -18,12 +22,11 @@
 			$TS[$i] = $_REQUEST["TS".$i];
 			$P[$i] = $_REQUEST["P".$i];
 		}
-		//層級
-		$Level = 2;
+		
 		$TableTitle = $Title02;
 		$Title=$Title01;
 		//要查詢的欄位
-		$SQLFields="SerialNo,IndexShow,PrdName,PrdPrice,PICHidden,Sort,Status";
+		$SQLFields="SerialNo,IndexShow,PrdName,PIC1Hidden,Sort,Status";
 		//預設排序方式
 		$DefaultSort = "Sort,SerialNo Desc";
 		//指定那個欄位為修改聯結欄
@@ -51,7 +54,7 @@
 		//核取方塊欄位
 		$CheckBoxFields[] = "IndexShow";
 		//圖片顯示欄位
-		$PicField = "PICHidden";
+		$PicField = "PIC1Hidden";
 		$PicWidth = $UploadPic["List"]["Width"];
 		$PicRoot = $UploadPic["List"]["Root"];		
 		//刪除處理
@@ -318,11 +321,10 @@ $(function(){
 							<td nowrap width="40"><font color="#FFFFFF"><input type="button" value="全選" cvalue="true" onclick="CheckAll(this);" name="B1"></font></td>
 							<td nowrap width="60" style="font-size:12px;"><font color="#FFFFFF">推薦產品</font></td>
 							<td nowrap><a class="Title sortlink" href="<?php echo GetSCRIPTNAME(); ?>?SF<?php echo $Level; ?>=PrdName"><font color="#FFFFFF">名稱</font></a></td>
-							<td nowrap width="100"><a class="Title sortlink" href="<?php echo GetSCRIPTNAME(); ?>?SF<?php echo $Level; ?>=PrdPrice"><font color="#FFFFFF">價格</font></a></td>
 							<td nowrap style="font-size:12px;" width="<?php echo($UploadPic["List"]["Width"] + 5); ?>"><font color="#FFFFFF" style="font-size:13px;">圖片</font></td>
 							<td nowrap width="80"><input type="button" name="SortUpdate" value="更新排序" onClick="cmdSortUpdate_onclick('<?php echo GetSCRIPTNAME(); ?>');"></td>
 							<td nowrap width="80"><input type="button" name="StatusUpdate" value="更新狀態" onClick="cmdStatusUpdate_onclick('<?php echo GetSCRIPTNAME(); ?>');"></td>
-                        </tr>	
+                        </tr>
                         <?php
                                 $SQL = "select ".$SQLFields." from ".$DBTable_S.$Query." order by ".$SQLOrderBy." limit ".($Page-1) * $RowCount.",".$RowCount;
                                 $Rs = mysql_query($SQL,$Conn);
