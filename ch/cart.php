@@ -376,11 +376,11 @@
             $('#cartList').append(value); 
         })
         // #cartListnum塞入carList 各數
-       		$("#cartListnum").text(carList.length);
+            $("#cartListnum").text(carList.length);
         } 
         //#cartListnum else塞入0
         else
-        	$("#cartListnum").text("0");
+            $("#cartListnum").text("0");
     // 結束local storage 塞入資料
 
 
@@ -395,14 +395,18 @@
                 $(cartList).each(function(){
                     myImg = $(this).find('img').prop('src');
                     // alert(myImg);
-                    spanText = $(this).find('span').text();
+                    spanText = $(this).find('.product-title').text();
                     // alert(spanText);
+                     var myNumber = $(this).find('.serialNumber').text();
+                     
                     newProduct += " <tr> ";
                     // xx結構
                     newProduct += "<th scope=\"row\"><a class=\"remove-item\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"\" data-original-title=\"Remove from list\"><i class=\"ti-close\"></i></a></th>";
                     //img
                     newProduct += "<td><img src=\""+ myImg +"\" alt=\"\" class=\"img-responsive product-thumb\"></td>";
-                    newProduct += "<td><span>" + spanText + "</span></td>";
+                    newProduct += "<td><span class=\"tr-tittle\">" + spanText + "</span></td>";
+                    newProduct += "<td>"+ myNumber +"</td>";
+                    newProduct += "<td><input type=\"text\" placeholder=\"QTY\" /></td>";
                     newProduct += "</tr>";                  
                 });
 
@@ -413,7 +417,7 @@
                 // 抓出list 值
                 $('i').click(function(){
                     //選取目前按鈕清單的SPAN
-                    var listElement = $(this).parents('tr').find('span');
+                    var listElement = $(this).parents('tr').find('.tr-tittle');
                     //選取目前按鈕清單的SPAN的值                   
                     var listName = listElement.text();
                     // alert(listName);
@@ -441,8 +445,8 @@
                 });
                 
                 $('#btnSubmit').click(function() {
-                	localStorage.clear();    
-                	location.reload();
+                    localStorage.clear();    
+                    location.reload();
                 });
 
     });
