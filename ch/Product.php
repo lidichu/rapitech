@@ -249,7 +249,7 @@
                                         </p>
                                         <ul>
                                             <li>
-                                                <strong>what ever u like:</strong> 8660
+                                                <strong>Serial Number:</strong><span class="SerialNumber">8660</span>
                                             </li>
                                             <li>
                                                 <strong>what ever u like:</strong> Black, Blue
