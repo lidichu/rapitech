@@ -1,5 +1,17 @@
 ﻿<!doctype html>
 <?php include_once('../PageHead.php');?>
+<?php
+	$Product_View=true;
+	function getBicPic($fileName)
+	{
+		return ($fileName == "" || $fileName == null) ? "" : "../files/Product/PICBig/".$fileName;
+	}
+		
+	function getPic($fileName)
+	{
+		return ($fileName == "" || $fileName == null) ? "" : "../files/Product/PICDetail/".$fileName;
+	}
+?>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -31,170 +43,27 @@
             <div class="container">
                 <div class="row">
                     <!--  -->
-                    <div class="col-md-3 hidden-sm">
-                        <h4 class="title">Product Categories</h4>
-                        <hr>
-                        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                            <div class="panel panel-default mypanel-default">
-                                <div class="panel-heading mypanel-heading" role="tab" id="headingOne">
-                                    <h4 class="panel-title">
-                                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                            Measuring <i class="fa fa-caret-square-o-down pull-right text-justify" aria-hidden="true"></i>
-                                        </a>
-                                    </h4>
-                                </div>
-                                <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-                                    <div class="panel-body">
-                                        <ul>
-                                            <li>
-                                            <a href="productList.php">Measuring1<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
-                                           </li>
-                                            <li><a href="productList.php">Measuring2<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
-                                            <li><a href="productList.php">Measuring3<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
-                                            <li><a href="productList.php">Measuring4<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="panel panel-default mypanel-default">
-                                <div class="panel-heading mypanel-heading" role="tab" id="headingTwo">
-                                    <h4 class="panel-title">
-                                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                            Garden Accessories <i class="fa fa-caret-square-o-down pull-right text-justify" aria-hidden="true"></i>
-                                        </a>
-                                    </h4>
-                                </div>
-                                <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-                                    <div class="panel-body">
-                                        <ul>
-                                            <li><a href="productList.php">Garden Accessories1<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
-                                            <li><a href="productList.php">Garden Accessories2<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
-                                            <li><a href="productList.php">Garden Accessories3<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
-                                            <li><a href="productList.php">Garden Accessories4<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="panel panel-default mypanel-default">
-                                <div class="panel-heading mypanel-heading" role="tab" id="headingThree">
-                                    <h4 class="panel-title">
-                                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                            Outdoor & Indoor Clocks <i class="fa fa-caret-square-o-down pull-right text-justify" aria-hidden="true"></i>
-                                        </a>
-                                    </h4>
-                                </div>
-                                <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-                                    <div class="panel-body">
-                                        <ul>
-                                            <li><a href="productList.php">Outdoor & Indoor Clocks1<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
-                                            <li><a href="productList.php">Outdoor & Indoor Clocks2<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
-                                            <li><a href="productList.php">Outdoor & Indoor Clocks3<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
-                                            <li><a href="productList.php">Outdoor & Indoor Clocks4<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="panel panel-default mypanel-default">
-                                <div class="panel-heading mypanel-heading" role="tab" id="headingfour">
-                                    <h4 class="panel-title">
-                                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsefour" aria-expanded="false" aria-controls="collapsefour">
-                                            Soil Test Kits <i class="fa fa-caret-square-o-down pull-right text-justify" aria-hidden="true"></i>
-                                        </a>
-                                    </h4>
-                                </div>
-                                <div id="collapsefour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingfour">
-                                    <div class="panel-body">
-                                        <ul>
-                                            <li><a href="productList.php">Soil Test Kits1<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
-                                            <li><a href="productList.php">Soil Test Kits2<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
-                                            <li><a href="productList.php">Soil Test Kits3<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
-                                            <li><a href="productList.php">Soil Test Kits4<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="panel panel-default mypanel-default">
-                                <div class="panel-heading mypanel-heading" role="tab" id="headingfive">
-                                    <h4 class="panel-title">
-                                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsefive" aria-expanded="false" aria-controls="collapsefour">
-                                            Thermometers <i class="fa fa-caret-square-o-down pull-right text-justify" aria-hidden="true"></i>
-                                        </a>
-                                    </h4>
-                                </div>
-                                <div id="collapsefive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingfive">
-                                    <div class="panel-body">
-                                        <ul>
-                                            <li><a href="productList.php">Thermometers1<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
-                                            <li><a href="productList.php">Thermometers2<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
-                                            <li><a href="productList.php">Thermometers3<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
-                                            <li><a href="productList.php">Thermometers4<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="panel panel-default mypanel-default">
-                                <div class="panel-heading mypanel-heading" role="tab" id="headingSix">
-                                    <h4 class="panel-title">
-                                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
-                                            Plant Labels <i class="fa fa-caret-square-o-down pull-right text-justify" aria-hidden="true"></i>
-                                        </a>
-                                    </h4>
-                                </div>
-                                <div id="collapseSix" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSix">
-                                    <div class="panel-body">
-                                        <ul>
-                                            <li><a href="productList.php">Plant Labels1<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
-                                            <li><a href="productList.php">Plant Labels2<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
-                                            <li><a href="productList.php">Plant Labels3<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
-                                            <li><a href="productList.php">Plant Labels4<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="panel panel-default mypanel-default">
-                                <div class="panel-heading mypanel-heading" role="tab" id="headingSeven">
-                                    <h4 class="panel-title">
-                                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
-                                            Plant Supports <i class="fa fa-caret-square-o-down pull-right text-justify" aria-hidden="true"></i>
-                                        </a>
-                                    </h4>
-                                </div>
-                                <div id="collapseSeven" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSeven">
-                                    <div class="panel-body">
-                                        <ul>
-                                            <li><a href="productList.php">Plant Supports1<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
-                                            <li><a href="productList.php">Plant Supports2<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
-                                            <li><a href="productList.php">Plant Supports3<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
-                                            <li><a href="productList.php">Plant Supports4<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="panel panel-default mypanel-default">
-                                <div class="panel-heading mypanel-heading" role="tab" id="headingEight">
-                                    <h4 class="panel-title">
-                                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
-                                            Gardening Ties <i class="fa fa-caret-square-o-down pull-right text-justify" aria-hidden="true"></i>
-                                        </a>
-                                    </h4>
-                                </div>
-                                <div id="collapseEight" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingEight">
-                                    <div class="panel-body">
-                                        <ul>
-                                            <li><a href="productList.php">Gardening Ties1<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
-                                            <li><a href="productList.php">Gardening Ties2<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
-                                            <li><a href="productList.php">Gardening Ties3<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
-                                            <li><a href="productList.php">Gardening Ties4<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
+                    <div class="row">
+						<?php include_once("../Common/left.php");?>
+					</div>
+					<?php
+						$Sn=$_REQUEST["Sn"];
+						if($Sn == null)
+							$Sn = 0;
+						$sql="select * from product where SerialNo=$Sn and Status='上架'";
+						$rs=mysql_query($sql);
+						if($rs && (mysql_num_rows($rs))>0){
+							$row=mysql_fetch_array($rs);
+							$PrdName=$row["PrdName"];	
+							$PrdNote=$row["PrdNote"];
+							$ModelNo=$row["ModelNo"];
+							$PrdSize=$row["PrdSize"];
+							$MOQ=$row["MOQ"];
+							$Notes=$row["Notes"];
+							
+							$BigPic=getBicPic($row["PIC1Hidden"]);
+						}
+					?>
                     <div class="col-md-9">
                         <div class="product-single">
                             <div class="row mb24 mb-xs-48">
@@ -202,60 +71,39 @@
                                     <div class="image-slider slider-thumb-controls controls-inside">
                                        
                                         <ul class="slides">
+                                        	<?php
+                                        		$PicCount=8;
+                                        		for($i = 1; $i <= $PicCount; $i ++) {
+                                        			$Pic=getPic($row["PIC".$i."Hidden"]);
+                                        			if($Pic != ""){
+											?>
                                             <li>
-                                                
-                                                <img src="https://placem.at/things?w=600&h=600&random=1" alt="" class="img-responsive">
+                                                <img src="<?php echo $Pic?>" alt="" class="img-responsive">
                                             </li>
-                                            <li>
-                                                
-                                                <img src="https://placem.at/things?w=600&h=600&random=2" alt="" class="img-responsive">
-                                            </li>
-                                            <li>
-                                                
-                                                <img src="https://placem.at/things?w=600&h=600&random=3" alt="" class="img-responsive">
-                                            </li>
-                                            <li>
-                                                
-                                                <img src="https://placem.at/things?w=600&h=600&random=4" alt="" class="img-responsive">
-                                            </li>
-                                            <li>
-                                                
-                                                <img src="https://placem.at/things?w=600&h=600&random=5" alt="" class="img-responsive">
-                                            </li>
-                                            <li>
-                                                
-                                                <img src="https://placem.at/things?w=600&h=600&random=6" alt="" class="img-responsive">
-                                            </li>
-                                            <li>
-                                                
-                                                <img src="https://placem.at/things?w=600&h=600&random=7" alt="" class="img-responsive">
-                                            </li>
-                                            <li>
-                                               
-                                                <img src="https://placem.at/things?w=600&h=600&random=8" alt="" class="img-responsive">
-                                            </li>
+                                            <?php
+                                        			}
+												}
+											?>
                                         </ul>
                                     </div>
                                     <!--end of image slider-->
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="description">
-                                        <h4 class="uppercase productTitle">put the measuring product name</h4>
+                                        <h4 class="uppercase productTitle"><?php echo $PrdName?></h4>
                                         <div class="mb32 mb-xs-24">
                                             
                                         </div>
-                                        <p>
-                                            put some description here natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis.
-                                        </p>
+                                        <p><?php echo $PrdNote?></p>
                                         <ul>
                                             <li>
-                                                <strong>what ever u like:</strong> 8660
+                                                <strong>Model No:</strong> <?php echo $ModelNo?>
                                             </li>
                                             <li>
-                                                <strong>what ever u like:</strong> Black, Blue
+                                                <strong>Product Size:</strong> <?php echo $PrdSize?>
                                             </li>
                                             <li>
-                                                <strong>what ever u like:</strong> XS,S,M,L,XL
+                                                <strong>MOQ:</strong> <?php echo $MOQ?>
                                             </li>
                                         </ul>
                                     </div>
@@ -273,9 +121,7 @@
                                                     <span>Product Detail</span>
                                                 </div>
                                                 <div class="tab-content">
-                                                    <p>
-                                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident.
-                                                    </p>
+                                                    <p><?php echo $Notes?></p>
                                                 </div>
                                             </li>
                                            

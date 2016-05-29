@@ -57,75 +57,68 @@ $(function(){
 <?php	}?>
 <!--產品介紹-->
 <?php	if($Product_View){?>
-<td width="15%" valign="top">
-	<a id="ToTop" name="ToTop"></a>
-	<table width="100%" border="0" cellspacing="0" cellpadding="0">
-		<tr>
-			<td><img src="images/03_product/title_01.jpg" width="259" height="87" /></td>
-		</tr>
-		<tr>
-			<td>
-				<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<div class="col-md-3 hidden-sm">
+				<!-- accordion -->
+				<h4 class="title">Product Categories</h4>
+				<hr>
+				<div class="panel-group" id="accordion" role="tablist"
+					aria-multiselectable="true">
 					<?php
-						$Sql="select * from productcategory where Status='上架' order by Sort,SerialNo desc";
-						$LeftRs=mysql_query($Sql,$Conn);
-						if($LeftRs &&mysql_num_rows($LeftRs)>0){
-							while($LeftRow=mysql_fetch_array($LeftRs)){
-								$LeftCategory=$LeftRow["Category"];
-								$LaftSerialNo=$LeftRow["SerialNo"];
-								if($G0==""){
-									$G0=$LaftSerialNo;
-								}
-								$LeftUrl="product_list.php?G0=$LaftSerialNo";
-								if($G0==$LaftSerialNo){
-									$ClassName="menu02";
-								}else{
-									$ClassName="menu01";
-								}
+						$G0=$_REQUEST["G0"];
+						$Name="";
+						$Sql="select * from productCategory where Status='上架' and ParentSerialNo=1 order by Sort,SerialNo Desc";
+						$Rs=mysql_query($Sql,$Conn);
+						if($Rs && mysql_num_rows($Rs)>0){
+							while($Row=mysql_fetch_array($Rs)){
+								$ParentSerialNo=$Row["SerialNo"];
+								$ParentCategory=$Row["Category"];
 					?>
-					<tr>
-						<td width="28%" height="30" align="right" style="padding-right:5px"><img src="images/00/img_02.jpg" width="13" height="13" /></td>
-						<td width="72%" height="30" class="<?php echo $ClassName?>"><a href="<?php echo $LeftUrl?>" title="產品介紹"><?php echo $LeftCategory?></a></td>
-					</tr>
-					<?php 	
-								if($ClassName=="menu02"){
-									$CategoryTitle=$LeftCategory;
-									$Sql2="select * from product where Status='上架' and G0=$G0 order by Sort,SerialNo desc";
-									$LeftRs2=mysql_query($Sql2,$Conn);
-									if($LeftRs2 &&mysql_num_rows($LeftRs2)>0){	
-					?>
-					<tr>
-						<td>&nbsp;</td>
-						<td style="padding-bottom:6px">
-							<table width="85%" border="0" cellspacing="0" cellpadding="0">
-								<?php
-									while($LeftRow2=mysql_fetch_array($LeftRs2)){
-										$LeftSn=$LeftRow2["SerialNo"];
-										$LeftPrdName=$LeftRow2["PrdName"];
-										$LeftUrl2="product_detail.php?G0=$LaftSerialNo&Sn=$LeftSn";	
-								?>
-								<tr>
-									<td width="92%" height="24" style="border-bottom:1px solid #242424;padding-left:10px">
-										<a href="<?php echo $LeftUrl2?>"><?php echo $LeftPrdName?></a>
-									</td>
-								</tr>
-								<?php
-									}
-								?>
-							</table>
-						</td>
-					</tr>
-					<?php
-									}	
-								}
+					<div class="panel panel-default mypanel-default">
+
+						<div class="panel-heading mypanel-heading" role="tab"
+							id="headingOne">
+							<h4 class="panel-title">
+								<a role="button" data-toggle="collapse" data-parent="#accordion"
+									href="#collapseOne" aria-expanded="true"
+									aria-controls="collapseOne"> <?php echo $ParentCategory?> <i
+									class="fa fa-caret-square-o-down pull-right text-justify"
+									aria-hidden="true"></i>
+								</a>
+							</h4>
+						</div>
+						<div id="collapseOne" class="panel-collapse collapse in"
+							role="tabpanel" aria-labelledby="headingOne">
+							<div class="panel-body">
+								<ul>
+									<?php
+										$Sql1="select * from productCategory where Status='上架' and ParentSerialNo=".$ParentSerialNo." order by Sort,SerialNo Desc";
+										$Rs1=mysql_query($Sql1,$Conn);
+										if($Rs1 && mysql_num_rows($Rs1)>0){
+											while($Row1=mysql_fetch_array($Rs1)){
+												$SerialNo=$Row1["SerialNo"];
+												$Category=$Row1["Category"];
+												if($G0 == null)
+													$G0=$SerialNo;
+												if($SerialNo == $G0)
+													$Name=$Category;
+									?>
+									<li><a href="productCategories.php?G0=<?php echo $SerialNo?>"><?php echo $Category?><i
+											class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
+									<?php
+											}
+										}
+									?>
+								</ul>
+							</div>
+
+						</div>
+					</div>
+				 	<?php
 							}
 						}
 					?>
-				</table>
-			</td>
-		</tr>
-	</table>
-</td>
+				<!--end accordion  -->
+			</div>
 <?php	}?>
 <!--推薦產品-->
 <?php	if($Recommend_View){?>

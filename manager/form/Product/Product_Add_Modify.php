@@ -59,7 +59,10 @@
 	$M->AddText("PrdName","產品名稱",true);
 // 	$M->AddNum("PrdPrice","價格",true,5,"","");
 	$M->AddNote2("PrdNote","說明",false,99999);
-    $M->AddNote2("Notes","商品規格",false,99999);
+	$M->AddText("ModelNo","Model No",false);
+	$M->AddText("PrdSize","Product Size",false);
+	$M->AddText("MOQ","MOQ",false);
+	$M->AddNote2("Notes","商品規格",false,99999);
 	
 	$M->AddPIC3("PIC1","產品圖片一",false,$PICRootArray,$PICWidthArray,$PICHeightArray,"圖片建議寬度為 800 x 603 像素","","","","",$PICBoxArray,140,"",$UploadPic["List"]["Root"]);
 	$M->AddPIC3("PIC2","產品圖片二",false,$PICRootArray,$PICWidthArray,$PICHeightArray,"圖片建議寬度為 800 x 603 像素","","","","",$PICBoxArray,140,"",$UploadPic["List"]["Root"]);
