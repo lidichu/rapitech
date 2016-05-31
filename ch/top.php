@@ -122,7 +122,7 @@
                                 <span id="cartListnum" class="label number">2</span>
                                 <span class="title">Shopping Cart</span>
                             </div>
-                            <div class="function">
+                            <div class="function displayNone">
                                 <div class="widget">
                                     <h6 class="title">Shopping Cart</h6>
                                     <hr>

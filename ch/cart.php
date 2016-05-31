@@ -365,7 +365,8 @@
   <script>
 
        $(function(){
-
+    // 購物車cart display none
+    $('.displayNone').css('display','none');
     // 開始 local storage 塞入資料
     // 宣告 carList是一個 arry
     var carList = []; 
@@ -413,7 +414,6 @@
             // end the new each
 
                 $('#list').append(newProduct);
-
                 // 抓出list 值
                 $('i').click(function(){
                     //選取目前按鈕清單的SPAN
