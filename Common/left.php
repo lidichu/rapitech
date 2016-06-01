@@ -1,10 +1,5 @@
 <script type="text/javascript">
 var CarNumber = 0;
-$(function(){
-	
-	
-
-});
 
 </script>
 
@@ -64,7 +59,7 @@ $(function(){
 				<div class="panel-group" id="accordion" role="tablist"
 					aria-multiselectable="true">
 					<?php
-						$G0=$_REQUEST["G0"];
+						$G0=CheckData($_REQUEST["G0"]);
 						$Name="";
 						$Sql="select * from productCategory where Status='上架' and ParentSerialNo=1 order by Sort,SerialNo Desc";
 						$Rs=mysql_query($Sql,$Conn);
@@ -76,17 +71,17 @@ $(function(){
 					<div class="panel panel-default mypanel-default">
 
 						<div class="panel-heading mypanel-heading" role="tab"
-							id="headingOne">
+							id="heading<?php echo $ParentSerialNo?>">
 							<h4 class="panel-title">
 								<a role="button" data-toggle="collapse" data-parent="#accordion"
-									href="#collapseOne" aria-expanded="true"
+									href="#collapse<?php echo $ParentSerialNo?>" aria-expanded="true"
 									aria-controls="collapseOne"> <?php echo $ParentCategory?> <i
 									class="fa fa-caret-square-o-down pull-right text-justify"
 									aria-hidden="true"></i>
 								</a>
 							</h4>
 						</div>
-						<div id="collapseOne" class="panel-collapse collapse in"
+						<div id="collapse<?php echo $ParentSerialNo?>" class="panel-collapse collapse in"
 							role="tabpanel" aria-labelledby="headingOne">
 							<div class="panel-body">
 								<ul>

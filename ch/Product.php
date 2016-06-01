@@ -47,7 +47,7 @@
 						<?php include_once("../Common/left.php");?>
 					</div>
 					<?php
-						$Sn=$_REQUEST["Sn"];
+						$Sn=CheckData($_REQUEST["Sn"]);
 						if($Sn == null)
 							$Sn = 0;
 						$sql="select * from product where SerialNo=$Sn and Status='上架'";
