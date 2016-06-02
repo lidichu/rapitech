@@ -41,7 +41,7 @@
 								<li>
 									<ul>
 									<?php
-										$Sql="select * from productCategory where Status='¤W¬[' and ParentSerialNo=1 order by Sort,SerialNo Desc";
+										$Sql="select * from productCategory where Status='ä¸Šæ¶' and ParentSerialNo=1 order by Sort,SerialNo Desc";
 										$Rs=mysql_query($Sql,$Conn);
 										if($Rs && mysql_num_rows($Rs)>0){
 											while($Row=mysql_fetch_array($Rs)){
@@ -81,7 +81,7 @@
 						<i class="ti-bag"></i> <span id="cartListnum" class="label number">2</span>
 						<span class="title">Shopping Cart</span>
 					</div>
-                            <div class="function displayNone">
+					<div class="function displayNone">
 						<div class="widget">
 							<h6 class="title">Shopping Cart</h6>
 							<hr>
@@ -109,7 +109,7 @@
 
 function searchProducts(evt)
 {
-	//«ö¤UEnter·j´M
+	//æŒ‰ä¸‹Enteræœå°‹
 	if(evt.keyCode == 13)
 	{
 		var txt = event.currentTarget;
