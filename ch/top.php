@@ -72,7 +72,9 @@
 					</div>
 					<div class="function ">
 <!-- 						<form class="search-form "> -->
+							<div class="search-form ">
 							<input type="text" placeholder="Search the product" onkeydown="searchProducts(event)"/>
+							</div>
 <!-- 						</form> -->
 					</div>
 				</div>
