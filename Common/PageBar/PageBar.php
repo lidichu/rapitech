@@ -12,26 +12,20 @@
 	if ($EndPage > $PageAmount) 
 		$EndPage=$PageAmount;
 ?>
-<tr>
-	<td height="40" align="center" valign="bottom">
-		<table cellpadding="0" cellspacing="0" border="0" align="center">
-			<tr>
-				<td>
-					<?php if($Page>1){ ?>
-					<div class="pagebar"><a href="<?php echo GetScriptName()."?Page=".($Page - 1).$OtherQuery ?>" title="上一頁,第<?php echo($Page - 1)?>頁" style="padding:2px 3px 0px 3px">上一頁</a></div>
-					<?php }?>
-					<?php for ($i=$StartPage;$i<=$EndPage;$i++){?>
-						<?php if($i!=$Page){?>
-							<div class="pagebar"><a href="<?php echo GetScriptName() . "?Page=" . $i . $OtherQuery ?>" title="第<?php echo $i?>頁"><?php echo $i?></a></div>
-						<?php }else{?>
-							<div  class="pagebar2"><a href="#" title="第 <?php echo $i?> 頁,目前所在頁"><?php echo $i?></a></div>
-						<?php }?>
-					<?php }?>
-					<?php if ($Page < $PageAmount ){?>
-					<div class="pagebar"><a href="<?php echo GetScriptName()."?Page=".($Page + 1).$OtherQuery ?>" title="下一頁,第<?php echo($Page + 1)?>頁" style="padding:2px 3px 0px 3px">下一頁</a></div>
-					<?php }?>
-				</td>
-			</tr>
-		</table>
-	</td>
-</tr>
+<div class="text-center ">
+	<ul class="pagination">
+		<?php if($Page>1){ ?>
+			<li><a href="<?php echo GetScriptName()."?Page=".($Page - 1).$OtherQuery ?>" aria-label="Previous" title="上一頁,第<?php echo($Page - 1)?>頁"> <span aria-hidden="true">&laquo;</span></a></li>
+		<?php }?>
+		<?php for ($i=$StartPage;$i<=$EndPage;$i++){?>
+			<?php if($i!=$Page){?>
+				<li><a href="<?php echo GetScriptName() . "?Page=" . $i . $OtherQuery ?>" title="第<?php echo $i?>頁"><?php echo $i?></a></li>
+			<?php }else{?>
+				<li class="active"><a href="#" title="第 <?php echo $i?> 頁,目前所在頁"><?php echo $i?></a></li>
+			<?php }?>
+		<?php }?>
+		<?php if ($Page < $PageAmount ){?>
+			<li><a href="<?php echo GetScriptName()."?Page=".($Page + 1).$OtherQuery ?>" title="下一頁,第<?php echo($Page + 1)?>頁" aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+		<?php }?>
+	</ul>
+</div>

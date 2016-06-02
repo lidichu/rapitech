@@ -41,14 +41,15 @@
 								<li>
 									<ul>
 									<?php
-										$Sql="select * from productCategory where Status='上架' and ParentSerialNo=1 order by Sort,SerialNo Desc";
+										$Sql="select pp.*,sp.serialNo as sSerialNo from productCategory pp inner join productcategory sp on pp.SerialNo = sp.parentSerialNo
+												where pp.Status='上架' and sp.Status='上架' and pp.ParentSerialNo=1 group by sp.parentSerialNo order by sp.Sort,sp.ParentSerialNo Desc ;";
 										$Rs=mysql_query($Sql,$Conn);
 										if($Rs && mysql_num_rows($Rs)>0){
 											while($Row=mysql_fetch_array($Rs)){
-												$ParentSerialNo=$Row["SerialNo"];
+												$sSerialNo=$Row["sSerialNo"];
 												$Category=$Row["Category"];
 									?>
-										<li><a href="productCategories.php?G0=<?php echo $ParentSerialNo?>"> <?php echo $Category?> </a></li>
+										<li><a href="productCategories.php?G0=<?php echo $sSerialNo?>"> <?php echo $Category?> </a></li>
 									<?php
 											}
 										}

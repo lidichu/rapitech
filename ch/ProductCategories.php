@@ -24,44 +24,49 @@
     </head>
     <body>
 <?php include_once ('top.php');?>
-
-	<div class="container-fluid">
-                <img src="https://placem.at/things?w=1920&h=400&random=0" alt="" class="img-responsive">
+	<div class="main-container">
+		<div class="container-fluid">
+			<img src="https://placem.at/things?w=1920&h=400&random=0" alt=""
+				class="img-responsive">
+		</div>
+		<div class="clearfix"></div>
 	</div>
-	<div class="clearfix"></div>
-	<div class="container">
-		<br>
+	<section>
+		<div class="container">
+			<br>
 
-		<!-- <hr> -->
-		<div class="row">
+			<!-- <hr> -->
+			<div class="row">
 			<?php include_once("../Common/left.php");?>
 					<!--end of widget-->
-			<div class="widget">
-				<h4 class="title">Search Product</h4>
-				<hr>
- 				<!--<form> -->
-					<input class="mb0" type="text" placeholder="Search the Product" onkeydown="searchProducts(event)"/>
- 				<!--</form> -->
+				<div class="widget">
+					<h4 class="title">Search Product</h4>
+					<hr>
+					<!--<form> -->
+					<input class="mb0" type="text" placeholder="Search the Product"
+						onkeydown="searchProducts(event)" />
+					<!--</form> -->
+				</div>
+				<!--end of widget-->
+
+				<div class="widget">
+					<h6 class="title">Returns Policy</h6>
+					<hr>
+					<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+						antium doloremque laudantium, totam rem aperiam, eaque ipsa
+						quae...</p>
+				</div>
+
+				<!--end of widget-->
+
+				<!--end of sidebar-->
 			</div>
-			<!--end of widget-->
-
-			<div class="widget">
-				<h6 class="title">Returns Policy</h6>
-				<hr>
-				<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-					antium doloremque laudantium, totam rem aperiam, eaque ipsa quae...</p>
-			</div>
-
-			<!--end of widget-->
-
-			<!--end of sidebar-->
-		</div>
 		<?php include_once("ProductList.php");?>
 		<!--end of nine col-->
-		<!--end of container row-->
-	</div>
-	<!--end of container-->
-
+			<!--end of container row-->
+		</div>
+		<!--end of container-->
+	</section>
 	<?php include_once ('footer.php');?>
    
          
