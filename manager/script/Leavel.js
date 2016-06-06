@@ -128,7 +128,7 @@ function cmdSortUpdate_onclick(href){
 
 }
 
-//執行更新首頁排序欄位
+//執行更新排序欄位
 function cmdSortUpdate2_onclick(href){
 	$("#form1").prop("action",href+"?option=IndexSortUp");
 	$("#form1").submit();	
