@@ -36,7 +36,7 @@
                                 <img alt="Pic" src="img/project-single-1.jpg" class="myborder">
                                 <div class="title titlebg1">
                                     <h5 class="uppercase mb0">Measuring</h5>
-                                    <span>Measuring / all of our products</span>
+                                   <!--  <span>Measuring / all of our products</span> -->
                                 </div>
                             </a>
                         </div>
@@ -47,7 +47,7 @@
                                 <img alt="Pic" src="img/project-single-16.jpg" class="myborder">
                                 <div class="title titlebg2">
                                     <h5 class="uppercase mb0">Garden Accessories</h5>
-                                    <span>Garden Accessories / all of our products</span>
+                                  <!--   <span>Garden Accessories / all of our products</span> -->
                                 </div>
                             </a>
                         </div>
@@ -58,7 +58,7 @@
                                 <img alt="Pic" src="img/project-single-3.jpg" class="myborder" />
                                 <div class="title titlebg3">
                                     <h5 class="uppercase mb0">Outdoor & Indoor Clocks</h5>
-                                    <span>Outdoor & Indoor Clocks / all of our products</span>
+                                <!--     <span>Outdoor & Indoor Clocks / all of our products</span> -->
                                 </div>
                             </a>
                         </div>
@@ -70,7 +70,7 @@
                                 <img alt="Pic" src="img/project-single-5.jpg" class="myborder" />
                                 <div class="title titlebg4">
                                     <h5 class="uppercase mb0">Soil Test Kits</h5>
-                                    <span>Soil Test Kits / all of our products</span>
+                                   <!--  <span>Soil Test Kits / all of our products</span> -->
                                 </div>
                             </a>
                         </div>
@@ -81,7 +81,7 @@
                                 <img alt="Pic" src="img/project-single-17.jpg" class="myborder">
                                 <div class="title titlebg5">
                                     <h5 class="uppercase mb0">Thermometers</h5>
-                                    <span>Thermometers / all of our products</span>
+                                   <!--  <span>Thermometers / all of our products</span> -->
                                 </div>
                             </a>
                         </div>
@@ -92,7 +92,7 @@
                                 <img alt="Pic" src="img/project-single-18.jpg" class="myborder">
                                 <div class="title titlebg6">
                                     <h5 class="uppercase mb0">Gardening Ties</h5>
-                                    <span>Gardening Ties / all of our products</span>
+                                   <!--  <span>Gardening Ties / all of our products</span> -->
                                 </div>
                             </a>
                         </div>
@@ -103,7 +103,7 @@
                                 <img alt="Pic" src="img/project-single-6.jpg" class="myborder" />
                                 <div class="title titlebg7">
                                     <h5 class="uppercase mb0">Plant Labels</h5>
-                                    <span>Plant Labels / all of our products</span>
+                                    <!-- <span>Plant Labels / all of our products</span> -->
                                 </div>
                             </a>
                         </div>
@@ -114,7 +114,7 @@
                                 <img alt="Pic" src="img/project-single-19.jpg" class="myborder" />
                                 <div class="title titlebg8">
                                     <h5 class="uppercase mb0">Plant Supports </h5>
-                                    <span>Plant Supports / all of our products</span>
+                                    <!-- <span>Plant Supports / all of our products</span> -->
                                 </div>
                             </a>
                         </div>
@@ -129,7 +129,7 @@
                                   <img src="https://placem.at/things?w=1440&h=955&random=4" alt="Pic" class="myborder"/>
                                 <div class="title titlebg9">
                                     <h5 class="uppercase mb0"> New arrived </h5>
-                                    <span> New arrived / all of our products</span>
+                                    <!-- <span> New arrived / all of our products</span> -->
                                 </div>
                             </a>
                             <!-- this is the last of block -->
