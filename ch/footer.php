@@ -46,27 +46,28 @@
                                 <h6 class="title">Social Media</h6>
                                 <hr>
                                 <div class="row">
-                                    <div class="col-xs-3 ">
-                                        <a href="">
-                                            <img src="img/fb.png" alt="" class="wow flipInX " data-wow-delay=".5s">
-                                        </a>
-                                    </div>
-
-                                    <div class="col-xs-3 ">
+                                   
+                                    <div class="col-xs-4 ">
                                         <a href="">
                                             <img src="img/alibaba.png" alt="" class="wow flipInX " data-wow-delay=".5s">
                                         </a>
                                     </div>
-                                    <div class="col-xs-3 ">
+                                    <div class="col-xs-4 ">
                                         <a href="">
                                             <img src="img/youtube.png" alt="" class="wow flipInX " data-wow-delay=".5s">
                                         </a>
                                     </div>
-                                    <div class="col-xs-3">
+                                   <!--  <div class="col-xs-3">
                                         <a href="">
                                             <img src="img/google.png" alt="" class="wow flipInX " data-wow-delay=".5s">
                                         </a>
-                                    </div>
+                                    </div> -->
+                                    <!--  <div class="col-xs-3 ">
+                                        <a href="">
+                                            <img src="img/fb.png" alt="" class="wow flipInX " data-wow-delay=".5s">
+                                        </a>
+                                    </div> -->
+
 
                                 </div>
                             </div>

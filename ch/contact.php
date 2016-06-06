@@ -41,7 +41,10 @@
                         <div class="col-sm-6 col-md-5">
                             <h4 class="uppercase">Get In Touch</h4>
                             <p>
-                                At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident,
+                                Your questions and comments are important to us. 
+                                Leave your message in the form, or reach us by phone or email. 
+                                We will answer you as soon as possible.
+
                             </p>
                             <hr>
                             <p> 12F-5 No.2, Fuxing 4th Rd Qianzhen Dist
@@ -50,10 +53,12 @@
                             </p>
                             <hr>
                             <p>
-                                <strong>E:</strong> hello@email.com
-                                <br />
+                                <strong>E:</strong> sales@rapitech.com.tw
+                                <br/>
                                 <strong>P:</strong> (886) 7 535 7099
-                                <br />
+                                <br/>
+                                 <strong>Fax:</strong> (886) 5 370 1384
+                                <br/>
                             </p>
                         </div>
                         <div class="col-sm-6 col-md-5 col-md-offset-1">

@@ -41,7 +41,7 @@
             <section class="image-square right">
                 <div class="col-md-6 p0 image">
                     <div class="map-holder background-image-holder">
-                         <img src="https://placem.at/things?w=800&h=533&random=102" alt=""  >
+                         <img src="img/factory.jpg" alt=""  >
                     </div>
                 </div>
                 <div class="col-md-6 content wow bounceIn">
