@@ -266,10 +266,10 @@
 		}
 		
 		//圖片上傳(儲存為多尺寸)
-		public function AddPIC3($FieldNameIn,$ShowNameIn,$NullFlagIn=false,$FilePathArrayIn,$WidthArrayIn,$HeightArrayIn,$NoteIn,$TitleFieldIn,$TitleShowIn,$OtherVarIn="",$FieldNameHiddenIn="",$BoxModeIn,$ShowWidthIn,$ShowHeightIn,$ShowRootIn=""){
+		public function AddPIC3($FieldNameIn,$ShowNameIn,$NullFlagIn=false,$FilePathArrayIn,$WidthArrayIn,$HeightArrayIn,$NoteIn,$TitleFieldIn,$TitleShowIn,$OtherVarIn="",$FieldNameHiddenIn="",$BoxModeIn,$ShowWidthIn,$ShowHeightIn,$ShowRootIn="",$AddWaterMark=false){
 			if(array_key_exists($FieldNameIn,$this->Fields)==true){exit("AddPIC3 Error ：`".$FieldNameIn."` is existed In Fields");}
 			Manager::$FileNum++;
-			$this->Fields[$FieldNameIn] = New PICFields3($FieldNameIn,$ShowNameIn,$NullFlagIn,$FilePathArrayIn,$WidthArrayIn,$HeightArrayIn,$NoteIn,$TitleFieldIn,$TitleShowIn,Manager::$FileNum,$OtherVarIn,$FieldNameHiddenIn,$BoxModeIn,$ShowWidthIn,$ShowHeightIn,$ShowRootIn);
+			$this->Fields[$FieldNameIn] = New PICFields3($FieldNameIn,$ShowNameIn,$NullFlagIn,$FilePathArrayIn,$WidthArrayIn,$HeightArrayIn,$NoteIn,$TitleFieldIn,$TitleShowIn,Manager::$FileNum,$OtherVarIn,$FieldNameHiddenIn,$BoxModeIn,$ShowWidthIn,$ShowHeightIn,$ShowRootIn,$AddWaterMark);
 			$this->FieldsStatus[$FieldNameIn] = false;
 		}	
 		public function AddPICM($FieldNameIn,$ShowNameIn,$NullFlagIn=false,$FilePathArrayIn,$WidthArrayIn=null,$HeightArrayIn=null,$NoteIn,$TitleFieldIn="",$TitleShowIn="",$NumIn=1,$OtherVarIn="",$FieldNameHiddenIn="",$BoxModeIn,$ShowWidthIn,$ShowHeightIn,$ShowRootIn=""){
