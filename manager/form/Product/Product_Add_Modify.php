@@ -64,14 +64,10 @@
 	$M->AddText("MOQ","MOQ",false);
 	$M->AddNote2("Notes","商品規格",false,99999);
 	
-	$M->AddPIC3("PIC1","產品圖片一",false,$PICRootArray,$PICWidthArray,$PICHeightArray,"圖片建議寬度為 800 x 603 像素","","","","",$PICBoxArray,140,"",$UploadPic["List"]["Root"]);
-	$M->AddPIC3("PIC2","產品圖片二",false,$PICRootArray,$PICWidthArray,$PICHeightArray,"圖片建議寬度為 800 x 603 像素","","","","",$PICBoxArray,140,"",$UploadPic["List"]["Root"]);
-	$M->AddPIC3("PIC3","產品圖片三",false,$PICRootArray,$PICWidthArray,$PICHeightArray,"圖片建議寬度為 800 x 603 像素","","","","",$PICBoxArray,140,"",$UploadPic["List"]["Root"]);
-	$M->AddPIC3("PIC4","產品圖片四",false,$PICRootArray,$PICWidthArray,$PICHeightArray,"圖片建議寬度為 800 x 603 像素","","","","",$PICBoxArray,140,"",$UploadPic["List"]["Root"]);
-	$M->AddPIC3("PIC5","產品圖片五",false,$PICRootArray,$PICWidthArray,$PICHeightArray,"圖片建議寬度為 800 x 603 像素","","","","",$PICBoxArray,140,"",$UploadPic["List"]["Root"]);
-	$M->AddPIC3("PIC6","產品圖片六",false,$PICRootArray,$PICWidthArray,$PICHeightArray,"圖片建議寬度為 800 x 603 像素","","","","",$PICBoxArray,140,"",$UploadPic["List"]["Root"]);
-	$M->AddPIC3("PIC7","產品圖片七",false,$PICRootArray,$PICWidthArray,$PICHeightArray,"圖片建議寬度為 800 x 603 像素","","","","",$PICBoxArray,140,"",$UploadPic["List"]["Root"]);
-	$M->AddPIC3("PIC8","產品圖片八",false,$PICRootArray,$PICWidthArray,$PICHeightArray,"圖片建議寬度為 800 x 603 像素","","","","",$PICBoxArray,140,"",$UploadPic["List"]["Root"]);
+	$Nums = array("一","二","三","四","五","六","七","八");
+	for($i=0;$i<count($Nums);$i++){
+		$M->AddPIC3("PIC".($i+1),"產品圖片".$Nums[$i],false,$PICRootArray,$PICWidthArray,$PICHeightArray,"圖片建議寬度為 800 x 603 像素","","","","",$PICBoxArray,140,"",$UploadPic["List"]["Root"],true);
+	}
 	
 	//新增用SQL
 	$AddFieldsSQL = "";

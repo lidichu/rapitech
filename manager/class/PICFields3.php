@@ -17,7 +17,8 @@
 		var $ShowWidth;
 		var $ShowHeight;
 		var $ShowRoot;
-		public function PICFields3($FieldNameIn,$ShowNameIn,$NullFlagIn=false,$FilePathArrayIn,$WidthArrayIn=null,$HeightArrayIn=null,$NoteIn,$TitleFieldIn="",$TitleShowIn="",$NumIn=1,$OtherVarIn="",$FieldNameHiddenIn="",$BoxModeIn,$ShowWidthIn,$ShowHeightIn,$ShowRootIn){
+		var $AddWaterMark;
+		public function PICFields3($FieldNameIn,$ShowNameIn,$NullFlagIn=false,$FilePathArrayIn,$WidthArrayIn=null,$HeightArrayIn=null,$NoteIn,$TitleFieldIn="",$TitleShowIn="",$NumIn=1,$OtherVarIn="",$FieldNameHiddenIn="",$BoxModeIn,$ShowWidthIn,$ShowHeightIn,$ShowRootIn,$AddWaterMark=false){
 		
 			$this->FieldName = $FieldNameIn ;
 			$this->ShowName = $ShowNameIn ;
@@ -38,6 +39,7 @@
 			$this->ShowHeight = $ShowHeightIn;
 			$this->ShowRoot = $ShowRootIn;
 			if($this->ShowRoot==""){$this->ShowRoot = $this->FilePath;}
+			$this->AddWaterMark = $AddWaterMark;
 		}
 		
 		
@@ -213,6 +215,11 @@
 			if($_FILES[$this->FieldName]["size"] > 0){
 				$FileName = ($_POST["FileName_".$this->FieldName]=="")?$_FILES[$this->FieldName]['name']:$_POST["FileName_".$this->FieldName];
 				$FieldNameHiddenValue = FileHandle::Upload($_FILES[$this->FieldName],$this->FilePathArray[0],$_POST["FileName_".$this->FieldName]);
+				
+				//增加浮水印
+				if($this->AddWaterMark)
+					$this->attachWaterMark($this->FilePathArray[0]."/".$FieldNameHiddenValue);
+				
 				for($i=1;$i<count($this->FilePathArray);$i++){
 					PICHandle::ImageResize($this->FilePathArray[0].$FieldNameHiddenValue, $this->FilePathArray[$i]."/".$FieldNameHiddenValue, $this->WidthArray[$i],$this->HeightArray[$i],$this->BoxMode[$i]);
 				}
@@ -240,10 +247,17 @@
 				if($_FILES[$this->FieldName]["size"] > 0){
 					$FileName = ($_POST["FileName_".$this->FieldName]=="")?$_FILES[$this->FieldName]['name']:$_POST["FileName_".$this->FieldName];
 					$FieldNameHiddenValue = FileHandle::Upload($_FILES[$this->FieldName],$this->FilePathArray[0],$_POST["FileName_".$this->FieldName]);
+					
+					//增加浮水印
+					if($this->AddWaterMark)
+						$this->attachWaterMark($this->FilePathArray[0]."/".$FieldNameHiddenValue);
+					
 					for($i=1;$i<count($this->FilePathArray);$i++){
 						PICHandle::ImageResize($this->FilePathArray[0].$FieldNameHiddenValue, $this->FilePathArray[$i]."/".$FieldNameHiddenValue, $this->WidthArray[$i],$this->HeightArray[$i],$this->BoxMode[$i]);
 					}
 					PICHandle::ImageResize($this->FilePathArray[0].$FieldNameHiddenValue, $this->FilePathArray[0]."/".$FieldNameHiddenValue, $this->WidthArray[0],$this->HeightArray[0],$this->BoxMode[0]);
+						
+					
 					if($FieldNameHiddenValue!=""){
 						$DelFileName = $_POST["OldFile_".$this->FieldNameHidden];
 						for($i=0;$i<count($this->FilePathArray);$i++){
@@ -291,6 +305,64 @@
 						$ModifySQL.="`".$this->TitleField."`=".$this->FieldName;
 					}
 				}
+			}
+		}
+		
+		function attachWaterMark($img_path)
+		{
+			list($img_width, $img_height, $img_type) = getimagesize($img_path);
+			$img = $this->getImage($img_type,$img_path);
+				
+			$watermark_path = "../../images/RAPITECH_watermark.png";
+			list($watermark_width, $watermark_height, $watermark_type) = getimagesize($watermark_path);
+			$watermark = $this->getImage($watermark_type,$watermark_path);
+				
+				
+			$scaleX = $img_width/$watermark_width;
+			$new_width = $watermark_width * $scaleX;
+			$new_height = $watermark_height * $scaleX;
+			$new_x = $img_width/2 - $new_width/2;
+			$new_y = $img_height/2 - $new_height/2;
+			
+			
+			imagecopyresampled ( $img , $watermark, $new_x , $new_y , 0 , 0 , $new_width , $new_height , $watermark_width , $watermark_height);
+			$this->saveImage($img_type,$img,$img_path);
+		}
+		
+		function getImage($type,$path)
+		{
+			switch($type) {
+				case 1:
+					# GIF image
+					$img = imageCreateFromGIF($path);
+					break;
+				case 2:
+					# JPEG image
+					$img = imageCreateFromJPEG($path);
+					break;
+				case 3:
+					# PNG image
+					$img = imageCreateFromPNG($path);
+					break;
+			}
+			return $img;
+		}
+		
+		function saveImage($type,$img,$path)
+		{
+			switch($type) {
+				case 1:
+					# GIF image
+					imageGIF($img, $path);
+					break;
+				case 2:
+					# JPEG image
+					imageJPEG($img, $path);
+					break;
+				case 3:
+					# PNG image
+					imagePNG($img, $path);
+					break;
 			}
 		}
 	}

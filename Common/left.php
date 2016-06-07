@@ -115,6 +115,28 @@ var CarNumber = 0;
 				<!--end accordion  -->
 			</div>
 <?php	}?>
+<!--end of widget-->
+<div class="widget">
+	<h4 class="title">Search Product</h4>
+	<hr>
+	<!--<form> -->
+	<input class="mb0" type="text" placeholder="Search the Product"
+		onkeydown="searchProducts(event)" />
+	<!--</form> -->
+</div>
+<!--end of widget-->
+
+<div class="widget">
+	<h6 class="title">Returns Policy</h6>
+	<hr>
+	<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+		antium doloremque laudantium, totam rem aperiam, eaque ipsa
+		quae...</p>
+</div>
+
+<!--end of widget-->
+
+<!--end of sidebar-->
 <!--推薦產品-->
 <?php	if($Recommend_View){?>
 <td width="15%" valign="top">

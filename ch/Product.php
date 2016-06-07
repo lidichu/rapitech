@@ -150,84 +150,38 @@
                 </div>
                 <!--end of row-->
                 <div class="row" id="likelist">
-                   <!--  <div class="col-md-2 col-sm-4">
+	                <?php
+						$SQL = "Select * From product where Status = '上架' and IndexShow = 'true'";
+						$Rs = mysql_query ( $SQL, $Conn );
+						if($Rs && mysql_num_rows($Rs)>0){
+							while($Row=mysql_fetch_array($Rs)){
+								$ParentSerialNo=$Row["G0"];
+								$pSerialNo = $Row ["SerialNo"];
+								$PrdName = $Row ["PrdName"];
+								
+								if ($Row ["PIC1Hidden"] != "") {
+									$Pic = "../files/Product/PICList/" . $Row ["PIC1Hidden"];
+								} else {
+									$Pic = "../NoPIC/140x106.jpg";
+								}
+								$Url = "Product.php?G0=$G0&Sn=$pSerialNo";
+					?>
+                   <div class="col-md-2 col-sm-4">
                         <div class="image-tile outer-title text-center">
-                            <a href="#">
-                                <img src="https://placem.at/things?w=600&h=600&random=1" alt="" class="img-responsive product-thumb">
-                            </a>
+	                        <a href="<?php echo $Url?>" class="list"> <img src="<?php echo $Pic?>"
+								alt="" class="img-responsive product-thumb ">
+							</a>
                             <div class="title">
-                                <h5 class="mb0">Adrian LambsWool</h5>
+                                <h5 class="mb0"><?php echo $PrdName?></h5>
                                    <br>
                                     <a class="btn btn-sm btn-rounded">Add To List</a>
                             </div>
                         </div>
-                    </div> -->
-                    <!--end three col-->
-                   <!--  <div class="col-md-2 col-sm-4">
-                        <div class="image-tile outer-title text-center">
-                            <a href="#">
-                                <img src="https://placem.at/things?w=600&h=600&random=2" alt="" class="img-responsive product-thumb">
-                            </a>
-                            <div class="title">
-                                <h5 class="mb0">Stanley Leather</h5>
-                                 <br>
-                                <a class="btn btn-sm btn-rounded">Add To List</a>
-                            </div>
-                        </div>
-                    </div> -->
-                    <!--end three col-->
-                 <!--    <div class="col-md-2 col-sm-4">
-                        <div class="image-tile outer-title text-center">
-                            <a href="#">
-                                <img src="https://placem.at/things?w=600&h=600&random=3" alt="" class="img-responsive product-thumb">
-                            </a>
-                            <div class="title">
-                                <h5 class="mb0">Vladimir Stainless</h5>
-                                 <br>
-                                <a class="btn btn-sm btn-rounded">Add To List</a>
-                            </div>
-                        </div>
-                    </div> -->
-                    <!--end three col-->
-                  <!--   <div class="col-md-2 col-sm-4">
-                        <div class="image-tile outer-title text-center">
-                            <a href="#">
-                                <img src="https://placem.at/things?w=600&h=600&random=4" alt="" class="img-responsive product-thumb">
-                            </a>
-                            <div class="title">
-                                <h5 class="mb0">Luka Vintage Camera</h5>
-                                <br>
-                                <a class="btn btn-sm btn-rounded">Add To List</a>
-                            </div>
-                        </div>
-                    </div> -->
-                    <!--end three col-->
-                    <!-- <div class="col-md-2 col-sm-4">
-                        <div class="image-tile outer-title text-center">
-                            <a href="#">
-                                <img src="https://placem.at/things?w=600&h=600&random=5" alt="" class="img-responsive product-thumb">
-                            </a>
-                            <div class="title">
-                                <h5 class="mb0">Luka Vintage Camerb</h5>
-                                  <br>
-                                <a class="btn btn-sm btn-rounded">Add To List</a>
-                            </div>
-                        </div>
-                    </div> -->
-                    <!--end three col-->
-                   <!--  <div class="col-md-2 col-sm-4">
-                        <div class="image-tile outer-title text-center">
-                            <a href="#">
-                                <img src="https://placem.at/things?w=600&h=600&random=6" alt="" class="img-responsive product-thumb">
-                            </a>
-                            <div class="title">
-                                <h5 class="mb0">Luka Vintage Camerc</h5>
-                                <br>
-                                <a class="btn btn-sm btn-rounded">Add To List</a>
-                            </div>
-                        </div>
-                    </div> -->
-                    <!--end three col-->
+                    </div> 
+	                <?php 
+							}
+						}
+					?>
                 </div>
                 <!--end of row-->
             </div>

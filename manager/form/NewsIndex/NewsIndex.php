@@ -222,7 +222,7 @@
 		                        <td nowrap width="100" style="font-size:12px;"><a class="Title sortlink" href="<?php echo GetSCRIPTNAME(); ?>?SF<?php echo $Level; ?>=PostDate"><font color="#FFFFFF" style="font-size:13px;">日期</font></a></td>
 								<td nowrap style="font-size:12px;"><a class="Title sortlink" href="<?php echo GetSCRIPTNAME(); ?>?SF<?php echo $Level; ?>=Title"><font color="#FFFFFF" style="font-size:13px;">標題</font></a></td>
 		                        <td nowrap width="80"style="font-size:12px;"><a class="Title sortlink" href="<?php echo GetSCRIPTNAME(); ?>?SF<?php echo $Level; ?>=Status"><font color="#FFFFFF" style="font-size:13px;">狀態</font></a></td>
-								<td nowrap width="100"><input type="button" name="SortUpdate2" value="更新首頁排序" onClick="cmdSortUpdate2_onclick('<?php echo GetSCRIPTNAME(); ?>');"></td>
+								<td nowrap width="100"><input type="button" name="SortUpdate2" value="更新排序" onClick="cmdSortUpdate2_onclick('<?php echo GetSCRIPTNAME(); ?>');"></td>
 	                       	</tr>	
                         <?php
                                 $SQL = "select ".$SQLFields." from ".$DBTable_S.$Query." order by ".$SQLOrderBy." limit ".($Page-1) * $RowCount.",".$RowCount;

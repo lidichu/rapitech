@@ -243,7 +243,9 @@ $(function(){
         // }
     });
 
-//加入你可能會喜歡點過資料
+
+    /*
+	//加入你可能會喜歡點過資料
     // 宣告一個陣列
     var likeList = [];    
 
@@ -287,7 +289,7 @@ $(function(){
         // $("#likeListnum").text(likeList.length);
 
         });
-       
+       */
 });
 
 

@@ -29,6 +29,7 @@
 	<div class="container-fluid">
                 <img src="https://placem.at/things?w=1920&h=400&random=0" alt="" class="img-responsive">
 	</div>
+	<section>
 	<div class="clearfix"></div>
 	<div class="container">
 		<br>
@@ -44,7 +45,7 @@
 		<!--end of container row-->
 	</div>
 	<!--end of container-->
-
+</section>
 	<?php include_once ('footer.php');?>
    
          

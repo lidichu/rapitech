@@ -32,7 +32,7 @@ function UpdateSort(){
 	}	
 }
 
-//更新首頁排序
+//更新排序
 function UpdateIndexSort(){
 	global $DBTable,$Conn,$RowCount;
 	for($i=1;$i<=$RowCount;$i++){
