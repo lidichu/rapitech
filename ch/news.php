@@ -79,7 +79,7 @@
 		                        			echo "</a>\n";
 							?>
                                 <hr>
-                                <p><?php echo $Note?></p>
+                                <p><?php echo htmlspecialchars_decode($Note)?></p>
                                 <!-- <a class="btn btn-sm" href="#">Read More</a> -->
                             </div>
                         </div>

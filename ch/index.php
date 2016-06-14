@@ -162,7 +162,7 @@
                                         <li>
                                             <h2 class="text-center wordColor"><?php echo $Title?></h2>
                                             <hr />
-                                            <p class="lead"><?php echo $Note?></p>
+                                            <p class="lead"><?php echo htmlspecialchars_decode($Note)?></p>
                                             <div class="quote-author">
                                                 <span><?php echo $PostDate?></span>
                                             </div>
