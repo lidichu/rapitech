@@ -1,12 +1,13 @@
 <?php
-	//訂單資訊
+	//詢問資訊
 	$SQL="select * From ordermain Where SerialNo = ".$G[0];
 	$Rs =mysql_query($SQL,$Conn);
 	if($Rs && mysql_num_rows($Rs) > 0){
 		$Row=mysql_fetch_array($Rs);
 		$OrderNumber=$Row["OrderNumber"];		
+		$OrderMessage=$Row["OrderMessage"];
 	}
-	//訂購人資訊
+	//詢問人資訊
 	$SQL="select * From ordermember Where G0 = ".$G[0];
 	$Rs =mysql_query($SQL,$Conn);
 	if($Rs && mysql_num_rows($Rs) > 0){
@@ -15,29 +16,17 @@
 		$OrderSex=$Row["OrderSex"];     	
 		$OrderEmail=$Row["OrderEMail"];      
 		$OrderTel=$Row["OrderTel"];      
-		$OrderAddress=$Row["OrderAddress"];      
+		$OrderAddress=$Row["OrderAddress"];
 		$TickectType=$Row["TickectType"];      
 		$TicketID=$Row["TicketID"];      
 		$TicketTitle=$Row["TicketTitle"];      
-	}
-	
-	//收件人資訊
-
-	$SQL="select * From orderreceiver Where G0 = ".$G[0];
-	$Rs =mysql_query($SQL,$Conn);
-	if($Rs && mysql_num_rows($Rs) > 0){
-		$Row=mysql_fetch_array($Rs);	
-		$ReceiverName=$Row["ReceiverName"];   
-		$ReceiverSex=$Row["ReceiverSex"];		
-		$ReceiverTel=$Row["ReceiverTel"];      
-		$ReceiverAddress=$Row["ReceiverAddress"];      
 	}
 	
 	
 ?>	
 <table width="60%" border="0" cellspacing="0" cellpadding="0">			
 	<tr>
-		<td align="left" class="title2" style="padding-top:10px">1）購物明細</td>
+		<td align="left" class="title2" style="padding-top:10px">1）詢問明細</td>
 	</tr>
 	<tr>
 		<td style="padding-top:5px">
@@ -48,9 +37,8 @@
 						<table width="100%" style="border:1px solid #000;border-bottom-width:0px;" border="0" cellpadding="0" cellspacing="0" style="border-bottom:none;">
 							<tr>
 								<td width="50%" height="30" align="center" style="border-bottom:1px solid #2c261e">商品名稱</td>
-								<td width="16%" height="30" align="center" style="border-bottom:1px solid #2c261e">價格</td>
+								<td width="16%" height="30" align="center" style="border-bottom:1px solid #2c261e">Model No</td>
 								<td width="17%" height="30" align="center" style="border-bottom:1px solid #2c261e">數量</td>
-								<td width="17%" height="30" align="center" style="border-bottom:1px solid #2c261e">小計</td>
 							</tr>
 							<?php	
 								$SQL="Select * From orderitem Where G0 = ".$G[0];
@@ -59,16 +47,13 @@
 								while($Row=mysql_fetch_array($Rs)){
 									$PrdName=$Row["PrdName"];										
 									$PrdAmount=$Row["PrdAmount"];
-									$PrdPrice=$Row["PrdPrice"];
-									$TempPrice =$PrdAmount*$PrdPrice;
-									$TotalPrice=$TotalPrice+$TempPrice;	
+									$ModelNo=$Row["ModelNo"];
 									
 							?>
 							<tr>
 								<td align="center" height="42"  style="border-bottom:1px dotted #2c261e"><?php echo $PrdName?></td>
 								<td align="center"  style="border-bottom:1px dotted #2c261e"><?php echo NumHandle3($PrdPrice)?></td>
 								<td align="center"  style="border-bottom:1px dotted #2c261e"><?php echo $PrdAmount?></td>
-								<td align="center" class="TempPriceClass" style="border-bottom:1px dotted #2c261e"><?php echo NumHandle3($TempPrice)?></td>
 							</tr>
 							<?php
 								}
@@ -76,17 +61,6 @@
 						</table>
 					</td>
 					<td width="8" rowspan="2" align="left" valign="bottom"></td>
-				</tr>
-				<tr>
-					<td style="height:91px;border:1px solid #000;border-top-width:0px">
-						<table width="100%" border="0" cellspacing="1" cellpadding="3">
-							<tr class="white_1">
-								<td width="83%" align="right">商品金額總計</td>
-								<td width="17%" align="center" ><?php echo NumHandle3($TotalPrice)?></td>
-							</tr>
-						</table>
-					</td>
-					
 				</tr>
 				<tr>
 					<td>&nbsp;</td>
@@ -97,7 +71,7 @@
 		</td>
 	</tr>
 	<tr>
-		<td align="left" class="title2" style="padding-top:20px">2）訂購人資訊</td>
+		<td align="left" class="title2" style="padding-top:20px">2）詢問人資訊</td>
 	</tr>
 	<tr>
 		<td align="left" style="padding-top:5px">
@@ -122,7 +96,13 @@
 					</td>
 				</tr>
 				<tr>
-					<td height="30" style="padding-left:15px">聯絡地址</td>
+					<td height="30" style="padding-left:15px">聯絡區域</td>
+					<td>
+						<?php echo $OrderAddress?>
+					</td>
+				</tr>
+				<tr>
+					<td height="30" style="padding-left:15px">訊　　息</td>
 					<td>
 						<?php echo $OrderAddress?>
 					</td>
@@ -148,31 +128,6 @@
 				</tr>
 				<?php }?>
 				-->
-				<tr>
-					<td valign="top">&nbsp;</td>
-					<td>&nbsp;</td>
-				</tr>
-			</table>
-		</td>
-	</tr>
-	<tr>
-		<td align="left" style="padding-top:20px" class="title2">3）收件人資訊</td>
-	</tr>
-	<tr>
-		<td align="left" style="padding-top:5px">
-			<table width="97%" border="0" style="border:1px solid #000" align="center" cellpadding="0" cellspacing="0" class="pro">
-				<tr>
-					<td width="17%" height="30" style="padding-left:15px">中文全名</td>
-					<td width="83%"><?php echo $ReceiverName?>&nbsp;<?php echo $ReceiverSex?></td>
-				</tr>
-				<tr>
-					<td height="30" style="padding-left:15px">聯絡電話</td>
-					<td><?php echo $ReceiverTel?></td>
-				</tr>
-				<tr>
-					<td height="30" style="padding-left:15px">聯絡地址</td>
-					<td><?php echo $ReceiverAddress?></td>
-				</tr>
 				<tr>
 					<td valign="top">&nbsp;</td>
 					<td>&nbsp;</td>

@@ -60,6 +60,7 @@ var CarNumber = 0;
 					aria-multiselectable="true">
 					<?php
 						$G0=CheckData($_REQUEST["G0"]);
+						$SN=CheckData($_REQUEST["SN"]);
 						$Name="";
 						$Sql="select * from productCategory where Status='上架' and ParentSerialNo=1 order by Sort,SerialNo Desc";
 						$Rs=mysql_query($Sql,$Conn);
@@ -92,10 +93,22 @@ var CarNumber = 0;
 											while($Row1=mysql_fetch_array($Rs1)){
 												$SerialNo=$Row1["SerialNo"];
 												$Category=$Row1["Category"];
-												if($G0 == null)
-													$G0=$SerialNo;
-												if($SerialNo == $G0)
-													$Name=$Category;
+												
+												if($SN != null)
+												{
+													if($SN == $ParentSerialNo && $G0 == null)
+													{
+														$Name=$Category;
+														$G0=$SerialNo; 
+													}
+												}
+												else
+												{
+													if($G0 == null)
+														$G0=$SerialNo;
+													if($SerialNo == $G0)
+														$Name=$Category;
+												}
 									?>
 									<li><a href="productCategories.php?G0=<?php echo $SerialNo?>"><?php echo $Category?><i
 											class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
