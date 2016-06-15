@@ -375,21 +375,6 @@
 <script type="text/javascript">
 
 $(function(){
-
-  // 開始 local storage 塞入資料
-    // 宣告 carList是一個 arry
-    var carList = []; 
-    carList = JSON.parse(window.localStorage.getItem("carList"));
-      // alert(carList);  
-    if(carList){
-        $.each(carList,function(idx, value){
-            $('#cartList').append(value); 
-        })
-        // #cartListnum塞入carList 各數
-        $("#cartListnum").text(carList.length);
-    }
-    else
-        $("#cartListnum").text("0");
 	//$("body").TwZipCode({CountryFieldName : 'AddressCity',AreaFieldName:'AddressArea',ZipCodeFieldName:'AddressZipCode',CountryDefaultValue : '縣/市',AreaDefaultValue: '鄉/鎮/市/區'});
 	$("#btnSubmit").click(function(){
 		$("#form1").submit();

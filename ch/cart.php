@@ -27,7 +27,7 @@
             <section>
                 <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 wow bounceIn">
                     <div class="feature boxed bg-secondary">
-                    <form class="text-center form-email" data-error="There were errors, please check all required fields and try again" data-success="Thanks for taking the time to complete the planner. We'll be in touch shortly!">
+                    <form id="form1" action="order_handle.php"  method="post" name="form1" class="text-center" data-error="There were errors, please check all required fields and try again" data-success="Thanks for taking the time to complete the planner. We'll be in touch shortly!">
                         <h3 class="uppercase mt48 mt-xs-0 wordColor">Inquiry List</h3>
                         <p class="lead mb64 mb-xs-24">
                             Dear client please check your order and fill the details  <br /> We will contact you as soon as we can .
@@ -35,8 +35,9 @@
                         <!--  -->
                         <div class="container">
                     <div class="row">
+                    	<input type="text" id="CartList" name="CartList" style="display:none"/>
                         <div class="col-md-12 col-md-offset-0 col-sm-10 col-sm-offset-1">
-                            <table class="table cart mb48 text-left">
+                            <table class="table cart mb48 text-left" name="tb">
                                 <thead>
                                     <tr>
                                         <th>&nbsp;</th>
@@ -79,14 +80,14 @@
                             <h6 class="uppercase">
                              Your personal details
                             </h6>
-                            <input type="text" name="name" class="col-md-6 validate-required" placeholder="Name*" />
-                            <input type="text" name="email" class="col-md-6 validate-required validate-email" placeholder="Email Address*" />
-                            <input type="text" name="phone" class= "validate-required" placeholder="Phone number*" />
+                            <input type="text" name="Name" class="col-md-6 validate-required" placeholder="Name*" />
+                            <input type="text" name="Email" class="col-md-6 validate-required validate-email" placeholder="Email Address*" />
+                            <input type="text" name="Phone" class= "validate-required" placeholder="Phone number*" />
                             <div class="form-group  ">
                             
-                              <select class="my-form-control my-from-group" id="sel1">
+                               <select name="AddressCity" class="my-form-control my-from-group cbg" id="sel1">
                                 <!-- <option value="AF" >select country*</option> -->
-                                    <option id="demo" value="AL">Albania </option>
+                                    <option value="AL">Albania </option>
                                     <option value="DZ">Algeria</option>
                                     <option value="AS">American Samoa</option>
                                     <option value="AD">Andorra</option>
@@ -297,7 +298,7 @@
                                     <option value="SE">Sweden</option>
                                     <option value="CH">Switzerland</option>
                                     <option value="SY">Syria</option>
-                                    <option value="TW" selected="" >Taiwan</option>
+                                    <option value="TW" selected >Taiwan</option>
                                     <option value="TJ">Tajikistan</option>
                                     <option value="TZ">Tanzania</option>
                                     <option value="TH">Thailand</option>
@@ -333,7 +334,7 @@
 
                             </div>
                            
-                            <textarea name="message" placeholder="Message" rows="4" class="validate-required"></textarea>
+                            <textarea name="Message" placeholder="Message" rows="4" ></textarea>
                             <hr>
                         </div>
                         <div class="overflow-hidden">
@@ -348,109 +349,84 @@
 <?php include_once ('footer.php');?>
 
         </div>
+        <?php include_once(VisualRoot.'Common/Script.php'); ?>
         <script src="js/jquery.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-       <script src="js/flickr.js"></script>
-        <script src="js/flexslider.min.js"></script>
-        <script src="js/lightbox.min.js"></script> 
-        <script src="js/masonry.min.js"></script>
-        <script src="js/twitterfetcher.min.js"></script>
-        <script src="js/spectragram.min.js"></script>
-        <script src="js/ytplayer.min.js"></script>
-        <script src="js/countdown.min.js"></script>
-         <script src="js/smooth-scroll.min.js"></script> 
-        <script src="js/parallax.js"></script> 
-        <script src="js/scripts.js"></script>
-        <script src="js/wow.js"></script>
-  <script>
-
-       $(function(){
-    // 購物車cart display none
-    $('.displayNone').css('display','none');
-    // 開始 local storage 塞入資料
-    // 宣告 carList是一個 arry
-    var carList = []; 
-    carList = JSON.parse(window.localStorage.getItem("carList"));
-      // alert(carList);  
-    if(carList){
-        $.each(carList,function(idx, value){
-            $('#cartList').append(value); 
-        })
-        // #cartListnum塞入carList 各數
-            $("#cartListnum").text(carList.length);
-        } 
-        //#cartListnum else塞入0
-        else
-            $("#cartListnum").text("0");
-    // 結束local storage 塞入資料
-
-
-        // 塞資料
-                var myImg = "";//$('.cart img').prop('src');\取img src
-                var spanText = "";
-                var cartList = $('#cartList').children('li');//$('.cart .cart-title').text(); 所有的li在cartlist
-                // var myCartN = myCartList.text();
-                // alert(myCartN);
-                var newProduct = "";
-            // new eah
-                $(cartList).each(function(){
-                    myImg = $(this).find('img').prop('src');
-                    // alert(myImg);
-                    spanText = $(this).find('.product-title').text();
-                    // alert(spanText);
-                     var myNumber = $(this).find('.serialNumber').text();
-                     
-                    newProduct += " <tr> ";
-                    // xx結構
-                    newProduct += "<th scope=\"row\"><a class=\"remove-item\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"\" data-original-title=\"Remove from list\"><i class=\"ti-close\"></i></a></th>";
-                    //img
-                    newProduct += "<td><img src=\""+ myImg +"\" alt=\"\" class=\"img-responsive product-thumb\"></td>";
-                    newProduct += "<td><span class=\"tr-tittle\">" + spanText + "</span></td>";
-                    newProduct += "<td>"+ myNumber +"</td>";
-                    newProduct += "<td><input type=\"text\" placeholder=\"QTY\" /></td>";
-                    newProduct += "</tr>";                  
-                });
-
-            // end the new each
-
-                $('#list').append(newProduct);
-                // 抓出list 值
-                $('i').click(function(){
-                    //選取目前按鈕清單的SPAN
-                    var listElement = $(this).parents('tr').find('.tr-tittle');
-                    //選取目前按鈕清單的SPAN的值                   
-                    var listName = listElement.text();
-                    // alert(listName);
-
-                    // 選取購物車所有清單SPAN
-                    var cartList = $('#cartList').find('span');
-                    // alert(list);
-                    $(cartList).each(function(){
-                     var s = $(this).text();
-                         if(listName == s)
-                         {
-                            $(this).parents('li').remove(); 
-                            $(listElement).parents('tr').remove();
-                            alert(listName+" "+"has been move out from  INQUIRY LIST");
-                            return false;                       
-                         }          
-                    });
-                    
-                    var arr =[]; 
-                    $('#cartList li').each(function(index,val) {                      
-                      arr.push(val.outerHTML);
-                    });                    
-                    localStorage.setItem("carList",JSON.stringify(arr));
-                    $("#cartListnum").text(arr.length);
-                });
-                
-                $('#btnSubmit').click(function() {
-                    localStorage.clear();    
-                    location.reload();
-                });
-
-    });
-
-    </script> 
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/flickr.js"></script>
+		<script src="js/flexslider.min.js"></script>
+		<script src="js/lightbox.min.js"></script>
+		<script src="js/masonry.min.js"></script>
+		<script src="js/twitterfetcher.min.js"></script>
+		<script src="js/spectragram.min.js"></script>
+		<script src="js/ytplayer.min.js"></script>
+		<script src="js/countdown.min.js"></script>
+		<script src="js/smooth-scroll.min.js"></script>
+		<script src="js/parallax.js"></script>
+		<script src="js/scripts.js"></script>
+		<script src="js/wow.js"></script>
+        <script type="text/javascript" src="../Scripts/myError.js"></script>
+		<script type="text/javascript">
+		    $(function() {
+		        // 購物車cart display none
+		        $('.displayNone').css('display', 'none');
+		
+		        var cartListArr = getCartList();
+		        var cartListString = "";
+		        $.each(cartListArr, function(index, obj) {
+		            cartListString += " <tr> ";
+		            cartListString += "<th scope=\"row\"><a class=\"remove-item\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"\" data-original-title=\"Remove from list\"><i class=\"ti-close\"></i></a></th>";
+		            cartListString += "<td><img src=\"" + obj.img + "\" alt=\"\" class=\"img-responsive product-thumb\"></td>";
+		            cartListString += "<td><span class=\"tr-tittle\">" + obj.title + "</span></td>";
+		            cartListString += "<td>" + obj.modelNo + "</td>";
+		            cartListString += "<td><input type=\"text\" placeholder=\"QTY\" value=\"" + obj.amount + "\"/></td>";
+		            cartListString += "</tr>";
+		        });
+		        $('#list').append(cartListString);
+		
+		        $('i').click(function() {
+		            var prdTr = $(this).parents("tr:first");
+		            var removedId = prdTr.find('.tr-tittle').data("sn");
+		            var currentList = getCartList();
+		            $.each(currentList, function(index, obj) {
+		                if (obj.id == removedId) {
+		                    currentList.splice(index, 1);
+		                    return false;
+		                }
+		            });
+		            prdTr.remove();
+		
+		            localStorage.setItem("carList", JSON.stringify(currentList));
+		            $("#cartListnum").text(currentList.length);
+		        });
+		
+		        $('#btnSubmit').click(function() {
+		            $("#CartList").val(window.localStorage.getItem("carList"));
+		            $("#form1").submit();
+		            return false;
+		            //                     localStorage.clear();    
+		            //                     location.reload();
+		        });
+		
+		        $("#form1").submit(function() {
+		            var sError = new MyErrorCh();
+		            var AddressValue = new Array();
+		            AddressValue.push($("#AddressCity").val());
+		            AddressValue.push($("#AddressArea").val());
+		            AddressValue.push($("#AddressZipCode").val());
+		            AddressValue.push($("#AddressOther").val());
+		            sError.checkNull("姓名", $("#Name").val());
+		            sError.checkNull("電子郵件", $("#Email").val());
+		            sError.checkNull("連絡電話", $("#Phone").val());
+		            sError.checkNull("訊息", $("#Message").val());
+		            return sError.pass();
+		        });
+		
+		        $("#form1").ajaxComplete(function(event, request, settings) {
+		            localStorage.clear();
+		            location.reload();
+		        });
+		
+		    });
+		</script>
     </body>
 </html>

@@ -78,6 +78,7 @@
 						$PrdName = $Row ["PrdName"];
 						$PrdNote = $Row ["PrdNote"];
 						$Notes = $Row ["Notes"];
+						$ModelNo = $Row ["ModelNo"];
 						
 						if($Query_View)
 							$G0 = $Row["G0"];
@@ -96,14 +97,14 @@
 				alt="" class="img-responsive product-thumb ">
 			</a>
 			<div class="description">
-				<span class="product-title"><?php echo $PrdName?></span>
+				<span class="product-title" data-sn="<?php echo $pSerialNo?>"><?php echo $PrdName?></span>
                                              <br>
-                                             <strong>Serial Number:</strong>
-                                             <span class="serialNumber">8660</span>
+                                             <strong>Model No:</strong>
+                                             <span class="modelNo"><?php echo $ModelNo?></span>
 						</div>
 						<br />
 						<!--  btn -->
-			<a id="btn" class="btn btn-sm btn-rounded" href="#">add to List</a>
+			<a id="btn" class="btn btn-sm btn-rounded">add to List</a>
 			<!-- btn -->
 		</div>
 	</div>
@@ -129,173 +130,10 @@
 
 </div>
 <?php include_once ("../Common/PageBar/PageBar.php"); ?>
-<script src="js/jquery.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-       <script src="js/flickr.js"></script>
-        <script src="js/flexslider.min.js"></script>
-        <script src="js/lightbox.min.js"></script> 
-        <script src="js/masonry.min.js"></script>
-        <script src="js/twitterfetcher.min.js"></script>
-        <script src="js/spectragram.min.js"></script>
-        <script src="js/ytplayer.min.js"></script>
-        <script src="js/countdown.min.js"></script>
-         <script src="js/smooth-scroll.min.js"></script> 
-        <script src="js/parallax.js"></script> 
-        <script src="js/wow.js"></script>
-        <script src="js/scripts.js"></script>
-       
 
-  <!-- add to cart -->
 <script type="text/javascript">
-
-$(function(){
-
-  // 開始 local storage 塞入資料
-    // 宣告 carList是一個 arry
-    var carList = []; 
-    // 宣告carList 從localStorage取得carList並序列化 
-    carList = JSON.parse(window.localStorage.getItem("carList"));
-      // alert(carList);  
-    if(carList != null)
-    {
-        $.each(carList,function(idx, value){
-        	$('#cartList').append(value); 
-        })
-        // #cartListnum塞入carList 各數
-        $("#cartListnum").text(carList.length);
-    } 
-        //#cartListnum else塞入0
-    else
-    	$("#cartListnum").text("0");
-    
-  // 結束local storage 塞入資料
-
-    $('.btn-rounded').click(function(){
-
-        var myImg = $(this).parents('.image-tile').children('a').children('img').prop('src');
-        // var myTitle = $(this).parent().children()[1].innerText;//$('.list .product-title').text();
-        var myTitle = $(this).parents('.image-tile').find('.product-title').text();
-        // alert(myTitle);
-        var myNumber = $(this).parents('.image-tile').find('.serialNumber').text();
-        // alert(myNumber);
-        var newProduct = "";
-            newProduct += "<li>";
-            newProduct += "<a href=\"#\">";
-            newProduct += "<img src=\"" + myImg + "\" class=\"img-responsive product-thumb  col-sm-6\">";
-            newProduct += "<div class=\"description\">";
-            newProduct += "<span class=\"product-title\">" + myTitle + "</span><br/>";
-            newProduct += "<span class=\"serialNumber\">serialNumber" + myNumber + "</span>";
-            newProduct += "</div>";
-            newProduct += "</a>";
-            newProduct += "</li>";
-
-        // 布林值    
-        var b = false;
-
-        var cartItem = $('.cart-overview').children('li');
-        $(cartItem).each(function(){
-           var carItemName = $(this).children('a').children('.description').children('span:eq(0)').text();
-           // alert(carItemName);
-            if(myTitle == carItemName){
-            // 布林值是true;
-            b = true;
-            // 跳出 
-            alert('加過了');
-            return false;
-            }   
-        });
-
-        if(!b){
-      // alert('u can del')
-         $('#cartList').append(newProduct);
-         alert(myTitle +"add to inquiry List");
-                 // 宣告arr陣列
-        var arr =[]; 
-        // #cartList li 全部each 
-        $('#cartList li').each(function(index,val) {  
-        //塞入val 
-        arr.push(val.outerHTML);
-                });                    
-        localStorage.setItem("carList",JSON.stringify(arr));
-        $("#cartListnum").text(arr.length); 
-    }
-
-
-        // for(i = 0;i<select.length;i++)
-        // {
-        //   if(!select[i])
-        //     break;
-        //     var title = select[i].children[0].textContent;
-        //     // alert(title);
-
-        //   if(title == myTitle) 
-        //     alert('加過了');
-        //         break;
-        // }
-        // if(title!= myTitle && title !="")
-        // {
-        //     $('#cartList').append(newProduct); 
-
-        //     if(!carList)
-
-        //     carList = [];
-        //     carList.push(newProduct);
-        //     var jsonStr = JSON.stringify(carList);
-        //     localStorage.setItem("carList",jsonStr);
-        //     $("#cartListnum").text(carList.length);
-            
-        //     // // alert("已加入清單。");
-        // }
-    });
-
-
-    /*
-	//加入你可能會喜歡點過資料
-    // 宣告一個陣列
-    var likeList = [];    
-
-    $('.list img').click(
-      function(){
-         var likeImgSrc = $(this).prop('src');
-        // alert(likeImgSrc);
-         var likeImgTitle = $(this).parents('.image-tile').find('.product-title').text();
-        // alert(likeImgTitle);
-        var likeImgNumber = $(this).parents('.image-tile').find('.serialNumber').text();
-        // alert(likeImgNumber);
-
-
-
-        // 產品頁面 你可能會喜歡li結構
-         var likeProduct = "";
-             likeProduct += "<div class=\"col-md-2 col-sm-4\">";
-             likeProduct += "<div class=\"image-tile outer-title text-center\">";
-             likeProduct += "<a href=\"#\">";
-             likeProduct += " <img src=\""+ likeImgSrc +"\" alt=\"\" class=\"img-responsive product-thumb\">";
-             likeProduct += "</a>";
-             likeProduct += "<div class=\"title\">";
-             likeProduct += "<span class=\"mb0 likeImgTitle\">" + likeImgTitle + "</span>";
-             likeProduct += "<span>SerialNumber:</span> ";
-             likeProduct += "<span class=\"mb0 serialNumber\">" + likeImgNumber + "</span>";
-             likeProduct += "<br/><br/>";
-             likeProduct += "<a class=\"btn btn-sm btn-rounded\">Add To List</a>";
-             likeProduct += "</div>";
-             likeProduct += "</div>";
-             likeProduct += "</div>";
-
-
-        // 將likeproduct塞入likeList
-        likeList.push(likeProduct);
-        // 宣告jsonLikeStr反序列化likeList
-        var jsonLikeStr = JSON.stringify(likeList);
-        // 將likeList裡的jsonLikeStr 存到localStorage
-        localStorage.setItem( "likeList", jsonLikeStr );
-        // 取得likeList裡的jsonLikeStr 顯示
-        alert(localStorage.getItem( "likeList", jsonLikeStr ));
-        // $("#likeListnum").text(likeList.length);
-
-        });
-       */
-});
-
-
+	$(function(){
+	  // 結束local storage 塞入資料
+		$('.btn-rounded').click(addToList);
+	});
 </script>
