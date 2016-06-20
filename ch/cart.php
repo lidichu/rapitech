@@ -378,7 +378,7 @@
 		            cartListString += "<td><img src=\"" + obj.img + "\" alt=\"\" class=\"img-responsive product-thumb\"></td>";
 		            cartListString += "<td><span class=\"tr-tittle\" data-sn=\"" + obj.id +"\" >" + obj.title + "</span></td>";
 		            cartListString += "<td>" + obj.modelNo + "</td>";
-		            cartListString += "<td><input type=\"text\" placeholder=\"QTY\" value=\"" + obj.amount + "\"/></td>";
+		            cartListString += "<td><input type=\"text\" name=\"QTY\" placeholder=\"QTY\" value=\"" + obj.amount + "\"/></td>";
 		            cartListString += "</tr>";
 		        });
 		        $('#list').append(cartListString);
@@ -420,15 +420,10 @@
 		
 		        $("#form1").submit(function() {
 		            var sError = new MyErrorCh();
-		            var AddressValue = new Array();
-		            AddressValue.push($("#AddressCity").val());
-		            AddressValue.push($("#AddressArea").val());
-		            AddressValue.push($("#AddressZipCode").val());
-		            AddressValue.push($("#AddressOther").val());
-		            sError.checkNull("姓名", $("#Name").val());
-		            sError.checkNull("電子郵件", $("#Email").val());
-		            sError.checkNull("連絡電話", $("#Phone").val());
-		            sError.checkNull("訊息", $("#Message").val());
+		            sError.checkNumber("產品數量", $("input[name='QTY']").val());
+		            sError.checkNull("姓名", $("input[name='Name']").val());
+		            sError.checkEMail("電子郵件", $("input[name='Email']").val(),true);
+		            sError.checkNull("連絡電話", $("input[name='Phone']").val());
 		            return sError.pass();
 		        });
 		    });
