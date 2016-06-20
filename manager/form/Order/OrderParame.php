@@ -4,7 +4,7 @@
 <?php $check_fileName="Order.php";	//有2功能,1:檢查權限用,2:使下面的程式超聯結本網頁?>
 <?php
 //標題設定
-	$Title01 = "訂單管理";
+	$Title01 = "詢問管理";
 
 //主頁檔案名稱
 	$MainFileName01 = "Order.php";

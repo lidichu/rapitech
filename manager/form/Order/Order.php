@@ -14,7 +14,7 @@
 		//標題文字
 		$TableTitle = $Title01;
 		//要查詢的欄位
-		$SQLFields="ordermain.SerialNo,DATE_FORMAT(OrderDate,'%Y-%m-%d'),OrderNumber,OrderName,OrderTel,OrderEMail as Email,TotalPrice ,Status As ContactStatus";
+		$SQLFields="SerialNo,DATE_FORMAT(OrderDate,'%Y-%m-%d'),OrderNumber,OrderName,OrderTel,OrderEMail as Email ,Status As ContactStatus";
 		//預設排序方式
 		$DefaultSort = "OrderDate DESC";
 		//指定那個欄位為修改聯結欄
@@ -38,7 +38,7 @@
 		//顯示資料庫名稱
 		$DBTable_S = $DatabaseName01_S;
 		//可查詢欄位
-		$QueryField["OrderNumber"] = "訂單編號";
+		$QueryField["OrderNumber"] = "詢問編號";
 		$QueryField["OrderName"] = "姓名";
 		//圖片顯示欄位
 		$PicField = "";
@@ -55,17 +55,11 @@
 				$tmpCheckBox = $_REQUEST["checkbox".$i];
 				if($tmpCheckBox!=""){
 					$OrderMainSerialNo=$_REQUEST["SERIALNO".$i];
-					//刪除訂單訂購人資料
-						$upsql="Delete From ordermember Where G0 = ".$OrderMainSerialNo;
-						mysql_query($upsql,$Conn);
-					//刪除訂單明細資料
+					//刪除詢問明細資料
 						$upsql="Delete From orderitem Where  G0 = ".$OrderMainSerialNo;
 						mysql_query($upsql,$Conn);
-					//刪除訂單收件人資料
-						$upsql="Delete From orderreceiver Where  G0 = ".$OrderMainSerialNo;
-						mysql_query($upsql,$Conn);	
 					
-					//刪除訂單資料
+					//刪除詢問資料
 						$upsql="Delete From ordermain Where SerialNo = " .$OrderMainSerialNo;
 						mysql_query($upsql,$Conn);	
 				}
@@ -115,11 +109,6 @@
 		if($TS[$Level] !="" && $SK[$Level] != ""){
 			$Query = " where ".$SK[$Level]." like '%".$TS[$Level]."%'";
 		}
-		if($Query!="")
-			$Query.=" and ordermember.G0=$DBTable_S.SerialNo";
-		else
-			$Query.=" where ordermember.G0=$DBTable_S.SerialNo ";
-			
 			
 			
 		//PageCount處理
@@ -240,17 +229,16 @@ $(function(){
                         <table cellspacing="1" cellpadding="2" width="100%" border="0">
 	                        <tr style="font-size:13;color:#E0EFF8" bgcolor="#005783" align="center">
 								<td nowrap width="40" style="font-size:12px;"><font color="#FFFFFF"><input type="button" value="全選" cvalue="true" onclick="CheckAll(this);" name="B1"></font></td>
-		                        <td nowrap width="80" style="font-size:12px;"><a class="Title sortlink" href="<?php echo GetSCRIPTNAME(); ?>?SF<?php echo $Level; ?>=RecordDate DESC"><font color="#FFFFFF" style="font-size:13px;">訂購日期</font></a></td>
-		                        <td nowrap width="100" style="font-size:12px;"><a class="Title sortlink" href="<?php echo GetSCRIPTNAME(); ?>?SF<?php echo $Level; ?>=OrderNumber"><font color="#FFFFFF" style="font-size:13px;">訂單編號</font></a></td>
-								<td nowrap style="font-size:12px;"><a class="Title sortlink" href="<?php echo GetSCRIPTNAME(); ?>?SF<?php echo $Level; ?>=OrderName"><font color="#FFFFFF" style="font-size:13px;">訂購人</font></a></td>
-								<td nowrap style="font-size:12px;"><a class="Title sortlink" href="<?php echo GetSCRIPTNAME(); ?>?SF<?php echo $Level; ?>=OrderTel"><font color="#FFFFFF" style="font-size:13px;">訂購人電話</font></a></td>
-								<td nowrap style="font-size:12px;"><a class="Title sortlink" href="<?php echo GetSCRIPTNAME(); ?>?SF<?php echo $Level; ?>=OrderEMail"><font color="#FFFFFF" style="font-size:13px;">訂購人信箱</font></a></td>
-								<td nowrap style="font-size:12px;"><a class="Title sortlink" href="<?php echo GetSCRIPTNAME(); ?>?SF<?php echo $Level; ?>=PayPrice"><font color="#FFFFFF" style="font-size:13px;">應付金額</font></a></td>
+		                        <td nowrap width="80" style="font-size:12px;"><a class="Title sortlink" href="<?php echo GetSCRIPTNAME(); ?>?SF<?php echo $Level; ?>=RecordDate DESC"><font color="#FFFFFF" style="font-size:13px;">詢問日期</font></a></td>
+		                        <td nowrap width="100" style="font-size:12px;"><a class="Title sortlink" href="<?php echo GetSCRIPTNAME(); ?>?SF<?php echo $Level; ?>=OrderNumber"><font color="#FFFFFF" style="font-size:13px;">詢問編號</font></a></td>
+								<td nowrap style="font-size:12px;"><a class="Title sortlink" href="<?php echo GetSCRIPTNAME(); ?>?SF<?php echo $Level; ?>=OrderName"><font color="#FFFFFF" style="font-size:13px;">詢問人</font></a></td>
+								<td nowrap style="font-size:12px;"><a class="Title sortlink" href="<?php echo GetSCRIPTNAME(); ?>?SF<?php echo $Level; ?>=OrderTel"><font color="#FFFFFF" style="font-size:13px;">詢問人電話</font></a></td>
+								<td nowrap style="font-size:12px;"><a class="Title sortlink" href="<?php echo GetSCRIPTNAME(); ?>?SF<?php echo $Level; ?>=OrderEMail"><font color="#FFFFFF" style="font-size:13px;">詢問人信箱</font></a></td>
 								<td nowrap width="80"><input type="button" name="StatusUpdate" value="更新狀態" onClick="cmdStatusUpdate_onclick('<?php echo GetSCRIPTNAME(); ?>');"></td>
 								
 	                       	</tr>	
                         <?php
-                                $SQL = "select ".$SQLFields." from ".$DBTable_S.",ordermember".$Query." order by ".$SQLOrderBy." limit ".($Page-1) * $RowCount.",".$RowCount;
+                                $SQL = "select ".$SQLFields." from ".$DBTable_S.$Query." order by ".$SQLOrderBy." limit ".($Page-1) * $RowCount.",".$RowCount;
 								$Rs = mysql_query($SQL,$Conn);
                                 ShowOnePageMe($Rs,$page,$NoShowFields,$File_Add_Modify,$UpdateField,$UpdateFieldAlign,$PicField,$PicWidth,$PicRoot,$DBTableName,"G".$Level);
                         ?>

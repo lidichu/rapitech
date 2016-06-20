@@ -376,7 +376,7 @@
 		            cartListString += " <tr> ";
 		            cartListString += "<th scope=\"row\"><a class=\"remove-item\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"\" data-original-title=\"Remove from list\"><i class=\"ti-close\"></i></a></th>";
 		            cartListString += "<td><img src=\"" + obj.img + "\" alt=\"\" class=\"img-responsive product-thumb\"></td>";
-		            cartListString += "<td><span class=\"tr-tittle\">" + obj.title + "</span></td>";
+		            cartListString += "<td><span class=\"tr-tittle\" data-sn=\"" + obj.id +"\" >" + obj.title + "</span></td>";
 		            cartListString += "<td>" + obj.modelNo + "</td>";
 		            cartListString += "<td><input type=\"text\" placeholder=\"QTY\" value=\"" + obj.amount + "\"/></td>";
 		            cartListString += "</tr>";
@@ -400,11 +400,22 @@
 		        });
 		
 		        $('#btnSubmit').click(function() {
+			        var trs = $('#list tr');
+			        var arr = [];
+			        $(trs).each(function(){
+				        var prdId = $(this).find(".tr-tittle").data("sn");
+				        var qty = $(this).find("input").val();
+				        arr[prdId] = qty;
+			        });
+			        var cartListArr = getCartList();
+			        $.each(cartListArr, function(index, obj) {
+			        	obj.amount = arr[obj.id];
+			        });
+			        
+			        localStorage.setItem("carList", JSON.stringify(cartListArr));
 		            $("#CartList").val(window.localStorage.getItem("carList"));
 		            $("#form1").submit();
 		            return false;
-		            //                     localStorage.clear();    
-		            //                     location.reload();
 		        });
 		
 		        $("#form1").submit(function() {
@@ -420,12 +431,6 @@
 		            sError.checkNull("訊息", $("#Message").val());
 		            return sError.pass();
 		        });
-		
-		        $("#form1").ajaxComplete(function(event, request, settings) {
-		            localStorage.clear();
-		            location.reload();
-		        });
-		
 		    });
 		</script>
     </body>
