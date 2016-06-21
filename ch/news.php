@@ -79,7 +79,7 @@
 		                        			echo "</a>\n";
 							?>
                                 <hr>
-                                <p><?php echo $Note?></p>
+                                <p><?php echo htmlspecialchars_decode($Note)?></p>
                                 <!-- <a class="btn btn-sm" href="#">Read More</a> -->
                             </div>
                         </div>
@@ -129,43 +129,5 @@
 <?php include_once ('footer.php');?>
 
         </div>
-        <script src="js/jquery.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-       <script src="js/flickr.js"></script>
-        <script src="js/flexslider.min.js"></script>
-        <script src="js/lightbox.min.js"></script> 
-        <script src="js/masonry.min.js"></script>
-        <script src="js/twitterfetcher.min.js"></script>
-        <script src="js/spectragram.min.js"></script>
-        <script src="js/ytplayer.min.js"></script>
-        <script src="js/countdown.min.js"></script>
-         <script src="js/smooth-scroll.min.js"></script> 
-        <script src="js/parallax.js"></script> 
-        <script src="js/scripts.js"></script>
-        <script src="js/wow.js"></script>
-
-<script type="text/javascript">
-
-$(function(){
-
-  // 開始 local storage 塞入資料
-    // 宣告 carList是一個 arry
-    var carList = []; 
-    carList = JSON.parse(window.localStorage.getItem("carList"));
-      // alert(carList);  
-    if(carList){
-        $.each(carList,function(idx, value){
-            $('#cartList').append(value); 
-        })
-        // #cartListnum塞入carList 各數
-        $("#cartListnum").text(carList.length);
-    }
-    else
-        $("#cartListnum").text("0");
-    }); 
-
-</script>
-
-
     </body>
 </html>

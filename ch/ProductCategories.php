@@ -2,6 +2,22 @@
 <?php include_once('../PageHead.php');?>
 <?php
 	$Product_View=true;
+	
+	$BannerPic="";
+	$G0=CheckData($_REQUEST["G0"]);
+	$SN=CheckData($_REQUEST["SN"]);
+	$Sql="select * from productCategory where Status='上架'";
+	if($SN != null)
+		$Sql .= " and SerialNo=$SN";
+	else if($G0 != null)
+		$Sql .= " and SerialNo=(select ParentSerialNo from productCategory where SerialNo=$G0)";
+	else 
+		$Sql .= " and SerialNo=(select SerialNo from productCategory where Status='上架' and ParentSerialNo=1 order by Sort,SerialNo Desc limit 1)";
+	$Rs=mysql_query($Sql,$Conn);
+	if($Rs && mysql_num_rows($Rs)>0){
+		if($Row=mysql_fetch_array($Rs))
+			$BannerPic="../images/".$Row["Category"].".jpg";
+	}
 ?>
 <html lang="en">
     <head>
@@ -26,7 +42,7 @@
 <?php include_once ('top.php');?>
 	<div class="main-container">
 		<div class="container-fluid">
-			<img src="https://placem.at/things?w=1920&h=400&random=0" alt=""
+			<img src="<?php echo $BannerPic?>" alt=""
 				class="img-responsive">
 		</div>
 		<div class="clearfix"></div>

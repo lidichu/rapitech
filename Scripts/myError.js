@@ -82,6 +82,15 @@ function MyErrorCh(){
 		}
 	};	
 	
+	//檢查數字
+	this.checkNumber = function(FieldName,FieldValue){
+		re = /^\d+$/g;
+		if(FieldValue==""){
+			this.add("．『" + FieldName + "』 不能為空白");
+		}else if(!re.test(FieldValue)){
+			this.add("．『" + FieldName + "』 請輸入數字");
+		}
+	};
 	
 	//檢查CheckBox必填
 	this.checkCheckbox = function (FieldName,CheckBoxName){

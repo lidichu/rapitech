@@ -32,7 +32,7 @@
                 <div class="row masonry masonryFlyIn">
                     <div class="col-md-3 col-sm-6 masonry-item project" data-filter="Measuring">
                         <div class="image-tile inner-title hover-reveal text-center">
-                            <a href="productCategories.php">
+                            <a href="productCategories.php?SN=2">
                                 <img alt="Pic" src="img/project-single-1.jpg" class="myborder">
                                 <div class="title titlebg1">
                                     <h5 class="uppercase mb0">Measuring</h5>
@@ -43,7 +43,7 @@
                     </div>
                     <div class="col-md-3 col-sm-6 masonry-item project" data-filter="Garden Accessories">
                         <div class="image-tile inner-title hover-reveal text-center">
-                            <a href="productCategories.php">
+                            <a href="productCategories.php?SN=5">
                                 <img alt="Pic" src="img/project-single-16.jpg" class="myborder">
                                 <div class="title titlebg2">
                                     <h5 class="uppercase mb0">Garden Accessories</h5>
@@ -54,7 +54,7 @@
                     </div>
                     <div class="col-md-3 col-sm-6 masonry-item project" data-filter="Outdoor & Indoor Clocks ">
                         <div class="image-tile inner-title hover-reveal text-center">
-                            <a href="productCategories.php">
+                            <a href="productCategories.php?SN=7">
                                 <img alt="Pic" src="img/project-single-3.jpg" class="myborder" />
                                 <div class="title titlebg3">
                                     <h5 class="uppercase mb0">Outdoor & Indoor Clocks</h5>
@@ -66,7 +66,7 @@
 
                     <div class="col-md-3 col-sm-6 masonry-item project" data-filter="Soil Test Kits">
                         <div class="image-tile inner-title hover-reveal text-center">
-                            <a href="productCategories.php">
+                            <a href="productCategories.php?SN=8">
                                 <img alt="Pic" src="img/project-single-5.jpg" class="myborder" />
                                 <div class="title titlebg4">
                                     <h5 class="uppercase mb0">Soil Test Kits</h5>
@@ -77,7 +77,7 @@
                     </div>
                     <div class="col-md-3 col-sm-6 masonry-item project" data-filter="Thermometers">
                         <div class="image-tile inner-title hover-reveal text-center">
-                            <a href="productCategories.php">
+                            <a href="productCategories.php?SN=6">
                                 <img alt="Pic" src="img/project-single-17.jpg" class="myborder">
                                 <div class="title titlebg5">
                                     <h5 class="uppercase mb0">Thermometers</h5>
@@ -88,7 +88,7 @@
                     </div>
                     <div class="col-md-3 col-sm-6 masonry-item project" data-filter="Gardening Ties">
                         <div class="image-tile inner-title hover-reveal text-center">
-                            <a href="productCategories.php">
+                            <a href="productCategories.php?SN=4">
                                 <img alt="Pic" src="img/project-single-18.jpg" class="myborder">
                                 <div class="title titlebg6">
                                     <h5 class="uppercase mb0">Gardening Ties</h5>
@@ -99,7 +99,7 @@
                     </div>
                     <div class="col-md-3 col-sm-6 masonry-item project" data-filter="Plant Labels">
                         <div class="image-tile inner-title hover-reveal text-center">
-                            <a href="productCategories.php">
+                            <a href="productCategories.php?SN=3">
                                 <img alt="Pic" src="img/project-single-6.jpg" class="myborder" />
                                 <div class="title titlebg7">
                                     <h5 class="uppercase mb0">Plant Labels</h5>
@@ -110,7 +110,7 @@
                     </div>
                     <div class="col-md-3 col-sm-6 masonry-item project" data-filter="Plant Supports">
                         <div class="image-tile inner-title hover-reveal text-center">
-                            <a href="productCategories.php">
+                            <a href="productCategories.php?SN=9">
                                 <img alt="Pic" src="img/project-single-19.jpg" class="myborder" />
                                 <div class="title titlebg8">
                                     <h5 class="uppercase mb0">Plant Supports </h5>
@@ -124,7 +124,7 @@
                     <div class="clearfix"></div>
                     <div class="col-md-3 col-sm-6 masonry-item project" data-filter="New arrived">
                         <div class="image-tile inner-title hover-reveal text-center">
-                            <a href="productCategories.php">
+                            <a href="productCategories.php?SN=2">
                                  <!-- <img alt="Pic" src="img/project-single-20.jpg" class="myborder" /> -->
                                   <img src="img/project-single-20.jpg" alt="Pic" class="myborder"/>
                                 <div class="title titlebg9">
@@ -162,7 +162,7 @@
                                         <li>
                                             <h2 class="text-center wordColor"><?php echo $Title?></h2>
                                             <hr />
-                                            <p class="lead"><?php echo $Note?></p>
+                                            <p class="lead"><?php echo htmlspecialchars_decode($Note)?></p>
                                             <div class="quote-author">
                                                 <span><?php echo $PostDate?></span>
                                             </div>
@@ -225,45 +225,6 @@
             </div>
 			<?php include_once ('footer.php');?>
         </div> 
-
-   
-        <script src="js/jquery.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-       <script src="js/flickr.js"></script>
-        <script src="js/flexslider.min.js"></script>
-        <script src="js/lightbox.min.js"></script> 
-        <script src="js/masonry.min.js"></script>
-        <script src="js/twitterfetcher.min.js"></script>
-        <script src="js/spectragram.min.js"></script>
-        <script src="js/ytplayer.min.js"></script>
-        <script src="js/countdown.min.js"></script>
-         <script src="js/smooth-scroll.min.js"></script> 
-        <script src="js/parallax.js"></script> 
-        <script src="js/scripts.js"></script>
-        <!--  -->
-        <script src="js/wow.js"></script>
-
-<script type="text/javascript">
-
-$(function(){
-
-  // 開始 local storage 塞入資料
-    // 宣告 carList是一個 arry
-    var carList = []; 
-    carList = JSON.parse(window.localStorage.getItem("carList"));
-      // alert(carList);  
-    if(carList){
-        $.each(carList,function(idx, value){
-            $('#cartList').append(value); 
-        })
-        // #cartListnum塞入carList 各數
-        $("#cartListnum").text(carList.length);
-    }
-    else
-        $("#cartListnum").text("0");
-    }); 
-
-</script>
 
     </body>
 </html>
