@@ -126,7 +126,7 @@
                         <div class="image-tile inner-title hover-reveal text-center">
                             <a href="productCategories.php">
                                  <!-- <img alt="Pic" src="img/project-single-20.jpg" class="myborder" /> -->
-                                  <img src="https://placem.at/things?w=1440&h=955&random=4" alt="Pic" class="myborder"/>
+                                  <img src="img/project-single-20.jpg" alt="Pic" class="myborder"/>
                                 <div class="title titlebg9">
                                     <h5 class="uppercase mb0"> New arrived </h5>
                                     <!-- <span> New arrived / all of our products</span> -->
