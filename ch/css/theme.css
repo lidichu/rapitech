@@ -410,7 +410,7 @@ h6.uppercase,
 }
 p,
 span {
-  font-weight: 600;
+  font-weight: 400;
 }
 p.lead {
   font-size: 16px;
@@ -995,12 +995,13 @@ nav.bg-dark .logo-dark {
   position: absolute;
   z-index: 99;
   opacity: 0;
-  transition: all 0.3s ease;
+  
+ /* transition: all 0.3s ease;
   -webkit-transition: all 0.3s ease;
   -moz-transition: all 0.3s ease;
   transform: translate3d(0, 10px, 0);
   -webkit-transform: translate3d(0, 10px, 0);
-  -moz-transform: translate3d(0, 10px, 0);
+  -moz-transform: translate3d(0, 10px, 0);*/
   visibility: hidden;
   margin-top: -1px;
 }
@@ -1746,7 +1747,7 @@ input.transparent,
 button.transparent {
   background: none;
   border: 1px solid rgba(255, 255, 255, 0.5);
-  color: #fff !important  ;
+  color: #fff !important	;
 }
 input[type="text"]:focus,
 input[type="password"]:focus {
@@ -2575,7 +2576,7 @@ button[type="submit"] .form-loading {
   .page-title-4 .breadcrumb,
   .page-title-2 .breadcrumb {
     float: left;
-    margin-top: 8 px;
+    margin-top: 8	px;
   }
 }
 /*!---------- 17. PAGINATION ----------*/
@@ -3164,7 +3165,6 @@ img {
 }
 .inner-title .title h5 {
   font-weight: 600;
-  padding: 5px 0;
 }
 .inner-title {
   transition: all 0.3s ease;
