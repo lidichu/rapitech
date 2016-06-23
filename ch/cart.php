@@ -354,7 +354,6 @@
 		<script src="js/bootstrap.min.js"></script>
 		<script src="js/flickr.js"></script>
 		<script src="js/flexslider.min.js"></script>
-		<script src="js/lightbox.min.js"></script>
 		<script src="js/masonry.min.js"></script>
 		<script src="js/twitterfetcher.min.js"></script>
 		<script src="js/spectragram.min.js"></script>
@@ -420,7 +419,12 @@
 		
 		        $("#form1").submit(function() {
 		            var sError = new MyErrorCh();
-		            sError.checkNumber("產品數量", $("input[name='QTY']").val());
+		            $("input[name='QTY']").each(function(){
+		            	var prdTr = $(this).parents("tr:first");
+			            var prdTitle = prdTr.find('.tr-tittle').text();
+				        sError.checkNumber(prdTitle + "產品數量", $(this).val());
+			        });
+// 		            sError.checkNumber("產品數量", $("input[name='QTY']").val());
 		            sError.checkNull("姓名", $("input[name='Name']").val());
 		            sError.checkEMail("電子郵件", $("input[name='Email']").val(),true);
 		            sError.checkNull("連絡電話", $("input[name='Phone']").val());

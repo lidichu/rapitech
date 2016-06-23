@@ -360,7 +360,6 @@
         <script src="js/bootstrap.min.js"></script>
        <script src="js/flickr.js"></script>
         <script src="js/flexslider.min.js"></script>
-        <script src="js/lightbox.min.js"></script> 
         <script src="js/masonry.min.js"></script>
         <script src="js/twitterfetcher.min.js"></script>
         <script src="js/spectragram.min.js"></script>
