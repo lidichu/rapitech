@@ -48,12 +48,12 @@
                                 <div class="row">
                                    
                                     <div class="col-xs-4 ">
-                                        <a href="">
+                                        <a href=" http://rapitech.en.alibaba.com/">
                                             <img src="img/alibaba.png" alt="" class="wow flipInX " data-wow-delay=".5s">
                                         </a>
                                     </div>
                                     <div class="col-xs-4 ">
-                                        <a href="">
+                                        <a href="https://www.youtube.com/channel/UCvrkG9RoOVVEf7dU14ZCwgg">
                                             <img src="img/youtube.png" alt="" class="wow flipInX " data-wow-delay=".5s">
                                         </a>
                                     </div>

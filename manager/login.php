@@ -92,7 +92,7 @@ $(function(){
 		<td><marquee style="font-size:12pt;color:#00F;margin-top:200px;">本系統適用於 Internet Explorer 8.0 以上的版本，最佳瀏覽解析度為 1280 X 1024</marquee></td>
 	</tr>
 	<tr>
-		<td align="center"><div style="font-size:12px;color:#000;margin-top:50px;">台南網頁設計公司　製作</div></td>
+		<td align="center"><div style="font-size:12px;color:#000;margin-top:50px;">禾益網路資訊系統　製作</div></td>
 	</tr>
 </table>
 </body>
