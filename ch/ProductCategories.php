@@ -6,13 +6,13 @@
 	$BannerPic="";
 	$G0=CheckData($_REQUEST["G0"]);
 	$SN=CheckData($_REQUEST["SN"]);
-	$Sql="select * from productCategory where Status='上架'";
+	$Sql="select * from productcategory where Status='上架'";
 	if($SN != null)
 		$Sql .= " and SerialNo=$SN";
 	else if($G0 != null)
-		$Sql .= " and SerialNo=(select ParentSerialNo from productCategory where SerialNo=$G0)";
+		$Sql .= " and SerialNo=(select ParentSerialNo from productcategory where SerialNo=$G0)";
 	else 
-		$Sql .= " and SerialNo=(select SerialNo from productCategory where Status='上架' and ParentSerialNo=1 order by Sort,SerialNo Desc limit 1)";
+		$Sql .= " and SerialNo=(select SerialNo from productcategory where Status='上架' and ParentSerialNo=1 order by Sort,SerialNo Desc limit 1)";
 	$Rs=mysql_query($Sql,$Conn);
 	if($Rs && mysql_num_rows($Rs)>0){
 		if($Row=mysql_fetch_array($Rs))

@@ -41,7 +41,7 @@
 								<li>
 									<ul>
 									<?php
-										$Sql="select * from productCategory where Status='上架' and ParentSerialNo=1 order by Sort;";
+										$Sql="select * from productcategory where Status='上架' and ParentSerialNo=1 order by Sort;";
 										$Rs=mysql_query($Sql,$Conn);
 										if($Rs && mysql_num_rows($Rs)>0){
 											while($Row=mysql_fetch_array($Rs)){

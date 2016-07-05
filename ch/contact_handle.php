@@ -31,7 +31,7 @@
 	foreach($CheckField as $Key => $Value){
 		if($Value!="Sex" && $Value!="Address"){
 			if($KeyPair[$Value] == ""){				
-				notify("部份欄位未填寫","history.back()");
+				notify("部份欄位未填寫","","history.back()");
 			}
 		}
 	}	

@@ -62,7 +62,7 @@ var CarNumber = 0;
 						$G0=CheckData($_REQUEST["G0"]);
 						$SN=CheckData($_REQUEST["SN"]);
 						$Name="";
-						$Sql="select * from productCategory where Status='上架' and ParentSerialNo=1 order by Sort,SerialNo Desc";
+						$Sql="select * from productcategory where Status='上架' and ParentSerialNo=1 order by Sort,SerialNo Desc";
 						$Rs=mysql_query($Sql,$Conn);
 						if($Rs && mysql_num_rows($Rs)>0){
 							while($Row=mysql_fetch_array($Rs)){
@@ -87,7 +87,7 @@ var CarNumber = 0;
 							<div class="panel-body">
 								<ul>
 									<?php
-										$Sql1="select * from productCategory where Status='上架' and ParentSerialNo=".$ParentSerialNo." order by Sort,SerialNo Desc";
+										$Sql1="select * from productcategory where Status='上架' and ParentSerialNo=".$ParentSerialNo." order by Sort,SerialNo Desc";
 										$Rs1=mysql_query($Sql1,$Conn);
 										if($Rs1 && mysql_num_rows($Rs1)>0){
 											while($Row1=mysql_fetch_array($Rs1)){

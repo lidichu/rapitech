@@ -37,7 +37,7 @@
 			$SQL.=" and (PrdName like $Parameter or PrdNote like $Parameter or Notes like $Parameter or ModelNo like $Parameter or PrdSize like $Parameter or MOQ like $Parameter)";
 		}
 		else if($SN != null)
-			$SQL.=" and G0=(select SerialNo from productCategory where parentSerialNo=$SN limit 1)";
+			$SQL.=" and G0=(select SerialNo from productcategory where parentSerialNo=$SN limit 1)";
 		else
 			$SQL.=" and G0=$G0";
 			
@@ -61,7 +61,7 @@
 		if($Query_View)
 			$SQL.=" and (PrdName like $Parameter or PrdNote like $Parameter or Notes like $Parameter or ModelNo like $Parameter or PrdSize like $Parameter or MOQ like $Parameter)";
 		else if($SN != null)
-			$SQL.=" and G0=(select SerialNo from productCategory where parentSerialNo=$SN limit 1)";
+			$SQL.=" and G0=(select SerialNo from productcategory where parentSerialNo=$SN limit 1)";
 		else
 			$SQL.=" and G0=$G0";
 		

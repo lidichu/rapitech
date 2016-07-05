@@ -24,7 +24,7 @@
                 <div class="col-md-6 image">
                     <div class="background-image-holder">
                         
-                         <img src="https://placem.at/things?w=800&h=533&random=4" alt="" class="wow slideInLeft" data-wow-delay=".5s">
+                         <img src="img/about.jpg" alt="" class="wow slideInLeft" data-wow-delay=".5s">
                     </div>
                 </div>
                 <div class="col-md-6 col-md-offset-1 content  wow bounceIn">
