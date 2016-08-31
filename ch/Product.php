@@ -11,6 +11,21 @@
 	{
 		return ($fileName == "" || $fileName == null) ? "" : "../files/Product/PICDetail/".$fileName;
 	}
+	$BannerPic="";
+	$G0=CheckData($_REQUEST["G0"]);
+	$SN=CheckData($_REQUEST["SN"]);
+	$Sql="select * from productcategory where Status='上架'";
+	if($SN != null)
+		$Sql .= " and SerialNo=$SN";
+		else if($G0 != null)
+			$Sql .= " and SerialNo=(select ParentSerialNo from productcategory where SerialNo=$G0)";
+			else
+				$Sql .= " and SerialNo=(select SerialNo from productcategory where Status='上架' and ParentSerialNo=1 order by Sort,SerialNo Desc limit 1)";
+				$Rs=mysql_query($Sql,$Conn);
+				if($Rs && mysql_num_rows($Rs)>0){
+					if($Row=mysql_fetch_array($Rs))
+						$BannerPic="../images/".$Row["Category"].".jpg";
+				}
 ?>
 <html lang="en">
 	<head>
@@ -24,7 +39,7 @@
 	    <link href="css/ytplayer.css" rel="stylesheet" type="text/css" media="all" />
 	    <link href="css/theme.css" rel="stylesheet" type="text/css" media="all" />
 	    <link href="css/custom.css" rel="stylesheet" type="text/css" media="all" />
-	    <link href='http://fonts.googleapis.com/css?family=Lato:300,400%7CRaleway:100,400,300,500,600,700%7COpen+Sans:400,500,600' rel='stylesheet' type='text/css'>
+	    <link href='http://fonts.googleapis.com/css?family=Lato:300,400%7CRaleway:100,400,300,500,600,700%7COpen+Sans:sd 400,500,600' rel='stylesheet' type='text/css'>
 	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
 	    <link rel="stylesheet" href="css/animate.css">
 	</head>
@@ -32,7 +47,7 @@
 <?php include_once ('top.php');?>
     <div class="main-container">
 		<div class="container-fluid">
-			<img src="https://placem.at/things?w=1920&h=400&random=0" alt=""
+			<img src="<?php echo $BannerPic?>" alt=""
 				class="img-responsive">
 		</div>
 		<div class="clearfix"></div>
@@ -89,7 +104,7 @@
 							</div>
 							<div class="col-sm-6">
 								<div class="description">
-									<h4 class="uppercase productTitle" data-sn="<?php echo $Sn?>"><?php echo $PrdName?></h4>
+									<h3 class="productTitle" data-sn="<?php echo $Sn?>"><strong><?php echo $PrdName?></strong></h3>
 									<div class="mb32 mb-xs-24"></div>
 									<p><?php echo $PrdNote?></p>
 									<ul>
@@ -112,10 +127,10 @@
 									<ul class="tabs">
 										<li class="active">
 											<div class="tab-title">
-												<span>Product Detail</span>
+												<span style="font-size:18px">Product Detail</span>
 											</div>
 											<div class="tab-content">
-												<p><?php echo $Notes?></p>
+												<p><?php echo htmlspecialchars_decode($Notes)?></p>
 											</div>
 										</li>
 

@@ -31,15 +31,15 @@
 	$UploadPic["Big"]["Height"] = "";
 	
 	$UploadPic["Index"]["Root"] = "../../../files/Product/PICIndex/";
-	$UploadPic["Index"]["Width"] = 187;
-	$UploadPic["Index"]["Height"] = 141;
+	$UploadPic["Index"]["Width"] = 400;
+	$UploadPic["Index"]["Height"] = 400;
 	
 	$UploadPic["List"]["Root"] = "../../../files/Product/PICList/";
-	$UploadPic["List"]["Width"] = 140;
-	$UploadPic["List"]["Height"] = 106;
+	$UploadPic["List"]["Width"] = 400;
+	$UploadPic["List"]["Height"] = 400;
 	
 	$UploadPic["Detail"]["Root"] = "../../../files/Product/PICDetail/";
-	$UploadPic["Detail"]["Width"] = 350;
-	$UploadPic["Detail"]["Height"] = 264;
+	$UploadPic["Detail"]["Width"] = 800;
+	$UploadPic["Detail"]["Height"] = 603;
 ?>
 

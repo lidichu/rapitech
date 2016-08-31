@@ -43,7 +43,7 @@
                                         <th>&nbsp;</th>
                                         <th>Product</th>
                                         <th>Description</th>
-                                        <th>Serial Number</th>
+                                        <th>Model Number</th>
                                         <th>Product QTY</th>
                                     </tr>
                                 </thead>

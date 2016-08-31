@@ -62,11 +62,11 @@
 	$M->AddText("ModelNo","Model No",false);
 	$M->AddText("PrdSize","Product Size",false);
 	$M->AddText("MOQ","MOQ",false);
-	$M->AddNote2("Notes","商品規格",false,99999);
+	$M->AddNote1n("Notes","商品規格",false,99999);
 	
 	$Nums = array("一","二","三","四","五","六","七","八");
 	for($i=0;$i<count($Nums);$i++){
-		$M->AddPIC3("PIC".($i+1),"產品圖片".$Nums[$i],false,$PICRootArray,$PICWidthArray,$PICHeightArray,"圖片建議寬度為 800 x 603 像素","","","","",$PICBoxArray,140,"",$UploadPic["List"]["Root"],true);
+		$M->AddPIC3("PIC".($i+1),"產品圖片".$Nums[$i],false,$PICRootArray,$PICWidthArray,$PICHeightArray,"圖片建議寬度為 800 x 800 像素","","","","",$PICBoxArray,140,"",$UploadPic["List"]["Root"],true);
 	}
 	
 	//新增用SQL

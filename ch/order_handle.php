@@ -52,12 +52,12 @@
 				}
 				else{
 					setcookie("BuyCar","",time() - 24*60*60,"/","",0);
-					notify("發生錯誤1，請重新選取","index.php","");
+					notify("ERROR！Please reselect","index.php","");
 				}
 			}
 		}else{
 			setcookie("BuyCar","",time() - 24*60*60,"/","",0);
-			notify("發生錯誤2，請重新選取","index.php","");	
+			notify("ERROR！Please reselect","index.php","");	
 		}
 		
 		//寄送購物通知信	
@@ -69,20 +69,20 @@
 		$MailString = $MailString . "</head>";
 		$MailString = $MailString . "<body>" ;
 		$MailString = $MailString . "<span style=\"font-size:10pt;\">";
-		$MailString = $MailString . "親愛的 $MemName  您好 :<br />";
-		$MailString = $MailString . "這封信件是由 ".$Web["WebTitle"]." 系統自動發出，通知您本次的詢問程序已經完成，請勿直接回信！<br /><br />";
-		$MailString = $MailString . "您的詢問編號：$OrderNumber ，以下為詢問清單：<br /><br />";
+		$MailString = $MailString . "Dear: $MemName:<br />";
+		$MailString = $MailString . "This is an automatically generated email Please do not reply to this email address.<br /><br />";
+		$MailString = $MailString . "Inquiry No：$OrderNumber<br /><br />";
 		$MailString = $MailString . "<table width=\"100%\" border=\"0\">";
 		$MailString = $MailString . "<tr>";
-		$MailString = $MailString . "<td align=\"left\" valign=\"top\"><font color=\"blue\" size=\"3\">詢問明細</font></td>";
+		$MailString = $MailString . "<td align=\"left\" valign=\"top\"><font color=\"blue\" size=\"3\">Inquiry detail</font></td>";
 		$MailString = $MailString . "</tr>";
 		$MailString = $MailString . "<tr>"; 
 		$MailString = $MailString . "<td >";
 		$MailString = $MailString . "<table width=\"70%\" border=\"0\" cellspacing=\"1\" cellpadding=\"1\">";
 		$MailString = $MailString . "<tr>";
-		$MailString = $MailString . "<td width=\"50%\" align=\"center\" bgcolor=\"#666666\" style=\"border-right:1px solid #000; border-left:1px solid #333; border-bottom:1px solid #333; border-top:1px solid #333\">商品名稱</td>";
-		$MailString = $MailString . "<td width=\"40%\" align=\"center\" bgcolor=\"#666666\" style=\"border-right:1px solid #000; border-left:1px solid #333; border-bottom:1px solid #333; border-top:1px solid #333\">Model No</td>";
-		$MailString = $MailString . "<td width=\"10%\" align=\"center\" bgcolor=\"#666666\" style=\"border-right:1px solid #000; border-left:1px solid #333; border-bottom:1px solid #333; border-top:1px solid #333\">數量</td>";
+		$MailString = $MailString . "<td width=\"50%\" align=\"center\" bgcolor=\"#CCCCCC\" style=\"border-right:1px solid #000; border-left:1px solid #333; border-bottom:1px solid #333; border-top:1px solid #333\">Product Name</td>";
+		$MailString = $MailString . "<td width=\"40%\" align=\"center\" bgcolor=\"#CCCCCC\" style=\"border-right:1px solid #000; border-left:1px solid #333; border-bottom:1px solid #333; border-top:1px solid #333\">Model No</td>";
+		$MailString = $MailString . "<td width=\"10%\" align=\"center\" bgcolor=\"#CCCCCC\" style=\"border-right:1px solid #000; border-left:1px solid #333; border-bottom:1px solid #333; border-top:1px solid #333\">Qty</td>";
 		$MailString = $MailString . "</tr>";
 		foreach($BuyCar as $Key => $Value){			
 			$MailString = $MailString . "<tr>";
@@ -99,25 +99,25 @@
 		$MailString = $MailString . "</td>";
 		$MailString = $MailString . "</tr>";		
 		$MailString = $MailString . "<tr>";
-		$MailString = $MailString . "<td align=\"left\" valign=\"top\"><font color=\"blue\" size=\"3\">詢問人資訊</font></td>";
+		$MailString = $MailString . "<td align=\"left\" valign=\"top\"><font color=\"blue\" size=\"3\"></font></td>";
 		$MailString = $MailString . "</tr>";
 		$MailString = $MailString . "<tr>";
 		$MailString = $MailString . "<td align=\"left\" valign=\"top\">";
 		$MailString = $MailString . "<table border=\"0\" cellspacing=\"1\" cellpadding=\"3\">";
 		$MailString = $MailString . "<tr>";
-		$MailString = $MailString . "<td width=\"100\" height=\"25\" align=\"center\" bgcolor=\"#CCCCCC\">中文全名</td>";
+		$MailString = $MailString . "<td width=\"100\" height=\"25\" align=\"center\" bgcolor=\"#f2f2f2\">Name</td>";
 		$MailString = $MailString . "<td height=\"25\" align=\"left\" >". $MemName . "</td>";
 		$MailString = $MailString . "</tr>";
 		$MailString = $MailString . "<tr>";
-		$MailString = $MailString . "<td height=\"25\" align=\"center\" bgcolor=\"#CCCCCC\">電子郵件</td>";
+		$MailString = $MailString . "<td height=\"25\" align=\"center\" bgcolor=\"#f2f2f2\">E-mail</td>";
 		$MailString = $MailString . "<td height=\"25\" align=\"left\"><a>". $MemEmail ."</a></td>";
 		$MailString = $MailString . "</tr>";
 		$MailString = $MailString . "<tr>";
-		$MailString = $MailString . "<td height=\"25\" align=\"center\" bgcolor=\"#CCCCCC\">聯絡電話</td>";
+		$MailString = $MailString . "<td height=\"25\" align=\"center\" bgcolor=\"#f2f2f2\">Number</td>";
 		$MailString = $MailString . "<td height=\"25\" align=\"left\">". $MemTel ."</td>";
 		$MailString = $MailString . "</tr>";
 		$MailString = $MailString . "<tr>";
-		$MailString = $MailString . "<td height=\"25\" align=\"center\" bgcolor=\"#CCCCCC\">聯絡區域</td>";
+		$MailString = $MailString . "<td height=\"25\" align=\"center\" bgcolor=\"#f2f2f2\">Country/Region</td>";
 		$MailString = $MailString . "<td height=\"25\" align=\"left\">". $Address ."</td>";
 		$MailString = $MailString . "</tr>";
 		$MailString = $MailString . "</table>";
@@ -126,20 +126,20 @@
 		$MailString = $MailString . "</td>";
 		$MailString = $MailString . "</tr>";
 		$MailString = $MailString . "</table>";																					
-		$MailString = $MailString . "當您有任何使用上的問題時，可以利用下列的資訊與我們聯絡：<br/>";
-		$MailString = $MailString . "客服信箱：<a href=\"".$Web["ManagerEmail"]."\">".$Web["ManagerEmail"]."</a><br/>";
+		$MailString = $MailString . "<br/>";
+		$MailString = $MailString . "Customer Service：<a href=\"".$Web["ManagerEmail"]."\">".$Web["ManagerEmail"]."</a><br/>";
 		$MailString = $MailString . $Web["WebTitle"].":".getHostUrl()."<br/>";
 		$MailString = $MailString . "</span>";
 		$MailString = $MailString . "</body>";
 		$MailString = $MailString . "</html>";	
-		SendMail($Web["WebTitle"],$Web["ManagerEmail"],$MemName,$MemEmail,"詢問通知!詢問編號：".$OrderNumber,$MailString,"",$Web["EMailServer"],"");
-		SendMail($Web["WebTitle"],$Web["ManagerEmail"],$Web["WebTitle"],$Web["ManagerEmail"],"詢問通知!詢問編號：".$OrderNumber,$MailString,"",$Web["EMailServer"],"");
+		SendMail($Web["WebTitle"],$Web["ManagerEmail"],$MemName,$MemEmail,"Inquiry No：".$OrderNumber,$MailString,"",$Web["EMailServer"],"");
+		SendMail($Web["WebTitle"],$Web["ManagerEmail"],$Web["WebTitle"],$Web["ManagerEmail"],"Inquiry No：".$OrderNumber,$MailString,"",$Web["EMailServer"],"");
 		
 		//將信件內容寫回訂單		
 		$upsql="UPDATE ordermain SET `MailString` = '$MailString' WHERE `SerialNo` =$MainSerialNo";
 		mysql_query($upsql,$Conn);
 		setcookie("BuyCar","",time() - 24*60*60,"/","",0);
-		notify("感謝您的詢問，我們會盡快處理您的訂單","index.php"," localStorage.clear();");
+		notify("We just received your inquiry. We’ll get back to you about your order as soon as possible.","index.php"," localStorage.clear();");
 ?>
 </body>
 </html>

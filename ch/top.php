@@ -1,4 +1,4 @@
-<div class="nav-container wow bounceIn" data-wow-delay="1.5s">
+<div class="nav-container bounceIn" data-wow-delay="1.5s">
 	<div class="nav-utility wordColor ">
 
 		<div class="module right">
@@ -123,6 +123,7 @@
 <script src="js/scripts.js"></script>
 
 <script type="text/javascript">
+	document.oncontextmenu=function(){return false;} 
 
 	$(function() {
 		setCartListNum();
