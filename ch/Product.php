@@ -42,6 +42,8 @@
 	    <link href='http://fonts.googleapis.com/css?family=Lato:300,400%7CRaleway:100,400,300,500,600,700%7COpen+Sans:sd 400,500,600' rel='stylesheet' type='text/css'>
 	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
 	    <link rel="stylesheet" href="css/animate.css">
+	    <link rel="stylesheet" href="js/lightbox.css" type="text/css" />
+		<script type="text/javascript" src="js/lightbox.js"></script>
 	</head>
 <body>
 <?php include_once ('top.php');?>
@@ -92,8 +94,8 @@
                                         			$Pic=getPic($row["PIC".$i."Hidden"]);
                                         			if($Pic != ""){
 											?>
-                                            <li><img
-											src="<?php echo $Pic?>" alt="" class="img-responsive"></li>
+                                            <li><a href="<?php echo $Pic?>" rel="lightbox"><img
+											src="<?php echo $Pic?>" alt="" class="img-responsive"/></a></li>
                                             <?php
                                         			}
 												}

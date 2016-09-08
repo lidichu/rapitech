@@ -62,13 +62,13 @@ label
 							answer you as soon as possible.</p>
 						<hr>
 						<p>
-							12F-5 No.2, Fuxing 4th Rd Qianzhen Dist <br /> Kaohsiung City 806
+							<?php echo $Web["WebAddress"]?> <br /> Kaohsiung City 806
 							<br /> Taiwan (R.O.C.)
 						</p>
 						<hr>
 						<p>
-							<strong>E:</strong> sales@rapitech.com.tw <br /> <strong>P:</strong>
-							(886) 7 535 7099 <br /> <strong>F:</strong> (886) 7 535 7318 <br />
+							<strong>E:</strong> <?php echo $Web["ManagerEmail"]?> <br /> <strong>P:</strong>
+							<?php echo $Web["WebTel"]?> <br /> <strong>F:</strong> <?php echo $Web["WebFax"]?> <br />
 						</p>
 					</div>
 					<div class="col-sm-7 col-md-6 col-md-offset-1">

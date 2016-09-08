@@ -82,6 +82,7 @@
                         <i class="fa fa-chevron-circle-up fa-5x goTop" aria-hidden="true" id="goTop" ></i>
                     </div>
                 </div>
+                <script src="http://s1.twcount.com/stat.aspx?id=19156177&logo=1" language="javascript" charset="big5"></script>
 
 
             </footer>
